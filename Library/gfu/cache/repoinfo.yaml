@@ -13,26 +13,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2021-05-10T11:38:13.339+02:00
+  lastUpdatedAtString: 2021-05-10T14:16:55.847+02:00
   initializedAtString: 2021-05-10T11:38:13.339+02:00
   currentGitRemote:
-    name: origin
-    url: https://github.com/Kaaaaarim/MapTestClimbingRush.git
+    name: MapTest
+    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
     login: 
     user: 
     host: 
     function: 0
     token: 
   currentGitBranch:
-    name: main
-    tracking: origin/main
+    name: MapTest
+    tracking: 
   currentConfigBranch:
-    name: main
+    name: MapTest
     remote:
-      name: origin
-      url: https://github.com/Kaaaaarim/MapTestClimbingRush.git
-    trackingBranch: main
+      name: 
+      url: 
+    trackingBranch: 
   currentConfigRemote:
-    name: origin
-    url: https://github.com/Kaaaaarim/MapTestClimbingRush.git
+    name: MapTest
+    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
   currentHead: 

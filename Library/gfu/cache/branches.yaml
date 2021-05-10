@@ -13,17 +13,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2021-05-10T11:49:01.940+02:00
+  lastUpdatedAtString: 2021-05-10T14:16:55.749+02:00
   initializedAtString: 2021-05-10T11:48:02.888+02:00
   localBranches:
   - name: main
-    tracking: origin/main
-  remoteBranches:
-  - name: origin/main
-    tracking: '[None]'
+    tracking: 
+  - name: MapTest
+    tracking: 
+  remoteBranches: []
   remotes:
-  - name: origin
-    url: https://github.com/Kaaaaarim/MapTestClimbingRush.git
+  - name: MapTest
+    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
     login: 
     user: 
     host: 
@@ -32,28 +32,25 @@ MonoBehaviour:
   localConfigBranches:
     keys:
     - main
+    - MapTest
     values:
     - name: main
       remote:
-        name: origin
-        url: https://github.com/Kaaaaarim/MapTestClimbingRush.git
-      trackingBranch: main
+        name: 
+        url: 
+      trackingBranch: 
+    - name: MapTest
+      remote:
+        name: 
+        url: 
+      trackingBranch: 
   remoteConfigBranches:
-    keys:
-    - origin
-    subKeys:
-    - Values:
-      - main
-    subKeyValues:
-    - Values:
-      - name: main
-        remote:
-          name: origin
-          url: https://github.com/Kaaaaarim/MapTestClimbingRush.git
-        trackingBranch: 
+    keys: []
+    subKeys: []
+    subKeyValues: []
   configRemotes:
     keys:
-    - origin
+    - MapTest
     values:
-    - name: origin
-      url: https://github.com/Kaaaaarim/MapTestClimbingRush.git
+    - name: MapTest
+      url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
