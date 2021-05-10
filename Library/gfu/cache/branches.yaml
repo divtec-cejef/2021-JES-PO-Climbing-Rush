@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2021-05-10T14:16:55.749+02:00
+  lastUpdatedAtString: 2021-05-10T14:27:23.530+02:00
   initializedAtString: 2021-05-10T11:48:02.888+02:00
   localBranches:
   - name: main
     tracking: 
   - name: MapTest
+    tracking: 
+  - name: MapTest3D
     tracking: 
   remoteBranches: []
   remotes:
@@ -33,6 +35,7 @@ MonoBehaviour:
     keys:
     - main
     - MapTest
+    - MapTest3D
     values:
     - name: main
       remote:
@@ -40,6 +43,11 @@ MonoBehaviour:
         url: 
       trackingBranch: 
     - name: MapTest
+      remote:
+        name: 
+        url: 
+      trackingBranch: 
+    - name: MapTest3D
       remote:
         name: 
         url: 

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 6
-  lastUpdatedAtString: 2021-05-10T14:17:06.706+02:00
+  lastUpdatedAtString: 2021-05-10T14:27:38.704+02:00
   initializedAtString: 2021-05-10T11:38:16.825+02:00
   entries:
   - path: Library\gfu\cache\branches.yaml
@@ -22,21 +22,15 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\gfu\cache\gitlog.yaml
-    fullPath: C:\Users\houbkar\Documents\Projets Unity\MapTestClimbingRush\Library\gfu\cache\gitlog.yaml
-    projectPath: Library\gfu\cache\gitlog.yaml
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\gfu\cache\gitstatusentries.yaml
-    fullPath: C:\Users\houbkar\Documents\Projets Unity\MapTestClimbingRush\Library\gfu\cache\gitstatusentries.yaml
-    projectPath: Library\gfu\cache\gitstatusentries.yaml
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\gfu\cache\gittrackingstatus.yaml
     fullPath: C:\Users\houbkar\Documents\Projets Unity\MapTestClimbingRush\Library\gfu\cache\gittrackingstatus.yaml
     projectPath: Library\gfu\cache\gittrackingstatus.yaml
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\gfu\cache\gituser.yaml
+    fullPath: C:\Users\houbkar\Documents\Projets Unity\MapTestClimbingRush\Library\gfu\cache\gituser.yaml
+    projectPath: Library\gfu\cache\gituser.yaml
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -49,6 +43,24 @@ MonoBehaviour:
   - path: Library\ProtocolInstance.json
     fullPath: C:\Users\houbkar\Documents\Projets Unity\MapTestClimbingRush\Library\ProtocolInstance.json
     projectPath: Library\ProtocolInstance.json
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\SceneVisibilityState.asset
+    fullPath: C:\Users\houbkar\Documents\Projets Unity\MapTestClimbingRush\Library\SceneVisibilityState.asset
+    projectPath: Library\SceneVisibilityState.asset
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\StateCache\MainStageHierarchy\4d\4d2a36d9faf65734f0bbefb3ee623532.json
+    fullPath: C:\Users\houbkar\Documents\Projets Unity\MapTestClimbingRush\Library\StateCache\MainStageHierarchy\4d\4d2a36d9faf65734f0bbefb3ee623532.json
+    projectPath: Library\StateCache\MainStageHierarchy\4d\4d2a36d9faf65734f0bbefb3ee623532.json
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\StateCache\SceneView\8c\8cd7c613bf844de3b80696e27a479d5e.json
+    fullPath: C:\Users\houbkar\Documents\Projets Unity\MapTestClimbingRush\Library\StateCache\SceneView\8c\8cd7c613bf844de3b80696e27a479d5e.json
+    projectPath: Library\StateCache\SceneView\8c\8cd7c613bf844de3b80696e27a479d5e.json
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
