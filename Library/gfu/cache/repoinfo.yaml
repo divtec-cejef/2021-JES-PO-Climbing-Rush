@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2021-05-10T14:27:23.411+02:00
+  lastUpdatedAtString: 2021-05-10T14:39:52.418+02:00
   initializedAtString: 2021-05-10T11:38:13.339+02:00
   currentGitRemote:
     name: MapTest
@@ -25,13 +25,13 @@ MonoBehaviour:
     token: 
   currentGitBranch:
     name: MapTest3D
-    tracking: 
+    tracking: MapTest/MapTest3D
   currentConfigBranch:
     name: MapTest3D
     remote:
-      name: 
-      url: 
-    trackingBranch: 
+      name: MapTest
+      url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+    trackingBranch: MapTest3D
   currentConfigRemote:
     name: MapTest
     url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush

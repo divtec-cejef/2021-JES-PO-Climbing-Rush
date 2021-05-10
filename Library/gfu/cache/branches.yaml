@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2021-05-10T14:27:23.530+02:00
+  lastUpdatedAtString: 2021-05-10T14:39:52.418+02:00
   initializedAtString: 2021-05-10T11:48:02.888+02:00
   localBranches:
   - name: main
@@ -21,8 +21,10 @@ MonoBehaviour:
   - name: MapTest
     tracking: 
   - name: MapTest3D
-    tracking: 
-  remoteBranches: []
+    tracking: MapTest/MapTest3D
+  remoteBranches:
+  - name: MapTest/MapTest3D
+    tracking: '[None]'
   remotes:
   - name: MapTest
     url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
@@ -49,13 +51,22 @@ MonoBehaviour:
       trackingBranch: 
     - name: MapTest3D
       remote:
-        name: 
-        url: 
-      trackingBranch: 
+        name: MapTest
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+      trackingBranch: MapTest3D
   remoteConfigBranches:
-    keys: []
-    subKeys: []
-    subKeyValues: []
+    keys:
+    - MapTest
+    subKeys:
+    - Values:
+      - MapTest3D
+    subKeyValues:
+    - Values:
+      - name: MapTest3D
+        remote:
+          name: MapTest
+          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+        trackingBranch: 
   configRemotes:
     keys:
     - MapTest
