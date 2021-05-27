@@ -1,0 +1,368 @@
+fileFormatVersion: 2
+guid: 6d3ef65a8a841ce4396137251ea743b5
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Box001
+    100002: Brick1
+    100004: Brick2
+    100006: Brick3
+    100008: Fir Tree
+    100010: Fir Tree2
+    100012: Fir Tree3
+    100014: Fir Tree4
+    100016: //RootNode
+    100018: Group12336
+    100020: Group12394
+    100022: Group12444
+    100024: Group14980
+    100026: Group19477
+    100028: Group19627
+    100030: Group25918
+    100032: Group25976
+    100034: Group26026
+    100036: Group51674
+    100038: Group54450
+    100040: Group55932
+    100042: Group55990
+    100044: Group56040
+    100046: Group56823
+    100048: Leaves
+    100050: Leaves2
+    100052: Leaves3
+    100054: Leaves4
+    100056: Log
+    100058: Mashroom
+    100060: Mashroom2
+    100062: MountRock
+    100064: MountRock2
+    100066: MountRock3
+    100068: Plane
+    100070: Rock
+    100072: Rock2
+    100074: Rock3
+    100076: Rock4
+    100078: Rock5
+    100080: Rock6
+    100082: Rock7
+    100084: Rock8
+    100086: Stump
+    100088: Stump2
+    100090: Stump3
+    100092: Tower
+    100094: Tree
+    100096: Tree2
+    100098: Tree3
+    100100: Tree4
+    100102: Tree5
+    100104: Wall1
+    100106: Wall2
+    100108: Wall3
+    400000: Box001
+    400002: Brick1
+    400004: Brick2
+    400006: Brick3
+    400008: Fir Tree
+    400010: Fir Tree2
+    400012: Fir Tree3
+    400014: Fir Tree4
+    400016: //RootNode
+    400018: Group12336
+    400020: Group12394
+    400022: Group12444
+    400024: Group14980
+    400026: Group19477
+    400028: Group19627
+    400030: Group25918
+    400032: Group25976
+    400034: Group26026
+    400036: Group51674
+    400038: Group54450
+    400040: Group55932
+    400042: Group55990
+    400044: Group56040
+    400046: Group56823
+    400048: Leaves
+    400050: Leaves2
+    400052: Leaves3
+    400054: Leaves4
+    400056: Log
+    400058: Mashroom
+    400060: Mashroom2
+    400062: MountRock
+    400064: MountRock2
+    400066: MountRock3
+    400068: Plane
+    400070: Rock
+    400072: Rock2
+    400074: Rock3
+    400076: Rock4
+    400078: Rock5
+    400080: Rock6
+    400082: Rock7
+    400084: Rock8
+    400086: Stump
+    400088: Stump2
+    400090: Stump3
+    400092: Tower
+    400094: Tree
+    400096: Tree2
+    400098: Tree3
+    400100: Tree4
+    400102: Tree5
+    400104: Wall1
+    400106: Wall2
+    400108: Wall3
+    2100000: 09 - Default
+    2100002: 08 - Default
+    2100004: map
+    2300000: Box001
+    2300002: Brick1
+    2300004: Brick2
+    2300006: Brick3
+    2300008: Fir Tree
+    2300010: Fir Tree2
+    2300012: Fir Tree3
+    2300014: Fir Tree4
+    2300016: Group12336
+    2300018: Group12394
+    2300020: Group12444
+    2300022: Group14980
+    2300024: Group19477
+    2300026: Group19627
+    2300028: Group25918
+    2300030: Group25976
+    2300032: Group26026
+    2300034: Group51674
+    2300036: Group54450
+    2300038: Group55932
+    2300040: Group55990
+    2300042: Group56040
+    2300044: Group56823
+    2300046: Leaves
+    2300048: Leaves2
+    2300050: Leaves3
+    2300052: Leaves4
+    2300054: Log
+    2300056: Mashroom
+    2300058: Mashroom2
+    2300060: MountRock
+    2300062: MountRock2
+    2300064: MountRock3
+    2300066: Plane
+    2300068: Rock
+    2300070: Rock2
+    2300072: Rock3
+    2300074: Rock4
+    2300076: Rock5
+    2300078: Rock6
+    2300080: Rock7
+    2300082: Rock8
+    2300084: Stump
+    2300086: Stump2
+    2300088: Stump3
+    2300090: Tower
+    2300092: Tree
+    2300094: Tree2
+    2300096: Tree3
+    2300098: Tree4
+    2300100: Tree5
+    3300000: Box001
+    3300002: Brick1
+    3300004: Brick2
+    3300006: Brick3
+    3300008: Fir Tree
+    3300010: Fir Tree2
+    3300012: Fir Tree3
+    3300014: Fir Tree4
+    3300016: Group12336
+    3300018: Group12394
+    3300020: Group12444
+    3300022: Group14980
+    3300024: Group19477
+    3300026: Group19627
+    3300028: Group25918
+    3300030: Group25976
+    3300032: Group26026
+    3300034: Group51674
+    3300036: Group54450
+    3300038: Group55932
+    3300040: Group55990
+    3300042: Group56040
+    3300044: Group56823
+    3300046: Leaves
+    3300048: Leaves2
+    3300050: Leaves3
+    3300052: Leaves4
+    3300054: Log
+    3300056: Mashroom
+    3300058: Mashroom2
+    3300060: MountRock
+    3300062: MountRock2
+    3300064: MountRock3
+    3300066: Plane
+    3300068: Rock
+    3300070: Rock2
+    3300072: Rock3
+    3300074: Rock4
+    3300076: Rock5
+    3300078: Rock6
+    3300080: Rock7
+    3300082: Rock8
+    3300084: Stump
+    3300086: Stump2
+    3300088: Stump3
+    3300090: Tower
+    3300092: Tree
+    3300094: Tree2
+    3300096: Tree3
+    3300098: Tree4
+    3300100: Tree5
+    4300000: Stump3
+    4300002: Fir Tree3
+    4300004: Fir Tree4
+    4300006: Fir Tree2
+    4300008: Leaves
+    4300010: Leaves3
+    4300012: Leaves4
+    4300014: Leaves2
+    4300016: Mashroom2
+    4300018: Mashroom
+    4300020: Plane
+    4300022: Rock
+    4300024: Rock2
+    4300026: MountRock3
+    4300028: MountRock
+    4300030: MountRock2
+    4300032: Rock4
+    4300034: Rock3
+    4300036: Rock8
+    4300038: Rock5
+    4300040: Rock7
+    4300042: Rock6
+    4300044: Stump
+    4300046: Stump2
+    4300048: Tree
+    4300050: Log
+    4300052: Tree2
+    4300054: Tree3
+    4300056: Tree5
+    4300058: Tree4
+    4300060: Group25976
+    4300062: Group12394
+    4300064: Group55990
+    4300066: Group12444
+    4300068: Group56040
+    4300070: Group26026
+    4300072: Group25918
+    4300074: Group55932
+    4300076: Group12336
+    4300078: Box001
+    4300080: Fir Tree
+    4300082: Brick1
+    4300084: Brick3
+    4300086: Brick2
+    4300088: Group51674
+    4300090: Group56823
+    4300092: Group19477
+    4300094: Group14980
+    4300096: Tower
+    4300098: Group54450
+    4300100: Group19627
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 08 - Default
+    second: {fileID: 2100000, guid: 26fdf7673d8da2b419cd0528ab626fe3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: 09 - Default
+    second: {fileID: 2100000, guid: aa821d98c52c76e4f8dcc42764dcc659, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: map
+    second: {fileID: 2100000, guid: 7352441c339d75148a6b9896bbd613ee, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
