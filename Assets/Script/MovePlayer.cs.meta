@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Script/MovePlayer.cs.meta
 guid: 02cdd5fd895b9ba478d0670681b0f71f
+=======
+guid: 45659ab9d4d1240449e4512912194169
+>>>>>>> Indicateur_prise_1:Assets/Script/moveIndicator.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
