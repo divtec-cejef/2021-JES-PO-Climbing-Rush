@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2021-05-28T11:00:48.500+02:00
+  lastUpdatedAtString: 2021-05-28T11:20:14.255+02:00
   initializedAtString: 2021-05-28T11:00:48.500+02:00
   currentGitRemote:
     name: origin
@@ -24,10 +24,10 @@ MonoBehaviour:
     function: 0
     token: 
   currentGitBranch:
-    name: Indicateur_prise_1
+    name: Indicateur_prise_2
     tracking: 
   currentConfigBranch:
-    name: Indicateur_prise_1
+    name: Indicateur_prise_2
     remote:
       name: 
       url: 
