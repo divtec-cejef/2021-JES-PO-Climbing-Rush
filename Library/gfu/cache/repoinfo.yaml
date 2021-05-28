@@ -13,26 +13,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2021-05-10T14:39:52.418+02:00
-  initializedAtString: 2021-05-10T11:38:13.339+02:00
+  lastUpdatedAtString: 2021-05-28T08:58:23.666+02:00
+  initializedAtString: 2021-05-28T08:58:23.666+02:00
   currentGitRemote:
-    name: MapTest
-    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+    name: origin
+    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
     login: 
     user: 
     host: 
     function: 0
     token: 
   currentGitBranch:
-    name: MapTest3D
-    tracking: MapTest/MapTest3D
+    name: reuperer_inputs_switchs
+    tracking: 
   currentConfigBranch:
-    name: MapTest3D
+    name: reuperer_inputs_switchs
     remote:
-      name: MapTest
-      url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
-    trackingBranch: MapTest3D
+      name: 
+      url: 
+    trackingBranch: 
   currentConfigRemote:
-    name: MapTest
-    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+    name: origin
+    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
   currentHead: 

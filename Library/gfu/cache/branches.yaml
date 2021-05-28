@@ -13,21 +13,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2021-05-10T14:39:52.418+02:00
-  initializedAtString: 2021-05-10T11:48:02.888+02:00
+  lastUpdatedAtString: 2021-05-28T08:50:47.259+02:00
+  initializedAtString: 2021-05-28T08:48:24.388+02:00
   localBranches:
+  - name: Deplacer_joueur_prises
+    tracking: origin/Deplacer_joueur_prises
+  - name: Deplacer_joueur_quand_la_bonne_couleur_correspond
+    tracking: origin/Deplacer_joueur_quand_la_bonne_couleur_correspond
   - name: main
-    tracking: 
-  - name: MapTest
-    tracking: 
+    tracking: origin/main
   - name: MapTest3D
-    tracking: MapTest/MapTest3D
+    tracking: origin/MapTest3D
+  - name: reuperer_inputs_switchs
+    tracking: 
   remoteBranches:
-  - name: MapTest/MapTest3D
+  - name: origin/Deplacer_joueur_quand_la_bonne_couleur_correspond
+    tracking: '[None]'
+  - name: origin/HEAD
+    tracking: '[None]'
+  - name: origin/Indicateur_prises_1
+    tracking: '[None]'
+  - name: origin/map_finale
     tracking: '[None]'
   remotes:
-  - name: MapTest
-    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+  - name: origin
+    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
     login: 
     user: 
     host: 
@@ -35,41 +45,71 @@ MonoBehaviour:
     token: 
   localConfigBranches:
     keys:
+    - Deplacer_joueur_prises
+    - Deplacer_joueur_quand_la_bonne_couleur_correspond
     - main
-    - MapTest
     - MapTest3D
+    - reuperer_inputs_switchs
     values:
+    - name: Deplacer_joueur_prises
+      remote:
+        name: origin
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+      trackingBranch: Deplacer_joueur_prises
+    - name: Deplacer_joueur_quand_la_bonne_couleur_correspond
+      remote:
+        name: origin
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+      trackingBranch: Deplacer_joueur_quand_la_bonne_couleur_correspond
     - name: main
       remote:
-        name: 
-        url: 
-      trackingBranch: 
-    - name: MapTest
-      remote:
-        name: 
-        url: 
-      trackingBranch: 
+        name: origin
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+      trackingBranch: main
     - name: MapTest3D
       remote:
-        name: MapTest
-        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+        name: origin
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
       trackingBranch: MapTest3D
+    - name: reuperer_inputs_switchs
+      remote:
+        name: 
+        url: 
+      trackingBranch: 
   remoteConfigBranches:
     keys:
-    - MapTest
+    - origin
     subKeys:
     - Values:
-      - MapTest3D
+      - Deplacer_joueur_quand_la_bonne_couleur_correspond
+      - HEAD
+      - Indicateur_prises_1
+      - map_finale
     subKeyValues:
     - Values:
-      - name: MapTest3D
+      - name: Deplacer_joueur_quand_la_bonne_couleur_correspond
         remote:
-          name: MapTest
-          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+          name: origin
+          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+        trackingBranch: 
+      - name: HEAD
+        remote:
+          name: origin
+          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+        trackingBranch: 
+      - name: Indicateur_prises_1
+        remote:
+          name: origin
+          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+        trackingBranch: 
+      - name: map_finale
+        remote:
+          name: origin
+          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
         trackingBranch: 
   configRemotes:
     keys:
-    - MapTest
+    - origin
     values:
-    - name: MapTest
-      url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+    - name: origin
+      url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
