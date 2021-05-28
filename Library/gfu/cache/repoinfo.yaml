@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2021-05-28T08:58:23.666+02:00
-  initializedAtString: 2021-05-28T08:58:23.666+02:00
+  lastUpdatedAtString: 2021-05-28T13:31:02.169+02:00
+  initializedAtString: 2021-05-28T13:31:02.169+02:00
   currentGitRemote:
     name: origin
     url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
@@ -24,10 +24,10 @@ MonoBehaviour:
     function: 0
     token: 
   currentGitBranch:
-    name: reuperer_inputs_switchs
+    name: Deplacer_joueur_quand_couleur_correspond
     tracking: 
   currentConfigBranch:
-    name: reuperer_inputs_switchs
+    name: Deplacer_joueur_quand_couleur_correspond
     remote:
       name: 
       url: 
