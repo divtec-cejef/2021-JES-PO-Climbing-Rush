@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2021-05-31T14:24:42.605+02:00
-  initializedAtString: 2021-05-31T14:24:42.605+02:00
+  lastUpdatedAtString: 2021-05-31T15:39:15.899+02:00
+  initializedAtString: 2021-05-31T15:39:15.899+02:00
   currentGitRemote:
     name: origin
     url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
@@ -25,13 +25,13 @@ MonoBehaviour:
     token: 
   currentGitBranch:
     name: timer_jeu
-    tracking: 
+    tracking: origin/timer_jeu
   currentConfigBranch:
     name: timer_jeu
     remote:
-      name: 
-      url: 
-    trackingBranch: 
+      name: origin
+      url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+    trackingBranch: timer_jeu
   currentConfigRemote:
     name: origin
     url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
