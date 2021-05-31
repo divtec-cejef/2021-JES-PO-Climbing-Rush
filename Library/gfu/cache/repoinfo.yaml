@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2021-05-31T08:30:11.331+02:00
-  initializedAtString: 2021-05-31T08:30:11.331+02:00
+  lastUpdatedAtString: 2021-05-31T15:10:14.714+02:00
+  initializedAtString: 2021-05-31T15:10:14.714+02:00
   currentGitRemote:
     name: origin
     url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
@@ -24,14 +24,14 @@ MonoBehaviour:
     function: 0
     token: 
   currentGitBranch:
-    name: Deplacer_joueur_quand_couleur_correspond
-    tracking: origin/Deplacer_joueur_quand_couleur_correspond
+    name: Indicateur_prise_2
+    tracking: 
   currentConfigBranch:
-    name: Deplacer_joueur_quand_couleur_correspond
+    name: Indicateur_prise_2
     remote:
-      name: origin
-      url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
-    trackingBranch: Deplacer_joueur_quand_couleur_correspond
+      name: 
+      url: 
+    trackingBranch: 
   currentConfigRemote:
     name: origin
     url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git

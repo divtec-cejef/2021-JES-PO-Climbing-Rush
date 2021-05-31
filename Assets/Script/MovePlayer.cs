@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class MovePlayer : MonoBehaviour
 {
     private const int NBRE_PRISES = 14;
-    
+
     // Variable pour les boutons et les indicateurs de couleurs
     private PlayerControls controls;
     public MoveIndicator moveIndicator;
@@ -33,15 +33,17 @@ public class MovePlayer : MonoBehaviour
     private int indexCoordinateLeftHold = 0;
     private int holdAxeY = 25;
     private int playerAxeY = 0;
-    
-    
+
+
     // Liste de couleurs
     private List<Color> listColorIndicator = new List<Color>();
     private int indexListColorIndicator = 0;
 
     private int comptorNbrHolds = 1;
 
-    
+    private ShrinkIndicator shrinkIndicator;
+
+
     private void Start()
     {
         // Reprends depuis la classe _MoveIndicator_ les couleurs des indicateurs
@@ -62,8 +64,9 @@ public class MovePlayer : MonoBehaviour
         controls.Gameplay.GreenButton.performed += ctx => correctCircle(Color.green);
         controls.Gameplay.YellowButton.performed += ctx => correctCircle(Color.yellow);
         controls.Gameplay.PurpleButton.performed += ctx => correctCircle(Color.magenta);
+        
+        
     }
-    
 
 
     /// <summary>
@@ -72,7 +75,7 @@ public class MovePlayer : MonoBehaviour
     /// <param name="colorButton"> La couleur du bouton qui est appuyé </param>
     void correctCircle(Color colorButton)
     {
-        if (colorButton.Equals(listColorIndicator[indexListColorIndicator]) && comptorNbrHolds <= NBRE_PRISES)
+        if (colorButton.Equals(moveIndicator.getCurrentColorIndicator()) && comptorNbrHolds <= NBRE_PRISES)
         {
             // Déplace l'indicateur à la prochaine prise
             moveIndicator.moveNextIndicator();
@@ -82,7 +85,7 @@ public class MovePlayer : MonoBehaviour
 
             comptorNbrHolds++;
             indexListColorIndicator++;
-                    
+
 
             // Si l'index de la liste des couleurs de l'indicateur est fini alors on recommence à zéro
             // pour continuer sur n prises.
@@ -93,7 +96,6 @@ public class MovePlayer : MonoBehaviour
         }
     }
 
-    
 
     /// <summary>
     /// Déplace le joueur sur la prochaine prise
@@ -105,7 +107,7 @@ public class MovePlayer : MonoBehaviour
         {
             handRight.transform.position =
                 new Vector3(listHoldRightCoordinateX[indexCoordinateRightHold], holdAxeY, HOLD_AXE_Z);
-            
+
             holdAxeY += 25;
             grabRightHand = false;
             indexCoordinateRightHold++;
@@ -115,7 +117,7 @@ public class MovePlayer : MonoBehaviour
         {
             handLeft.transform.position =
                 new Vector3(listHoldLeftCoordinateX[indexCoordinateLeftHold], holdAxeY, HOLD_AXE_Z);
-            
+
             holdAxeY += 25;
             grabRightHand = true;
             indexCoordinateLeftHold++;
