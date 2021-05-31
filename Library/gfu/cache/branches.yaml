@@ -13,21 +13,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2021-05-10T14:39:52.418+02:00
-  initializedAtString: 2021-05-10T11:48:02.888+02:00
+  lastUpdatedAtString: 2021-05-31T14:25:07.739+02:00
+  initializedAtString: 2021-05-31T14:24:44.067+02:00
   localBranches:
   - name: main
-    tracking: 
-  - name: MapTest
-    tracking: 
+    tracking: origin/main
   - name: MapTest3D
-    tracking: MapTest/MapTest3D
+    tracking: origin/MapTest3D
+  - name: timer_jeu
+    tracking: 
   remoteBranches:
-  - name: MapTest/MapTest3D
+  - name: origin/HEAD
     tracking: '[None]'
   remotes:
-  - name: MapTest
-    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+  - name: origin
+    url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
     login: 
     user: 
     host: 
@@ -36,40 +36,40 @@ MonoBehaviour:
   localConfigBranches:
     keys:
     - main
-    - MapTest
     - MapTest3D
+    - timer_jeu
     values:
     - name: main
       remote:
-        name: 
-        url: 
-      trackingBranch: 
-    - name: MapTest
-      remote:
-        name: 
-        url: 
-      trackingBranch: 
+        name: origin
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+      trackingBranch: main
     - name: MapTest3D
       remote:
-        name: MapTest
-        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+        name: origin
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
       trackingBranch: MapTest3D
+    - name: timer_jeu
+      remote:
+        name: 
+        url: 
+      trackingBranch: 
   remoteConfigBranches:
     keys:
-    - MapTest
+    - origin
     subKeys:
     - Values:
-      - MapTest3D
+      - HEAD
     subKeyValues:
     - Values:
-      - name: MapTest3D
+      - name: HEAD
         remote:
-          name: MapTest
-          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+          name: origin
+          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
         trackingBranch: 
   configRemotes:
     keys:
-    - MapTest
+    - origin
     values:
-    - name: MapTest
-      url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush
+    - name: origin
+      url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
