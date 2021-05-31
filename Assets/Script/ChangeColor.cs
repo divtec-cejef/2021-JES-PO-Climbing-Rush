@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class ChangeColor : MonoBehaviour
 {
-
     public Material[] Materials;
     public int x;
     private Renderer rend;
-    
+
     // Start is called before the first frame update
     void Start()
     {

@@ -9,6 +9,7 @@ using UnityEngine.InputSystem.Utilities;
 public class @PlayerControls : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
+
     public @PlayerControls()
     {
         asset = InputActionAsset.FromJson(@"{
@@ -181,20 +182,44 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_GreenButton;
     private readonly InputAction m_Gameplay_YellowButton;
     private readonly InputAction m_Gameplay_PurpleButton;
+
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
-        public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+
+        public GameplayActions(@PlayerControls wrapper)
+        {
+            m_Wrapper = wrapper;
+        }
+
         public InputAction @RedButton => m_Wrapper.m_Gameplay_RedButton;
         public InputAction @BlueButton => m_Wrapper.m_Gameplay_BlueButton;
         public InputAction @GreenButton => m_Wrapper.m_Gameplay_GreenButton;
         public InputAction @YellowButton => m_Wrapper.m_Gameplay_YellowButton;
         public InputAction @PurpleButton => m_Wrapper.m_Gameplay_PurpleButton;
-        public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
+
+        public InputActionMap Get()
+        {
+            return m_Wrapper.m_Gameplay;
+        }
+
+        public void Enable()
+        {
+            Get().Enable();
+        }
+
+        public void Disable()
+        {
+            Get().Disable();
+        }
+
         public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GameplayActions set) { return set.Get(); }
+
+        public static implicit operator InputActionMap(GameplayActions set)
+        {
+            return set.Get();
+        }
+
         public void SetCallbacks(IGameplayActions instance)
         {
             if (m_Wrapper.m_GameplayActionsCallbackInterface != null)
@@ -215,6 +240,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @PurpleButton.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPurpleButton;
                 @PurpleButton.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnPurpleButton;
             }
+
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
             {
@@ -236,7 +262,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
             }
         }
     }
+
     public GameplayActions @Gameplay => new GameplayActions(this);
+
     public interface IGameplayActions
     {
         void OnRedButton(InputAction.CallbackContext context);

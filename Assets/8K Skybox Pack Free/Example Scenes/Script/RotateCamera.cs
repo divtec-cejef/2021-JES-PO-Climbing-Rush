@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RotateCamera : MonoBehaviour {
+public class RotateCamera : MonoBehaviour
+{
     float MouseRotateSpeed = 80f;
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         float y = Input.GetAxis("Mouse X") * MouseRotateSpeed * Time.deltaTime;
         float x = Input.GetAxis("Mouse Y") * MouseRotateSpeed * Time.deltaTime;
         transform.Rotate(-x, y, 0);

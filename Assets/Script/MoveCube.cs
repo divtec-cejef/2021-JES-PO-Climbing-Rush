@@ -38,6 +38,7 @@ public class MoveCube : MonoBehaviour
         {
             this.transform.Translate(Vector3.right * moveSpeed);
         }
+
         // Fais aller le joueur en avant
         if (Input.GetKey(KeyCode.W))
         {

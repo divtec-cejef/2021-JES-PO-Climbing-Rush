@@ -1,87 +1,117 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class moveIndicator : MonoBehaviour
+public class MoveIndicator : MonoBehaviour
 {
-    private const int HOLD_AXE_Z = 199;
-    
-    public GameObject handRight; 
-    public GameObject handLeft;
+    private const int INDICATOR_AXE_Z = 199;
 
-    private bool grabRightHand = true;
     
-    public float moveSpeed;
+    public GameObject rightCircle;
+    public GameObject leftCircle;
+
+    private bool moveIndicatorRight = true;
 
     private List<int> listHoldRightCoordinateX = new List<int>();
     private List<int> listHoldLeftCoordinateX = new List<int>();
-    private List<Color> listColor = new List<Color>();
+    private List<Color> listColorIndicator = new List<Color>();
 
-    private int indexCoRight = 0;
-    private int indexCoLeft = 0;
+    private int indexCoordinateRightHold = 0;
+    private int indexCoordinateLeftHold = 0;
     private int holdAxeY = 75;
-    private int countColor = 0;
-    private int nombreAleatoire = 0;
+    private int indexListOfColorIndicator = 0;
 
-
+    private Renderer circleColorRight;
+    private Renderer circleColorLeft;
+    
     void Start()
     {
-        moveSpeed = 10;
-
+        // Permet de récupérer le matériau des indicateurs
+        circleColorRight = rightCircle.GetComponent<Renderer>();
+        circleColorLeft = leftCircle.GetComponent<Renderer>();
+        
+        
+        // Liste des coordonnées des prises sur l'axe X 
         listHoldRightCoordinateX.AddRange(new List<int>() {10, 1, 21, 19, 12, 3});
         listHoldLeftCoordinateX.AddRange(new List<int>() {-15, -11, -2, 0, -14, -21});
-        listColor.AddRange(new List<Color>() {Color.green, Color.yellow, Color.magenta, Color.red, Color.blue });
+
+        // Liste des couleurs des indicateurs
+        listColorIndicator.AddRange(new List<Color>() {Color.red, Color.blue, Color.green, Color.yellow, Color.magenta});
         
-        var circleColorLeft = handLeft.GetComponent<Renderer>();
-        var circleColorRight = handRight.GetComponent<Renderer>();
+
+        // Initialise les couleurs des deux premiers indicateurs au démarrage du jeu
+        circleColorRight.material.SetColor("_Color", listColorIndicator[indexListOfColorIndicator]);
+        circleColorLeft.material.SetColor("_Color", listColorIndicator[indexListOfColorIndicator + 1]);
         
-        circleColorLeft.material.SetColor("_Color",Color.blue);
-        circleColorRight.material.SetColor("_Color",Color.red);
+        indexListOfColorIndicator += 2;
+    }
+    
+    
+    /// <summary>
+    /// Retourne les couleurs des indicateurs contenues dans une liste
+    /// </summary>
+    /// <returns> Une liste de couleur </returns>
+    public List<Color> getColorIndicator()
+    {
+        return listColorIndicator;
     }
 
-    void Update()
+    
+    /// <summary>
+    /// Fais bouger les deux indicateurs de prises et change leur couleur non aléatoirement
+    /// </summary>
+    public void moveNextIndicator()
     {
-        
-        var circleColorLeft = handLeft.GetComponent<Renderer>();
-        var circleColorRight = handRight.GetComponent<Renderer>();
-        
-        if (Input.GetKeyDown(KeyCode.M))
+        // L'indicateur droit se déplace à la prochaine prise et change de couleur
+        if (moveIndicatorRight)
         {
-            nombreAleatoire = Random.Range(0, 4);
-
+            try
+            {
+                rightCircle.transform.position = new Vector3(listHoldRightCoordinateX[indexCoordinateRightHold], holdAxeY, INDICATOR_AXE_Z);
+            }
+            catch
+            {
+            }
             
-            // Prends la prise de la main droite
-            if (grabRightHand)
+            circleColorRight.material.SetColor("_Color", listColorIndicator[indexListOfColorIndicator]);
+
+            holdAxeY += 25;
+            moveIndicatorRight = false;
+            indexCoordinateRightHold++;
+            indexListOfColorIndicator++;
+
+            // Vérifie si les couleurs ont été déjà toutes faites et si c'est le cas
+            // on recommence avec la première couleur, qui permet de refaire n prises.
+            if (indexListOfColorIndicator >= listColorIndicator.Count)
             {
-                handRight.transform.position = new Vector3(listHoldRightCoordinateX[indexCoRight], holdAxeY, HOLD_AXE_Z);
-                circleColorRight.material.SetColor("_Color",listColor[countColor]);
-
-                holdAxeY += 25;
-                grabRightHand = false;
-                indexCoRight++;
-                countColor++;
-
-                if (countColor > 4)
-                {
-                    countColor = 0;
-                }
-                
-            } 
-            // Prends la prise de la main gauche
-            else
+                indexListOfColorIndicator = 0;
+            }
+        }
+        // L'indicateur gauche se déplace à la prochaine prise et change de couleur
+        else
+        {
+            try
             {
-                handLeft.transform.position = new Vector3(listHoldLeftCoordinateX[indexCoLeft], holdAxeY, HOLD_AXE_Z);
-                circleColorLeft.material.SetColor("_Color",listColor[countColor]);
+                leftCircle.transform.position = new Vector3(listHoldLeftCoordinateX[indexCoordinateLeftHold], holdAxeY, INDICATOR_AXE_Z);
+            }
+            catch
+            {
+            }
 
-                holdAxeY += 25;
-                grabRightHand = true;
-                indexCoLeft++;
-                countColor++;
+            circleColorLeft.material.SetColor("_Color", listColorIndicator[indexListOfColorIndicator]);
 
-                if (countColor > 4)
-                {
-                    countColor = 0;
-                }
+            holdAxeY += 25;
+            moveIndicatorRight = true;
+            indexCoordinateLeftHold++;
+            indexListOfColorIndicator++;
+
+            // Vérifie si les couleurs ont été déjà toutes faites et si c'est le cas
+            // on recommence avec la première couleur, qui permet de refaire n prises.
+            if (indexListOfColorIndicator >= listColorIndicator.Count)
+            {
+                indexListOfColorIndicator = 0;
             }
         }
     }

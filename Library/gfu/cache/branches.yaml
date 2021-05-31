@@ -13,23 +13,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2021-05-28T11:20:14.249+02:00
-  initializedAtString: 2021-05-28T11:18:46.398+02:00
+  lastUpdatedAtString: 2021-05-28T15:37:56.534+02:00
+  initializedAtString: 2021-05-28T15:37:56.512+02:00
   localBranches:
+  - name: Deplacer_joueur_prises
+    tracking: origin/Deplacer_joueur_prises
+  - name: Deplacer_joueur_quand_couleur_correspond
+    tracking: origin/Deplacer_joueur_quand_couleur_correspond
   - name: Indicateur_prise_1
     tracking: origin/Indicateur_prise_1
-  - name: Indicateur_prise_2
-    tracking: 
   - name: main
     tracking: origin/main
   - name: MapTest3D
     tracking: origin/MapTest3D
+  - name: reuperer_inputs_switchs
+    tracking: origin/reuperer_inputs_switchs
   remoteBranches:
+  - name: origin/Deplacer_joueur_quand_couleur_correspond
+    tracking: '[None]'
   - name: origin/HEAD
     tracking: '[None]'
   - name: origin/Indicateur_prise_1
     tracking: '[None]'
   - name: origin/main
+    tracking: '[None]'
+  - name: origin/map_finale
+    tracking: '[None]'
+  - name: origin/reuperer_inputs_switchs
     tracking: '[None]'
   remotes:
   - name: origin
@@ -41,21 +51,28 @@ MonoBehaviour:
     token: 
   localConfigBranches:
     keys:
+    - Deplacer_joueur_prises
+    - Deplacer_joueur_quand_couleur_correspond
     - Indicateur_prise_1
-    - Indicateur_prise_2
     - main
     - MapTest3D
+    - reuperer_inputs_switchs
     values:
+    - name: Deplacer_joueur_prises
+      remote:
+        name: origin
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+      trackingBranch: Deplacer_joueur_prises
+    - name: Deplacer_joueur_quand_couleur_correspond
+      remote:
+        name: origin
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+      trackingBranch: Deplacer_joueur_quand_couleur_correspond
     - name: Indicateur_prise_1
       remote:
         name: origin
         url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
       trackingBranch: Indicateur_prise_1
-    - name: Indicateur_prise_2
-      remote:
-        name: 
-        url: 
-      trackingBranch: 
     - name: main
       remote:
         name: origin
@@ -66,16 +83,29 @@ MonoBehaviour:
         name: origin
         url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
       trackingBranch: MapTest3D
+    - name: reuperer_inputs_switchs
+      remote:
+        name: origin
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+      trackingBranch: reuperer_inputs_switchs
   remoteConfigBranches:
     keys:
     - origin
     subKeys:
     - Values:
+      - Deplacer_joueur_quand_couleur_correspond
       - HEAD
       - Indicateur_prise_1
       - main
+      - map_finale
+      - reuperer_inputs_switchs
     subKeyValues:
     - Values:
+      - name: Deplacer_joueur_quand_couleur_correspond
+        remote:
+          name: origin
+          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+        trackingBranch: 
       - name: HEAD
         remote:
           name: origin
@@ -87,6 +117,16 @@ MonoBehaviour:
           url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
         trackingBranch: 
       - name: main
+        remote:
+          name: origin
+          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+        trackingBranch: 
+      - name: map_finale
+        remote:
+          name: origin
+          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+        trackingBranch: 
+      - name: reuperer_inputs_switchs
         remote:
           name: origin
           url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git

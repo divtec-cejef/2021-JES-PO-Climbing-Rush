@@ -1,39 +1,54 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class MovePlayer : MonoBehaviour
 {
-    // Variables pour les boutons et les indicateurs
+    private const int NBRE_PRISES = 14;
+    
+    // Variable pour les boutons et les indicateurs de couleurs
     private PlayerControls controls;
-    private List<char> listColorCircleIndicator = new List<char>();
-    private int indexListColorCircle = 0;
-    
-    
+    public MoveIndicator moveIndicator;
+
     // Variables pour le déplacement du joueur
     private const int HOLD_AXE_Z = 190;
 
-    public GameObject handRight; 
+    // Des objets du jeu avec lesquels ont doit interagir par programmation
+    public GameObject handRight;
     public GameObject handLeft;
-    private bool grabRightHand = true;
-    
-    public float moveSpeed;
+    public GameObject headAndBody;
 
+
+    private bool grabRightHand = true;
+
+
+    // Liste des coordonnées des prises droites et gauches
     private List<int> listHoldRightCoordinateX = new List<int>();
     private List<int> listHoldLeftCoordinateX = new List<int>();
 
- 
-    private int indexCoRight = 0;
-    private int indexCoLeft = 0;
+    private int indexCoordinateRightHold = 0;
+    private int indexCoordinateLeftHold = 0;
     private int holdAxeY = 25;
     private int playerAxeY = 0;
+    
+    
+    // Liste de couleurs
+    private List<Color> listColorIndicator = new List<Color>();
+    private int indexListColorIndicator = 0;
 
+    private int comptorNbrHolds = 1;
+
+    
     private void Start()
     {
-        listColorCircleIndicator.AddRange(new List<char>(){'R', 'B', 'G', 'Y', 'P'});
-     
+        // Reprends depuis la classe _MoveIndicator_ les couleurs des indicateurs
+        listColorIndicator = moveIndicator.getColorIndicator();
+
+
+        // Liste des coordonnées sur l'axe X des prises
         listHoldRightCoordinateX.AddRange(new List<int>() {17, 10, 1, 21, 19, 12, 3});
         listHoldLeftCoordinateX.AddRange(new List<int>() {-3, -15, -11, -2, 0, -14, -21});
     }
@@ -42,57 +57,76 @@ public class MovePlayer : MonoBehaviour
     {
         controls = new PlayerControls();
 
-        controls.Gameplay.RedButton.performed += ctx => CorrectCircle('R');
-        controls.Gameplay.BlueButton.performed += ctx => CorrectCircle('B');
-        controls.Gameplay.GreenButton.performed += ctx => CorrectCircle('G');
-        controls.Gameplay.YellowButton.performed += ctx => CorrectCircle('Y');
-        controls.Gameplay.PurpleButton.performed += ctx => CorrectCircle('P');
+        controls.Gameplay.RedButton.performed += ctx => correctCircle(Color.red);
+        controls.Gameplay.BlueButton.performed += ctx => correctCircle(Color.blue);
+        controls.Gameplay.GreenButton.performed += ctx => correctCircle(Color.green);
+        controls.Gameplay.YellowButton.performed += ctx => correctCircle(Color.yellow);
+        controls.Gameplay.PurpleButton.performed += ctx => correctCircle(Color.magenta);
     }
+    
 
-    // Vérifie si le bouton appuyé correspondant avec la couleur du cercle courrant
-    void CorrectCircle(char colorButton)
+
+    /// <summary>
+    /// Vérifie si le bouton appuyé correspondant avec la couleur du cercle courrant
+    /// </summary>
+    /// <param name="colorButton"> La couleur du bouton qui est appuyé </param>
+    void correctCircle(Color colorButton)
     {
-        if (colorButton == listColorCircleIndicator[indexListColorCircle])
+        if (colorButton.Equals(listColorIndicator[indexListColorIndicator]) && comptorNbrHolds <= NBRE_PRISES)
         {
-            print("bouton " + colorButton);
-            
-            indexListColorCircle++;
-            
-            if (indexListColorCircle >= listColorCircleIndicator.Count)
-            {
-                indexListColorCircle = 0;
-            }
+            // Déplace l'indicateur à la prochaine prise
+            moveIndicator.moveNextIndicator();
 
             // Fais bouger le joueur à la prochaine prise
-            MovePlayerToGrab();
+            grabNextHold();
+
+            comptorNbrHolds++;
+            indexListColorIndicator++;
+                    
+
+            // Si l'index de la liste des couleurs de l'indicateur est fini alors on recommence à zéro
+            // pour continuer sur n prises.
+            if (indexListColorIndicator >= listColorIndicator.Count)
+            {
+                indexListColorIndicator = 0;
+            }
         }
     }
 
-    void MovePlayerToGrab()
+    
+
+    /// <summary>
+    /// Déplace le joueur sur la prochaine prise
+    /// </summary>
+    void grabNextHold()
     {
         // Prends la prise de la main droite
         if (grabRightHand)
         {
-            handRight.transform.position = new Vector3(listHoldRightCoordinateX[indexCoRight], holdAxeY, HOLD_AXE_Z);
-
+            handRight.transform.position =
+                new Vector3(listHoldRightCoordinateX[indexCoordinateRightHold], holdAxeY, HOLD_AXE_Z);
+            
             holdAxeY += 25;
             grabRightHand = false;
-            indexCoRight++;
-        } 
+            indexCoordinateRightHold++;
+        }
         // Prends la prise de la main gauche
         else
         {
-            handLeft.transform.position = new Vector3(listHoldLeftCoordinateX[indexCoLeft], holdAxeY, HOLD_AXE_Z);
+            handLeft.transform.position =
+                new Vector3(listHoldLeftCoordinateX[indexCoordinateLeftHold], holdAxeY, HOLD_AXE_Z);
+            
             holdAxeY += 25;
             grabRightHand = true;
-            indexCoLeft++;
+            indexCoordinateLeftHold++;
         }
-            
+
         // Monte le joueur
-        this.transform.position = new Vector3(0, playerAxeY, HOLD_AXE_Z);
+        headAndBody.transform.position = new Vector3(0, playerAxeY, HOLD_AXE_Z);
 
         playerAxeY += 25;
     }
+
 
     void OnEnable()
     {
