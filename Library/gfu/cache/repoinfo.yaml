@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 1
-  lastUpdatedAtString: 2021-05-31T15:10:14.714+02:00
-  initializedAtString: 2021-05-31T15:10:14.714+02:00
+  lastUpdatedAtString: 2021-06-04T15:22:08.567+02:00
+  initializedAtString: 2021-06-04T15:22:08.567+02:00
   currentGitRemote:
     name: origin
     url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
@@ -25,13 +25,13 @@ MonoBehaviour:
     token: 
   currentGitBranch:
     name: Indicateur_prise_2
-    tracking: 
+    tracking: origin/Indicateur_prise_2
   currentConfigBranch:
     name: Indicateur_prise_2
     remote:
-      name: 
-      url: 
-    trackingBranch: 
+      name: origin
+      url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+    trackingBranch: Indicateur_prise_2
   currentConfigRemote:
     name: origin
     url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git

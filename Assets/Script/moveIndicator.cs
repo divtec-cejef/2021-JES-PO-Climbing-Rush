@@ -86,10 +86,9 @@ public class MoveIndicator : MonoBehaviour
         {
             try
             {
-                shrinkIndicator.correctButtonPressed = true;
                 rightCircle.transform.position = new Vector3(listHoldRightCoordinateX[indexCoordinateRightHold],
                     holdAxeY, INDICATOR_AXE_Z);
-                shrinkIndicator.defaultSizeIndicator(rightCircle);
+                shrinkIndicator.setDefaultSizeIndicator(rightCircle);
                 shrinkIndicator.shrinkCurrentIndicator(leftCircle);
             }
             catch
@@ -120,10 +119,9 @@ public class MoveIndicator : MonoBehaviour
             try
             {
                 print("passer dans le try deuxième");
-                shrinkIndicator.correctButtonPressed = true;
                 leftCircle.transform.position = new Vector3(listHoldLeftCoordinateX[indexCoordinateLeftHold], holdAxeY,
                     INDICATOR_AXE_Z);
-                shrinkIndicator.defaultSizeIndicator(leftCircle);
+                shrinkIndicator.setDefaultSizeIndicator(leftCircle);
                 shrinkIndicator.shrinkCurrentIndicator(rightCircle);
             }
             catch
@@ -149,6 +147,7 @@ public class MoveIndicator : MonoBehaviour
         }
     }
 
+    
     /// <summary>
     /// Retourne une couleur aléatoire (soit rouge, bleu, vert, jaune ou violet)
     /// </summary>
@@ -167,6 +166,7 @@ public class MoveIndicator : MonoBehaviour
         return nextColorIndcator;
     }
 
+    
     /// <summary>
     /// Retourne la couleur de l'incateur courant
     /// </summary>

@@ -228,7 +228,6 @@ GameObject:
   m_Component:
   - component: {fileID: 158911439}
   - component: {fileID: 158911440}
-  - component: {fileID: 158911441}
   m_Layer: 0
   m_Name: Cricle
   m_TagString: Untagged
@@ -261,24 +260,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 158911438}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbb2a199520925e43a70988b3f1b5fa1, type: 3}
+  m_Script: {fileID: 11500000, guid: 45659ab9d4d1240449e4512912194169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rightCircle: {fileID: 8985557035985763659}
   leftCircle: {fileID: 1529836012}
   shrinkIndicator: {fileID: 708734416}
---- !u!114 &158911441
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 158911438}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eeeaf30e8590fe46952ff4b87806e94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &174863359
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,9 +1039,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 708734415}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3eeeaf30e8590fe46952ff4b87806e94, type: 3}
+  m_Script: {fileID: 11500000, guid: f18e89d8e868416ba9ccba752118713c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  correctButtonPressed: 0
+  movePlayer: {fileID: 1762513622}
+  isPressed: 0
 --- !u!4 &708734417
 Transform:
   m_ObjectHideFlags: 0
@@ -2020,6 +2010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveIndicator: {fileID: 158911440}
+  shrinkIndicator: {fileID: 708734416}
   handRight: {fileID: 397222888}
   handLeft: {fileID: 401497091}
   headAndBody: {fileID: 964163762}

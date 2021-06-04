@@ -12,6 +12,9 @@ public class MovePlayer : MonoBehaviour
     // Variable pour les boutons et les indicateurs de couleurs
     private PlayerControls controls;
     public MoveIndicator moveIndicator;
+    public ShrinkIndicator shrinkIndicator;
+    
+
 
     // Variables pour le déplacement du joueur
     private const int HOLD_AXE_Z = 190;
@@ -23,7 +26,6 @@ public class MovePlayer : MonoBehaviour
 
 
     private bool grabRightHand = true;
-
 
     // Liste des coordonnées des prises droites et gauches
     private List<int> listHoldRightCoordinateX = new List<int>();
@@ -41,11 +43,11 @@ public class MovePlayer : MonoBehaviour
 
     private int comptorNbrHolds = 1;
 
-    private ShrinkIndicator shrinkIndicator;
 
 
     private void Start()
     {
+        shrinkIndicator.isPressed = false;
         // Reprends depuis la classe _MoveIndicator_ les couleurs des indicateurs
         listColorIndicator = moveIndicator.getColorIndicator();
 
@@ -59,24 +61,26 @@ public class MovePlayer : MonoBehaviour
     {
         controls = new PlayerControls();
 
+        // Les cinq boutons 
         controls.Gameplay.RedButton.performed += ctx => correctCircle(Color.red);
         controls.Gameplay.BlueButton.performed += ctx => correctCircle(Color.blue);
         controls.Gameplay.GreenButton.performed += ctx => correctCircle(Color.green);
         controls.Gameplay.YellowButton.performed += ctx => correctCircle(Color.yellow);
         controls.Gameplay.PurpleButton.performed += ctx => correctCircle(Color.magenta);
         
-        
     }
-
 
     /// <summary>
     /// Vérifie si le bouton appuyé correspondant avec la couleur du cercle courrant
     /// </summary>
     /// <param name="colorButton"> La couleur du bouton qui est appuyé </param>
-    void correctCircle(Color colorButton)
+    public void correctCircle(Color colorButton)
     {
         if (colorButton.Equals(moveIndicator.getCurrentColorIndicator()) && comptorNbrHolds <= NBRE_PRISES)
         {
+
+            shrinkIndicator.setIsPressed(true);
+            
             // Déplace l'indicateur à la prochaine prise
             moveIndicator.moveNextIndicator();
 
@@ -94,6 +98,7 @@ public class MovePlayer : MonoBehaviour
                 indexListColorIndicator = 0;
             }
         }
+        
     }
 
 
