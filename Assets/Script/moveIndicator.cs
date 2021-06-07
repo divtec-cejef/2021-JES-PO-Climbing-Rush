@@ -10,7 +10,7 @@ public class MoveIndicator : MonoBehaviour
 {
     private const int INDICATOR_AXE_Z = 199;
 
-
+    public ShrinkIndicator shrinkIndicator;
     public GameObject rightCircle;
     public GameObject leftCircle;
 
@@ -34,12 +34,10 @@ public class MoveIndicator : MonoBehaviour
 
     private int previousRandomNumber = 0;
 
-    public ShrinkIndicator shrinkIndicator;
-
 
     void Start()
     {
-        // Permet de récupérer le matériau des indicateurs
+        // Permet de récupérer le matériau des indicateurs afin de leurs ajouter par la suite des couleurs
         circleColorRight = rightCircle.GetComponent<Renderer>();
         circleColorLeft = leftCircle.GetComponent<Renderer>();
 
@@ -60,9 +58,6 @@ public class MoveIndicator : MonoBehaviour
 
         // Récupère le couleur du premier indicateur 
         currentColorIndicator = circleColorRight.GetComponent<Renderer>().material.color;
-
-        // Rétrécis le premier indicator jusqu'à la limite
-        shrinkIndicator.shrinkCurrentIndicator(rightCircle);
     }
 
 
@@ -77,10 +72,14 @@ public class MoveIndicator : MonoBehaviour
 
 
     /// <summary>
-    /// Fais bouger les deux indicateurs de prises et change leur couleur non aléatoirement
+    /// Change de place un des indicateurs de prises et change sa couleur aléatoirement
     /// </summary>
     public void moveNextIndicator()
     {
+        // Stop le rétrécissement de l'indicateur courant
+        shrinkIndicator.stopShrinkIndicator();
+        
+
         // L'indicateur droit se déplace à la prochaine prise et change de couleur
         if (moveIndicatorRight)
         {
@@ -88,17 +87,15 @@ public class MoveIndicator : MonoBehaviour
             {
                 rightCircle.transform.position = new Vector3(listHoldRightCoordinateX[indexCoordinateRightHold],
                     holdAxeY, INDICATOR_AXE_Z);
-                shrinkIndicator.setDefaultSizeIndicator(rightCircle);
-                shrinkIndicator.shrinkCurrentIndicator(leftCircle);
             }
             catch
             {
             }
 
-
-            // Récupération de la prise courante
+            // Récupération de la couleur de la prise courante 
             currentColorIndicator = circleColorLeft.GetComponent<Renderer>().material.color;
 
+            // Ajoute une couleur random sur cet indicateur
             circleColorRight.material.SetColor("_Color", getRandomColor());
 
             holdAxeY += 25;
@@ -118,19 +115,17 @@ public class MoveIndicator : MonoBehaviour
         {
             try
             {
-                print("passer dans le try deuxième");
                 leftCircle.transform.position = new Vector3(listHoldLeftCoordinateX[indexCoordinateLeftHold], holdAxeY,
                     INDICATOR_AXE_Z);
-                shrinkIndicator.setDefaultSizeIndicator(leftCircle);
-                shrinkIndicator.shrinkCurrentIndicator(rightCircle);
             }
             catch
             {
             }
-
-            // Récupération de la prise courante
+            
+            // Récupération de la couleur de la prise courante 
             currentColorIndicator = circleColorRight.GetComponent<Renderer>().material.color;
 
+            // Ajoute une couleur random sur cet indicateur
             circleColorLeft.material.SetColor("_Color", getRandomColor());
 
             holdAxeY += 25;
@@ -138,6 +133,7 @@ public class MoveIndicator : MonoBehaviour
             indexCoordinateLeftHold++;
             indexListOfColorIndicator++;
 
+            
             // Vérifie si les couleurs ont été déjà toutes faites et si c'est le cas
             // on recommence avec la première couleur, qui permet de refaire n prises.
             if (indexListOfColorIndicator >= listColorIndicator.Count)
@@ -145,11 +141,17 @@ public class MoveIndicator : MonoBehaviour
                 indexListOfColorIndicator = 0;
             }
         }
+        
+        // Remets la taille par défaut de l'indicateur qui s'est fait rétrécir
+        shrinkIndicator.setDefaultSizeIndicator();
+        
+        // Rétrécis l'indicateur courant
+        shrinkIndicator.shrinkCurrentIndicator();
     }
 
     
     /// <summary>
-    /// Retourne une couleur aléatoire (soit rouge, bleu, vert, jaune ou violet)
+    /// Retourne une couleur aléatoire (rouge, bleu, vert, jaune ou violet)
     /// </summary>
     /// <returns>une couleur aléatoire</returns>
     private Color getRandomColor()
@@ -158,6 +160,7 @@ public class MoveIndicator : MonoBehaviour
         do
         {
             randomNumber = Random.Range(0, 5);
+            
         } while (randomNumber == previousRandomNumber);
 
         previousRandomNumber = randomNumber;

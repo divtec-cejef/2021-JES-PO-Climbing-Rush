@@ -13,7 +13,7 @@ public class MovePlayer : MonoBehaviour
     private PlayerControls controls;
     public MoveIndicator moveIndicator;
     public ShrinkIndicator shrinkIndicator;
-    
+    public FlashIndicator flashIndicator;
 
 
     // Variables pour le déplacement du joueur
@@ -42,12 +42,11 @@ public class MovePlayer : MonoBehaviour
     private int indexListColorIndicator = 0;
 
     private int comptorNbrHolds = 1;
-
-
+    
 
     private void Start()
     {
-        shrinkIndicator.isPressed = false;
+        // shrinkIndicator.setIsPressed(false);
         // Reprends depuis la classe _MoveIndicator_ les couleurs des indicateurs
         listColorIndicator = moveIndicator.getColorIndicator();
 
@@ -57,11 +56,12 @@ public class MovePlayer : MonoBehaviour
         listHoldLeftCoordinateX.AddRange(new List<int>() {-3, -15, -11, -2, 0, -14, -21});
     }
 
+    
     void Awake()
     {
         controls = new PlayerControls();
 
-        // Les cinq boutons 
+        // Les cinq boutons à contrôler
         controls.Gameplay.RedButton.performed += ctx => correctCircle(Color.red);
         controls.Gameplay.BlueButton.performed += ctx => correctCircle(Color.blue);
         controls.Gameplay.GreenButton.performed += ctx => correctCircle(Color.green);
@@ -70,6 +70,7 @@ public class MovePlayer : MonoBehaviour
         
     }
 
+    
     /// <summary>
     /// Vérifie si le bouton appuyé correspondant avec la couleur du cercle courrant
     /// </summary>
@@ -79,7 +80,8 @@ public class MovePlayer : MonoBehaviour
         if (colorButton.Equals(moveIndicator.getCurrentColorIndicator()) && comptorNbrHolds <= NBRE_PRISES)
         {
 
-            shrinkIndicator.setIsPressed(true);
+            // Stop le clignotement de l'indicateur courant
+            flashIndicator.stopFlashCurrentIndicator();
             
             // Déplace l'indicateur à la prochaine prise
             moveIndicator.moveNextIndicator();
@@ -135,6 +137,7 @@ public class MovePlayer : MonoBehaviour
     }
 
 
+    // Fonctions qui permettent aux boutons de s'activer
     void OnEnable()
     {
         controls.Gameplay.Enable();

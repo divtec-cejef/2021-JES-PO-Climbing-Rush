@@ -47,8 +47,9 @@
      <Compile Include="Assets\8K Skybox Pack Free\Example Scenes\Script\RotateCamera.cs" />
      <Compile Include="Assets\Script\ChangeColor.cs" />
      <Compile Include="Assets\AlignedGames\Polygonal Foliage Asset Package\Scripts\Utility\FlyCameraBehaviour.cs" />
-     <Compile Include="Assets\Script\ShrinkIndicator.cs" />
+     <Compile Include="Assets\Script\FlashIndicator.cs" />
      <Compile Include="Assets\Script\MovePlayer.cs" />
+     <Compile Include="Assets\Script\ShrinkIndicator.cs" />
      <None Include="Assets\AlignedGames\Polygonal Foliage Asset Package\Shaders\Cloud.shader" />
      <None Include="Assets\8K Skybox Pack Free\ReadMe.txt" />
      <None Include="Assets\DefaultShader.shader" />
