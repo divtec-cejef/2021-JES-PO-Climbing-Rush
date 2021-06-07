@@ -13,21 +13,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 6
-  lastUpdatedAtString: 2021-06-07T10:42:19.799+02:00
+  lastUpdatedAtString: 2021-06-07T10:57:40.594+02:00
   initializedAtString: 2021-06-07T09:36:25.138+02:00
   entries:
-  - path: Assembly-CSharp.csproj
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Assembly-CSharp.csproj
-    projectPath: Assembly-CSharp.csproj
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Assets\AssetsBase.unity
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Assets\AssetsBase.unity
-    projectPath: Assets\AssetsBase.unity
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Assets\Script\FlashIndicator.cs
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Assets\Script\FlashIndicator.cs
     projectPath: Assets\Script\FlashIndicator.cs
@@ -40,24 +28,12 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
-  - path: Assets\Script\moveIndicator.cs
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Assets\Script\moveIndicator.cs
-    projectPath: Assets\Script\moveIndicator.cs
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Assets\Script\MoveIndicator.cs.meta
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Assets\Script\MoveIndicator.cs.meta
     projectPath: Assets\Script\MoveIndicator.cs.meta
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
-  - path: Assets\Script\MovePlayer.cs
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Assets\Script\MovePlayer.cs
-    projectPath: Assets\Script\MovePlayer.cs
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Assets\Script\ShrinkIndicator.cs
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Assets\Script\ShrinkIndicator.cs
     projectPath: Assets\Script\ShrinkIndicator.cs
@@ -70,24 +46,6 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
-  - path: Library\APIUpdater\project-dependencies.graph
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\APIUpdater\project-dependencies.graph
-    projectPath: Library\APIUpdater\project-dependencies.graph
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ArtifactDB
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\ArtifactDB
-    projectPath: Library\ArtifactDB
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ArtifactDB-lock
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\ArtifactDB-lock
-    projectPath: Library\ArtifactDB-lock
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\Artifacts\00\004d8fb54b75e4fb50e21a2f5b5393d1
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\Artifacts\00\004d8fb54b75e4fb50e21a2f5b5393d1
     projectPath: Library\Artifacts\00\004d8fb54b75e4fb50e21a2f5b5393d1
@@ -3286,6 +3244,12 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
+  - path: Library\Artifacts\40\40b1831fd5eb4b50c2f14b8c7853dd61
+    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\Artifacts\40\40b1831fd5eb4b50c2f14b8c7853dd61
+    projectPath: Library\Artifacts\40\40b1831fd5eb4b50c2f14b8c7853dd61
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
   - path: Library\Artifacts\40\40b88f9044592b1861621cdff89e1598
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\Artifacts\40\40b88f9044592b1861621cdff89e1598
     projectPath: Library\Artifacts\40\40b88f9044592b1861621cdff89e1598
@@ -5251,6 +5215,12 @@ MonoBehaviour:
   - path: Library\Artifacts\67\679b62f5a3197b56684cfc55dfc18860
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\Artifacts\67\679b62f5a3197b56684cfc55dfc18860
     projectPath: Library\Artifacts\67\679b62f5a3197b56684cfc55dfc18860
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Library\Artifacts\67\679d87dc6fbb55458649e4a54da1b762
+    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\Artifacts\67\679d87dc6fbb55458649e4a54da1b762
+    projectPath: Library\Artifacts\67\679d87dc6fbb55458649e4a54da1b762
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
@@ -12742,24 +12712,12 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
-  - path: Library\CurrentLayout-default.dwlt
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\CurrentLayout-default.dwlt
-    projectPath: Library\CurrentLayout-default.dwlt
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\CurrentMaximizeLayout.dwlt
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\CurrentMaximizeLayout.dwlt
     projectPath: Library\CurrentMaximizeLayout.dwlt
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
-  - path: Library\EditorInstance.json
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\EditorInstance.json
-    projectPath: Library\EditorInstance.json
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\gfu\cache\branches.yaml
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\gfu\cache\branches.yaml
     projectPath: Library\gfu\cache\branches.yaml
@@ -12781,12 +12739,6 @@ MonoBehaviour:
   - path: Library\gfu\cache\gittrackingstatus.yaml
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\gfu\cache\gittrackingstatus.yaml
     projectPath: Library\gfu\cache\gittrackingstatus.yaml
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\gfu\cache\gituser.yaml
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\gfu\cache\gituser.yaml
-    projectPath: Library\gfu\cache\gituser.yaml
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -22015,30 +21967,6 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\ProtocolInstance.json
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\ProtocolInstance.json
-    projectPath: Library\ProtocolInstance.json
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\SceneVisibilityState.asset
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\SceneVisibilityState.asset
-    projectPath: Library\SceneVisibilityState.asset
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Assembly-CSharp.dll
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\ScriptAssemblies\Assembly-CSharp.dll
-    projectPath: Library\ScriptAssemblies\Assembly-CSharp.dll
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
-  - path: Library\ScriptAssemblies\Assembly-CSharp.pdb
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\ScriptAssemblies\Assembly-CSharp.pdb
-    projectPath: Library\ScriptAssemblies\Assembly-CSharp.pdb
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll
     projectPath: Library\ScriptAssemblies\Assembly-CSharp-Editor-firstpass.dll
@@ -22717,12 +22645,6 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Library\SourceAssetDB-lock
-    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Library\SourceAssetDB-lock
-    projectPath: Library\SourceAssetDB-lock
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 3
   - path: Logs\ApiUpdaterCheck.txt
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Logs\ApiUpdaterCheck.txt
     projectPath: Logs\ApiUpdaterCheck.txt
@@ -22894,6 +22816,18 @@ MonoBehaviour:
   - path: Temp\UnityTempFile-df167c788ec8b814f84f72571c14a66e
     fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Temp\UnityTempFile-df167c788ec8b814f84f72571c14a66e
     projectPath: Temp\UnityTempFile-df167c788ec8b814f84f72571c14a66e
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-e4efdbf6c6925ca4c98466e71d49cce6
+    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Temp\UnityTempFile-e4efdbf6c6925ca4c98466e71d49cce6
+    projectPath: Temp\UnityTempFile-e4efdbf6c6925ca4c98466e71d49cce6
+    originalPath: 
+    indexStatus: 1
+    workTreeStatus: 1
+  - path: Temp\UnityTempFile-e76efe8762006c842a9a56df3fdd1348
+    fullPath: C:\Users\Admin\Documents\GitHub\2021-JES-PO-Climbing-Rush\Temp\UnityTempFile-e76efe8762006c842a9a56df3fdd1348
+    projectPath: Temp\UnityTempFile-e76efe8762006c842a9a56df3fdd1348
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
