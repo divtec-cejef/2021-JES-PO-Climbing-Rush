@@ -76,7 +76,7 @@ public class MovePlayer : MonoBehaviour
     /// <param name="colorButton"> La couleur du bouton qui est appuyé </param>
     public void correctCircle(Color colorButton)
     {
-        if (colorButton.Equals(moveIndicator.getCurrentColorIndicator()) && comptorNbrHolds <= NBRE_PRISES)
+        if (colorButton.Equals(moveIndicator.getCurrentColorIndicator()))
         {
 
             print("coucou");

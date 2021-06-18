@@ -48,7 +48,7 @@ public class IkControl : MonoBehaviour
 
         isFirstHold = true;
         watchTarget = true;
-        targetForHead = targetRight;
+        //targetForHead = GameObject.Find("prise 1").transform.position;
 
         numberOfTarget = 0;
     }
@@ -60,15 +60,10 @@ public class IkControl : MonoBehaviour
     public void animationClimbingPlayer()
     {
         numberOfTarget++;
-
-        print("N° de la prise : " + numberOfTarget);
-
-        print("ikControl");
-
+        
         watchTarget = false;
         axeYOfTargets += 1;
 
-        print("valeujr de gitr<hold : " + isFirstHold);
 
         if (isFirstHold)
         {
@@ -87,7 +82,7 @@ public class IkControl : MonoBehaviour
             isHoldLeft = true;
             isHoldRight = false;
 
-            targetForHead = targetRight;
+            targetForHead = targetLeft;
         }
         else
         {
@@ -96,7 +91,7 @@ public class IkControl : MonoBehaviour
             isHoldRight = true;
             isHoldLeft = false;
 
-            targetForHead = targetLeft;
+            targetForHead = targetRight;
         }
     }
 
@@ -115,21 +110,21 @@ public class IkControl : MonoBehaviour
                 isHoldRight = true;
                 isFirstHold = false;
 
-                targetForHead = targetLeft;
+                //targetForHead = targetLeft;
             }
             else if (isHoldRight)
             {
                 isHoldLeft = true;
                 isHoldRight = false;
 
-                targetForHead = targetRight;
+                //targetForHead = targetRight;
             }
             else
             {
                 isHoldRight = true;
                 isHoldLeft = false;
 
-                targetForHead = targetLeft;
+                //targetForHead = targetLeft;
             }
         }
     }
@@ -141,31 +136,26 @@ public class IkControl : MonoBehaviour
     /// <param name="layerIndex"></param>
     private void OnAnimatorIK(int layerIndex)
     {
-        print("animation dans la fonction 'OnAnimatorIK'");
 
-
-        // Animations po   ur que la tête regarde la prochaine prise à prendre
+        print("indicateur que le personnage doit regarder : " + targetForHead);
+        
+        // Animations pour que la tête regarde la prochaine prise à prendre
         if (watchTarget)
         {
             lookWeightForHead = Mathf.Lerp(lookWeightForHead, 1f, Time.deltaTime * lookSmoother);
         }
         else
         {
-            lookWeightForHead = Mathf.Lerp(lookWeightForHead, 0f, Time.deltaTime * lookSmoother);
+            lookWeightForHead = Mathf.Lerp(lookWeightForHead, 0f, Time.deltaTime * lookSmoother * 1.5f);
             watchTarget = true;
         }
 
 
         animator.SetLookAtWeight(lookWeightForHead);
-
-        if (isFirstHold)
-        {
-            animator.SetLookAtPosition(targetForHead.position);
-        }
-        else
-        {
-            animator.SetLookAtPosition(targetForHead.position + new Vector3(0, 30, 0));
-        }
+        
+        // Prochaine prise à regarder avec la tête
+        animator.SetLookAtPosition(GameObject.Find("prise " + (numberOfTarget + 1)).transform.position);
+    
 
 
         // La variable lookWeight permet de faire bouger le bras jusqu'à la prise. Exemple :
@@ -178,9 +168,6 @@ public class IkControl : MonoBehaviour
         /*-----------------------------------------*/
 
         // Vérifie si c'est le bras droit qui doit bouger, ainsi bouge le bras droit
-
-        print("valeur de isHoldRight : " + isHoldRight);
-
         if (isHoldRight)
         {
             lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
@@ -207,7 +194,6 @@ public class IkControl : MonoBehaviour
             lookWeightMaxForHoldRight = lookWeightForHoldRight;
         }
 
-        print("poids prise droite : " + lookWeightForHoldRight);
 
         // Bouge le bras droit (animation)
         animator.SetIKPositionWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
