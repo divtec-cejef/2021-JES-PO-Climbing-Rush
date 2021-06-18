@@ -32,17 +32,19 @@ public class ScoreScript : MonoBehaviour
     public void calculatePoints()
     {
         float counter = shrinkIndicator.getValueX();
+        
+        print("ouais dans le ScoreSript, valeur du button : " + getIsGoodButton());
 
         if (getIsGoodButton())
         {
 
-            if (counter > 13)
+            if (counter > 0.75f)
             {
                 scoreValue += 50;
-            }else if (counter > 9.5f)
+            }else if (counter > 0.55f)
             {
                 scoreValue += 150;
-            }else if (counter > 8.0f)
+            }else if (counter > 0.4f)
             {
                 scoreValue += 500;
             }

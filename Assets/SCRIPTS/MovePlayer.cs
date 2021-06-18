@@ -78,10 +78,8 @@ public class MovePlayer : MonoBehaviour
     {
         if (colorButton.Equals(moveIndicator.getCurrentColorIndicator()))
         {
-
-            print("coucou");
             
-            //scoreScript.setIsGoodButton(true);
+            scoreScript.setIsGoodButton(true);
             
             // Stop le clignotement de l'indicateur courant
             flashIndicator.stopFlashCurrentIndicator();

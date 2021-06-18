@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 public class ShrinkIndicator : MonoBehaviour
 {
-    private const float MIN_DIAMETER_INDICATOR = 8.0f;
+    private const float MIN_DIAMETER_INDICATOR = 0.5f;
 
     public GameObject rightIndicator;
     public GameObject leftIndicator;
@@ -26,6 +26,7 @@ public class ShrinkIndicator : MonoBehaviour
         // Rétrécis le premier indicator jusqu'à la limite
         shrinkCurrentIndicator();
         
+        print("dans le start du shrinkIndicator");
 
     }
 
@@ -73,10 +74,12 @@ public class ShrinkIndicator : MonoBehaviour
     {
         while (scaleCircleIndicator.x > MIN_DIAMETER_INDICATOR)
         {
-            indicator.gameObject.transform.localScale -= new Vector3(0.05f, 0.0f, 0.05f);
+            indicator.gameObject.transform.localScale -= new Vector3(0.005f, 0.0f, 0.005f);
             valueX = indicator.gameObject.transform.localScale.x;
 
             scaleCircleIndicator = indicator.gameObject.transform.localScale;
+            
+            print("ouuais saluuut alros voila mon scale : " + scaleCircleIndicator);
 
             yield return null;
         }
