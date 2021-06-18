@@ -136,8 +136,6 @@ public class IkControl : MonoBehaviour
     /// <param name="layerIndex"></param>
     private void OnAnimatorIK(int layerIndex)
     {
-
-        print("indicateur que le personnage doit regarder : " + targetForHead);
         
         // Animations pour que la tête regarde la prochaine prise à prendre
         if (watchTarget)
