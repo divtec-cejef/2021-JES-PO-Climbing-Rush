@@ -13,21 +13,21 @@ public class ShrinkIndicator : MonoBehaviour
     public GameObject rightIndicator;
     public GameObject leftIndicator;
     
-    public FlashIndicator flashIndicator;
-    private bool isRightIndicatorCurrent = true;
+    public FlashIndicator flashIndicator; 
+    private bool isRightIndicatorCurrent;
     private Coroutine coroutineShrinkIndicator;
     private Vector3 scaleCircleIndicator;
+    private GameObject indicatorCurrent;
+    private GameObject indicatorNext;
+
 
     public float valueX = 0;
     public float sizeValueCircle;
 
+
     private void Start()
     {
-        // Rétrécis le premier indicator jusqu'à la limite
-        shrinkCurrentIndicator();
-        
-        print("dans le start du shrinkIndicator");
-
+        isRightIndicatorCurrent = true;
     }
 
 
@@ -35,30 +35,29 @@ public class ShrinkIndicator : MonoBehaviour
     /// Rétrécis l'indicateur courrant à l'aide de la fonction StartCoroutine (qui permet de
     /// de rétrécir l'indicateur avec fluidité et non que l'indicateur se rétrécit immédiatement) 
     /// </summary>
-    public void shrinkCurrentIndicator()
+    public void ShrinkCurrentIndicator()
     {
-        GameObject indicatorCurrent;
 
-        print("bonjour je suis dans la focntion shrink");
+        print("bonjour je suis dans la fonction shrink");
 
+        
         // Test de qui est l'indicateur courrant     
         if (isRightIndicatorCurrent)
         {
-            print("indicateur droit");
             indicatorCurrent = rightIndicator;
             isRightIndicatorCurrent = false;
+            print("ouais alors c'est l'indicateur de droit qui doit rétrécir");
         }
         else
         {
-            print("indicateur gauihce");
-
             indicatorCurrent = leftIndicator;
             isRightIndicatorCurrent = true;
+            print("ouais alors c'est l'indicateur de gacuhe qui doit rétrécir");
         }
+       
 
         scaleCircleIndicator = indicatorCurrent.gameObject.transform.localScale;
         
-        print("l'indicateur courrant : " + indicatorCurrent);
 
         // Démarre la fonction rétrécit l'indicateur courrant
         coroutineShrinkIndicator = StartCoroutine(ScaleToTargetCoroutine(indicatorCurrent));
@@ -79,13 +78,9 @@ public class ShrinkIndicator : MonoBehaviour
 
             scaleCircleIndicator = indicator.gameObject.transform.localScale;
             
-            print("ouuais saluuut alros voila mon scale : " + scaleCircleIndicator);
-
             yield return null;
         }
         
-        flashIndicator.flashCurrentIndicator(indicator);
-
         yield return null;
     }
 
@@ -96,19 +91,19 @@ public class ShrinkIndicator : MonoBehaviour
     /// <param name="indicator">  L'indicateur à remettre à l'échelle de base </param>
     public void setDefaultSizeIndicator()
     {
-        GameObject indicatorNext;
-
-        // Test de qui est l'indicateur prochain
         if (isRightIndicatorCurrent)
         {
             indicatorNext = leftIndicator;
+            //isRightIndicatorCurrent = false;
         }
         else
         {
             indicatorNext = rightIndicator;
+            //isRightIndicatorCurrent = true;
         }
-        
-        indicatorNext.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
+        leftIndicator.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
+        rightIndicator.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
+
     }
 
 

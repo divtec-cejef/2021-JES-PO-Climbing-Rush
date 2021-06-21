@@ -170,7 +170,6 @@ public class IkControl : MonoBehaviour
         {
             lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
 
-            print("c'est la prise numero : " + numberOfTarget);
 
 
             positionOfCurrentTarget = GameObject.Find("prise " + numberOfTarget).transform.position;
@@ -209,7 +208,7 @@ public class IkControl : MonoBehaviour
         {
             lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
             
-            print("c'est la prise numero : " + numberOfTarget);
+
             
             positionOfCurrentTarget = GameObject.Find("prise " + numberOfTarget).transform.position;
             targetLeft.transform.position =

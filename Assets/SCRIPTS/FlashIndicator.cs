@@ -12,17 +12,39 @@ public class FlashIndicator : MonoBehaviour
     public GameObject leftIndicator;
     private bool isRightIndicatorCurrent = true;
     private bool continueFlash = true;
+    public ShrinkIndicator shrinkIndicator;
 
     private GameObject indicatorCurrent;
-
+    private int counter;
     private Renderer colorIndicatorCurrent;
+
+    void Start()
+    {
+        flashIndicator = StartCoroutine(FlashCurrentIndicator(moveIndicator.getCurrentColorIndicator()));
+        flashCurrentIndicator();
+    }
 
     /// <summary>
     /// Appelle la fonction qui fera clignoter les indicateurs
     /// </summary>
     /// <param name="indicatorCurrent"></param>
-    public void flashCurrentIndicator(GameObject indicatorCurrent)
+    public void flashCurrentIndicator()
     {
+        // Test de qui est l'indicateur courrant     
+        if (isRightIndicatorCurrent)
+        {
+            print("indicateur droit");
+            indicatorCurrent = rightIndicator;
+            isRightIndicatorCurrent = false;
+        }
+        else
+        {
+            print("indicateur gauihce");
+
+            indicatorCurrent = leftIndicator;
+            isRightIndicatorCurrent = true;
+        }
+        
         Color currentColor = moveIndicator.getCurrentColorIndicator();
 
         colorIndicatorCurrent = indicatorCurrent.GetComponent<Renderer>();
@@ -35,31 +57,39 @@ public class FlashIndicator : MonoBehaviour
     /// </summary>
     /// <param name="currentColor"></param>
     /// <returns></returns>
-    IEnumerator FlashCurrentIndicator(Color currentColor)
+    public IEnumerator FlashCurrentIndicator(Color currentColor)
     {
 
+        counter = 0;
         continueFlash = true;
 
         while (continueFlash)
         {
             
-            yield return new WaitForSeconds(0.3f);
-            colorIndicatorCurrent.material.SetColor("_Color", currentColor);
+            yield return new WaitForSeconds(0.2f);
+            colorIndicatorCurrent.material.SetColor("_Color", Color.white);
             
             yield return new WaitForSeconds(0.3f);
-            colorIndicatorCurrent.material.SetColor("_Color", Color.white);
-        }
+            colorIndicatorCurrent.material.SetColor("_Color", currentColor);
 
+            if (counter >= 3)
+            {
+                continueFlash = false;
+                StopFlashCurrentIndicator();
+                shrinkIndicator.ShrinkCurrentIndicator();
+
+            }
+            counter++;
+        }
+        
         yield return null;
 
     }
     /// <summary>
     /// Arrete le clignotement
     /// </summary>
-    public void stopFlashCurrentIndicator()
+    public void StopFlashCurrentIndicator()
     {
-        
-        continueFlash = false;
         StopCoroutine(flashIndicator);
     }
     

@@ -81,8 +81,11 @@ public class MovePlayer : MonoBehaviour
             
             scoreScript.setIsGoodButton(true);
             
-            // Stop le clignotement de l'indicateur courant
-            flashIndicator.stopFlashCurrentIndicator();
+            flashIndicator.StopFlashCurrentIndicator();
+            
+            shrinkIndicator.stopShrinkIndicator();
+          
+
             
             // Déplace l'indicateur à la prochaine prise
             moveIndicator.moveNextIndicator();

@@ -11,25 +11,19 @@ public class MoveIndicator : MonoBehaviour
     public ShrinkIndicator shrinkIndicator;
     public GameObject rightCircle;
     public GameObject leftCircle;
-
-    private bool moveIndicatorRight = true;
-
-    private List<Color> listColorIndicator = new List<Color>();
+    public FlashIndicator flashIndicator;
     
+    private bool moveIndicatorRight = true;
+    private List<Color> listColorIndicator = new List<Color>();
     private Renderer circleColorRight;
     private Renderer circleColorLeft;
-
     private Color nextColorIndicator;
     private Color firstColorIndicator;
     private Color currentColorIndicator;
-
     private int previousRandomNumber = 0;
-
     private Vector3 positionNextHoldRight;
     private Vector3 positionNextHoldLeft;
-
     private int numberOfTarget;
-
 
     void Start()
     {
@@ -54,9 +48,10 @@ public class MoveIndicator : MonoBehaviour
 
         // Récupère le couleur du premier indicateur 
         currentColorIndicator = circleColorRight.GetComponent<Renderer>().material.color;
+
+
+
     }
-
-
     
     /// <summary>
     /// Retourne les couleurs des indicateurs contenues dans une liste
@@ -66,17 +61,12 @@ public class MoveIndicator : MonoBehaviour
     {
         return listColorIndicator;
     }
-
     
-
     /// <summary>
     /// Change de place un des indicateurs de prises et change sa couleur aléatoirement
     /// </summary>
     public void moveNextIndicator()
     {
-        // Stop le rétrécissement de l'indicateur courant
-        shrinkIndicator.stopShrinkIndicator();
-
         numberOfTarget++;
 
         // L'indicateur droit se déplace à la prochaine prise et change de couleur
@@ -90,6 +80,7 @@ public class MoveIndicator : MonoBehaviour
                 // Déplace l'indicateur gauche à la prochaine prise gauche
                 rightCircle.transform.position = new Vector3(positionNextHoldRight.x,
                     positionNextHoldRight.y, positionNextHoldRight.z - 0.01f);
+                
             }
             catch
             {
@@ -134,11 +125,9 @@ public class MoveIndicator : MonoBehaviour
         // Remets la taille par défaut de l'indicateur qui s'est fait rétrécir
         shrinkIndicator.setDefaultSizeIndicator();
         
-        // Rétrécis l'indicateur courant
-        shrinkIndicator.shrinkCurrentIndicator();
+        // Fais clignoter l'indicateur courant
+        flashIndicator.flashCurrentIndicator();
     }
-
-    
     
     /// <summary>
     /// Retourne une couleur aléatoire (rouge, bleu, vert, jaune ou violet)
@@ -158,8 +147,6 @@ public class MoveIndicator : MonoBehaviour
 
         return nextColorIndicator;
     }
-
-    
     
     /// <summary>
     /// Retourne la couleur de l'incateur courant

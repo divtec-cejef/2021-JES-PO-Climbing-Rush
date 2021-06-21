@@ -7037,6 +7037,7 @@ MonoBehaviour:
   shrinkIndicator: {fileID: 481987319}
   rightCircle: {fileID: 7510900699594134470}
   leftCircle: {fileID: 1587764300}
+  flashIndicator: {fileID: 1049177716}
 --- !u!1 &696407207
 GameObject:
   m_ObjectHideFlags: 0
@@ -12845,6 +12846,7 @@ MonoBehaviour:
   moveIndicator: {fileID: 691706067}
   rightIndicator: {fileID: 7510900699594134470}
   leftIndicator: {fileID: 1587764300}
+  shrinkIndicator: {fileID: 481987319}
 --- !u!4 &1049177717
 Transform:
   m_ObjectHideFlags: 0
