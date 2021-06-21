@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 6
-  lastUpdatedAtString: 2021-05-31T15:39:20.132+02:00
-  initializedAtString: 2021-05-31T15:39:17.392+02:00
+  lastUpdatedAtString: 2021-06-21T13:43:26.708+02:00
+  initializedAtString: 2021-06-21T13:42:07.488+02:00
   entries:
   - path: .idea\.idea.timer_jeu.dir\.idea\.gitignore
     fullPath: C:\Users\Admin\RiderProjects\timer_jeu\.idea\.idea.timer_jeu.dir\.idea\.gitignore
@@ -130,9 +130,21 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
+  - path: Library\gfu\cache\branches.yaml
+    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Library\gfu\cache\branches.yaml
+    projectPath: Library\gfu\cache\branches.yaml
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
   - path: Library\gfu\cache\gitlocks.yaml
     fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Library\gfu\cache\gitlocks.yaml
     projectPath: Library\gfu\cache\gitlocks.yaml
+    originalPath: 
+    indexStatus: 0
+    workTreeStatus: 3
+  - path: Library\gfu\cache\gitlog.yaml
+    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Library\gfu\cache\gitlog.yaml
+    projectPath: Library\gfu\cache\gitlog.yaml
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
@@ -2941,57 +2953,21 @@ MonoBehaviour:
     originalPath: 
     indexStatus: 0
     workTreeStatus: 3
-  - path: Logs\AssetImportWorker0-prev.log
-    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\AssetImportWorker0-prev.log
-    projectPath: Logs\AssetImportWorker0-prev.log
+  - path: Logs\AssetImportWorker0.log
+    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\AssetImportWorker0.log
+    projectPath: Logs\AssetImportWorker0.log
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
-  - path: Logs\AssetImportWorker1-prev.log
-    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\AssetImportWorker1-prev.log
-    projectPath: Logs\AssetImportWorker1-prev.log
+  - path: Logs\shadercompiler-AssetImportWorker0.log
+    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\shadercompiler-AssetImportWorker0.log
+    projectPath: Logs\shadercompiler-AssetImportWorker0.log
     originalPath: 
     indexStatus: 1
     workTreeStatus: 1
-  - path: Logs\AssetImportWorker2-prev.log
-    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\AssetImportWorker2-prev.log
-    projectPath: Logs\AssetImportWorker2-prev.log
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Logs\AssetImportWorker3-prev.log
-    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\AssetImportWorker3-prev.log
-    projectPath: Logs\AssetImportWorker3-prev.log
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Logs\AssetImportWorker4-prev.log
-    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\AssetImportWorker4-prev.log
-    projectPath: Logs\AssetImportWorker4-prev.log
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Logs\AssetImportWorker5-prev.log
-    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\AssetImportWorker5-prev.log
-    projectPath: Logs\AssetImportWorker5-prev.log
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Logs\AssetImportWorker6-prev.log
-    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\AssetImportWorker6-prev.log
-    projectPath: Logs\AssetImportWorker6-prev.log
-    originalPath: 
-    indexStatus: 1
-    workTreeStatus: 1
-  - path: Logs\shadercompiler-UnityShaderCompiler.exe1.log
-    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\shadercompiler-UnityShaderCompiler.exe1.log
-    projectPath: Logs\shadercompiler-UnityShaderCompiler.exe1.log
+  - path: Logs\shadercompiler-UnityShaderCompiler.exe0.log
+    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\shadercompiler-UnityShaderCompiler.exe0.log
+    projectPath: Logs\shadercompiler-UnityShaderCompiler.exe0.log
     originalPath: 
     indexStatus: 0
-    workTreeStatus: 5
-  - path: Logs\shadercompiler-UnityShaderCompiler.exe2.log
-    fullPath: C:\Users\Admin\RiderProjects\timer_jeu\Logs\shadercompiler-UnityShaderCompiler.exe2.log
-    projectPath: Logs\shadercompiler-UnityShaderCompiler.exe2.log
-    originalPath: 
-    indexStatus: 0
-    workTreeStatus: 5
+    workTreeStatus: 3

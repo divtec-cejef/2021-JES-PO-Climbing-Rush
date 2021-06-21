@@ -13,17 +13,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2021-05-31T14:25:07.739+02:00
-  initializedAtString: 2021-05-31T14:24:44.067+02:00
+  lastUpdatedAtString: 2021-06-21T13:42:07.700+02:00
+  initializedAtString: 2021-06-21T13:42:07.651+02:00
   localBranches:
   - name: main
     tracking: origin/main
   - name: MapTest3D
     tracking: origin/MapTest3D
   - name: timer_jeu
-    tracking: 
+    tracking: origin/timer_jeu
   remoteBranches:
   - name: origin/HEAD
+    tracking: '[None]'
+  - name: origin/timer_jeu
     tracking: '[None]'
   remotes:
   - name: origin
@@ -51,18 +53,24 @@ MonoBehaviour:
       trackingBranch: MapTest3D
     - name: timer_jeu
       remote:
-        name: 
-        url: 
-      trackingBranch: 
+        name: origin
+        url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+      trackingBranch: timer_jeu
   remoteConfigBranches:
     keys:
     - origin
     subKeys:
     - Values:
       - HEAD
+      - timer_jeu
     subKeyValues:
     - Values:
       - name: HEAD
+        remote:
+          name: origin
+          url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
+        trackingBranch: 
+      - name: timer_jeu
         remote:
           name: origin
           url: https://github.com/divtec-cejef/2021-JES-PO-Climbing-Rush.git
