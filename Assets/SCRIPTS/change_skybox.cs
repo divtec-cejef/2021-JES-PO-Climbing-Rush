@@ -7,6 +7,7 @@ public class change_skybox : MonoBehaviour
     // Start is called before the first frame update
     public Material skyboxJour;
     public Material skyboxNuit;
+    public int tempsCycle;
     void Start()
     {
         RenderSettings.skybox = skyboxJour;
