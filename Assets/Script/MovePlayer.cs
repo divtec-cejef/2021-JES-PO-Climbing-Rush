@@ -14,6 +14,7 @@ public class MovePlayer : MonoBehaviour
     public MoveIndicator moveIndicator;
     public ShrinkIndicator shrinkIndicator;
     public FlashIndicator flashIndicator;
+    public ScoreScript scoreScript;
 
 
     // Variables pour le déplacement du joueur
@@ -23,8 +24,7 @@ public class MovePlayer : MonoBehaviour
     public GameObject handRight;
     public GameObject handLeft;
     public GameObject headAndBody;
-
-
+    
     private bool grabRightHand = true;
 
     // Liste des coordonnées des prises droites et gauches
@@ -35,22 +35,19 @@ public class MovePlayer : MonoBehaviour
     private int indexCoordinateLeftHold = 0;
     private int holdAxeY = 25;
     private int playerAxeY = 0;
-
-
+    
     // Liste de couleurs
     private List<Color> listColorIndicator = new List<Color>();
     private int indexListColorIndicator = 0;
 
     private int comptorNbrHolds = 1;
     
-
     private void Start()
     {
         // shrinkIndicator.setIsPressed(false);
         // Reprends depuis la classe _MoveIndicator_ les couleurs des indicateurs
         listColorIndicator = moveIndicator.getColorIndicator();
-
-
+        
         // Liste des coordonnées sur l'axe X des prises
         listHoldRightCoordinateX.AddRange(new List<int>() {17, 10, 1, 21, 19, 12, 3});
         listHoldLeftCoordinateX.AddRange(new List<int>() {-3, -15, -11, -2, 0, -14, -21});
@@ -80,6 +77,7 @@ public class MovePlayer : MonoBehaviour
         if (colorButton.Equals(moveIndicator.getCurrentColorIndicator()) && comptorNbrHolds <= NBRE_PRISES)
         {
 
+            scoreScript.setIsGoodButton(true);
             // Stop le clignotement de l'indicateur courant
             flashIndicator.stopFlashCurrentIndicator();
             
@@ -100,10 +98,17 @@ public class MovePlayer : MonoBehaviour
                 indexListColorIndicator = 0;
             }
         }
+        else
+        {
+            scoreScript.setIsGoodButton(false);
+            print("LA VALEUR DU BOUTON = " + scoreScript.getIsGoodButton());
+            
+        }
+        scoreScript.calculatePoints();
+
         
     }
-
-
+    
     /// <summary>
     /// Déplace le joueur sur la prochaine prise
     /// </summary>

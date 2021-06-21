@@ -11,18 +11,16 @@ public class ShrinkIndicator : MonoBehaviour
 {
     private const float MIN_DIAMETER_INDICATOR = 8.0f;
 
-
     public GameObject rightIndicator;
     public GameObject leftIndicator;
-
+    
     public FlashIndicator flashIndicator;
-
-
     private bool isRightIndicatorCurrent = true;
-
     private Coroutine coroutineShrinkIndicator;
-
     private Vector3 scaleCircleIndicator;
+
+    public float valueX = 0;
+    public float sizeValueCircle;
 
 
     private void Start()
@@ -70,11 +68,14 @@ public class ShrinkIndicator : MonoBehaviour
         while (scaleCircleIndicator.x > MIN_DIAMETER_INDICATOR)
         {
             indicator.gameObject.transform.localScale -= new Vector3(0.05f, 0.0f, 0.05f);
+            valueX = indicator.gameObject.transform.localScale.x;
 
             scaleCircleIndicator = indicator.gameObject.transform.localScale;
 
             yield return null;
         }
+
+
 
         flashIndicator.flashCurrentIndicator(indicator);
 
@@ -99,8 +100,7 @@ public class ShrinkIndicator : MonoBehaviour
         {
             indicatorNext = rightIndicator;
         }
-
-
+        
         indicatorNext.gameObject.transform.localScale = new Vector3(15.0f, 1.0f, 15.0f);
     }
 
@@ -111,6 +111,12 @@ public class ShrinkIndicator : MonoBehaviour
     /// <param name="pressed"> valeur vraie si le bouton est pressé sinon faux </param>
     public void stopShrinkIndicator()
     {
+        sizeValueCircle = valueX;
         StopCoroutine(coroutineShrinkIndicator);
+    }
+
+    public float getValueX()
+    {
+        return sizeValueCircle;
     }
 }

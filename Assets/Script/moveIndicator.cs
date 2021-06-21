@@ -50,7 +50,6 @@ public class MoveIndicator : MonoBehaviour
         listColorIndicator.AddRange(new List<Color>()
             {Color.red, Color.blue, Color.green, Color.yellow, Color.magenta});
 
-
         // Initialise les couleurs des deux premiers indicateurs au démarrage du jeu;
         circleColorRight.material.SetColor("_Color", getRandomColor());
         circleColorLeft.material.SetColor("_Color", getRandomColor());

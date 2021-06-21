@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cacheType: 2
-  lastUpdatedAtString: 2021-06-07T10:57:41.184+02:00
-  initializedAtString: 2021-06-07T10:53:54.045+02:00
+  lastUpdatedAtString: 2021-06-18T15:11:23.708+02:00
+  initializedAtString: 2021-06-18T14:06:14.990+02:00
   localBranches:
+  - name: Attribution_de_points
+    tracking: 
   - name: Deplacer_joueur_quand_couleur_correspond
     tracking: origin/Deplacer_joueur_quand_couleur_correspond
   - name: Indicateur_prise_1
@@ -53,12 +55,18 @@ MonoBehaviour:
     token: 
   localConfigBranches:
     keys:
+    - Attribution_de_points
     - Deplacer_joueur_quand_couleur_correspond
     - Indicateur_prise_1
     - Indicateur_prise_2
     - main
     - MapTest3D
     values:
+    - name: Attribution_de_points
+      remote:
+        name: 
+        url: 
+      trackingBranch: 
     - name: Deplacer_joueur_quand_couleur_correspond
       remote:
         name: origin
