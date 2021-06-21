@@ -16,7 +16,7 @@ public class CrossFade : MonoBehaviour
     {
         GetComponent<Renderer>().material.SetFloat( "_Blend", 0f );
     }
-  
+  // comm pour commit
     void Update ()
     {
         if ( true == trigger )
