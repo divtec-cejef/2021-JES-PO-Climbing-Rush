@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
 
 public class CrossFade : MonoBehaviour
 {
@@ -35,6 +34,10 @@ public class CrossFade : MonoBehaviour
                 GetComponent<Renderer>().material.SetTextureOffset ( "_MainTex", newOffset );
                 GetComponent<Renderer>().material.SetTextureScale ( "_MainTex", newTiling );
                 GetComponent<Renderer>().material.SetFloat( "_Blend", 0f );
+            }
+            else
+            {
+                CrossFadeTo(newTexture, newOffset, newTiling);
             }
         }
     }

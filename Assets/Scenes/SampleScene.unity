@@ -835,7 +835,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skyboxJour: {fileID: 2100000, guid: a87bdb5f2440aeb40994fb9e24388e59, type: 2}
   skyboxNuit: {fileID: 2100000, guid: 946bebadb2c76924e92b0e7fd225757f, type: 2}
-  tempsCycle: 0
+  tempsCycle: 60
 --- !u!4 &128933795
 Transform:
   m_ObjectHideFlags: 0
@@ -5172,7 +5172,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 814875100}
   m_LocalRotation: {x: 0.08715578, y: 0, z: 0, w: 0.9961947}
-  m_LocalPosition: {x: 61.86, y: 35.25, z: 9.87}
+  m_LocalPosition: {x: 61.86, y: 76.5, z: -49}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
