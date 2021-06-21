@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,12 @@ public class FlashIndicator : MonoBehaviour
     private GameObject indicatorCurrent;
 
     private Renderer colorIndicatorCurrent;
+
+    private void Start()
+    {
+        flashIndicator = StartCoroutine(FlashCurrentIndicator(moveIndicator.getCurrentColorIndicator()));
+    }
+
 
     /// <summary>
     /// Appelle la fonction qui fera clignoter les indicateurs

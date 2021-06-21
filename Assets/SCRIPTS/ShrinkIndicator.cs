@@ -21,13 +21,13 @@ public class ShrinkIndicator : MonoBehaviour
     public float valueX = 0;
     public float sizeValueCircle;
 
+
     private void Start()
     {
         // Rétrécis le premier indicator jusqu'à la limite
         shrinkCurrentIndicator();
         
         print("dans le start du shrinkIndicator");
-
     }
 
 
