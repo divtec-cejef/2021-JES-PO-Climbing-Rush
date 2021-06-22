@@ -84,6 +84,8 @@ public class MovePlayer : MonoBehaviour
             // Stop le clignotement de l'indicateur courant
             flashIndicator.stopFlashCurrentIndicator();
             
+            shrinkIndicator.stopShrinkIndicator();
+            
             // Déplace l'indicateur à la prochaine prise
             moveIndicator.moveNextIndicator();
 

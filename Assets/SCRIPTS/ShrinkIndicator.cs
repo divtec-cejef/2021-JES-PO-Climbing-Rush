@@ -17,17 +17,20 @@ public class ShrinkIndicator : MonoBehaviour
     private bool isRightIndicatorCurrent = true;
     private Coroutine coroutineShrinkIndicator;
     private Vector3 scaleCircleIndicator;
+    private GameObject indicatorCurrent;
 
     public float valueX = 0;
     public float sizeValueCircle;
+    
+    private bool isFirstEnterInFunctionStopShrink = true;
+    private bool isFirstTimeToPressButton = true;
+
 
     private void Start()
     {
         // Rétrécis le premier indicator jusqu'à la limite
-        shrinkCurrentIndicator();
-        
-        print("dans le start du shrinkIndicator");
-
+        coroutineShrinkIndicator = StartCoroutine(ScaleToTargetCoroutine(indicatorCurrent));
+        stopShrinkIndicator();
     }
 
 
@@ -37,23 +40,11 @@ public class ShrinkIndicator : MonoBehaviour
     /// </summary>
     public void shrinkCurrentIndicator()
     {
-        GameObject indicatorCurrent;
 
-        print("bonjour je suis dans la focntion shrink");
-
-        // Test de qui est l'indicateur courrant     
-        if (isRightIndicatorCurrent)
+        if (isFirstEnterInFunctionStopShrink)
         {
-            print("indicateur droit");
             indicatorCurrent = rightIndicator;
             isRightIndicatorCurrent = false;
-        }
-        else
-        {
-            print("indicateur gauihce");
-
-            indicatorCurrent = leftIndicator;
-            isRightIndicatorCurrent = true;
         }
 
         scaleCircleIndicator = indicatorCurrent.gameObject.transform.localScale;
@@ -83,8 +74,6 @@ public class ShrinkIndicator : MonoBehaviour
 
             yield return null;
         }
-        
-        flashIndicator.flashCurrentIndicator(indicator);
 
         yield return null;
     }
@@ -109,6 +98,11 @@ public class ShrinkIndicator : MonoBehaviour
         }
         
         indicatorNext.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
+        // Ici dans les git hub c'est différent, voir ci-dessous :
+        /*
+         leftIndicator.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
+         rightIndicator.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
+         */
     }
 
 
@@ -118,6 +112,31 @@ public class ShrinkIndicator : MonoBehaviour
     /// <param name="pressed"> valeur vraie si le bouton est pressé sinon faux </param>
     public void stopShrinkIndicator()
     {
+        if (!isFirstEnterInFunctionStopShrink)
+        {
+            //StopCoroutine(coroutineShrinkIndicator);
+            
+            if (isFirstTimeToPressButton)
+            {
+                isRightIndicatorCurrent = false;
+                isFirstTimeToPressButton = false;
+            }
+            
+    
+            if (isRightIndicatorCurrent)
+            {
+                indicatorCurrent = rightIndicator;
+                isRightIndicatorCurrent = false;
+            }
+            else
+            {
+                indicatorCurrent = leftIndicator;
+                isRightIndicatorCurrent = true;
+            }
+        }
+        
+        
+        
         sizeValueCircle = valueX;
         StopCoroutine(coroutineShrinkIndicator);
     }
@@ -125,5 +144,10 @@ public class ShrinkIndicator : MonoBehaviour
     public float getValueX()
     {
         return sizeValueCircle;
+    }
+    
+    public void setIsFirstEnterInFunctionStopShrink(bool isEnter)
+    {
+        isFirstTimeToPressButton = isEnter;
     }
 }

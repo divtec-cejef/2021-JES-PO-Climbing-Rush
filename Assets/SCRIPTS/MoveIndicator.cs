@@ -11,6 +11,7 @@ public class MoveIndicator : MonoBehaviour
     public ShrinkIndicator shrinkIndicator;
     public GameObject rightCircle;
     public GameObject leftCircle;
+    public FlashIndicator flashIndicator;
 
     private bool moveIndicatorRight = true;
 
@@ -75,7 +76,7 @@ public class MoveIndicator : MonoBehaviour
     public void moveNextIndicator()
     {
         // Stop le rétrécissement de l'indicateur courant
-        shrinkIndicator.stopShrinkIndicator();
+        //shrinkIndicator.stopShrinkIndicator();
 
         numberOfTarget++;
 
@@ -135,7 +136,10 @@ public class MoveIndicator : MonoBehaviour
         shrinkIndicator.setDefaultSizeIndicator();
         
         // Rétrécis l'indicateur courant
-        shrinkIndicator.shrinkCurrentIndicator();
+        //shrinkIndicator.shrinkCurrentIndicator();
+        
+        // Fais clignoter l'indicateur courant
+        flashIndicator.flashCurrentIndicator();
     }
 
     
