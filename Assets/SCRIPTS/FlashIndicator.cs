@@ -21,6 +21,7 @@ public class FlashIndicator : MonoBehaviour
     private void Start()
     {
         flashIndicator = StartCoroutine(FlashCurrentIndicator(moveIndicator.getCurrentColorIndicator()));
+        stopFlashCurrentIndicator();
     }
 
 
@@ -44,11 +45,13 @@ public class FlashIndicator : MonoBehaviour
     /// <returns></returns>
     IEnumerator FlashCurrentIndicator(Color currentColor)
     {
-
+        
         continueFlash = true;
 
         while (continueFlash)
         {
+
+            print("1. début débug, colorIndicatorCurrent : " + colorIndicatorCurrent);
             
             yield return new WaitForSeconds(0.3f);
             colorIndicatorCurrent.material.SetColor("_Color", currentColor);

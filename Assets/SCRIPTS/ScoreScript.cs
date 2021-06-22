@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,53 +13,57 @@ public class ScoreScript : MonoBehaviour
     public bool isGoodButton;
     
     public static int scoreValue = 0;
+    
+    private int currentScore;
 
     private Text score;
     // Start is called before the first frame update
     void Start()
     {
         score = GetComponent<Text>();
-        
+        calculatePoints();
+
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        score.text = "Score : " + scoreValue;
+        displayScore();
 
     }
 
     public void calculatePoints()
     {
         float counter = shrinkIndicator.getValueX();
-        
-        print("ouais dans le ScoreSript, valeur du button : " + getIsGoodButton());
 
         if (getIsGoodButton())
         {
 
             if (counter > 0.75f)
             {
-                scoreValue += 50;
+                currentScore += 50;
             }else if (counter > 0.55f)
             {
-                scoreValue += 150;
+                currentScore += 150;
             }else if (counter > 0.4f)
             {
-                scoreValue += 500;
+                currentScore += 500;
             }
 
-        }else if (scoreValue < 10)
+        }else if (currentScore < 10)
         {
-            scoreValue = 0;
+            currentScore = 0;
         }
         else
         {
-            scoreValue -= 10;
+            currentScore -= 10;
 
         }
 
+        currentScore = 100;
+        print("LA VALEUR DANS LE CALCULATE : " + getScore());
+        
     }
 
     /// <summary>
@@ -77,5 +82,18 @@ public class ScoreScript : MonoBehaviour
     public void setIsGoodButton(bool isGoodButton)
     {
         this.isGoodButton = isGoodButton;
+    }
+
+    public int getScore()
+    {
+        return currentScore;
+    }
+    
+
+    private void displayScore()
+    {
+        print("LA VALEUR DU SCORE :" + getScore());
+        score.text = "Score : " + getScore();
+
     }
 }

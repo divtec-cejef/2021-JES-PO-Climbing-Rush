@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
-
 
 public class ShrinkIndicator : MonoBehaviour
 {
@@ -84,7 +82,7 @@ public class ShrinkIndicator : MonoBehaviour
             yield return null;
         }
         
-        flashIndicator.flashCurrentIndicator(indicator);
+        //flashIndicator.flashCurrentIndicator(indicator);
 
         yield return null;
     }
