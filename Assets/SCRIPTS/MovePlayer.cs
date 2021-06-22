@@ -108,8 +108,6 @@ public class MovePlayer : MonoBehaviour
         else
         {
             scoreScript.setIsGoodButton(false);
-            print("LA VALEUR DU BOUTON = " + scoreScript.getIsGoodButton());
-            
         }
         scoreScript.calculatePoints();
 

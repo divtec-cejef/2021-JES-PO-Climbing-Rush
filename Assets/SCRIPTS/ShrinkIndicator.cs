@@ -14,7 +14,7 @@ public class ShrinkIndicator : MonoBehaviour
     public GameObject leftIndicator;
     
     public FlashIndicator flashIndicator;
-    private bool isRightIndicatorCurrent = true;
+    private bool isRightIndicatorCurrent;
     private Coroutine coroutineShrinkIndicator;
     private Vector3 scaleCircleIndicator;
     private GameObject indicatorCurrent;
@@ -28,6 +28,7 @@ public class ShrinkIndicator : MonoBehaviour
 
     private void Start()
     {
+        isRightIndicatorCurrent = true;
         // Rétrécis le premier indicator jusqu'à la limite
         coroutineShrinkIndicator = StartCoroutine(ScaleToTargetCoroutine(indicatorCurrent));
         stopShrinkIndicator();
@@ -73,8 +74,6 @@ public class ShrinkIndicator : MonoBehaviour
 
             scaleCircleIndicator = indicator.gameObject.transform.localScale;
             
-            print("ouuais saluuut alros voila mon scale : " + scaleCircleIndicator);
-
             yield return null;
         }
 
@@ -143,6 +142,7 @@ public class ShrinkIndicator : MonoBehaviour
                 indicatorCurrent = leftIndicator;
                 isRightIndicatorCurrent = true;
             }
+
         }
         
         
