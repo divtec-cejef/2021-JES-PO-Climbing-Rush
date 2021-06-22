@@ -80,6 +80,7 @@ public class MovePlayer : MonoBehaviour
         {
             
             scoreScript.setIsGoodButton(true);
+            shrinkIndicator.setIsFirstEnterInFunctionStopShrink(false);
             
             // Stop le clignotement de l'indicateur courant
             flashIndicator.stopFlashCurrentIndicator();

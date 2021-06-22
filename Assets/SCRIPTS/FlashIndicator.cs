@@ -97,8 +97,6 @@ public class FlashIndicator : MonoBehaviour
     /// </summary>
     public void stopFlashCurrentIndicator()
     {
-        
-        continueFlash = false;
         StopCoroutine(flashIndicator);
     }
     

@@ -22,8 +22,8 @@ public class ShrinkIndicator : MonoBehaviour
     public float valueX = 0;
     public float sizeValueCircle;
     
-    private bool isFirstEnterInFunctionStopShrink = true;
-    private bool isFirstTimeToPressButton = true;
+    private bool isFirstEnterInFunctionStopShrink;
+    private bool isFirstTimeToPressButton;
 
 
     private void Start()
@@ -31,6 +31,9 @@ public class ShrinkIndicator : MonoBehaviour
         // Rétrécis le premier indicator jusqu'à la limite
         coroutineShrinkIndicator = StartCoroutine(ScaleToTargetCoroutine(indicatorCurrent));
         stopShrinkIndicator();
+        
+        isFirstEnterInFunctionStopShrink = true;
+        isFirstTimeToPressButton = true;
     }
 
 
@@ -112,9 +115,14 @@ public class ShrinkIndicator : MonoBehaviour
     /// <param name="pressed"> valeur vraie si le bouton est pressé sinon faux </param>
     public void stopShrinkIndicator()
     {
+
+        print("actuellement dans le stopShrinkIndicator");
+        
         if (!isFirstEnterInFunctionStopShrink)
         {
             //StopCoroutine(coroutineShrinkIndicator);
+
+            print("coucou uband");
             
             if (isFirstTimeToPressButton)
             {
@@ -125,11 +133,13 @@ public class ShrinkIndicator : MonoBehaviour
     
             if (isRightIndicatorCurrent)
             {
+                print("indicateur courrant droit");
                 indicatorCurrent = rightIndicator;
                 isRightIndicatorCurrent = false;
             }
             else
             {
+                print("indicateur courrant gauche");
                 indicatorCurrent = leftIndicator;
                 isRightIndicatorCurrent = true;
             }
