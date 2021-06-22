@@ -154,7 +154,6 @@ public class ShrinkIndicator : MonoBehaviour
         }
         
         
-        
         sizeValueCircle = valueX;
         StopCoroutine(coroutineShrinkIndicator);
     }
