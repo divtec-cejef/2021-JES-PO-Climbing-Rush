@@ -89,19 +89,21 @@ public class ShrinkIndicator : MonoBehaviour
     {
         GameObject indicatorNext;
 
-        // Test de qui est l'indicateur prochain
+        // Test de qui est l'indicateur prochain ainsi pour remettre à échelle l'indicateur
         if (isRightIndicatorCurrent)
-        {
-            indicatorNext = leftIndicator;
-        }
-        else
         {
             indicatorNext = rightIndicator;
         }
+        else
+        {
+            indicatorNext = leftIndicator;
+        }
+        
+        print("pour remettre la taille initiale, l'indicateur prochain c'est : " + indicatorNext);
         
         indicatorNext.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
         // Ici dans les git hub c'est différent, voir ci-dessous :
-        /*
+        /*b 
          leftIndicator.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
          rightIndicator.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
          */
@@ -125,9 +127,15 @@ public class ShrinkIndicator : MonoBehaviour
             
             if (isFirstTimeToPressButton)
             {
+                print("si tu me vois c'est que c'est la première fois que t'appuies sur un bouton");
                 isRightIndicatorCurrent = false;
                 isFirstTimeToPressButton = false;
             }
+
+
+            print(
+                "tester si le *isFirstTimeToPRessButton* est fait, valeur de isRightIndicator, elle doit être à *false* : " +
+                isRightIndicatorCurrent);
             
     
             if (isRightIndicatorCurrent)
@@ -151,13 +159,16 @@ public class ShrinkIndicator : MonoBehaviour
         StopCoroutine(coroutineShrinkIndicator);
     }
 
+    
     public float getValueX()
     {
         return sizeValueCircle;
     }
     
+    
     public void setIsFirstEnterInFunctionStopShrink(bool isEnter)
     {
-        isFirstTimeToPressButton = isEnter;
+        //isFirstTimeToPressButton = isEnter;
+        isFirstEnterInFunctionStopShrink = isEnter;
     }
 }
