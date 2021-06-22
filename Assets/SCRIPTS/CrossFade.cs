@@ -3,53 +3,64 @@ using System.Collections;
 
 public class CrossFade : MonoBehaviour
 {
-    private Texture    newTexture;
-    private Vector2    newOffset;
-    private Vector2    newTiling;
+    private Texture    _newTexture;
+    private Vector2    _newOffset;
+    private Vector2    _newTiling;
+
+    public Texture textureCiel;
   
     public  float    BlendSpeed = 3.0f;
   
-    private bool    trigger = false;
-    private float    fader = 0f;
+    private bool    _trigger = false;
+    private float    _fader = 0f;
   
+     
     void Start ()
     {
-        GetComponent<Renderer>().material.SetFloat( "_Blend", 0f );
+        GetComponent<Renderer>().material.SetFloat(12,3f);
+        GetComponent<Renderer>().material.SetFloat(name, 3f);
+        this.GetComponent<Renderer>().material.SetFloat( name, 0f );
     }
   // comm pour commit
     void Update ()
     {
-        if ( true == trigger )
+        if (Input.GetKey(KeyCode.Space))
         {
-            fader += Time.deltaTime * BlendSpeed;
+            _fader += Time.deltaTime * BlendSpeed;
       
-            GetComponent<Renderer>().material.SetFloat( "_Blend", fader );
+            this.GetComponent<Renderer>().material.SetFloat( name, _fader );
       
-            if ( fader >= 1.0f )
+            if ( _fader >= 1.0f )
             {
-                trigger = false;
-                fader = 0f;
+                _trigger = false;
+                _fader = 0f;
         
-                GetComponent<Renderer>().material.SetTexture ("_MainTex", newTexture );
-                GetComponent<Renderer>().material.SetTextureOffset ( "_MainTex", newOffset );
-                GetComponent<Renderer>().material.SetTextureScale ( "_MainTex", newTiling );
+                GetComponent<Renderer>().material.SetTexture ("_MainTex", _newTexture );
+                GetComponent<Renderer>().material.SetTextureOffset ( "_MainTex", _newOffset );
+                GetComponent<Renderer>().material.SetTextureScale ( "_MainTex", _newTiling );
                 GetComponent<Renderer>().material.SetFloat( "_Blend", 0f );
             }
             else
             {
-                CrossFadeTo(newTexture, newOffset, newTiling);
+                CrossFadeTo(_newTexture, _newOffset, _newTiling);
+            }
+            
+            
+            if (Input.GetKey(KeyCode.Space))
+            {
+                CrossFadeTo(textureCiel,_newOffset,_newTiling);
             }
         }
     }
   
     public void CrossFadeTo( Texture curTexture, Vector2 offset, Vector2 tiling )
     {
-        newOffset = offset;
-        newTiling = tiling;
-        newTexture = curTexture;
+        _newOffset = offset;
+        _newTiling = tiling;
+        _newTexture = curTexture;
         GetComponent<Renderer>().material.SetTexture( "_Texture2", curTexture );
-        GetComponent<Renderer>().material.SetTextureOffset ( "_Texture2", newOffset );
-        GetComponent<Renderer>().material.SetTextureScale ( "_Texture2", newTiling );
-        trigger = true;
+        GetComponent<Renderer>().material.SetTextureOffset ( "_Texture2", _newOffset );
+        GetComponent<Renderer>().material.SetTextureScale ( "_Texture2", _newTiling );
+        _trigger = true;
     }
 }
