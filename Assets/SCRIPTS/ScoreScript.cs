@@ -33,8 +33,6 @@ public class ScoreScript : MonoBehaviour
     {
         float counter = shrinkIndicator.getValueX();
         
-        print("ouais dans le ScoreSript, valeur du button : " + getIsGoodButton());
-
         if (getIsGoodButton())
         {
 

@@ -18,9 +18,9 @@ public class FlashIndicator : MonoBehaviour
     private int counter;
     private Renderer colorIndicatorCurrent;
 
+
     void Start()
     {
-        flashIndicator = StartCoroutine(FlashCurrentIndicator(moveIndicator.getCurrentColorIndicator()));
         flashCurrentIndicator();
     }
 
@@ -33,14 +33,11 @@ public class FlashIndicator : MonoBehaviour
         // Test de qui est l'indicateur courrant     
         if (isRightIndicatorCurrent)
         {
-            print("indicateur droit");
             indicatorCurrent = rightIndicator;
             isRightIndicatorCurrent = false;
         }
         else
         {
-            print("indicateur gauihce");
-
             indicatorCurrent = leftIndicator;
             isRightIndicatorCurrent = true;
         }
@@ -85,6 +82,8 @@ public class FlashIndicator : MonoBehaviour
         yield return null;
 
     }
+    
+    
     /// <summary>
     /// Arrete le clignotement
     /// </summary>

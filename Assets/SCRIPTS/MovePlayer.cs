@@ -80,9 +80,9 @@ public class MovePlayer : MonoBehaviour
         {
             
             scoreScript.setIsGoodButton(true);
+            shrinkIndicator.setIsFirstEnterInFunctionStopShrink(true);
             
             flashIndicator.StopFlashCurrentIndicator();
-            
             shrinkIndicator.stopShrinkIndicator();
           
 
@@ -108,7 +108,6 @@ public class MovePlayer : MonoBehaviour
         else
         {
             scoreScript.setIsGoodButton(false);
-            print("LA VALEUR DU BOUTON = " + scoreScript.getIsGoodButton());
             
         }
         scoreScript.calculatePoints();
