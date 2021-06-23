@@ -7,13 +7,7 @@ using UnityEngine.Serialization;
 
 public class IkControl : MonoBehaviour
 {
-    private const float AXE_Z_TARGET = 40f;
-
-    public Transform targetRight;
-    public Transform targetLeft;
-
-    private Transform targetForHead;
-
+    
     private Animator animator;
 
     private bool isHoldRight = false;
@@ -23,8 +17,11 @@ public class IkControl : MonoBehaviour
     private bool watchTarget;
 
     private float lookWeightForHead;
-    public float lookWeightForHoldRight;
-    public float lookWeightForHoldLeft;
+    private float lookWeightForHoldRight;
+    private float lookWeightForHoldLeft;
+
+    private float lookWeightForLeftFeet;
+    private float lookWeightForRightFeet;
     public float lookSmoother = 3f;
     public float speed = 1f;
 
@@ -32,13 +29,10 @@ public class IkControl : MonoBehaviour
     private float lookWeightMaxForHoldRight;
     private float lookWeightMaxForHoldLeft;
 
+    
 
-    private bool grabNextHoldRight = false;
-    private bool grabNextHoldLeft = false;
-
-    private int axeYOfTargets;
-
-    private Vector3 positionOfCurrentTarget;
+    private GameObject currentHoldRight;
+    private GameObject currentHoldLeft;
 
     private int numberOfTarget;
 
@@ -48,7 +42,6 @@ public class IkControl : MonoBehaviour
 
         isFirstHold = true;
         watchTarget = true;
-        //targetForHead = GameObject.Find("prise 1").transform.position;
 
         numberOfTarget = 0;
     }
@@ -62,8 +55,7 @@ public class IkControl : MonoBehaviour
         numberOfTarget++;
         
         watchTarget = false;
-        axeYOfTargets += 1;
-
+        
 
         if (isFirstHold)
         {
@@ -71,9 +63,6 @@ public class IkControl : MonoBehaviour
 
             isHoldRight = true;
             isFirstHold = false;
-            axeYOfTargets = 31;
-
-            targetForHead = targetLeft;
         }
         else if (isHoldRight)
         {
@@ -81,8 +70,6 @@ public class IkControl : MonoBehaviour
 
             isHoldLeft = true;
             isHoldRight = false;
-
-            targetForHead = targetLeft;
         }
         else
         {
@@ -90,45 +77,9 @@ public class IkControl : MonoBehaviour
 
             isHoldRight = true;
             isHoldLeft = false;
-
-            targetForHead = targetRight;
         }
     }
-
-
-    private void ouais()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            watchTarget = false;
-            axeYOfTargets += 15;
-
-            numberOfTarget++;
-
-            if (isFirstHold)
-            {
-                isHoldRight = true;
-                isFirstHold = false;
-
-                //targetForHead = targetLeft;
-            }
-            else if (isHoldRight)
-            {
-                isHoldLeft = true;
-                isHoldRight = false;
-
-                //targetForHead = targetRight;
-            }
-            else
-            {
-                isHoldRight = true;
-                isHoldLeft = false;
-
-                //targetForHead = targetLeft;
-            }
-        }
-    }
-
+    
 
     /// <summary>
     /// Fonction qui fait les animations
@@ -158,10 +109,10 @@ public class IkControl : MonoBehaviour
 
         // La variable lookWeight permet de faire bouger le bras jusqu'à la prise. Exemple :
         // lookWeight = 0, le bras ne vas pas bouger ; lookWeight = 0.5, le bras fera la moitié du chemin entre
-        // le personnage et l'objet qu'il doit atteindre ; lookWieght = 0.99999.., le bras touche l'objet qui devait atteindre.
-        // La valeur de la variable lookWeight change grâce à la fonction Mathf.Lerp(), elle peut se situer entre 0 et 0.99999....
+        // le personnage et l'objet qu'il doit atteindre ; lookWieght = 1, le bras touche l'objet qui devait atteindre.
+        // La valeur de la variable lookWeight change grâce à la fonction Mathf.Lerp(), elle peut se situer entre 0 et 1
 
-        /*-----------------------------------------*/
+        /*----------------------------------------*/
         /*--------------- BRAS DROIT --------------*/
         /*-----------------------------------------*/
 
@@ -169,21 +120,20 @@ public class IkControl : MonoBehaviour
         if (isHoldRight)
         {
             lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
+            lookWeightForLeftFeet = Mathf.Lerp(lookWeightForLeftFeet, 1f, Time.deltaTime * lookSmoother);
+            
+            // Cherche l'objet qui est la prise courrante
+            currentHoldRight = GameObject.Find("prise " + numberOfTarget);
 
-            print("c'est la prise numero : " + numberOfTarget);
+            print("c'est la prise : " + currentHoldRight);
 
-
-            positionOfCurrentTarget = GameObject.Find("prise " + numberOfTarget).transform.position;
-            targetRight.transform.position =
-                new Vector3(positionOfCurrentTarget.x, positionOfCurrentTarget.y, AXE_Z_TARGET);
-
-            // Bouge le corps du personnage vers la prise et monte
-            transform.position = Vector3.Lerp(transform.position, targetRight.position - new Vector3(.8f, 1.81f, 0.1f),
-                speed * Time.deltaTime);
+            transform.position = Vector3.Lerp(transform.position, currentHoldRight.transform.position - new Vector3(.9f, 1.81f, .6f),
+               speed * Time.deltaTime);
         }
         else
         {
             lookWeightForHoldRight = 0;
+            lookWeightForLeftFeet = 0;
         }
 
         // Récupère la valeur maximale de lookWeight à chaque fois pour que le bras ne descende pas 
@@ -193,13 +143,38 @@ public class IkControl : MonoBehaviour
         }
 
 
-        // Bouge le bras droit (animation)
-        animator.SetIKPositionWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
-        animator.SetIKRotationWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
-        animator.SetIKPosition(AvatarIKGoal.RightHand, targetRight.position);
-        animator.SetIKRotation(AvatarIKGoal.RightHand, targetRight.rotation);
+        try
+        {
+            // Bouge le bras droit (animation)
+            animator.SetIKPositionWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
+            animator.SetIKRotationWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
+            animator.SetIKPosition(AvatarIKGoal.RightHand, currentHoldRight.transform.position - new Vector3(0, 0, .3f));
+            animator.SetIKRotation(AvatarIKGoal.RightHand, currentHoldRight.transform.rotation);
+        }
+        catch (Exception e)
+        {
+        }
+        
+        
+        
+        /*-----------------------------------------*/
+        /*--------------- PIED DROIT --------------*/
+        /*-----------------------------------------*/
+        try
+        {
+            animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, lookWeightForRightFeet);
+            animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, lookWeightForRightFeet);
 
-
+            animator.SetIKPosition(AvatarIKGoal.RightFoot, currentHoldRight.transform.position - new Vector3(0.5f, 1.5f, -0.5f));
+            animator.SetIKRotation(AvatarIKGoal.RightFoot, currentHoldRight.transform.rotation);
+        }
+        catch (Exception e)
+        {
+        }
+        
+        
+        
+        
         /*-----------------------------------------*/
         /*-------------- BRAS GAUCHE --------------*/
         /*-----------------------------------------*/
@@ -208,20 +183,19 @@ public class IkControl : MonoBehaviour
         if (isHoldLeft)
         {
             lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
+            lookWeightForRightFeet = Mathf.Lerp(lookWeightForRightFeet, 1f, Time.deltaTime * lookSmoother);
             
-            print("c'est la prise numero : " + numberOfTarget);
+            // Cherche l'objet qui est la prise courrante
+            currentHoldLeft = GameObject.Find("prise " + numberOfTarget);
             
-            positionOfCurrentTarget = GameObject.Find("prise " + numberOfTarget).transform.position;
-            targetLeft.transform.position =
-                new Vector3(positionOfCurrentTarget.x, positionOfCurrentTarget.y, AXE_Z_TARGET);
-
             // Bouge le corps du personnage vers la prise et monte
-            transform.position = Vector3.Lerp(transform.position, targetLeft.position - new Vector3(-.8f, 1.81f, 0.1f),
+            transform.position = Vector3.Lerp(transform.position, currentHoldLeft.transform.position - new Vector3(-0.9f, 1.81f, .6f),
                 speed * Time.deltaTime);
         }
         else
         {
             lookWeightForHoldLeft = 0;
+            lookWeightForRightFeet = 0;
         }
 
 
@@ -230,11 +204,35 @@ public class IkControl : MonoBehaviour
         {
             lookWeightMaxForHoldLeft = lookWeightForHoldLeft;
         }
-
+        
+        
         // Bouge le bras gauche (animation)
-        animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, lookWeightMaxForHoldLeft);
-        animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, lookWeightMaxForHoldLeft);
-        animator.SetIKPosition(AvatarIKGoal.LeftHand, targetLeft.position);
-        animator.SetIKRotation(AvatarIKGoal.LeftHand, targetLeft.rotation);
+        try
+        {
+            animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, lookWeightMaxForHoldLeft);
+            animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, lookWeightMaxForHoldLeft);
+            animator.SetIKPosition(AvatarIKGoal.LeftHand, currentHoldLeft.transform.position);
+            animator.SetIKRotation(AvatarIKGoal.LeftHand, currentHoldLeft.transform.rotation);
+        }
+        catch (Exception e)
+        {
+        }
+        
+        
+        
+        /*-----------------------------------------*/
+        /*-------------- PIED GAUCHE --------------*/
+        /*-----------------------------------------*/
+        try
+        {
+            animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, lookWeightForLeftFeet);
+            animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, lookWeightForLeftFeet);
+            animator.SetIKPosition(AvatarIKGoal.LeftFoot, currentHoldLeft.transform.position - new Vector3(0.5f, 1.5f, -0.5f));
+            animator.SetIKRotation(AvatarIKGoal.LeftFoot, currentHoldLeft.transform.rotation);
+        }
+        catch (Exception e)
+        {
+        }
+
     }
 }

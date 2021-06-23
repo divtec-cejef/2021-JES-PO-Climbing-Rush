@@ -35,6 +35,8 @@ public class ShrinkIndicator : MonoBehaviour
         
         isFirstEnterInFunctionStopShrink = true;
         isFirstTimeToPressButton = true;
+        
+        print("start du shrink");
     }
 
 

@@ -7,56 +7,52 @@ using UnityEngine.UI;
 public class ScoreScript : MonoBehaviour
 {
 
-    public ShrinkIndicator shrinkIndicator;
-
-    public bool isGoodButton;
+    public ProgressiveCircular progressiveCircular;
+    public Text score;
     
-    public static int scoreValue = 0;
-
-    private Text score;
-    // Start is called before the first frame update
-    void Start()
-    {
-        score = GetComponent<Text>();
-        
-    }
+    private bool isGoodButton;
+    
+    private int scoreValue = 0;
 
     // Update is called once per frame
     void Update()
     {
         
         score.text = "Score : " + scoreValue;
-
     }
 
     public void calculatePoints()
     {
-        float counter = shrinkIndicator.getValueX();
+        float counter = progressiveCircular.getProgressionCircularBar();
+        //float counter = 0;
+        
+        print("en fait je sais pas ce que ça retourne alors : " + counter);
         
         print("ouais dans le ScoreSript, valeur du button : " + getIsGoodButton());
 
         if (getIsGoodButton())
         {
-
-            if (counter > 0.75f)
+            if (counter <= 0.3f)
             {
                 scoreValue += 50;
-            }else if (counter > 0.55f)
+            }else if (counter <= 0.6f)
             {
                 scoreValue += 150;
-            }else if (counter > 0.4f)
+            }else if (counter <= 0.9f)
+            {
+                scoreValue += 300;
+            } else if (counter == 1)
             {
                 scoreValue += 500;
             }
-
-        }else if (scoreValue < 10)
-        {
-            scoreValue = 0;
         }
         else
         {
-            scoreValue -= 10;
-
+            if (scoreValue !< 0)
+            {
+                scoreValue -= 75;
+            }
+            
         }
 
     }

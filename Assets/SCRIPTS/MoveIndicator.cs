@@ -55,6 +55,7 @@ public class MoveIndicator : MonoBehaviour
 
         // Récupère le couleur du premier indicateur 
         currentColorIndicator = circleColorRight.GetComponent<Renderer>().material.color;
+        print("fin du start moveIndicator");
     }
 
 
