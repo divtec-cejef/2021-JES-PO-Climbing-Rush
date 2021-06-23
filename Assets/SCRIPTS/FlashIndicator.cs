@@ -2,10 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class FlashIndicator : MonoBehaviour
 {
-
     private Renderer currenIndicator;
     private Coroutine flashIndicator;
     public MoveIndicator moveIndicator;
@@ -14,8 +14,10 @@ public class FlashIndicator : MonoBehaviour
     public GameObject leftIndicator;
     private bool isRightIndicatorCurrent = true;
     private bool continueFlash = true;
-
     
+    private bool hasShrinkBegan;
+
+    public ScoreScript scoreScript;
     
     private GameObject indicatorCurrent;
 
@@ -34,6 +36,8 @@ public class FlashIndicator : MonoBehaviour
     /// <param name="indicatorCurrent"></param>
     public void flashCurrentIndicator()
     {
+        
+        scoreScript.setHasShrinkBegan(false);
         
         // Test de qui est l'indicateur courrant     
         if (isRightIndicatorCurrent)
@@ -62,7 +66,7 @@ public class FlashIndicator : MonoBehaviour
     /// <returns></returns>
     IEnumerator FlashCurrentIndicator(Color currentColor)
     {
-
+        
         counter = 0;
         continueFlash = true;
 

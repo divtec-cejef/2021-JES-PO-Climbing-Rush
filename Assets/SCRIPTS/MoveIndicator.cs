@@ -141,8 +141,6 @@ public class MoveIndicator : MonoBehaviour
         // Fais clignoter l'indicateur courant
         flashIndicator.flashCurrentIndicator();
     }
-
-    
     
     /// <summary>
     /// Retourne une couleur aléatoire (rouge, bleu, vert, jaune ou violet)

@@ -10,54 +10,58 @@ public class ScoreScript : MonoBehaviour
     public ShrinkIndicator shrinkIndicator;
 
     public bool isGoodButton;
+
+    public FlashIndicator flashIndicator;
     
     public static int scoreValue = 0;
 
+    private bool hasShrinkBegan;
+    
+    
     private Text score;
     // Start is called before the first frame update
     void Start()
     {
         score = GetComponent<Text>();
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
         score.text = "Score : " + scoreValue;
 
     }
 
+
+
     public void calculatePoints()
     {
-        float counter = shrinkIndicator.getValueX();
+        float counter = shrinkIndicator.getSizeValueCircle();
         
-        print("ouais dans le ScoreSript, valeur du button : " + getIsGoodButton());
+
 
         if (getIsGoodButton())
         {
-
-            if (counter > 0.75f)
-            {
-                scoreValue += 50;
-            }else if (counter > 0.55f)
-            {
-                scoreValue += 150;
-            }else if (counter > 0.4f)
+            
+            if (getHasShrinkBegan() == false)
             {
                 scoreValue += 500;
+            }else if (counter > 0.65f && counter < 0.75f)
+            {
+                scoreValue += 150;
+            }else if (counter > 0.5f && counter < 0.5f)
+            {
+                scoreValue += 100;
+            }else if(counter <= 0.5f){
+                scoreValue += 10;
             }
 
-        }else if (scoreValue < 10)
+        }else if (scoreValue < 200)
         {
             scoreValue = 0;
         }
         else
         {
-            scoreValue -= 10;
+            scoreValue -= 200;
 
         }
+
+        score.text = "Score : " + scoreValue;
 
     }
 
@@ -78,4 +82,15 @@ public class ScoreScript : MonoBehaviour
     {
         this.isGoodButton = isGoodButton;
     }
+    
+    public void setHasShrinkBegan(bool hasShrinkBegan)
+    {
+        this.hasShrinkBegan = hasShrinkBegan;
+    }
+
+    public bool getHasShrinkBegan()
+    {
+        return hasShrinkBegan;
+    }
+
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SocialPlatforms.Impl;
 
 
 public class ShrinkIndicator : MonoBehaviour
@@ -18,9 +19,10 @@ public class ShrinkIndicator : MonoBehaviour
     private Coroutine coroutineShrinkIndicator;
     private Vector3 scaleCircleIndicator;
     private GameObject indicatorCurrent;
+    public ScoreScript scoreScript;
 
-    public float valueX = 0;
-    public float sizeValueCircle;
+    private float valueX;
+    private float sizeValueCircle;
     
     private bool isFirstEnterInFunctionStopShrink;
     private bool isFirstTimeToPressButton;
@@ -44,7 +46,7 @@ public class ShrinkIndicator : MonoBehaviour
     /// </summary>
     public void shrinkCurrentIndicator()
     {
-
+        
         if (isFirstEnterInFunctionStopShrink)
         {
             indicatorCurrent = rightIndicator;
@@ -53,8 +55,6 @@ public class ShrinkIndicator : MonoBehaviour
 
         scaleCircleIndicator = indicatorCurrent.gameObject.transform.localScale;
         
-        print("l'indicateur courrant : " + indicatorCurrent);
-
         // Démarre la fonction rétrécit l'indicateur courrant
         coroutineShrinkIndicator = StartCoroutine(ScaleToTargetCoroutine(indicatorCurrent));
     }
@@ -67,15 +67,21 @@ public class ShrinkIndicator : MonoBehaviour
     /// <returns> null </returns>
     private IEnumerator ScaleToTargetCoroutine(GameObject indicator)
     {
+        
         while (scaleCircleIndicator.x > MIN_DIAMETER_INDICATOR)
         {
-            indicator.gameObject.transform.localScale -= new Vector3(0.005f, 0.0f, 0.005f);
-            valueX = indicator.gameObject.transform.localScale.x;
 
-            scaleCircleIndicator = indicator.gameObject.transform.localScale;
+            yield return new WaitForSeconds(0.001f);
             
+            indicator.gameObject.transform.localScale -= new Vector3(0.005f, 0.0f, 0.005f);
+            
+            scaleCircleIndicator = indicator.gameObject.transform.localScale;
+
+            valueX = scaleCircleIndicator.x;
+
             yield return null;
         }
+
 
         yield return null;
     }
@@ -99,8 +105,6 @@ public class ShrinkIndicator : MonoBehaviour
             indicatorNext = leftIndicator;
         }
         
-        print("pour remettre la taille initiale, l'indicateur prochain c'est : " + indicatorNext);
-        
         indicatorNext.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
         // Ici dans les git hub c'est différent, voir ci-dessous :
         /*b 
@@ -117,36 +121,24 @@ public class ShrinkIndicator : MonoBehaviour
     public void stopShrinkIndicator()
     {
 
-        print("actuellement dans le stopShrinkIndicator");
-        
         if (!isFirstEnterInFunctionStopShrink)
         {
             //StopCoroutine(coroutineShrinkIndicator);
-
-            print("coucou uband");
             
             if (isFirstTimeToPressButton)
             {
-                print("si tu me vois c'est que c'est la première fois que t'appuies sur un bouton");
                 isRightIndicatorCurrent = false;
                 isFirstTimeToPressButton = false;
             }
 
 
-            print(
-                "tester si le *isFirstTimeToPRessButton* est fait, valeur de isRightIndicator, elle doit être à *false* : " +
-                isRightIndicatorCurrent);
-            
-    
             if (isRightIndicatorCurrent)
             {
-                print("indicateur courrant droit");
                 indicatorCurrent = rightIndicator;
                 isRightIndicatorCurrent = false;
             }
             else
             {
-                print("indicateur courrant gauche");
                 indicatorCurrent = leftIndicator;
                 isRightIndicatorCurrent = true;
             }
@@ -158,12 +150,11 @@ public class ShrinkIndicator : MonoBehaviour
         StopCoroutine(coroutineShrinkIndicator);
     }
 
-    
-    public float getValueX()
+
+    public float getSizeValueCircle()
     {
         return sizeValueCircle;
     }
-    
     
     public void setIsFirstEnterInFunctionStopShrink(bool isEnter)
     {

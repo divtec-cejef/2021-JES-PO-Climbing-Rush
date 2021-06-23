@@ -79,6 +79,7 @@ public class MovePlayer : MonoBehaviour
         if (colorButton.Equals(moveIndicator.getCurrentColorIndicator()))
         {
             
+            
             scoreScript.setIsGoodButton(true);
             shrinkIndicator.setIsFirstEnterInFunctionStopShrink(false);
             
