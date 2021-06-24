@@ -13,6 +13,7 @@ public class ProgressiveCircular : MonoBehaviour
     public Image progressCircle;
     public float speed = 0.001f;
     public Canvas canvasIndicatorUI;
+    public Slider progressBar;
 
     private Coroutine progressCircularBarUICoroutine;
 
@@ -69,6 +70,11 @@ public class ProgressiveCircular : MonoBehaviour
     public List<Color> getColorIndicator()
     {
         return listColorIndicator;
+    }
+
+    private void Update()
+    {
+        progressBar.value = numberOfTarget;
     }
 
 
