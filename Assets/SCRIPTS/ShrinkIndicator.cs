@@ -21,7 +21,6 @@ public class ShrinkIndicator : MonoBehaviour
     private GameObject indicatorCurrent;
     public ScoreScript scoreScript;
 
-    private float valueX;
     private float sizeValueCircle;
     
     private bool isFirstEnterInFunctionStopShrink;
@@ -46,8 +45,6 @@ public class ShrinkIndicator : MonoBehaviour
     /// </summary>
     public void shrinkCurrentIndicator()
     {
-
-        scoreScript.setHasShrinkBegan(true);
         
         if (isFirstEnterInFunctionStopShrink)
         {
@@ -80,24 +77,15 @@ public class ShrinkIndicator : MonoBehaviour
             
             sizeValueCircle = scaleCircleIndicator.x;
             
-            
-
-            print("axe X de l'indicateur : " + valueX);
-
-            
             yield return null;
         }
 
         while (true)
         {
             yield return new WaitForSeconds(1);
-            scoreScript.losePointEverySecond();
+            scoreScript.losePoint();
             
         }
-        
-        
-
-
         
         yield return null;
     }
@@ -139,7 +127,6 @@ public class ShrinkIndicator : MonoBehaviour
 
         if (!isFirstEnterInFunctionStopShrink)
         {
-            //StopCoroutine(coroutineShrinkIndicator);
             
             if (isFirstTimeToPressButton)
             {
@@ -160,11 +147,8 @@ public class ShrinkIndicator : MonoBehaviour
 
         }
         
-        
         StopCoroutine(coroutineShrinkIndicator);
         
-        print("arr'etre le coroutine shrink, valueX ; " + valueX);
-        print("arr'etre le coroutine shrink, sizeCircle ; " + sizeValueCircle);
     }
 
 

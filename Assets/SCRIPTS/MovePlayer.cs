@@ -81,7 +81,6 @@ public class MovePlayer : MonoBehaviour
             
             //shrinkIndicator.setSizeValueCircle();
             scoreScript.setIsGoodButton(true);
-            print("move player, bon bouton : " + scoreScript.getIsGoodButton());
             shrinkIndicator.setIsFirstEnterInFunctionStopShrink(false);
             
             // Stop le clignotement de l'indicateur courant

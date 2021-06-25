@@ -94,42 +94,7 @@ public class IkControl : MonoBehaviour
             targetForHead = targetRight;
         }
     }
-
-
-    private void ouais()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            watchTarget = false;
-            axeYOfTargets += 15;
-
-            numberOfTarget++;
-
-            if (isFirstHold)
-            {
-                isHoldRight = true;
-                isFirstHold = false;
-
-                //targetForHead = targetLeft;
-            }
-            else if (isHoldRight)
-            {
-                isHoldLeft = true;
-                isHoldRight = false;
-
-                //targetForHead = targetRight;
-            }
-            else
-            {
-                isHoldRight = true;
-                isHoldLeft = false;
-
-                //targetForHead = targetLeft;
-            }
-        }
-    }
-
-
+    
     /// <summary>
     /// Fonction qui fait les animations
     /// </summary>
@@ -170,9 +135,6 @@ public class IkControl : MonoBehaviour
         {
             lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
 
-            print("c'est la prise numero : " + numberOfTarget);
-
-
             positionOfCurrentTarget = GameObject.Find("prise " + numberOfTarget).transform.position;
             targetRight.transform.position =
                 new Vector3(positionOfCurrentTarget.x, positionOfCurrentTarget.y, AXE_Z_TARGET);
@@ -208,8 +170,6 @@ public class IkControl : MonoBehaviour
         if (isHoldLeft)
         {
             lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
-            
-            print("c'est la prise numero : " + numberOfTarget);
             
             positionOfCurrentTarget = GameObject.Find("prise " + numberOfTarget).transform.position;
             targetLeft.transform.position =

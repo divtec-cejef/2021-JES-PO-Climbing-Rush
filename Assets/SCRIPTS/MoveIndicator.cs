@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class MoveIndicator : MonoBehaviour
@@ -30,6 +31,8 @@ public class MoveIndicator : MonoBehaviour
     private Vector3 positionNextHoldLeft;
 
     private int numberOfTarget;
+
+    public Slider progressBar; 
 
 
     void Start()
@@ -68,7 +71,11 @@ public class MoveIndicator : MonoBehaviour
         return listColorIndicator;
     }
 
-    
+    private void Update()
+    {
+        progressBar.value = numberOfTarget - 1;
+    }
+
 
     /// <summary>
     /// Change de place un des indicateurs de prises et change sa couleur aléatoirement

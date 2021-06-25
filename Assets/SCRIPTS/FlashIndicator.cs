@@ -37,8 +37,6 @@ public class FlashIndicator : MonoBehaviour
     public void flashCurrentIndicator()
     {
         
-        print("dans flashCurrentINdicator la");
-        
         // Test de qui est l'indicateur courrant     
         if (isRightIndicatorCurrent)
         {
