@@ -9,7 +9,7 @@ public class ScoreScript : MonoBehaviour
 {
 
     public ProgressiveCircular progressiveCircular;
-    public TextMeshProUGUI score;
+    //public TextMeshProUGUI score;
     
     private bool isGoodButton;
     
@@ -19,7 +19,7 @@ public class ScoreScript : MonoBehaviour
     void Update()
     {
         
-        score.text = "Score : " + scoreValue;
+        //score.text = "Score : " + scoreValue;
     }
 
     public void calculatePoints()
