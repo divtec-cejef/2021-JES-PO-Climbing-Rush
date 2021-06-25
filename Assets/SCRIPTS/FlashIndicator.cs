@@ -24,7 +24,7 @@ public class FlashIndicator : MonoBehaviour
     private Renderer colorIndicatorCurrent;
 
     private int counter;
-
+    
     private void Start()
     {
         flashCurrentIndicator();
@@ -37,7 +37,7 @@ public class FlashIndicator : MonoBehaviour
     public void flashCurrentIndicator()
     {
         
-        scoreScript.setHasShrinkBegan(false);
+        print("dans flashCurrentINdicator la");
         
         // Test de qui est l'indicateur courrant     
         if (isRightIndicatorCurrent)
@@ -66,7 +66,7 @@ public class FlashIndicator : MonoBehaviour
     /// <returns></returns>
     IEnumerator FlashCurrentIndicator(Color currentColor)
     {
-        
+
         counter = 0;
         continueFlash = true;
 
@@ -75,6 +75,7 @@ public class FlashIndicator : MonoBehaviour
         
         while (continueFlash)
         {
+            
             
             yield return new WaitForSeconds(0.2f);
             colorIndicatorCurrent.material.SetColor("_Color", currentColor);
@@ -88,7 +89,6 @@ public class FlashIndicator : MonoBehaviour
                 continueFlash = false;
                 stopFlashCurrentIndicator();
                 shrinkIndicator.shrinkCurrentIndicator();
-
             }
             counter++;
         }
@@ -103,5 +103,8 @@ public class FlashIndicator : MonoBehaviour
     {
         StopCoroutine(flashIndicator);
     }
+    
+    
+
     
 }

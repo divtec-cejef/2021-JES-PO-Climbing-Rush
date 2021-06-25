@@ -1,68 +1,62 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class ScoreScript : MonoBehaviour
 {
-
     public ShrinkIndicator shrinkIndicator;
 
     public bool isGoodButton;
 
     public FlashIndicator flashIndicator;
-    
+
     public static int scoreValue = 0;
 
-    private bool hasShrinkBegan;
-    
-    
-    private Text score;
+    private bool hasShrinkBegan = true;
+
+    private float counter;
+
+    public TextMeshProUGUI score;
+
     // Start is called before the first frame update
     void Start()
     {
-        score = GetComponent<Text>();
         score.text = "Score : " + scoreValue;
-
     }
-
-
 
     public void calculatePoints()
     {
-        float counter = shrinkIndicator.getSizeValueCircle();
-        
+        counter = shrinkIndicator.getSizeValueCircle();
+        print("scoreScript counter : " + counter);
 
+        print("ici c'est le coutner dans le scoreScript : " + counter);
 
-        if (getIsGoodButton())
+        if (isGoodButton)
         {
-            
-            if (getHasShrinkBegan() == false)
+            if (counter == 0)
             {
-                scoreValue += 500;
-            }else if (counter > 0.65f && counter < 0.75f)
-            {
-                scoreValue += 150;
-            }else if (counter > 0.5f && counter < 0.5f)
-            {
-                scoreValue += 100;
-            }else if(counter <= 0.5f){
-                scoreValue += 10;
+                counter = 0.8f;
             }
 
-        }else if (scoreValue < 200)
-        {
-            scoreValue = 0;
+            if (counter <= 0.5f)
+            {
+                scoreValue += 10;
+            }
+            else if (counter <= 0.65f)
+            {
+                scoreValue += 150;
+            }
+            else
+            {
+                scoreValue += 500;
+            }
         }
-        else
-        {
-            scoreValue -= 200;
 
-        }
 
         score.text = "Score : " + scoreValue;
-
     }
 
     /// <summary>
@@ -82,15 +76,48 @@ public class ScoreScript : MonoBehaviour
     {
         this.isGoodButton = isGoodButton;
     }
-    
+
     public void setHasShrinkBegan(bool hasShrinkBegan)
     {
         this.hasShrinkBegan = hasShrinkBegan;
     }
 
-    public bool getHasShrinkBegan()
+    public float getCounter()
     {
-        return hasShrinkBegan;
+        return counter;
+    }
+
+    public void setCounter(float counter)
+    {
+        this.counter = counter;
+    }
+
+    public void setWrongButton()
+    {
+        if (scoreValue <= 75)
+        {
+            scoreValue = 0;
+        }
+        else
+        {
+            scoreValue -= 75;
+        }
+
+        score.text = "Score : " + scoreValue;
+    }
+    
+    public void losePointEverySecond()
+    {
+        if (scoreValue <= 10)
+        {
+            scoreValue = 0;
+        }
+        else
+        {
+            scoreValue -= 10;
+        }
+
+        score.text = "Score : " + scoreValue;
     }
 
 }

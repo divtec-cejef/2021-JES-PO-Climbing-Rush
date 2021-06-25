@@ -46,6 +46,8 @@ public class ShrinkIndicator : MonoBehaviour
     /// </summary>
     public void shrinkCurrentIndicator()
     {
+
+        scoreScript.setHasShrinkBegan(true);
         
         if (isFirstEnterInFunctionStopShrink)
         {
@@ -71,18 +73,32 @@ public class ShrinkIndicator : MonoBehaviour
         while (scaleCircleIndicator.x > MIN_DIAMETER_INDICATOR)
         {
 
-            yield return new WaitForSeconds(0.001f);
-            
             indicator.gameObject.transform.localScale -= new Vector3(0.005f, 0.0f, 0.005f);
             
             scaleCircleIndicator = indicator.gameObject.transform.localScale;
 
-            valueX = scaleCircleIndicator.x;
+            
+            sizeValueCircle = scaleCircleIndicator.x;
+            
+            
 
+            print("axe X de l'indicateur : " + valueX);
+
+            
             yield return null;
         }
 
+        while (true)
+        {
+            yield return new WaitForSeconds(1);
+            scoreScript.losePointEverySecond();
+            
+        }
+        
+        
 
+
+        
         yield return null;
     }
 
@@ -131,7 +147,6 @@ public class ShrinkIndicator : MonoBehaviour
                 isFirstTimeToPressButton = false;
             }
 
-
             if (isRightIndicatorCurrent)
             {
                 indicatorCurrent = rightIndicator;
@@ -146,8 +161,10 @@ public class ShrinkIndicator : MonoBehaviour
         }
         
         
-        sizeValueCircle = valueX;
         StopCoroutine(coroutineShrinkIndicator);
+        
+        print("arr'etre le coroutine shrink, valueX ; " + valueX);
+        print("arr'etre le coroutine shrink, sizeCircle ; " + sizeValueCircle);
     }
 
 
@@ -155,10 +172,17 @@ public class ShrinkIndicator : MonoBehaviour
     {
         return sizeValueCircle;
     }
+
+    public void setSizeValueCircle()
+    {
+        sizeValueCircle = 0.8f;
+    }
     
     public void setIsFirstEnterInFunctionStopShrink(bool isEnter)
     {
         //isFirstTimeToPressButton = isEnter;
         isFirstEnterInFunctionStopShrink = isEnter;
     }
+
+
 }

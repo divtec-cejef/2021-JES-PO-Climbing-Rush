@@ -79,8 +79,9 @@ public class MovePlayer : MonoBehaviour
         if (colorButton.Equals(moveIndicator.getCurrentColorIndicator()))
         {
             
-            
+            //shrinkIndicator.setSizeValueCircle();
             scoreScript.setIsGoodButton(true);
+            print("move player, bon bouton : " + scoreScript.getIsGoodButton());
             shrinkIndicator.setIsFirstEnterInFunctionStopShrink(false);
             
             // Stop le clignotement de l'indicateur courant
@@ -94,25 +95,23 @@ public class MovePlayer : MonoBehaviour
             // Fais bouger le joueur à la prochaine prise
             ikControl.animationClimbingPlayer();
             
-
+            scoreScript.calculatePoints(); 
+            shrinkIndicator.setSizeValueCircle();
+            
             comptorNbrHolds++;
             indexListColorIndicator++;
 
 
-            // Si l'index de la liste des couleurs de l'indicateur est fini alors on recommence à zéro
-            // pour continuer sur n prises.
-            if (indexListColorIndicator >= listColorIndicator.Count)
-            {
-                indexListColorIndicator = 0;
-            }
         }
         else
         {
             scoreScript.setIsGoodButton(false);
-        }
-        scoreScript.calculatePoints();
+            scoreScript.setWrongButton();
+            
 
-        
+            
+        }
+
     }
     
     /*
