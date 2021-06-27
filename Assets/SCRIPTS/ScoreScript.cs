@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,44 +8,62 @@ using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour
 {
-
     public ProgressiveCircular progressiveCircular;
-    public TextMeshProUGUI score;
-    
+    //public TextMeshProUGUI score;
+
+    private int currentScore;
+
+    private Text score;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        score = GetComponent<Text>();
+        calculatePoints();
+    }
+
     private bool isGoodButton;
-    
+
     private int scoreValue = 0;
+
 
     // Update is called once per frame
     void Update()
     {
-        
         score.text = "Score : " + scoreValue;
     }
 
     public void calculatePoints()
     {
-        float counter = progressiveCircular.getProgressionCircularBar();
+        //float counter = shrinkIndicator.getValueX();
+
+        //float counter = progressiveCircular.getProgressionCircularBar();
         //float counter = 0;
-        
-        print("en fait je sais pas ce que ça retourne alors : " + counter);
-        
-        print("ouais dans le ScoreSript, valeur du button : " + getIsGoodButton());
+
+        //print("en fait je sais pas ce que ça retourne alors : " + counter);
+
+        //print("ouais dans le ScoreSript, valeur du button : " + getIsGoodButton());
+
+
+        float counter = 0;
 
         if (getIsGoodButton())
         {
             if (counter <= 0.3f)
             {
-                scoreValue += 50;
-            }else if (counter <= 0.6f)
+                currentScore += 50;
+            }
+            else if (counter <= 0.6f)
             {
                 scoreValue += 150;
-            }else if (counter <= 0.9f)
+            }
+            else if (counter <= 0.9f)
             {
                 scoreValue += 300;
-            } else if (counter == 1)
+            }
+            else if (counter == 1)
             {
-                scoreValue += 500;
+                currentScore += 500;
             }
         }
         else
@@ -58,9 +77,9 @@ public class ScoreScript : MonoBehaviour
                 scoreValue -= 75;
             }
         }
-
+        
     }
-
+    
     /// <summary>
     /// recupere la valeur du booleen
     /// </summary>
@@ -77,5 +96,17 @@ public class ScoreScript : MonoBehaviour
     public void setIsGoodButton(bool isGoodButton)
     {
         this.isGoodButton = isGoodButton;
+    }
+
+    public int getScore()
+    {
+        return currentScore;
+    }
+
+
+    private void displayScore()
+    {
+        print("LA VALEUR DU SCORE :" + getScore());
+        score.text = "Score : " + getScore();
     }
 }

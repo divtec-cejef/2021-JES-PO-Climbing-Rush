@@ -2,21 +2,25 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class MovePlayer : MonoBehaviour
 {
 
-    // Variable pour les boutons et les indicateurs de couleurs
+    // Variable pour les boutons pressoirs
     private PlayerControls controls;
     
+
+    public MoveIndicator moveIndicator;
+    public FlashIndicator flashIndicator;
     public ScoreScript scoreScript;
     public IkControl ikControl;
+  
+
     public ProgressiveCircular progressiveCircular;
 
 
 
-    
+
     void Awake()
     {
         controls = new PlayerControls();
@@ -57,6 +61,7 @@ public class MovePlayer : MonoBehaviour
             // Fais bouger le joueur à la prochaine prise
             ikControl.animationClimbingPlayer();
             
+
         }
         else
         {
@@ -68,8 +73,7 @@ public class MovePlayer : MonoBehaviour
 
         
     }
-    
-  
+
 
     // Fonctions qui permettent aux boutons de s'activer
     void OnEnable()

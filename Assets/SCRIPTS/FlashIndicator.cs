@@ -21,6 +21,7 @@ public class FlashIndicator : MonoBehaviour
 
     private Renderer colorIndicatorCurrent;
 
+
     private int counter;
 
     private void Start()
@@ -71,6 +72,8 @@ public class FlashIndicator : MonoBehaviour
         
         while (continueFlash)
         {
+
+            print("1. début débug, colorIndicatorCurrent : " + colorIndicatorCurrent);
             
             yield return new WaitForSeconds(0.2f);
             colorIndicatorCurrent.material.SetColor("_Color", currentColor);

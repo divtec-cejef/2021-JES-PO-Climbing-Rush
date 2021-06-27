@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
-
 
 public class ShrinkIndicator : MonoBehaviour
 {
@@ -26,6 +24,7 @@ public class ShrinkIndicator : MonoBehaviour
     private bool isFirstTimeToPressButton;
 
 
+
     private void Start()
     {
         isRightIndicatorCurrent = true;
@@ -33,6 +32,7 @@ public class ShrinkIndicator : MonoBehaviour
         coroutineShrinkIndicator = StartCoroutine(ScaleToTargetCoroutine(indicatorCurrent));
         stopShrinkIndicator();
         
+
         isFirstEnterInFunctionStopShrink = true;
         isFirstTimeToPressButton = true;
         
@@ -78,6 +78,8 @@ public class ShrinkIndicator : MonoBehaviour
             
             yield return null;
         }
+        
+        //flashIndicator.flashCurrentIndicator(indicator);
 
         yield return null;
     }
