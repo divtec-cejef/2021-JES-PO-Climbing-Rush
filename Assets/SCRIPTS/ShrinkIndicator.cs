@@ -12,20 +12,31 @@ public class ShrinkIndicator : MonoBehaviour
     public GameObject leftIndicator;
     
     public FlashIndicator flashIndicator;
-    private bool isRightIndicatorCurrent = true;
+    private bool isRightIndicatorCurrent;
     private Coroutine coroutineShrinkIndicator;
     private Vector3 scaleCircleIndicator;
+    private GameObject indicatorCurrent;
 
     public float valueX = 0;
     public float sizeValueCircle;
+    
+    private bool isFirstEnterInFunctionStopShrink;
+    private bool isFirstTimeToPressButton;
+
 
 
     private void Start()
     {
+        isRightIndicatorCurrent = true;
         // Rétrécis le premier indicator jusqu'à la limite
-        shrinkCurrentIndicator();
+        coroutineShrinkIndicator = StartCoroutine(ScaleToTargetCoroutine(indicatorCurrent));
+        stopShrinkIndicator();
         
-        print("dans le start du shrinkIndicator");
+
+        isFirstEnterInFunctionStopShrink = true;
+        isFirstTimeToPressButton = true;
+        
+        print("start du shrink");
     }
 
 
@@ -35,23 +46,11 @@ public class ShrinkIndicator : MonoBehaviour
     /// </summary>
     public void shrinkCurrentIndicator()
     {
-        GameObject indicatorCurrent;
 
-        print("bonjour je suis dans la focntion shrink");
-
-        // Test de qui est l'indicateur courrant     
-        if (isRightIndicatorCurrent)
+        if (isFirstEnterInFunctionStopShrink)
         {
-            print("indicateur droit");
             indicatorCurrent = rightIndicator;
             isRightIndicatorCurrent = false;
-        }
-        else
-        {
-            print("indicateur gauihce");
-
-            indicatorCurrent = leftIndicator;
-            isRightIndicatorCurrent = true;
         }
 
         scaleCircleIndicator = indicatorCurrent.gameObject.transform.localScale;
@@ -77,8 +76,6 @@ public class ShrinkIndicator : MonoBehaviour
 
             scaleCircleIndicator = indicator.gameObject.transform.localScale;
             
-            print("ouuais saluuut alros voila mon scale : " + scaleCircleIndicator);
-
             yield return null;
         }
         
@@ -96,17 +93,24 @@ public class ShrinkIndicator : MonoBehaviour
     {
         GameObject indicatorNext;
 
-        // Test de qui est l'indicateur prochain
+        // Test de qui est l'indicateur prochain ainsi pour remettre à échelle l'indicateur
         if (isRightIndicatorCurrent)
-        {
-            indicatorNext = leftIndicator;
-        }
-        else
         {
             indicatorNext = rightIndicator;
         }
+        else
+        {
+            indicatorNext = leftIndicator;
+        }
+        
+        print("pour remettre la taille initiale, l'indicateur prochain c'est : " + indicatorNext);
         
         indicatorNext.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
+        // Ici dans les git hub c'est différent, voir ci-dessous :
+        /*b 
+         leftIndicator.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
+         rightIndicator.gameObject.transform.localScale = new Vector3(.8f, 1.0f, 0.8f);
+         */
     }
 
 
@@ -116,12 +120,58 @@ public class ShrinkIndicator : MonoBehaviour
     /// <param name="pressed"> valeur vraie si le bouton est pressé sinon faux </param>
     public void stopShrinkIndicator()
     {
+
+        print("actuellement dans le stopShrinkIndicator");
+        
+        if (!isFirstEnterInFunctionStopShrink)
+        {
+            //StopCoroutine(coroutineShrinkIndicator);
+
+            print("coucou uband");
+            
+            if (isFirstTimeToPressButton)
+            {
+                print("si tu me vois c'est que c'est la première fois que t'appuies sur un bouton");
+                isRightIndicatorCurrent = false;
+                isFirstTimeToPressButton = false;
+            }
+
+
+            print(
+                "tester si le *isFirstTimeToPRessButton* est fait, valeur de isRightIndicator, elle doit être à *false* : " +
+                isRightIndicatorCurrent);
+            
+    
+            if (isRightIndicatorCurrent)
+            {
+                print("indicateur courrant droit");
+                indicatorCurrent = rightIndicator;
+                isRightIndicatorCurrent = false;
+            }
+            else
+            {
+                print("indicateur courrant gauche");
+                indicatorCurrent = leftIndicator;
+                isRightIndicatorCurrent = true;
+            }
+
+        }
+        
+        
         sizeValueCircle = valueX;
         StopCoroutine(coroutineShrinkIndicator);
     }
 
+    
     public float getValueX()
     {
         return sizeValueCircle;
+    }
+    
+    
+    public void setIsFirstEnterInFunctionStopShrink(bool isEnter)
+    {
+        //isFirstTimeToPressButton = isEnter;
+        isFirstEnterInFunctionStopShrink = isEnter;
     }
 }

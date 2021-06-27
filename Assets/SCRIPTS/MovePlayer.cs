@@ -9,11 +9,18 @@ public class MovePlayer : MonoBehaviour
     // Variable pour les boutons pressoirs
     private PlayerControls controls;
     
+
     public MoveIndicator moveIndicator;
     public FlashIndicator flashIndicator;
     public ScoreScript scoreScript;
     public IkControl ikControl;
   
+
+    public ProgressiveCircular progressiveCircular;
+
+
+
+
     void Awake()
     {
         controls = new PlayerControls();
@@ -35,32 +42,38 @@ public class MovePlayer : MonoBehaviour
     /// <param name="colorButton"> La couleur du bouton qui est appuyé </param>
     public void correctCircle(Color colorButton)
     {
-        if (colorButton.Equals(moveIndicator.getCurrentColorIndicator()))
+         
+        print("du coup la couleur c'est : " + progressiveCircular.getCurrentColorIndicator());
+        
+        
+       if (colorButton.Equals(progressiveCircular.getCurrentColorIndicator()))
         {
-            
+
             scoreScript.setIsGoodButton(true);
             
-            // Stop le clignotement de l'indicateur courant
-            flashIndicator.stopFlashCurrentIndicator();
-            
             // Déplace l'indicateur à la prochaine prise
-            moveIndicator.moveNextIndicator();
+            progressiveCircular.setButtonPressed(true);
+            progressiveCircular.stopProgressCircularBarCoroutine();
+            progressiveCircular.setDefaultProgressCircularBarUI();
+            progressiveCircular.moveNextIndicator();
+
 
             // Fais bouger le joueur à la prochaine prise
             ikControl.animationClimbingPlayer();
             
-            
+
         }
         else
         {
             scoreScript.setIsGoodButton(false);
-            print("LA VALEUR DU BOUTON = " + scoreScript.getIsGoodButton());
-            
         }
-        scoreScript.calculatePoints();
+       
+       // Calcule les points
+       scoreScript.calculatePoints();
 
         
     }
+
 
     // Fonctions qui permettent aux boutons de s'activer
     void OnEnable()
