@@ -9,43 +9,32 @@ using UnityEngine.UI;
 public class ScoreScript : MonoBehaviour
 {
     public ProgressiveCircular progressiveCircular;
-    //public TextMeshProUGUI score;
 
     private int currentScore;
 
-    private Text score;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        score = GetComponent<Text>();
-        calculatePoints();
-    }
-
+    public TextMeshProUGUI score;
+    
     private bool isGoodButton;
 
     private int scoreValue = 0;
 
-
-    // Update is called once per frame
-    void Update()
+    // Start is called before the first frame update
+    void Start()
     {
-        score.text = "Score : " + scoreValue;
+        calculatePoints();
     }
 
+    
+    
+
+    /// <summary>
+    /// Calcule les points gagnés dépendant à quel moment on prend la prise, et les affiche sur HUD
+    /// </summary>
     public void calculatePoints()
     {
-        //float counter = shrinkIndicator.getValueX();
 
-        //float counter = progressiveCircular.getProgressionCircularBar();
-        //float counter = 0;
-
-        //print("en fait je sais pas ce que ça retourne alors : " + counter);
-
-        //print("ouais dans le ScoreSript, valeur du button : " + getIsGoodButton());
-
-
-        float counter = 0;
+        float counter = progressiveCircular.getProgressionCircularBar();
+        
 
         if (getIsGoodButton())
         {
@@ -61,9 +50,9 @@ public class ScoreScript : MonoBehaviour
             {
                 scoreValue += 300;
             }
-            else if (counter == 1)
+            else if (counter == 1f)
             {
-                currentScore += 500;
+                scoreValue += 500;
             }
         }
         else
@@ -78,10 +67,12 @@ public class ScoreScript : MonoBehaviour
             }
         }
         
+        score.text = "Score : " + scoreValue;
     }
     
+    
     /// <summary>
-    /// recupere la valeur du booleen
+    /// recupere la valeur du booléen
     /// </summary>
     /// <returns></returns>
     public bool getIsGoodButton()
@@ -104,9 +95,4 @@ public class ScoreScript : MonoBehaviour
     }
 
 
-    private void displayScore()
-    {
-        print("LA VALEUR DU SCORE :" + getScore());
-        score.text = "Score : " + getScore();
-    }
 }

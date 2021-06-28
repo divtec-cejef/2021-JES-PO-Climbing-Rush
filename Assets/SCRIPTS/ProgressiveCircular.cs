@@ -41,7 +41,7 @@ public class ProgressiveCircular : MonoBehaviour
     {
         // Initialise à zéro le bar de progression circulaire
         setDefaultProgressCircularBarUI();
-        
+
 
         // Liste des couleurs des indicateurs
         listColorIndicator.AddRange(new List<Color>()
@@ -74,7 +74,7 @@ public class ProgressiveCircular : MonoBehaviour
 
     private void Update()
     {
-        progressBar.value = numberOfTarget;
+        progressBar.value = numberOfTarget - 1;
     }
 
 
