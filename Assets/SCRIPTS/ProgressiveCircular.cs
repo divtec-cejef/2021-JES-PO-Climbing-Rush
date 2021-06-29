@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -26,7 +28,6 @@ public class ProgressiveCircular : MonoBehaviour
     private int numberOfTarget;
 
     private List<Color> listColorIndicator = new List<Color>();
-
     private Color nextColorIndicator;
     
     private int previousRandomNumber = 0;
@@ -34,14 +35,18 @@ public class ProgressiveCircular : MonoBehaviour
     private bool isButtonPressed = false;
     
     private float progressionCircularBar;
+    public float intensity = 2;
     
+    
+    private Material spriteOutline;
 
 
     private void Start()
     {
         // Initialise à zéro le bar de progression circulaire
         setDefaultProgressCircularBarUI();
-
+        
+        spriteOutline = progressCircle.GetComponent<Image>().material;
 
         // Liste des couleurs des indicateurs
         listColorIndicator.AddRange(new List<Color>()
@@ -84,17 +89,17 @@ public class ProgressiveCircular : MonoBehaviour
     public void moveNextIndicator()
     {
         numberOfTarget++;
-        
 
+        
         // Téléporte le canvas qui contient l'indicateurUI pour être autour de la prochaine prise
         canvasIndicatorUI.transform.position = GameObject.Find("prise " + numberOfTarget).transform.position;
         
         // Ajoute une couleur random sur cet indicateur
         progressCircle.GetComponent<Image>().color = getRandomColor();
-
+        
         // Récupération de la couleur de la prise courante 
         currentColorIndicator = progressCircle.GetComponent<Image>().color;
-
+        
         // Affecte à faux pour que la progression circulaire recommence
         setButtonPressed(false);
         
@@ -157,11 +162,24 @@ public class ProgressiveCircular : MonoBehaviour
 
         previousRandomNumber = randomNumber;
         nextColorIndicator = listColorIndicator[randomNumber];
+        
+       
+        // Ajoute un effet de brillance autour de l'indicateur
+        float factor = Mathf.Pow(2, intensity);
+        
+        float r = nextColorIndicator.r;
+        float g = nextColorIndicator.g;
+        float b = nextColorIndicator.b;
+            
+       Color colorGlow = new Color(r * factor, g * factor, b * factor);
+       spriteOutline.SetColor(ShaderUtilities.ID_OutlineColor, colorGlow);
+       
 
         return nextColorIndicator;
     }
 
 
+    
     /// <summary>
     /// Retourne la couleur de l'incateur courrant
     /// </summary>
@@ -177,6 +195,7 @@ public class ProgressiveCircular : MonoBehaviour
         isButtonPressed = isPressed;
     }
 
+    
 
     /// <summary>
     /// On arrête la progression de la bar circulaire et on affecte à la variable son état
@@ -188,11 +207,14 @@ public class ProgressiveCircular : MonoBehaviour
     }
 
     
+    // Remets à zéro, la progression de la bar circulaire
     public void setDefaultProgressCircularBarUI()
     {
         progressCircle.fillAmount = 0;
     }
 
+    
+    
     // Retourne la progression de la bare circulaire 
     public float getProgressionCircularBar()
     {
