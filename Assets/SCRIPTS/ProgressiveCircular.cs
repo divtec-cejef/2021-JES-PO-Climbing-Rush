@@ -53,6 +53,7 @@ public class ProgressiveCircular : MonoBehaviour
             {Color.red, Color.blue, Color.green, Color.yellow, Color.magenta});
 
 
+        // Ajout d'une couleur aléatoire à l'indicateur
         progressCircle.GetComponent<Image>().color = getRandomColor();
         currentColorIndicator = progressCircle.GetComponent<Image>().color;
         
