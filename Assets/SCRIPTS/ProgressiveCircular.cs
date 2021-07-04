@@ -35,6 +35,7 @@ public class ProgressiveCircular : MonoBehaviour
     private bool isButtonPressed = false;
     
     private float progressionCircularBar;
+    
     public float intensity = 2;
     
     

@@ -14,6 +14,7 @@ public class MovePlayer : MonoBehaviour
     public FlashIndicator flashIndicator;
     public ScoreScript scoreScript;
     public IkControl ikControl;
+    public EffectBeamIndicator effectBeamIndicator;
   
 
     public ProgressiveCircular progressiveCircular;
@@ -48,8 +49,13 @@ public class MovePlayer : MonoBehaviour
         
        if (colorButton.Equals(progressiveCircular.getCurrentColorIndicator()))
         {
+            // Joue un effet autour de l'indicateur quand on attrape la prise
+            effectBeamIndicator.playEffectBeam(progressiveCircular.getCurrentColorIndicator());
 
+            
+            // Ajout de points pour le score du joueur
             scoreScript.setIsGoodButton(true);
+            
             
             // Déplace l'indicateur à la prochaine prise
             progressiveCircular.setButtonPressed(true);
@@ -60,8 +66,6 @@ public class MovePlayer : MonoBehaviour
 
             // Fais bouger le joueur à la prochaine prise
             ikControl.animationClimbingPlayer();
-            
-
         }
         else
         {
