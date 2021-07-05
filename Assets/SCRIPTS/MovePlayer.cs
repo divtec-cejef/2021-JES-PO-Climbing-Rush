@@ -5,21 +5,18 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
-
     // Variable pour les boutons pressoirs
     private PlayerControls controls;
-    
+
 
     public MoveIndicator moveIndicator;
     public FlashIndicator flashIndicator;
     public ScoreScript scoreScript;
     public IkControl ikControl;
     public EffectBeamIndicator effectBeamIndicator;
-  
+
 
     public ProgressiveCircular progressiveCircular;
-
-
 
 
     void Awake()
@@ -32,9 +29,7 @@ public class MovePlayer : MonoBehaviour
         controls.Gameplay.GreenButton.performed += ctx => correctCircle(Color.green);
         controls.Gameplay.YellowButton.performed += ctx => correctCircle(Color.yellow);
         controls.Gameplay.PurpleButton.performed += ctx => correctCircle(Color.magenta);
-        
     }
-    
 
 
     /// <summary>
@@ -43,39 +38,52 @@ public class MovePlayer : MonoBehaviour
     /// <param name="colorButton"> La couleur du bouton qui est appuyé </param>
     public void correctCircle(Color colorButton)
     {
-         
-        print("du coup la couleur c'est : " + progressiveCircular.getCurrentColorIndicator());
-        
-        
-       if (colorButton.Equals(progressiveCircular.getCurrentColorIndicator()))
+        if (colorButton.Equals(progressiveCircular.getCurrentColorIndicator()))
         {
-            // Joue un effet autour de l'indicateur quand on attrape la prise
-            effectBeamIndicator.playEffectBeam(progressiveCircular.getCurrentColorIndicator());
-
-            
-            // Ajout de points pour le score du joueur
+            scoreScript.setButtonPressedTooFast(true);
             scoreScript.setIsGoodButton(true);
             
-            
-            // Déplace l'indicateur à la prochaine prise
-            progressiveCircular.setButtonPressed(true);
-            progressiveCircular.stopProgressCircularBarCoroutine();
-            progressiveCircular.setDefaultProgressCircularBarUI();
-            progressiveCircular.moveNextIndicator();
+            if (ikControl.getCanClimb())
+            {
+                
+                print("peut grimper !");
+
+                // Joue un effet autour de l'indicateur quand on attrape la prise
+                effectBeamIndicator.playEffectBeam(progressiveCircular.getCurrentColorIndicator());
+                
+                
+                // Ajout de points pour le score du joueur
+                scoreScript.setButtonPressedTooFast(false);
+               
 
 
-            // Fais bouger le joueur à la prochaine prise
-            ikControl.animationClimbingPlayer();
+                // Déplace l'indicateur à la prochaine prise
+                progressiveCircular.setButtonPressed(true);
+                progressiveCircular.stopProgressCircularBarCoroutine();
+                progressiveCircular.setDefaultProgressCircularBarUI();
+                progressiveCircular.moveNextIndicator();
+
+
+                // Fais bouger le joueur à la prochaine prise
+                ikControl.animationClimbingPlayer();
+            }
         }
         else
-        {
+        { 
+            // Le bouton pressé est faux et on imagine qu'il a été pressé trop rapidement, si ce n'est pas le cas
+            // alors on annule ce dernier.
             scoreScript.setIsGoodButton(false);
+            scoreScript.setButtonPressedTooFast(true);
+            
+            if (ikControl.getCanClimb())
+            {
+                scoreScript.setButtonPressedTooFast(false);
+            }
         }
-       
-       // Calcule les points
-       scoreScript.calculatePoints();
 
-        
+
+        // Calcule les points
+        scoreScript.calculatePoints();
     }
 
 
@@ -89,5 +97,4 @@ public class MovePlayer : MonoBehaviour
     {
         controls.Gameplay.Disable();
     }
-    
 }

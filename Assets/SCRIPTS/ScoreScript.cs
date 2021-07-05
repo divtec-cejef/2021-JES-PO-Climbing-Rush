@@ -15,13 +15,14 @@ public class ScoreScript : MonoBehaviour
     public TextMeshProUGUI score;
     
     private bool isGoodButton;
-
+    private bool isButtonPressedTooFast = false;
+    
     private int scoreValue = 0;
 
     // Start is called before the first frame update
     void Start()
     {
-        calculatePoints();
+        score.text = "Score : " + scoreValue;
     }
 
     
@@ -34,37 +35,49 @@ public class ScoreScript : MonoBehaviour
     {
 
         float counter = progressiveCircular.getProgressionCircularBar();
-        
 
-        if (getIsGoodButton())
+
+        
+        print("est-ce que le bouton a été pressé trop vite : " + getButtonIsPressedToFast());
+        print("est-ce que c'est le bon bouton qui a été pressé : " + getIsGoodButton());
+        
+        print("est-ce que le counter : " + counter);
+        
+        
+        if (!getButtonIsPressedToFast())
         {
-            if (counter <= 0.3f)
+            
+            if (getIsGoodButton())
             {
-                currentScore += 50;
-            }
-            else if (counter <= 0.6f)
-            {
-                scoreValue += 150;
-            }
-            else if (counter <= 0.9f)
-            {
-                scoreValue += 300;
-            }
-            else if (counter == 1f)
-            {
-                scoreValue += 500;
-            }
-        }
-        else
-        {
-            if (scoreValue < 75)
-            {
-                scoreValue = 0;
+                if (counter <= 0.3f)
+                {
+                    scoreValue += 50;
+                }
+                else if (counter <= 0.6f)
+                {
+                    scoreValue += 150;
+                }
+                else if (counter <= 0.9f)
+                {
+                    scoreValue += 300;
+                }
+                else if (counter == 1f)
+                {
+                    scoreValue += 500;
+                }
             }
             else
             {
-                scoreValue -= 75;
+                if (scoreValue < 75)
+                {
+                    scoreValue = 0;
+                }
+                else
+                {
+                    scoreValue -= 75;
+                }
             }
+            
         }
         
         score.text = "Score : " + scoreValue;
@@ -89,6 +102,30 @@ public class ScoreScript : MonoBehaviour
         this.isGoodButton = isGoodButton;
     }
 
+
+
+    /// <summary>
+    /// Retourne la valeur si le bouton a été pressé trop rapidement ou non
+    /// </summary>
+    /// <returns></returns>
+    public bool getButtonIsPressedToFast()
+    {
+        return isButtonPressedTooFast;
+    }
+
+    
+    /// <summary>
+    /// Change la valeur du booléen, vrai si le bouton est appuyé trop rapidement sinon faux
+    /// </summary>
+    /// <param name="tooFast">Si le bouton a été appuyé trop rapidement</param>
+    public void setButtonPressedTooFast(bool tooFast)
+    {
+        isButtonPressedTooFast = tooFast;
+    }
+    
+    
+    
+    
     public int getScore()
     {
         return currentScore;

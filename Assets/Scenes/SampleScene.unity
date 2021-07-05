@@ -10318,6 +10318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lookSmoother: 3
   speed: 1
+  scoreScript: {fileID: 1644670621}
 --- !u!1 &850704519
 GameObject:
   m_ObjectHideFlags: 0
@@ -17666,7 +17667,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 8145270331785487792, guid: c5a26b05d57059440aece593204d8767, type: 3}
       propertyPath: looping
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8145270331785487792, guid: c5a26b05d57059440aece593204d8767, type: 3}
       propertyPath: prewarm
@@ -22987,7 +22988,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4198184247816210, guid: 8b04b10df80f1a24c98a031b8d77946f, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -57.128033
+      value: -57.06
       objectReference: {fileID: 0}
     - target: {fileID: 4198184247816210, guid: 8b04b10df80f1a24c98a031b8d77946f, type: 3}
       propertyPath: m_LocalRotation.w
