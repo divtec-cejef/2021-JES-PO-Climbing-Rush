@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using TMPro;
 using UnityEditor;
 using UnityEngine.UI;
@@ -38,16 +40,30 @@ public class ProgressiveCircular : MonoBehaviour
     
     public float intensity = 2;
     
-    
     private Material spriteOutline;
+
+    // Classe qui stocke les données du JSON (à modifier pour ajouter des données)
+    private CircleProgressData loadedCircleProgressData;
+    
+    // Chemin du fichier JSON
+    private string pathJsonFile;
 
 
     private void Start()
     {
+        // Lecture du fichier JSON
+        // Récupère le chemin du fichier json
+        string pathJsonFile = File.ReadAllText("C:/Users/Admin/Desktop/data.json");
+        
+        // Stock dans la classe "CircleProgressData" les données du JSON
+        loadedCircleProgressData = JsonUtility.FromJson<CircleProgressData>(pathJsonFile);
+        
+        
         // Initialise à zéro le bar de progression circulaire
         setDefaultProgressCircularBarUI();
         
         spriteOutline = progressCircle.GetComponent<Image>().material;
+        
 
         // Liste des couleurs des indicateurs
         listColorIndicator.AddRange(new List<Color>()
@@ -67,6 +83,12 @@ public class ProgressiveCircular : MonoBehaviour
         // Commence la progression de l'indicateur
         launchProgressCircularBarUI();
     }
+
+    private class CircleProgressData
+    {
+        public float speedIndicatorProgress;
+        public float waitTimeProgress;
+    }
     
 
 
@@ -82,6 +104,10 @@ public class ProgressiveCircular : MonoBehaviour
     private void Update()
     {
         progressBar.value = numberOfTarget - 1;
+        
+        // Stock dans la classe "CircleProgressData" les données du JSON
+        //loadedCircleProgressData = JsonUtility.FromJson<CircleProgressData>(pathJsonFile);
+
     }
 
 
@@ -128,10 +154,11 @@ public class ProgressiveCircular : MonoBehaviour
         {
             
             // Augmente la barre de progression circulaire
-            // Plus on rajoute des zéro plus ça sera lent
-            progressCircle.fillAmount += speed;
-            yield return new WaitForSeconds(0.001f);
-
+            // Plus on rajoute des zéro après la virgule plus ça sera rapie (pour la fluidité du rétrécissement)
+            progressCircle.fillAmount += loadedCircleProgressData.speedIndicatorProgress;
+            //yield return new WaitForSeconds(0.001f);
+            yield return new WaitForSeconds(loadedCircleProgressData.waitTimeProgress);
+            
             print("fillAmount : " + progressCircle.fillAmount);
 
             // Attends 2 secondes lorsque la bar de progression circulaire est à 100%, et la remet à zéro après ces 2 secondes

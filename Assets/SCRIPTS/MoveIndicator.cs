@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -30,6 +31,9 @@ public class MoveIndicator : MonoBehaviour
     private Vector3 positionNextHoldLeft;
 
     private int numberOfTarget;
+    
+    private Material spriteOutline;
+
 
 
     void Start()
@@ -160,8 +164,21 @@ public class MoveIndicator : MonoBehaviour
 
         previousRandomNumber = randomNumber;
         nextColorIndicator = listColorIndicator[randomNumber];
+        /*
+        // Ajoute un effet de brillance autour de l'indicateur
+        float factor = Mathf.Pow(2, 2);
+        
+        float r = nextColorIndicator.r;
+        float g = nextColorIndicator.g;
+        float b = nextColorIndicator.b;
+            
+        Color colorGlow = new Color(r * factor, g * factor, b * factor);
+        spriteOutline.SetColor(ShaderUtilities.ID_OutlineColor, colorGlow);
+       */
 
         return nextColorIndicator;
+
+        
     }
 
     

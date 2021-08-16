@@ -13727,7 +13727,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveIndicator: {fileID: 691706067}
-  shrinkIndicator: {fileID: 0}
+  shrinkIndicator: {fileID: 481987319}
   rightIndicator: {fileID: 7510900699594134470}
   leftIndicator: {fileID: 1587764300}
 --- !u!4 &1049177717
