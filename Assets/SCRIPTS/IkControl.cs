@@ -125,7 +125,7 @@ public class IkControl : MonoBehaviour
         // Vérifie si c'est le bras droit qui doit bouger, ainsi bouge le bras droit
         if (isHoldRight)
         {
-            isRightHandOnHold = lookWeightForHoldRight >= 0.99f;
+            isRightHandOnHold = lookWeightForHoldRight >= 0.9f;
             print("quand lookWeightForHoldRight est à 1 alors isRightHandOnHold doit être égale a *true*,  : " +
                   lookWeightForHoldRight);
             print("valeur de isRightHandOnHold : " + isRightHandOnHold);
@@ -194,7 +194,7 @@ public class IkControl : MonoBehaviour
         // Vérifie si c'est le bras gauche qui doit bouger
         if (isHoldLeft)
         {
-            isLeftHandOnHold = lookWeightForHoldLeft >= 0.99f;
+            isLeftHandOnHold = lookWeightForHoldLeft >= 0.9f;
 
             lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
             lookWeightForRightFeet = Mathf.Lerp(lookWeightForRightFeet, 1f, Time.deltaTime * lookSmoother);
@@ -264,7 +264,6 @@ public class IkControl : MonoBehaviour
         {
             if (scoreScript.getIsGoodButton())
             {
-                print("oui c'est le bon bouton");
                 isSecondHold = isFirstHold;
             }
 
