@@ -53,7 +53,8 @@ public class ProgressiveCircular : MonoBehaviour
     {
         // Lecture du fichier JSON
         // Récupère le chemin du fichier json
-        string pathJsonFile = File.ReadAllText("C:/Users/Admin/Desktop/data.json");
+        //string pathJsonFile = File.ReadAllText("C:/Users/Utilisateur/Desktop/data.json");
+        pathJsonFile = File.ReadAllText("C:/data.json");
         
         // Stock dans la classe "CircleProgressData" les données du JSON
         loadedCircleProgressData = JsonUtility.FromJson<CircleProgressData>(pathJsonFile);
@@ -88,6 +89,7 @@ public class ProgressiveCircular : MonoBehaviour
     {
         public float speedIndicatorProgress;
         public float waitTimeProgress;
+        public float portUSB;
     }
     
 

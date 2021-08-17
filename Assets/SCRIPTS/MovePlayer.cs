@@ -14,8 +14,6 @@ public class MovePlayer : MonoBehaviour
     public ScoreScript scoreScript;
     public IkControl ikControl;
     public EffectBeamIndicator effectBeamIndicator;
-
-
     public ProgressiveCircular progressiveCircular;
 
 
