@@ -54,18 +54,17 @@ public class LightUpLeds : MonoBehaviour
         {
             currentColor = progressiveCircular.getCurrentColorIndicator();
             counterDown++;
-
-        } while (counterDown <= 3 && isFirstColor);
+        } while (counterDown <= MAX_COUNT_DOWN && isFirstColor);
 
         isFirstColor = false;
-        
+
         currentColor = progressiveCircular.getCurrentColorIndicator();
 
 
         print("couleur courrante : " + currentColor);
         print("couleur précédente : " + previousColor);
 
-        
+
         do
         {
             // Couleur rouge
@@ -109,12 +108,11 @@ public class LightUpLeds : MonoBehaviour
             }
 
             counterDown++;
-
         } while (counterDown < 3);
-        
+
 
         // Change la couleur des LEDs
-    if (!isChangedColorRing && !currentColor.Equals(previousColor))
+        if (!isChangedColorRing && !currentColor.Equals(previousColor))
         {
             // Couleur rouge
             if (currentColor.Equals(Color.red))
@@ -165,44 +163,16 @@ public class LightUpLeds : MonoBehaviour
                 isChangedColorRing = true;
                 print("changement de couleur");
             }
-            
+
             previousColor = currentColor;
         }
-        
 
+
+        // Mets à false lorsque l'anneau de LEDs doit changer de couleur
         if (isChangedColorRing && currentColor.Equals(previousColor))
         {
             isChangedColorRing = false;
         }
-
-
-        /*
-        // Couleur rouge
-        //unchekColor(ref blue, ref green, ref yellow, ref magenta);
-        //dataStream.WriteLine(LED_RED.ToString());
-        //dataStream.WriteLine(colorRed.ToString());
-        dataStream.WriteLine(COLOR_RED);
-        print("LED : rouge");
-    
-        // Couleur bleu
-        //unchekColor(ref red, ref green, ref yellow, ref magenta);
-        dataStream.WriteLine(COLOR_BLUE);
-        print("LED : blue");
-    
-        // Couleur vert
-        //unchekColor(ref red, ref blue, ref yellow, ref magenta);
-        dataStream.WriteLine(COLOR_GREEN);
-        print("LED : vert");
-    
-        // Couleur jaune
-        //unchekColor(ref red, ref blue, ref green, ref magenta);
-        dataStream.WriteLine(COLOR_YELLOW);
-        print("LED : jaune");
-    
-        // Couleur magenta
-        //unchekColor(ref red, ref blue, ref green, ref yellow);
-        dataStream.WriteLine(COLOR_MAGENTA);
-        print("LED : magenta");
-        */
+        
     }
 }
