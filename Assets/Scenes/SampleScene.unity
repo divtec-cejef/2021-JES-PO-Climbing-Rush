@@ -10461,7 +10461,7 @@ MonoBehaviour:
   ikControl: {fileID: 850704518}
   effectBeamIndicator: {fileID: 684918466}
   progressiveCircular: {fileID: 414397379}
-  displayPopUpText: {fileID: 874916013}
+  displayPopUpText: {fileID: 874916015}
 --- !u!114 &850704521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11163,6 +11163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 874916014}
   - component: {fileID: 874916013}
+  - component: {fileID: 874916015}
   m_Layer: 0
   m_Name: DisplayPopUpText
   m_TagString: Untagged
@@ -11179,10 +11180,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 874916012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee3a454cb12ae6344a601e936aeb7caf, type: 3}
+  m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
-  blockedText: {fileID: 689173788}
 --- !u!4 &874916014
 Transform:
   m_ObjectHideFlags: 0
@@ -11197,6 +11197,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 209
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &874916015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 874916012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c61d3d0a3aa07d4d847f8bf400ca083, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blockedImage: {fileID: 689173788}
 --- !u!1 &881974023
 GameObject:
   m_ObjectHideFlags: 0
