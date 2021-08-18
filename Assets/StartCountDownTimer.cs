@@ -2,49 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.iOS;
 
 public class StartCountDownTimer : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private float currentTime = 0f;
-    private float startingTime = 3f;
+    private int countDownTime = 3;
+    private Coroutine startCountDownTimer;
+    public TextMeshProUGUI countDownTimeDisplay;
 
-    public TextMeshProUGUI countDownTimer;
-
+    
     void Start()
     {
-
-        currentTime = startingTime;
-
-
+        startCountDownTimer = StartCoroutine(CountDownToStart());
     }
 
-    // Update is called once per frame
-    void Update()
+    // Décompte de 3 secondes
+    IEnumerator CountDownToStart()
     {
+        while (countDownTime > 0)
+        {
+            countDownTimeDisplay.text = countDownTime.ToString();
 
-        
-        
-        
-            currentTime -= 1 * Time.deltaTime;
-            
-            if (currentTime <= 0 && currentTime >= -1)
-            {
-                countDownTimer.text = "GO !";
-                
-            }
-            
-            countDownTimer.text = currentTime.ToString("0");
+            yield return new WaitForSeconds(1f);
 
-            
-        
+            countDownTime--;
+        }
 
-       
-        
-        
-       
-        
+        countDownTimeDisplay.text = "GO !";
 
+        yield return new WaitForSeconds(1f);
+        
+        countDownTimeDisplay.gameObject.SetActive(false);
+        
+        StopCoroutine(startCountDownTimer);
     }
+    
 }
