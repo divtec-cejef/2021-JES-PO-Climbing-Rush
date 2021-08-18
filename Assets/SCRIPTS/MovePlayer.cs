@@ -15,6 +15,12 @@ public class MovePlayer : MonoBehaviour
     public IkControl ikControl;
     public EffectBeamIndicator effectBeamIndicator;
     public ProgressiveCircular progressiveCircular;
+    public DisplayPopUpText displayPopUpText;
+        
+    
+    private bool stuckPlayer = false;
+
+    private Coroutine stopPlayerClimb;
 
 
     void Awake()
@@ -41,7 +47,7 @@ public class MovePlayer : MonoBehaviour
             scoreScript.setButtonPressedTooFast(true);
             scoreScript.setIsGoodButton(true);
             
-            if (ikControl.getCanClimb())
+            if (ikControl.getCanClimb() && !stuckPlayer)
             {
                 
                 print("peut grimper !");
@@ -72,17 +78,49 @@ public class MovePlayer : MonoBehaviour
             // alors on annule ce dernier.
             scoreScript.setIsGoodButton(false);
             scoreScript.setButtonPressedTooFast(true);
-            
+
             if (ikControl.getCanClimb())
             {
                 scoreScript.setButtonPressedTooFast(false);
             }
+            
+            
+            
+            stuckPlayer = true;
         }
 
 
         // Calcule les points
         scoreScript.calculatePoints();
+        
+        
+        // Bloque le joueur pendant 2 secondes
+        if (stuckPlayer) {
+            stopPlayerClimb = StartCoroutine(StopPlayerClimbFor2Seconds());
+        }
+        
+        
     }
+
+    IEnumerator StopPlayerClimbFor2Seconds()
+    {
+        // Le joueur est bloqué pendant 2 secondes
+        displayPopUpText.setBlocked(true);
+        print("BLOQUÉ");
+        stuckPlayer = true;
+        yield return new WaitForSeconds(2f);
+        
+        stuckPlayer = false;
+
+        StopCoroutine(stopPlayerClimb);
+        displayPopUpText.setBlocked(false);
+        print("la coroutine est stope !");
+    }
+        
+
+    
+    
+    
 
 
     // Fonctions qui permettent aux boutons de s'activer
