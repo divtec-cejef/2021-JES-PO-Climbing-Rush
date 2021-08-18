@@ -15,6 +15,7 @@ public class IkControl : MonoBehaviour
     private bool isFirstHold;
 
     private bool watchTarget;
+    private bool doFallPlayer;
 
     private float lookWeightForHead;
     private float lookWeightForHoldRight;
@@ -36,6 +37,7 @@ public class IkControl : MonoBehaviour
     private GameObject currentHoldLeft;
 
     private int numberOfTarget;
+    private int targetNextOrBack;
 
 
     private bool canClimb = false;
@@ -49,6 +51,7 @@ public class IkControl : MonoBehaviour
 
         isFirstHold = true;
         watchTarget = true;
+        doFallPlayer = false;
 
 
         numberOfTarget = 0;
@@ -63,7 +66,7 @@ public class IkControl : MonoBehaviour
         numberOfTarget++;
 
         watchTarget = false;
-
+        
 
         if (isFirstHold)
         {
@@ -95,6 +98,7 @@ public class IkControl : MonoBehaviour
     /// <param name="layerIndex"></param>
     private void OnAnimatorIK(int layerIndex)
     {
+        
         // Animations pour que la tête regarde la prochaine prise à prendre
         if (watchTarget)
         {
@@ -105,12 +109,19 @@ public class IkControl : MonoBehaviour
             lookWeightForHead = Mathf.Lerp(lookWeightForHead, 0f, Time.deltaTime * lookSmoother * 1.5f);
             watchTarget = true;
         }
-
-
+        
         animator.SetLookAtWeight(lookWeightForHead);
 
+        
+        targetNextOrBack = 1;
+        // Si le jouer doit tomber alors on fait -1 comme prochaine prise
+        if (doFallPlayer)
+        {
+            targetNextOrBack = -1;
+        }
+        
         // Prochaine prise à regarder avec la tête
-        animator.SetLookAtPosition(GameObject.Find("prise " + (numberOfTarget + 1)).transform.position);
+        animator.SetLookAtPosition(GameObject.Find("prise " + (numberOfTarget + targetNextOrBack)).transform.position);
 
 
         // La variable lookWeight permet de faire bouger le bras jusqu'à la prise. Exemple :
@@ -123,8 +134,12 @@ public class IkControl : MonoBehaviour
         /*-----------------------------------------*/
 
         // Vérifie si c'est le bras droit qui doit bouger, ainsi bouge le bras droit
-        if (isHoldRight)
+        if (isHoldRight || doFallPlayer && !isHoldLeft)
         {
+            print("11 bras droit");
+            print("11 bras droit isHoldRight : " + isHoldRight);
+            print("11 bras droit doFallPlayer : " + doFallPlayer);
+            
             isRightHandOnHold = lookWeightForHoldRight >= 0.9f;
             print("quand lookWeightForHoldRight est à 1 alors isRightHandOnHold doit être égale a *true*,  : " +
                   lookWeightForHoldRight);
@@ -134,13 +149,33 @@ public class IkControl : MonoBehaviour
             lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
             lookWeightForLeftFeet = Mathf.Lerp(lookWeightForLeftFeet, 1f, Time.deltaTime * lookSmoother);
 
-            // Cherche l'objet qui est la prise courrante
-            currentHoldRight = GameObject.Find("prise " + numberOfTarget);
+            int numberOfTargetTmp = numberOfTarget;
+            
+            // Si le joueur doit tomber alors on cherche la prise précédente
+            if (doFallPlayer)
+            {
+                numberOfTargetTmp -= 1;
+                if (isHoldRight)
+                {
+                    numberOfTargetTmp -= 1;
+                }
+            }
+            
+            // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
+            currentHoldRight = GameObject.Find("prise " + numberOfTargetTmp);
 
             print("c'est la prise : " + currentHoldRight);
 
+            float axeYPlayer = 1.81f;
+            
+            if (doFallPlayer)
+            {
+                axeYPlayer = 1;
+            }
+            
+            // Fais monter ou descendre le joueur
             transform.position = Vector3.Lerp(transform.position,
-                currentHoldRight.transform.position - new Vector3(.9f, 1.81f, .6f),
+                currentHoldRight.transform.position - new Vector3(.9f, axeYPlayer, .6f),
                 speed * Time.deltaTime);
         }
         else
@@ -192,19 +227,42 @@ public class IkControl : MonoBehaviour
         /*-----------------------------------------*/
 
         // Vérifie si c'est le bras gauche qui doit bouger
-        if (isHoldLeft)
+        if (isHoldLeft || doFallPlayer && !isHoldRight)
         {
+            print("11 bras gauche");
+            print("11 bras gauche sHoldLeft : " + isHoldLeft);
+            print("11 bras gauche doFallPlayer : " + doFallPlayer);
+            
             isLeftHandOnHold = lookWeightForHoldLeft >= 0.9f;
 
             lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
             lookWeightForRightFeet = Mathf.Lerp(lookWeightForRightFeet, 1f, Time.deltaTime * lookSmoother);
 
-            // Cherche l'objet qui est la prise courrante
-            currentHoldLeft = GameObject.Find("prise " + numberOfTarget);
+            int numberOfTargetTmp = numberOfTarget;
 
-            // Bouge le corps du personnage vers la prise et monte
+            // Si le joueur doit tomber alors on cherche la prise précédnete
+            if (doFallPlayer)
+            {
+                numberOfTargetTmp -= 1;
+                if (isHoldLeft)
+                {
+                    numberOfTargetTmp -= 1;
+                }
+            }
+            
+            // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
+            currentHoldLeft = GameObject.Find("prise " + numberOfTargetTmp);
+
+            float axeYPlayer = 1.81f;
+            
+            if (doFallPlayer)
+            {
+                axeYPlayer = 1;
+            }
+            
+            // Bouge le corps du personnage vers la prise et monte ou descend
             transform.position = Vector3.Lerp(transform.position,
-                currentHoldLeft.transform.position - new Vector3(-0.9f, 1.81f, .6f),
+                currentHoldLeft.transform.position - new Vector3(-0.9f, axeYPlayer, .6f),
                 speed * Time.deltaTime);
         }
         else
@@ -248,6 +306,8 @@ public class IkControl : MonoBehaviour
         catch (Exception e)
         {
         }
+
+        
     }
 
 
@@ -273,4 +333,16 @@ public class IkControl : MonoBehaviour
 
         return canClimb;
     }
+
+
+    
+    /// <summary>
+    /// Modifie si le joueur doit tomber ou non
+    /// </summary>
+    /// <param name="fall">Booléen qui dit si le joueur doit tomber ou non</param>
+    public void setDoFallPlayer(bool fall)
+    {
+        doFallPlayer = fall;
+    }
+    
 }

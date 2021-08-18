@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MovePlayer : MonoBehaviour
 {
+    private const int MAX_PRESS_BUTTON_BEFORE_FALL = 2;
+    
     // Variable pour les boutons pressoirs
     private PlayerControls controls;
 
@@ -19,6 +21,8 @@ public class MovePlayer : MonoBehaviour
         
     
     private bool stuckPlayer = false;
+    private bool waitWhileCoroutine = false;
+    private int wrongButtonPressTwice = 0;
 
     private Coroutine stopPlayerClimb;
 
@@ -47,11 +51,26 @@ public class MovePlayer : MonoBehaviour
             scoreScript.setButtonPressedTooFast(true);
             scoreScript.setIsGoodButton(true);
             
-            if (ikControl.getCanClimb() && !stuckPlayer)
+            
+            // Le joueur n'a pas appuyé deux fois sur le mauvais bouton
+            wrongButtonPressTwice = 0;
+            ikControl.setDoFallPlayer(false);
+
+            // Le joueur ne doit pas être bloqué
+            stuckPlayer = false;
+
+            
+            print("avant de monter !");
+            
+            
+            // Vérifie que le joueur puisse monter et qu'il ne doit pas être bloqué (appuyé sur le mauvais bouton)
+            if (ikControl.getCanClimb() && !waitWhileCoroutine)
             {
                 
-                print("peut grimper !");
+                print("monte !");
+                
 
+                
                 // Joue un effet autour de l'indicateur quand on attrape la prise
                 effectBeamIndicator.playEffectBeam(progressiveCircular.getCurrentColorIndicator());
                 
@@ -65,6 +84,7 @@ public class MovePlayer : MonoBehaviour
                 progressiveCircular.setDefaultProgressCircularBarUI();
                 progressiveCircular.moveNextIndicator();
                 
+                // L'indicateur n'est plus le même, donc faux
                 scoreScript.setIsTheSameCircle(false);
 
 
@@ -84,18 +104,28 @@ public class MovePlayer : MonoBehaviour
                 scoreScript.setButtonPressedTooFast(false);
             }
             
-            
-            
+            // Le joueur doit être bloqué
             stuckPlayer = true;
+            
+            // Le joueur doit descendre d'une prise
+            wrongButtonPressTwice++;
         }
 
 
         // Calcule les points
         scoreScript.calculatePoints();
+
+        print("wrongButtonPressTwice : " + wrongButtonPressTwice);
         
-        
+        // Descends le joueur d'une prise
+        if (stuckPlayer && wrongButtonPressTwice >= 2)
+        {
+            print("le joueur doit tomber");
+            
+            ikControl.setDoFallPlayer(true);
+        }
         // Bloque le joueur pendant 2 secondes
-        if (stuckPlayer) {
+        else if (stuckPlayer) {
             stopPlayerClimb = StartCoroutine(StopPlayerClimbFor2Seconds());
         }
         
@@ -107,10 +137,10 @@ public class MovePlayer : MonoBehaviour
         // Le joueur est bloqué pendant 2 secondes
         displayPopUpText.setBlocked(true);
         print("BLOQUÉ");
-        stuckPlayer = true;
+        waitWhileCoroutine = true;
         yield return new WaitForSeconds(2f);
         
-        stuckPlayer = false;
+        waitWhileCoroutine = false;
 
         StopCoroutine(stopPlayerClimb);
         displayPopUpText.setBlocked(false);
