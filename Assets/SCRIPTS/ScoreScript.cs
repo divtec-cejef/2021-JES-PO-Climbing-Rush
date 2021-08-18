@@ -6,7 +6,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class ScoreScript : MonoBehaviour
 {
     public ProgressiveCircular progressiveCircular;
@@ -43,14 +42,12 @@ public class ScoreScript : MonoBehaviour
         }
         
     }
-
-
+    
     /// <summary>
     /// Calcule les points gagnés dépendant à quel moment on prend la prise, et les affiche sur HUD
     /// </summary>
     public void calculatePoints()
     {
-        
         
         if (!getButtonIsPressedToFast())
         {
@@ -88,9 +85,6 @@ public class ScoreScript : MonoBehaviour
                     scoreValue -= 15;
                 }
             }
-            
-            
-            
         }
         
         score.text = "Score : " + scoreValue;
@@ -105,7 +99,6 @@ public class ScoreScript : MonoBehaviour
     {
         isTheSameCircle = isTheSame;
     }
-    
     
     /// <summary>
     /// recupere la valeur du booléen
@@ -124,9 +117,7 @@ public class ScoreScript : MonoBehaviour
     {
         this.isGoodButton = isGoodButton;
     }
-
-
-
+    
     /// <summary>
     /// Retourne la valeur si le bouton a été pressé trop rapidement ou non
     /// </summary>
@@ -135,7 +126,6 @@ public class ScoreScript : MonoBehaviour
     {
         return isButtonPressedTooFast;
     }
-
     
     /// <summary>
     /// Change la valeur du booléen, vrai si le bouton est appuyé trop rapidement sinon faux
@@ -145,14 +135,5 @@ public class ScoreScript : MonoBehaviour
     {
         isButtonPressedTooFast = tooFast;
     }
-    
-    
-    
-    
-    public int getScore()
-    {
-        return currentScore;
-    }
-
 
 }
