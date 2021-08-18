@@ -52,14 +52,14 @@ public class MovePlayer : MonoBehaviour
                 
                 // Ajout de points pour le score du joueur
                 scoreScript.setButtonPressedTooFast(false);
-               
-
 
                 // Déplace l'indicateur à la prochaine prise
                 progressiveCircular.setButtonPressed(true);
                 progressiveCircular.stopProgressCircularBarCoroutine();
                 progressiveCircular.setDefaultProgressCircularBarUI();
                 progressiveCircular.moveNextIndicator();
+                
+                scoreScript.setIsTheSameCircle(false);
 
 
                 // Fais bouger le joueur à la prochaine prise

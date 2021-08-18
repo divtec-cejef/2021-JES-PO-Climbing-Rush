@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -19,29 +20,36 @@ public class ScoreScript : MonoBehaviour
     
     private int scoreValue = 0;
 
+    private int counterFullProgressionCircle = 0;
+
+    private bool isTheSameCircle = true;
+
+    
     // Start is called before the first frame update
     void Start()
     {
         score.text = "Score : " + scoreValue;
     }
 
-    
-    
+    private void Update()
+    {
+        float progressionCircle = progressiveCircular.getProgressionCircularBar();
+        
+        
+        if (progressionCircle == 0.01f && getIsTheSameCircle())
+        {
+            counterFullProgressionCircle++;
+
+        }
+        
+    }
+
 
     /// <summary>
     /// Calcule les points gagnés dépendant à quel moment on prend la prise, et les affiche sur HUD
     /// </summary>
     public void calculatePoints()
     {
-
-        float counter = progressiveCircular.getProgressionCircularBar();
-
-
-        
-        print("est-ce que le bouton a été pressé trop vite : " + getButtonIsPressedToFast());
-        print("est-ce que c'est le bon bouton qui a été pressé : " + getIsGoodButton());
-        
-        print("est-ce que le counter : " + counter);
         
         
         if (!getButtonIsPressedToFast())
@@ -49,38 +57,53 @@ public class ScoreScript : MonoBehaviour
             
             if (getIsGoodButton())
             {
-                if (counter <= 0.3f)
+                if (counterFullProgressionCircle <= 2)
                 {
                     scoreValue += 50;
                 }
-                else if (counter <= 0.6f)
+                else if (counterFullProgressionCircle <= 3)
                 {
-                    scoreValue += 150;
+                    scoreValue += 20;
                 }
-                else if (counter <= 0.9f)
+                else if (counterFullProgressionCircle <= 4)
                 {
-                    scoreValue += 300;
+                    scoreValue += 10;
                 }
-                else if (counter == 1f)
+                else if (counterFullProgressionCircle > 4)
                 {
-                    scoreValue += 500;
+                    scoreValue += 5;
                 }
+                
+                counterFullProgressionCircle = 0;
+                setIsTheSameCircle(true);
             }
             else
             {
-                if (scoreValue < 75)
+                if (scoreValue < 15)
                 {
                     scoreValue = 0;
                 }
                 else
                 {
-                    scoreValue -= 75;
+                    scoreValue -= 15;
                 }
             }
+            
+            
             
         }
         
         score.text = "Score : " + scoreValue;
+    }
+
+    public bool getIsTheSameCircle()
+    {
+        return isTheSameCircle;
+    }
+    
+    public void setIsTheSameCircle(bool isTheSame)
+    {
+        isTheSameCircle = isTheSame;
     }
     
     

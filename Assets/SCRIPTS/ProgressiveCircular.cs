@@ -106,7 +106,8 @@ public class ProgressiveCircular : MonoBehaviour
     private void Update()
     {
         progressBar.value = numberOfTarget - 1;
-        
+        progressionCircularBar = progressCircle.fillAmount;
+
         // Stock dans la classe "CircleProgressData" les données du JSON
         //loadedCircleProgressData = JsonUtility.FromJson<CircleProgressData>(pathJsonFile);
 
