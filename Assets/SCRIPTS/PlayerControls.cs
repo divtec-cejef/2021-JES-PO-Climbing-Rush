@@ -63,7 +63,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3898e311-c5e2-4cd7-adbe-b9194ffc5a75"",
-                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/trigger"",
+                    ""path"": ""<Joystick>/trigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

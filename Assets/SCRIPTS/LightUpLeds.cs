@@ -50,21 +50,11 @@ public class LightUpLeds : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        do
-        {
-            currentColor = progressiveCircular.getCurrentColorIndicator();
-            counterDown++;
-        } while (counterDown <= MAX_COUNT_DOWN && isFirstColor);
-
-        isFirstColor = false;
-
+       
         currentColor = progressiveCircular.getCurrentColorIndicator();
+        
 
-
-        print("couleur courrante : " + currentColor);
-        print("couleur précédente : " + previousColor);
-
-
+        /*
         do
         {
             // Couleur rouge
@@ -109,7 +99,7 @@ public class LightUpLeds : MonoBehaviour
 
             counterDown++;
         } while (counterDown < 3);
-
+        */
 
         // Change la couleur des LEDs
         if (!isChangedColorRing && !currentColor.Equals(previousColor))
@@ -119,7 +109,7 @@ public class LightUpLeds : MonoBehaviour
             {
                 dataStream.WriteLine("1," + COLOR_RED);
                 dataStream.WriteLine("1," + COLOR_RED);
-                dataStream.WriteLine("1," + COLOR_RED);
+                //dataStream.WriteLine("1," + COLOR_RED);
                 isChangedColorRing = true;
                 print("changement de couleur");
             }
@@ -129,7 +119,7 @@ public class LightUpLeds : MonoBehaviour
             {
                 dataStream.WriteLine("1," + COLOR_BLUE);
                 dataStream.WriteLine("1," + COLOR_BLUE);
-                dataStream.WriteLine("1," + COLOR_BLUE);
+                //dataStream.WriteLine("1," + COLOR_BLUE);
                 isChangedColorRing = true;
                 print("changement de couleur");
             }
@@ -139,7 +129,7 @@ public class LightUpLeds : MonoBehaviour
             {
                 dataStream.WriteLine("1," + COLOR_GREEN);
                 dataStream.WriteLine("1," + COLOR_GREEN);
-                dataStream.WriteLine("1," + COLOR_GREEN);
+                //dataStream.WriteLine("1," + COLOR_GREEN);
                 isChangedColorRing = true;
                 print("changement de couleur");
             }
@@ -149,7 +139,7 @@ public class LightUpLeds : MonoBehaviour
             {
                 dataStream.WriteLine("1," + COLOR_YELLOW);
                 dataStream.WriteLine("1," + COLOR_YELLOW);
-                dataStream.WriteLine("1," + COLOR_YELLOW);
+                //dataStream.WriteLine("1," + COLOR_YELLOW);
                 isChangedColorRing = true;
                 print("changement de couleur");
             }
@@ -159,7 +149,7 @@ public class LightUpLeds : MonoBehaviour
             {
                 dataStream.WriteLine("1," + COLOR_MAGENTA);
                 dataStream.WriteLine("1," + COLOR_MAGENTA);
-                dataStream.WriteLine("1," + COLOR_MAGENTA);
+                //dataStream.WriteLine("1," + COLOR_MAGENTA);
                 isChangedColorRing = true;
                 print("changement de couleur");
             }
