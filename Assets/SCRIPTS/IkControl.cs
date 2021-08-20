@@ -36,7 +36,7 @@ public class IkControl : MonoBehaviour
     private GameObject currentHoldRight;
     private GameObject currentHoldLeft;
 
-    private int numberOfTarget;
+    private int numberOfHoldTraveled;
     private int targetNextOrBack;
 
 
@@ -54,7 +54,7 @@ public class IkControl : MonoBehaviour
         doFallPlayer = false;
 
 
-        numberOfTarget = 0;
+        numberOfHoldTraveled = 0;
     }
 
 
@@ -63,7 +63,7 @@ public class IkControl : MonoBehaviour
     /// </summary>
     public void animationClimbingPlayer()
     {
-        numberOfTarget++;
+        numberOfHoldTraveled++;
 
         watchTarget = false;
         
@@ -117,11 +117,19 @@ public class IkControl : MonoBehaviour
         // Si le jouer doit tomber alors on fait -1 comme prochaine prise
         if (doFallPlayer)
         {
-            targetNextOrBack = -1;
+            if (numberOfHoldTraveled == 1)
+            {
+                print("je suis tombé de la première prise");
+                targetNextOrBack = 0;
+            }
+            else
+            {
+                targetNextOrBack = -1;
+            }
         }
         
         // Prochaine prise à regarder avec la tête
-        animator.SetLookAtPosition(GameObject.Find("prise " + (numberOfTarget + targetNextOrBack)).transform.position);
+        animator.SetLookAtPosition(GameObject.Find("prise " + (numberOfHoldTraveled + targetNextOrBack)).transform.position);
 
 
         // La variable lookWeight permet de faire bouger le bras jusqu'à la prise. Exemple :
@@ -149,7 +157,7 @@ public class IkControl : MonoBehaviour
             lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
             lookWeightForLeftFeet = Mathf.Lerp(lookWeightForLeftFeet, 1f, Time.deltaTime * lookSmoother);
 
-            int numberOfTargetTmp = numberOfTarget;
+            int numberOfTargetTmp = numberOfHoldTraveled;
             
             // Si le joueur doit tomber alors on cherche la prise précédente
             if (doFallPlayer)
@@ -238,7 +246,7 @@ public class IkControl : MonoBehaviour
             lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
             lookWeightForRightFeet = Mathf.Lerp(lookWeightForRightFeet, 1f, Time.deltaTime * lookSmoother);
 
-            int numberOfTargetTmp = numberOfTarget;
+            int numberOfTargetTmp = numberOfHoldTraveled;
 
             // Si le joueur doit tomber alors on cherche la prise précédnete
             if (doFallPlayer)
@@ -343,6 +351,14 @@ public class IkControl : MonoBehaviour
     public void setDoFallPlayer(bool fall)
     {
         doFallPlayer = fall;
+    }
+
+    /// <summary>
+    /// </summary>
+    /// <returns>Retourne le numéro de la prise prochaine</returns>
+    public int getNumberOfHoldCurrent()
+    {
+        return numberOfHoldTraveled;
     }
     
 }

@@ -26,6 +26,8 @@ public class MovePlayer : MonoBehaviour
 
     private Coroutine stopPlayerClimb;
 
+    private bool isFirstHold = true;
+
 
     void Awake()
     {
@@ -69,7 +71,7 @@ public class MovePlayer : MonoBehaviour
                 
                 print("monte !");
                 
-
+                
                 
                 // Joue un effet autour de l'indicateur quand on attrape la prise
                 effectBeamIndicator.playEffectBeam(progressiveCircular.getCurrentColorIndicator());
@@ -87,6 +89,8 @@ public class MovePlayer : MonoBehaviour
                 // L'indicateur n'est plus le même, donc faux
                 scoreScript.setIsTheSameCircle(false);
 
+                // Il a monté au moins une prise donc ce n'est plus la première
+                isFirstHold = false;
 
                 // Fais bouger le joueur à la prochaine prise
                 ikControl.animationClimbingPlayer();
@@ -118,7 +122,7 @@ public class MovePlayer : MonoBehaviour
         print("wrongButtonPressTwice : " + wrongButtonPressTwice);
         
         // Descends le joueur d'une prise
-        if (stuckPlayer && wrongButtonPressTwice >= 2)
+        if (stuckPlayer && wrongButtonPressTwice >= 2 && !isFirstHold)
         {
             print("le joueur doit tomber");
             
@@ -127,6 +131,14 @@ public class MovePlayer : MonoBehaviour
         // Bloque le joueur pendant 2 secondes
         else if (stuckPlayer) {
             stopPlayerClimb = StartCoroutine(StopPlayerClimbFor2Seconds());
+        }
+
+        print("c'est getNumberOfHoldCurrent : " + ikControl.getNumberOfHoldCurrent());
+        
+        // Vérifie qu'on est pas redescendu juqu'à la première prise
+        if (!isFirstHold && ikControl.getNumberOfHoldCurrent() == 0)
+        {
+            isFirstHold = true;
         }
         
         
