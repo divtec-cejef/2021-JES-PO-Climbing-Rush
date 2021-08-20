@@ -106,7 +106,7 @@ public class IkControl : MonoBehaviour
         }
         else
         {
-            lookWeightForHead = Mathf.Lerp(lookWeightForHead, 0f, Time.deltaTime * lookSmoother * 1.5f);
+            lookWeightForHead = Mathf.Lerp(lookWeightForHead, 0f, Time.deltaTime * 1);
             watchTarget = true;
         }
         
@@ -165,7 +165,10 @@ public class IkControl : MonoBehaviour
                     numberOfTargetTmp -= 1;
                     if (isHoldRight)
                     {
-                        numberOfTargetTmp -= 1;
+                        if (numberOfHoldTraveled != 2)
+                        {
+                            numberOfTargetTmp -= 1;
+                        }
                     }
                 }
             }
@@ -182,20 +185,28 @@ public class IkControl : MonoBehaviour
             {
                 axeYPlayer = 1;
             }
-
-            /*
-            if (numberOfHoldTraveled == 2)
+            
+            
+            // Info : dépenant de quel côté est la première prise, par ex. gauche, ce code devra être dans la partie du bras gauche
+            if (numberOfHoldTraveled == 1 && doFallPlayer)
             {
-                axeXPlayer = -0.9f;
+                // Ne change pas la postion y du joueur quand il doit tomber de la première prise
+                axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
+                
+                axeXPlayer = .9f;
+                lookWeightForHoldRight = 0;
+                lookWeightMaxForHoldRight = Mathf.Lerp(lookWeightMaxForHoldRight, 0f, Time.deltaTime * lookSmoother);
+                print("euhhhh lookWeightForHoldRight : " + lookWeightForHoldRight);
+                print("euhhhh lookWeightMaxForHoldRight : " + lookWeightMaxForHoldRight);
             }
-            */
+            
             
             print("axeYplayer : " + axeYPlayer);
             print("currentHoldRight : " + currentHoldRight);
 
             // Fais monter ou descendre le joueur
             transform.position = Vector3.Lerp(transform.position,
-                currentHoldRight.transform.position - new Vector3(.9f, axeYPlayer, .6f),
+                currentHoldRight.transform.position - new Vector3(axeXPlayer, axeYPlayer, .6f),
                 speed * Time.deltaTime);
             
             print("tu passes ou sal encuklé 1");
@@ -252,10 +263,6 @@ public class IkControl : MonoBehaviour
         // Vérifie si c'est le bras gauche qui doit bouger
         if (isHoldLeft || doFallPlayer && !isHoldRight)
         {
-            print("11 bras gauche");
-            print("11 bras gauche sHoldLeft : " + isHoldLeft);
-            print("11 bras gauche doFallPlayer : " + doFallPlayer);
-            
             isLeftHandOnHold = lookWeightForHoldLeft >= 0.9f;
 
             lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
@@ -263,6 +270,7 @@ public class IkControl : MonoBehaviour
 
             int numberOfTargetTmp = numberOfHoldTraveled;
 
+            
             // Si le joueur doit tomber alors on cherche la prise précédente
             if (doFallPlayer)
             {
@@ -275,10 +283,14 @@ public class IkControl : MonoBehaviour
                     numberOfTargetTmp -= 1;
                     if (isHoldLeft)
                     {
-                        numberOfTargetTmp -= 1;
+                        if (numberOfHoldTraveled != 2)
+                        {
+                            numberOfTargetTmp -= 1;
+                        }
                     }
                 }
             }
+            
             
             // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
             currentHoldLeft = GameObject.Find("prise " + numberOfTargetTmp);
@@ -290,11 +302,20 @@ public class IkControl : MonoBehaviour
             {
                 axeYPlayer = 1;
             }
+
+            // Ne change pas la postion y du joueur quand il doit tomber de la première prise
+            if (numberOfHoldTraveled == 1 && doFallPlayer)
+            {
+                axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
+            }
             
+            print("numberOfHoldTraveled : " + numberOfHoldTraveled);
+
+            // Info : dépenant de quel côté est la deuxième prise, par ex. droite, ce code devra être dans la partie du bras droit
             if (numberOfHoldTraveled == 2 && doFallPlayer)
             {
-                axeXPlayer = .9f;
-                axeYPlayer = 1.84f;
+                axeXPlayer = 1f;
+                axeYPlayer = 1.82f;
                 lookWeightForHoldLeft = 0;
                 lookWeightMaxForHoldLeft = 0;
                 lookWeightForRightFeet = 0;
