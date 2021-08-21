@@ -44,6 +44,10 @@ public class IkControl : MonoBehaviour
     private bool isRightHandOnHold = false;
     private bool isLeftHandOnHold = false;
     private bool isSecondHold = false;
+    private bool fellPlayer = false;
+    private bool isFellPlayerTmp = false;
+    private bool neverExceedHold2 = true;
+    
 
     private void Start()
     {
@@ -65,9 +69,37 @@ public class IkControl : MonoBehaviour
     {
         numberOfHoldTraveled++;
 
-        watchTarget = false;
+        // Pas sur que ça change quelques choses ça
+        if (numberOfHoldTraveled == 3)
+        {
+            neverExceedHold2 = false;
+        }
         
+        
+        if (fellPlayer)
+        {
 
+            print("numberOfHoldTraveled t'es tombé");
+            if (numberOfHoldTraveled == 2 && neverExceedHold2)
+            {
+                numberOfHoldTraveled = 2;
+                neverExceedHold2 = false;
+            }
+            else
+            {
+                numberOfHoldTraveled--;
+            }
+            
+            fellPlayer = false;
+            
+        }
+        
+        print("numberOfHoldTraveled : " + numberOfHoldTraveled);
+
+
+        watchTarget = false;
+
+        
         if (isFirstHold)
         {
             print("isFirstHold");
@@ -78,9 +110,10 @@ public class IkControl : MonoBehaviour
         else if (isHoldRight)
         {
             print("Prise droite");
-
+            
             isHoldLeft = true;
             isHoldRight = false;
+            
         }
         else
         {
@@ -88,6 +121,7 @@ public class IkControl : MonoBehaviour
 
             isHoldRight = true;
             isHoldLeft = false;
+            
         }
     }
 
@@ -98,7 +132,7 @@ public class IkControl : MonoBehaviour
     /// <param name="layerIndex"></param>
     private void OnAnimatorIK(int layerIndex)
     {
-        
+     
         // Animations pour que la tête regarde la prochaine prise à prendre
         if (watchTarget)
         {
@@ -120,7 +154,6 @@ public class IkControl : MonoBehaviour
             targetNextOrBack = 0;
         }
         
-        print("c koi numberOfHoldTraveled : " + numberOfHoldTraveled);
         
         // Prochaine prise à regarder avec la tête
         animator.SetLookAtPosition(GameObject.Find("prise " + (numberOfHoldTraveled + targetNextOrBack)).transform.position);
@@ -138,24 +171,22 @@ public class IkControl : MonoBehaviour
         // Vérifie si c'est le bras droit qui doit bouger, ainsi bouge le bras droit
         if (isHoldRight || doFallPlayer && !isHoldLeft)
         {
-            print("11 bras droit");
-            print("11 bras droit isHoldRight : " + isHoldRight);
-            print("11 bras droit doFallPlayer : " + doFallPlayer);
-            
             isRightHandOnHold = lookWeightForHoldRight >= 0.9f;
-            print("quand lookWeightForHoldRight est à 1 alors isRightHandOnHold doit être égale a *true*,  : " +
-                  lookWeightForHoldRight);
-            print("valeur de isRightHandOnHold : " + isRightHandOnHold);
-
-
+            
             lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
             lookWeightForLeftFeet = Mathf.Lerp(lookWeightForLeftFeet, 1f, Time.deltaTime * lookSmoother);
 
             int numberOfTargetTmp = numberOfHoldTraveled;
             
+            print("avant, numberOfTargetTmp : " + numberOfTargetTmp);
+            
+            
             // Si le joueur doit tomber alors on cherche la prise précédente
             if (doFallPlayer)
             {
+                // Le joueur est tombé, donc vrai
+                fellPlayer = true;
+                
                 if (numberOfTargetTmp == 1)
                 {
                     numberOfTargetTmp = 1;
@@ -173,11 +204,13 @@ public class IkControl : MonoBehaviour
                 }
             }
             
+            print("après, numberOfTargetTmp : " + numberOfTargetTmp);
+
             // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
             currentHoldRight = GameObject.Find("prise " + numberOfTargetTmp);
-
             print("c'est la prise : " + currentHoldRight);
 
+            
             float axeYPlayer = 1.81f;
             float axeXPlayer = .9f;
             
@@ -196,21 +229,13 @@ public class IkControl : MonoBehaviour
                 axeXPlayer = .9f;
                 lookWeightForHoldRight = 0;
                 lookWeightMaxForHoldRight = Mathf.Lerp(lookWeightMaxForHoldRight, 0f, Time.deltaTime * lookSmoother);
-                print("euhhhh lookWeightForHoldRight : " + lookWeightForHoldRight);
-                print("euhhhh lookWeightMaxForHoldRight : " + lookWeightMaxForHoldRight);
             }
             
             
-            print("axeYplayer : " + axeYPlayer);
-            print("currentHoldRight : " + currentHoldRight);
-
             // Fais monter ou descendre le joueur
             transform.position = Vector3.Lerp(transform.position,
                 currentHoldRight.transform.position - new Vector3(axeXPlayer, axeYPlayer, .6f),
                 speed * Time.deltaTime);
-            
-            print("tu passes ou sal encuklé 1");
-
         }
         else
         {
@@ -218,6 +243,7 @@ public class IkControl : MonoBehaviour
             lookWeightForLeftFeet = 0;
         }
 
+        
         // Récupère la valeur maximale de lookWeight à chaque fois pour que le bras ne descende pas 
         if (lookWeightForHoldRight > lookWeightMaxForHoldRight)
         {
@@ -267,13 +293,19 @@ public class IkControl : MonoBehaviour
 
             lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
             lookWeightForRightFeet = Mathf.Lerp(lookWeightForRightFeet, 1f, Time.deltaTime * lookSmoother);
-
-            int numberOfTargetTmp = numberOfHoldTraveled;
-
             
+            
+            int numberOfTargetTmp = numberOfHoldTraveled;
+            
+            print("avant, numberOfTargetTmp : " + numberOfTargetTmp);
+
+
             // Si le joueur doit tomber alors on cherche la prise précédente
             if (doFallPlayer)
             {
+                // Le joueur est tombé, donc vrai
+                fellPlayer = true;
+                
                 if (numberOfTargetTmp == 1)
                 {
                     numberOfTargetTmp = 1;
@@ -290,11 +322,16 @@ public class IkControl : MonoBehaviour
                     }
                 }
             }
+
+            print("après, numberOfTargetTmp : " + numberOfTargetTmp);
+            
+            
             
             
             // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
             currentHoldLeft = GameObject.Find("prise " + numberOfTargetTmp);
-
+            print("c la prise : " + currentHoldLeft);
+            
             float axeYPlayer = 1.81f;
             float axeXPlayer = -0.9f;
             
@@ -309,7 +346,6 @@ public class IkControl : MonoBehaviour
                 axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
             }
             
-            print("numberOfHoldTraveled : " + numberOfHoldTraveled);
 
             // Info : dépenant de quel côté est la deuxième prise, par ex. droite, ce code devra être dans la partie du bras droit
             if (numberOfHoldTraveled == 2 && doFallPlayer)
@@ -319,27 +355,21 @@ public class IkControl : MonoBehaviour
                 lookWeightForHoldLeft = 0;
                 lookWeightMaxForHoldLeft = 0;
                 lookWeightForRightFeet = 0;
-                
-                print("shit j'ai changé la trajectoire");
             }
             
-            print("currentHoldLeft : " + currentHoldLeft);
+            
 
             // Bouge le corps du personnage vers la prise et monte ou descend
             transform.position = Vector3.Lerp(transform.position,
                 currentHoldLeft.transform.position - new Vector3(axeXPlayer, axeYPlayer, .6f),
                 speed * Time.deltaTime);
-            
-            print("tu passes ou sal encuklé 2");
         }
         else
         {
             lookWeightForHoldLeft = 0;
             lookWeightForRightFeet = 0;
         }
-
-        print("c koi lookWeightForHoldLeft : " + lookWeightForHoldLeft);
-        print("c koi lookWeightMaxForHoldLeft : " + lookWeightMaxForHoldLeft);
+        
 
         // Récupère la valeur maximale de lookWeight à chaque fois pour que le bras ne descende pas 
         if (lookWeightForHoldLeft > lookWeightMaxForHoldLeft)
@@ -414,6 +444,27 @@ public class IkControl : MonoBehaviour
         doFallPlayer = fall;
     }
 
+
+    /// <summary>
+    /// </summary>
+    /// <returns>Retourne vrai si le joueur est tombé sinon faux</returns>
+    public bool getFellPlayer()
+    {
+        return fellPlayer;
+    }
+
+    /// <summary>
+    /// Permet de savoir quelle manin doit monter quand on est tombé
+    /// </summary>
+    /// <param name="isHoldLeft">Si c'est la main gauche qui doit montée</param>
+    /// <param name="isHoldRight">Si c'est la main droite qui doit montée</param>
+    public void setGoodHandForClimb(bool isHoldLeft, bool isHoldRight)
+    {
+        this.isHoldLeft = isHoldLeft;
+        this.isHoldRight = isHoldRight;
+    }
+    
+    
     /// <summary>
     /// </summary>
     /// <returns>Retourne le numéro de la prise prochaine</returns>
@@ -421,5 +472,16 @@ public class IkControl : MonoBehaviour
     {
         return numberOfHoldTraveled;
     }
+
+
+    /// <summary>
+    /// </summary>
+    /// <returns> Retourne si c'est la main droit ou non qui doit grimper</returns>
+    public bool getIsHoldRight()
+    {
+        return isHoldRight;
+    }
+    
+    
     
 }

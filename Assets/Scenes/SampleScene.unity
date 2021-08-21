@@ -10423,6 +10423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13fa34c555e014445bafef1c457fdaf5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movePlayer: {fileID: 850704520}
   lookSmoother: 3
   speed: 1
   scoreScript: {fileID: 1644670621}

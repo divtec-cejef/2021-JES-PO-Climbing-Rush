@@ -162,7 +162,6 @@ public class ProgressiveCircular : MonoBehaviour
             //yield return new WaitForSeconds(0.001f);
             yield return new WaitForSeconds(loadedCircleProgressData.waitTimeProgress);
             
-            print("fillAmount : " + progressCircle.fillAmount);
 
             // Attends 2 secondes lorsque la bar de progression circulaire est à 100%, et la remet à zéro après ces 2 secondes
             if (progressCircle.fillAmount == 1f)

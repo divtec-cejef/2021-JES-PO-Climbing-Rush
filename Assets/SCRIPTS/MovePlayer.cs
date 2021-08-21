@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.TextCore.LowLevel;
 
 public class MovePlayer : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class MovePlayer : MonoBehaviour
     private Coroutine stopPlayerClimb;
 
     private bool isFirstHold = true;
+    private bool fellPlayer = false;
+
 
 
     void Awake()
@@ -56,8 +59,12 @@ public class MovePlayer : MonoBehaviour
             
             // Le joueur n'a pas appuyé deux fois sur le mauvais bouton
             wrongButtonPressTwice = 0;
+            
+            
+            // On dit que le joueur n'est pas tombé ou qu'il remonte
             ikControl.setDoFallPlayer(false);
 
+            
             // Le joueur ne doit pas être bloqué
             stuckPlayer = false;
 
@@ -70,6 +77,20 @@ public class MovePlayer : MonoBehaviour
             {
                 
                 print("monte !");
+                
+                
+                // Vérifie si le joueur est tombé alors on fait pour que la prochaine prise soit prise avec la bonne main
+                if (ikControl.getFellPlayer() && ikControl.getNumberOfHoldCurrent() != 1)
+                {
+                    if (ikControl.getIsHoldRight())
+                    {
+                        ikControl.setGoodHandForClimb(true, false);
+                    }
+                    else
+                    {
+                        ikControl.setGoodHandForClimb(false, true);
+                    }  
+                }
                 
                 
                 
@@ -92,6 +113,7 @@ public class MovePlayer : MonoBehaviour
                 // Il a monté au moins une prise donc ce n'est plus la première
                 isFirstHold = false;
 
+                
                 // Fais bouger le joueur à la prochaine prise
                 ikControl.animationClimbingPlayer();
             }
@@ -111,7 +133,7 @@ public class MovePlayer : MonoBehaviour
             // Le joueur doit être bloqué
             stuckPlayer = true;
             
-            // Le joueur doit descendre d'une prise
+            // Le joueur doit descendre d'une prise si wrongButtonPressTwice = 2
             wrongButtonPressTwice++;
         }
 
@@ -119,7 +141,6 @@ public class MovePlayer : MonoBehaviour
         // Calcule les points
         scoreScript.calculatePoints();
 
-        print("wrongButtonPressTwice : " + wrongButtonPressTwice);
         
         // Descends le joueur d'une prise
         if (stuckPlayer && wrongButtonPressTwice >= 2 && !isFirstHold)
@@ -133,7 +154,6 @@ public class MovePlayer : MonoBehaviour
             stopPlayerClimb = StartCoroutine(StopPlayerClimbFor2Seconds());
         }
 
-        print("c'est getNumberOfHoldCurrent : " + ikControl.getNumberOfHoldCurrent());
         
         // Vérifie qu'on est pas redescendu juqu'à la première prise
         if (!isFirstHold && ikControl.getNumberOfHoldCurrent() == 0)
@@ -158,10 +178,25 @@ public class MovePlayer : MonoBehaviour
         displayPopUpText.setBlocked(false);
         print("la coroutine est stope !");
     }
-        
 
-    
-    
+
+    /// <summary>
+    /// </summary>
+    /// <returns>Retourne si vrai si le joueur est tombé sinon faux</returns>
+    public bool getFellPlayer()
+    {
+        return fellPlayer;
+    }
+
+
+    /// <summary>
+    /// Change à vrai si le joueur est tombé et vice versa
+    /// </summary>
+    /// <param name="fell">Si le joueur est tombé alors vrai sinon faux</param>
+    public void setFellPlayer(bool fell)
+    {
+        fellPlayer = fell;
+    }
     
 
 
