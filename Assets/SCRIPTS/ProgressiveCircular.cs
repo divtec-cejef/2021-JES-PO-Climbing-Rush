@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using TMPro;
 using UnityEditor;
+using UnityEngine.TextCore.LowLevel;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -41,6 +42,8 @@ public class ProgressiveCircular : MonoBehaviour
     public float intensity = 2;
     
     private Material spriteOutline;
+
+    private bool fellPlayer = false;
 
     // Classe qui stocke les données du JSON (à modifier pour ajouter des données)
     private CircleProgressData loadedCircleProgressData;
@@ -119,14 +122,30 @@ public class ProgressiveCircular : MonoBehaviour
     /// </summary>
     public void moveNextIndicator()
     {
-        numberOfTarget++;
+
+        // Si le joueur tombe on redescend d'une prise l'indicateur, sinon on le monte
+        if (fellPlayer)
+        {
+            numberOfTarget--;
+        }
+        else
+        {
+            numberOfTarget++;
+        }
+        
+        print(".. numberOfTarget : " + numberOfTarget );
+        
 
         
         // Téléporte le canvas qui contient l'indicateurUI pour être autour de la prochaine prise
         canvasIndicatorUI.transform.position = GameObject.Find("prise " + numberOfTarget).transform.position;
         
-        // Ajoute une couleur random sur cet indicateur
-        progressCircle.GetComponent<Image>().color = getRandomColor();
+        // Ajoute une couleur random sur cet indicateur si le joueur n'est pas tombé
+        if (!fellPlayer)
+        {
+            progressCircle.GetComponent<Image>().color = getRandomColor();
+        }
+        
         
         // Récupération de la couleur de la prise courante 
         currentColorIndicator = progressCircle.GetComponent<Image>().color;
@@ -244,8 +263,17 @@ public class ProgressiveCircular : MonoBehaviour
         progressCircle.fillAmount = 0;
     }
 
-    
-    
+
+    /// <summary>
+    /// Change à vrai si le joueur tombe sinon faux
+    /// </summary>
+    /// <param name="fell">Si le joueur est tombé ou non</param>
+    public void setFellPlayer(bool fell)
+    {
+        fellPlayer = fell;
+    }
+
+
     // Retourne la progression de la bare circulaire 
     public float getProgressionCircularBar()
     {

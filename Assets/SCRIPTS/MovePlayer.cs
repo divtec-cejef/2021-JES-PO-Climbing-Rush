@@ -28,7 +28,6 @@ public class MovePlayer : MonoBehaviour
     private Coroutine stopPlayerClimb;
 
     private bool isFirstHold = true;
-    private bool fellPlayer = false;
 
 
 
@@ -68,8 +67,13 @@ public class MovePlayer : MonoBehaviour
             // Le joueur ne doit pas être bloqué
             stuckPlayer = false;
 
+            // Le joueur n'est pas tombé
+            progressiveCircular.setFellPlayer(false);
+            
+
             
             print("avant de monter !");
+            
             
             
             // Vérifie que le joueur puisse monter et qu'il ne doit pas être bloqué (appuyé sur le mauvais bouton)
@@ -80,7 +84,8 @@ public class MovePlayer : MonoBehaviour
                 
                 
                 // Vérifie si le joueur est tombé alors on fait pour que la prochaine prise soit prise avec la bonne main
-                if (ikControl.getFellPlayer() && ikControl.getNumberOfHoldCurrent() != 1)
+                //&& ikControl.getNumberOfHoldCurrent() != 1
+                if (ikControl.getFellPlayer())
                 {
                     if (ikControl.getIsHoldRight())
                     {
@@ -93,7 +98,8 @@ public class MovePlayer : MonoBehaviour
                 }
                 
                 
-                
+
+
                 // Joue un effet autour de l'indicateur quand on attrape la prise
                 effectBeamIndicator.playEffectBeam(progressiveCircular.getCurrentColorIndicator());
                 
@@ -141,29 +147,48 @@ public class MovePlayer : MonoBehaviour
         // Calcule les points
         scoreScript.calculatePoints();
 
+        /*
+        // Vérifie qu'on est pas redescendu juqu'à la première prise
+        if (!isFirstHold && ikControl.getNumberOfHoldCurrent() == 1)
+        {
+            print("getNumberOfHoldCurrent saluuuuuuuuuut");
+            isFirstHold = true;
+        }
+        
+        print("getNumberOfHoldCurrent : " + ikControl.getNumberOfHoldCurrent());
+
+        /*
+        if (wrongButtonPressTwice >= 2 && isFirstHold)
+        {
+            print("bonsoir non");
+            ikControl.setFellPlayer(true);
+        }
+        */
         
         // Descends le joueur d'une prise
         if (stuckPlayer && wrongButtonPressTwice >= 2 && !isFirstHold)
         {
             print("le joueur doit tomber");
+            wrongButtonPressTwice = 0;
             
             ikControl.setDoFallPlayer(true);
+            progressiveCircular.setFellPlayer(true);
+            effectBeamIndicator.substractOneTarget();
+            
+            // Déplace l'indicateur
+            progressiveCircular.setButtonPressed(true);
+            progressiveCircular.stopProgressCircularBarCoroutine();
+            progressiveCircular.setDefaultProgressCircularBarUI();
+            progressiveCircular.moveNextIndicator();
         }
         // Bloque le joueur pendant 2 secondes
         else if (stuckPlayer) {
             stopPlayerClimb = StartCoroutine(StopPlayerClimbFor2Seconds());
         }
 
-        
-        // Vérifie qu'on est pas redescendu juqu'à la première prise
-        if (!isFirstHold && ikControl.getNumberOfHoldCurrent() == 0)
-        {
-            isFirstHold = true;
-        }
-        
-        
     }
 
+    
     IEnumerator StopPlayerClimbFor2Seconds()
     {
         // Le joueur est bloqué pendant 2 secondes
@@ -179,24 +204,6 @@ public class MovePlayer : MonoBehaviour
         print("la coroutine est stope !");
     }
 
-
-    /// <summary>
-    /// </summary>
-    /// <returns>Retourne si vrai si le joueur est tombé sinon faux</returns>
-    public bool getFellPlayer()
-    {
-        return fellPlayer;
-    }
-
-
-    /// <summary>
-    /// Change à vrai si le joueur est tombé et vice versa
-    /// </summary>
-    /// <param name="fell">Si le joueur est tombé alors vrai sinon faux</param>
-    public void setFellPlayer(bool fell)
-    {
-        fellPlayer = fell;
-    }
     
 
 

@@ -9,6 +9,7 @@ public class EffectBeamIndicator : MonoBehaviour
 
     private int numberOfTarget = 0;
 
+
     
     /// <summary>
     /// Change la couleur de l'effet et l'affiche
@@ -17,6 +18,7 @@ public class EffectBeamIndicator : MonoBehaviour
     public void playEffectBeam(Color colorIndicator)
     {
         numberOfTarget++;
+        
         
         // Déplace l'effet à la prise courrante
         effectBeam.transform.position = GameObject.Find("prise " + numberOfTarget).transform.position + new Vector3(0, 0.1f, 0);
@@ -27,5 +29,15 @@ public class EffectBeamIndicator : MonoBehaviour
         
         // Joue l'effet
         effectBeam.Play();
+    }
+
+
+    /// <summary>
+    /// Change à vrai si le joueur tombe sinon faux
+    /// </summary>
+    /// <param name="fell">Si le joueur est tombé ou non</param>
+    public void substractOneTarget()
+    {
+        numberOfTarget--;
     }
 }
