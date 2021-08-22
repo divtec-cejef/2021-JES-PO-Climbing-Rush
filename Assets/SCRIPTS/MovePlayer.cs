@@ -62,8 +62,10 @@ public class MovePlayer : MonoBehaviour
             
             // On dit que le joueur n'est pas tombé ou qu'il remonte
             ikControl.setDoFallPlayer(false);
+            ikControl.setNotYetFallen(true);
+            ikControl.setForGetCurrentNumberHold(true);
+            ikControl.setFallPlayerInARow(false);
 
-            
             // Le joueur ne doit pas être bloqué
             stuckPlayer = false;
 
@@ -147,23 +149,6 @@ public class MovePlayer : MonoBehaviour
         // Calcule les points
         scoreScript.calculatePoints();
 
-        /*
-        // Vérifie qu'on est pas redescendu juqu'à la première prise
-        if (!isFirstHold && ikControl.getNumberOfHoldCurrent() == 1)
-        {
-            print("getNumberOfHoldCurrent saluuuuuuuuuut");
-            isFirstHold = true;
-        }
-        
-        print("getNumberOfHoldCurrent : " + ikControl.getNumberOfHoldCurrent());
-
-        /*
-        if (wrongButtonPressTwice >= 2 && isFirstHold)
-        {
-            print("bonsoir non");
-            ikControl.setFellPlayer(true);
-        }
-        */
         
         // Descends le joueur d'une prise
         if (stuckPlayer && wrongButtonPressTwice >= 2 && !isFirstHold)
@@ -174,6 +159,26 @@ public class MovePlayer : MonoBehaviour
             ikControl.setDoFallPlayer(true);
             progressiveCircular.setFellPlayer(true);
             effectBeamIndicator.substractOneTarget();
+
+            if (ikControl.getFallPlayerOne())
+            {
+                ikControl.setFallPlayerInARow(true);
+            }
+            
+            
+            if (ikControl.getIsHoldRight())
+            {
+                print("ouais 1");
+                ikControl.setGoodHandForClimb(false, true);
+            }
+            else
+            {
+                print("ouais 2");
+                ikControl.setGoodHandForClimb(true, false);
+            }  
+            
+            
+            
             
             // Déplace l'indicateur
             progressiveCircular.setButtonPressed(true);

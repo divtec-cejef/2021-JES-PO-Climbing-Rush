@@ -279,5 +279,13 @@ public class ProgressiveCircular : MonoBehaviour
     {
         return progressionCircularBar;
     }
-    
+
+
+    /// <summary>
+    /// </summary>
+    /// <returns>Retourne le numéro de la prise sur laquelle se trouve l'indicateur</returns>
+    public int getCurrentNumberOfHoldOnIndicator()
+    {
+        return numberOfTarget;
+    }
 }
