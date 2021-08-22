@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 //using TMPro.EditorUtilities;
 using UnityEngine;
@@ -175,7 +176,6 @@ public class IkControl : MonoBehaviour
         climbFirstHoldAfterFall = numberOfHoldTraveled + targetNextOrBack == 1;
         
         // Prochaine prise à regarder avec la tête
-        //animator.SetLookAtPosition(GameObject.Find("prise " + (numberOfHoldTraveled + targetNextOrBack)).transform.position);
         animator.SetLookAtPosition(GameObject.Find("prise " + (progressiveCircular.getCurrentNumberOfHoldOnIndicator())).transform.position);
 
 
@@ -312,8 +312,12 @@ public class IkControl : MonoBehaviour
             
             // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
             currentHoldRight = GameObject.Find("prise " + numberOfTargetTmp);
-            print("c'est la prise : " + currentHoldRight);
+            print("c'est la prise droite : " + currentHoldRight);
 
+            if (numberOfTargetTmp == 1)
+            {
+                lookWeightForLeftFeet = 0;
+            }
             
             float axeYPlayer = 1.81f;
             float axeXPlayer = .9f;
@@ -323,15 +327,28 @@ public class IkControl : MonoBehaviour
                 axeYPlayer = 1;
             }
             
+            if (numberOfTargetTmp < 2)
+            {
+                if (numberOfTargetTmp == 0)
+                {
+                    currentHoldRight = GameObject.Find("prise 1");
+                    //lookWeightForHoldLeft = 0;
+                    //lookWeightMaxForHoldLeft = 0;
+                    lookWeightForLeftFeet = 0;
+
+                }
+                numberOfTargetTmp = progressiveCircular.getCurrentNumberOfHoldOnIndicator();
+            }
+            
             
             // Info : dépendant de quel côté est la première prise, par ex. gauche, ce code devra être dans la partie du bras gauche
-            if (numberOfHoldTraveled == 1 && doFallPlayer)
+            if (numberOfTargetTmp == 1 && doFallPlayer)
             {
                 // Ne change pas la postion y du joueur quand il doit tomber de la première prise
-                axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
-                
+                //axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
+                axeYPlayer = 0.83f;
                 axeXPlayer = .9f;
-                lookWeightForHoldRight = 0;
+                //lookWeightForHoldRight = 0;
                 lookWeightMaxForHoldRight = Mathf.Lerp(lookWeightMaxForHoldRight, 0f, Time.deltaTime * lookSmoother);
             }
             
@@ -413,7 +430,9 @@ public class IkControl : MonoBehaviour
 
             if (doFallPlayer)
             {
+                
                 numberOfTargetTmp = numberOfCurrentHold - 1;
+                
                 
                 // Le joueur est tombé, donc vrai
                 fellPlayer = true;
@@ -503,12 +522,13 @@ public class IkControl : MonoBehaviour
             
             */
             print("après, numberOfTargetTmp : " + numberOfTargetTmp);
-            
+
+
             
             
             // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
             currentHoldLeft = GameObject.Find("prise " + numberOfTargetTmp);
-            print("c la prise : " + currentHoldLeft);
+            print("c'est la prise de gauche : " + currentHoldLeft);
             
             float axeYPlayer = 1.81f;
             float axeXPlayer = -0.9f;
@@ -518,23 +538,43 @@ public class IkControl : MonoBehaviour
                 axeYPlayer = 1;
             }
 
-            // Ne change pas la postion y du joueur quand il doit tomber de la première prise
-            if (numberOfHoldTraveled == 1 && doFallPlayer)
+            if (numberOfTargetTmp < 2)
             {
-                axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
+                if (numberOfTargetTmp == 0)
+                {
+                    currentHoldLeft = GameObject.Find("prise 2");
+                    lookWeightForHoldLeft = 0;
+                    lookWeightMaxForHoldLeft = 0;
+                    lookWeightForRightFeet = 0;
+
+                }
+                numberOfTargetTmp = progressiveCircular.getCurrentNumberOfHoldOnIndicator() - 1;
             }
             
+            print("after, numberOfTargetTmp et doFallPlayer : " + numberOfTargetTmp + " et " + doFallPlayer);
 
+            
+            // Ne change pas la postion y du joueur quand il doit tomber de la première prise
+            if (numberOfTargetTmp == 1 && doFallPlayer)
+            {
+                print("after, inoxtag");
+                // Il faudra surement changer la valeur ici dans la nouvelle map -------------------- /!\
+                //axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
+                axeYPlayer = 2.83f;
+            }
+            
+            /*
             // Info : dépenant de quel côté est la deuxième prise, par ex. droite, ce code devra être dans la partie du bras droit
-            if (numberOfHoldTraveled == 2 && doFallPlayer)
+            if (numberOfTargetTmp == 2 && doFallPlayer)
             {
                 axeXPlayer = 1f;
-                axeYPlayer = 1.82f;
+                //axeYPlayer = 1.82f;
+                axeYPlayer = 3f;
                 lookWeightForHoldLeft = 0;
                 lookWeightMaxForHoldLeft = 0;
                 lookWeightForRightFeet = 0;
             }
-            
+            */
             
 
             // Bouge le corps du personnage vers la prise et monte ou descend
@@ -655,13 +695,7 @@ public class IkControl : MonoBehaviour
     }
     
 
-    /// <summary>
-    /// </summary>
-    /// <returns>Retourne vrai si le joueur est tombé sinon faux</returns>
-    public bool getFellPlayer()
-    {
-        return fellPlayer;
-    }
+    
 
     /// <summary>
     /// Permet de savoir quelle manin doit monter quand on est tombé
@@ -715,7 +749,24 @@ public class IkControl : MonoBehaviour
     {
         return fallPlayerOnce;
     }
+
+
+
+    /// <summary>
+    /// Change à vrai si c'est la première prise sinon faux
+    /// </summary>
+    /// <param name="isFirst">Vrai si c'est la première prise</param>
+    public void setIsFirstHold(bool isFirst)
+    {
+        isFirstHold = isFirst;
+    }
     
     
-    
+    /// <summary>
+    /// </summary>
+    /// <returns>Retourne vrai si le joueur est tombé sinon faux</returns>
+    public bool getFellPlayer()
+    {
+        return fellPlayer;
+    }
 }

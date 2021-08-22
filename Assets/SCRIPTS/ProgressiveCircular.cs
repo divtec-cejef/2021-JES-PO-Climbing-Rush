@@ -126,7 +126,10 @@ public class ProgressiveCircular : MonoBehaviour
         // Si le joueur tombe on redescend d'une prise l'indicateur, sinon on le monte
         if (fellPlayer)
         {
-            numberOfTarget--;
+            if (numberOfTarget != 1)
+            {
+                numberOfTarget--;
+            }
         }
         else
         {

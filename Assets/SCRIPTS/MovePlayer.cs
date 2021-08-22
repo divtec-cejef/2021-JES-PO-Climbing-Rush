@@ -78,6 +78,13 @@ public class MovePlayer : MonoBehaviour
             
             
             
+            // Vérifie si le joueur est redescendu jusqu'à la première
+            if (progressiveCircular.getCurrentNumberOfHoldOnIndicator() == 1)
+            {
+                isFirstHold = true;
+                ikControl.setIsFirstHold(true);
+            }
+            
             // Vérifie que le joueur puisse monter et qu'il ne doit pas être bloqué (appuyé sur le mauvais bouton)
             if (ikControl.getCanClimb() && !waitWhileCoroutine)
             {
@@ -89,7 +96,7 @@ public class MovePlayer : MonoBehaviour
                 //&& ikControl.getNumberOfHoldCurrent() != 1
                 if (ikControl.getFellPlayer())
                 {
-                    if (ikControl.getIsHoldRight())
+                    if (ikControl.getIsHoldRight() && progressiveCircular.getCurrentNumberOfHoldOnIndicator() != 1)
                     {
                         ikControl.setGoodHandForClimb(true, false);
                     }
@@ -147,11 +154,19 @@ public class MovePlayer : MonoBehaviour
 
 
         // Calcule les points
-        scoreScript.calculatePoints();
+        if (!waitWhileCoroutine)
+        {
+            scoreScript.calculatePoints();
+        }
 
-        
+        // Vérifie si le joueur est redescendu jusqu'à la première
+        if (progressiveCircular.getCurrentNumberOfHoldOnIndicator() == 1)
+        {
+            isFirstHold = true;
+        }
+
         // Descends le joueur d'une prise
-        if (stuckPlayer && wrongButtonPressTwice >= 2 && !isFirstHold)
+        if (stuckPlayer && wrongButtonPressTwice >= 2 && !isFirstHold && !waitWhileCoroutine)
         {
             print("le joueur doit tomber");
             wrongButtonPressTwice = 0;
