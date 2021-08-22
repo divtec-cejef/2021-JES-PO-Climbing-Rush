@@ -214,18 +214,13 @@ public class IkControl : MonoBehaviour
                 {
                     if (getFellPlayer())
                     {
-                        print("+ donc là il est tombé");
-                        if (!getIsHoldRight())
+                        if (getIsHoldRight())
                         {
-                            print("+ apparement c'est la main droite du coup on met true a gauche et faux droite");
-                            //setGoodHandForClimb(true, false);
-                            setGoodHandForClimb(false, true);
+                            setGoodHandForClimb(true, false);
                         }
                         else
                         {
-                            print("+ apparement c'est la main gauche du coup on met false a gauche et true a droite");
-                            //setGoodHandForClimb(false, true);
-                            setGoodHandForClimb(true, false);
+                            setGoodHandForClimb(false, true);
                         }
                         
                         fallPlayerInARow = false;
@@ -538,6 +533,8 @@ public class IkControl : MonoBehaviour
                 axeYPlayer = 1;
             }
 
+            
+            // Les tests ci-dessous c'est quand le joueur descend vers les premières prises
             if (numberOfTargetTmp < 2)
             {
                 if (numberOfTargetTmp == 0)
@@ -554,7 +551,7 @@ public class IkControl : MonoBehaviour
             print("after, numberOfTargetTmp et doFallPlayer : " + numberOfTargetTmp + " et " + doFallPlayer);
 
             
-            // Ne change pas la postion y du joueur quand il doit tomber de la première prise
+            // Le joueur doit tomber de la deuxième prise seulement en axe Y
             if (numberOfTargetTmp == 1 && doFallPlayer)
             {
                 print("after, inoxtag");
