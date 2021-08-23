@@ -8,6 +8,15 @@ using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour
 {
+
+    // Points possibles
+    private const int MAX_POINT = 50;
+    private const int MEDIUM_POINT = 20;
+    private const int LOW_POINT = 10;
+    private const int MIN_POINT = 5;
+    private const int POINT_LOSS = 15;
+    
+    
     public ProgressiveCircular progressiveCircular;
 
     private int currentScore;
@@ -23,6 +32,8 @@ public class ScoreScript : MonoBehaviour
 
     private bool isTheSameCircle = true;
 
+    private int counterALittleBitHigher = 1;
+    private float oldValueOfProgressBar = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -33,14 +44,29 @@ public class ScoreScript : MonoBehaviour
     private void Update()
     {
         float progressionCircle = progressiveCircular.getProgressionCircularBar();
+
+        print("progressionCircle avant : " + progressionCircle);
+
         
-        
-        if (progressionCircle == 0.01f && getIsTheSameCircle())
+        if (progressionCircle < 1f && oldValueOfProgressBar == 1f)
         {
+            // c'est un nouveau rond qui commence
             counterFullProgressionCircle++;
+            print("léo bouffe moi le cul : " + counterFullProgressionCircle);
 
         }
+
+        oldValueOfProgressBar = progressionCircle;
         
+        print("progressionCircle après : " + progressionCircle);
+        print("COUNTER DE TA MERE LA PUTE : " + counterFullProgressionCircle);
+
+        /*
+        if (progressionCircle <= 1  && getIsTheSameCircle() && counterFullProgressionCircle < counterALittleBitHigher)
+        {
+            counterFullProgressionCircle++;
+        }
+        */
     }
     
     /// <summary>
@@ -54,40 +80,46 @@ public class ScoreScript : MonoBehaviour
             
             if (getIsGoodButton())
             {
-                if (counterFullProgressionCircle <= 2)
+                if (counterFullProgressionCircle <= 1)
                 {
-                    scoreValue += 50;
+                    scoreValue += MAX_POINT;
+                    print("+" + MAX_POINT);
+                }
+                else if (counterFullProgressionCircle <= 2)
+                {
+                    scoreValue += MEDIUM_POINT;
                 }
                 else if (counterFullProgressionCircle <= 3)
                 {
-                    scoreValue += 20;
+                    scoreValue += LOW_POINT;
                 }
-                else if (counterFullProgressionCircle <= 4)
+                else if (counterFullProgressionCircle > 3)
                 {
-                    scoreValue += 10;
-                }
-                else if (counterFullProgressionCircle > 4)
-                {
-                    scoreValue += 5;
+                    scoreValue += MIN_POINT;
                 }
                 
                 counterFullProgressionCircle = 0;
+                counterALittleBitHigher = 1;
+
                 setIsTheSameCircle(true);
             }
             else
             {
-                if (scoreValue < 15)
+                if (scoreValue < POINT_LOSS)
                 {
                     scoreValue = 0;
                 }
                 else
                 {
-                    scoreValue -= 15;
+                    scoreValue -= POINT_LOSS;
                 }
+                
+                counterFullProgressionCircle = 0;
             }
         }
         
         score.text = "Score : " + scoreValue;
+
     }
 
     public bool getIsTheSameCircle()
