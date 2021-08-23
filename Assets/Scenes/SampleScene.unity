@@ -4726,6 +4726,7 @@ MonoBehaviour:
   speed: 0.001
   canvasIndicatorUI: {fileID: 201497671}
   progressBar: {fileID: 970866074}
+  startCountDownTimer: {fileID: 1883419129}
   intensity: 2
 --- !u!224 &414397380
 RectTransform:
@@ -10563,6 +10564,7 @@ MonoBehaviour:
   effectBeamIndicator: {fileID: 684918466}
   progressiveCircular: {fileID: 414397379}
   displayPopUpText: {fileID: 874916015}
+  startCountDownTimer: {fileID: 1883419129}
 --- !u!114 &850704521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11296,7 +11298,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 209
+  m_RootOrder: 210
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &874916015
 MonoBehaviour:
@@ -23821,7 +23823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a3025e0ac33ac4eae2920962d16a00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countDownTimer: {fileID: 1883419130}
+  countDownTimeDisplay: {fileID: 1883419130}
 --- !u!114 &1883419130
 MonoBehaviour:
   m_ObjectHideFlags: 0

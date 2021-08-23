@@ -20,6 +20,8 @@ public class ProgressiveCircular : MonoBehaviour
     public Canvas canvasIndicatorUI;
     public Slider progressBar;
 
+    public StartCountDownTimer startCountDownTimer;
+
     private Coroutine progressCircularBarUICoroutine;
 
     private bool isWait = false;
@@ -44,7 +46,8 @@ public class ProgressiveCircular : MonoBehaviour
     private Material spriteOutline;
 
     private bool fellPlayer = false;
-
+    private bool isFirstHold = true;
+    
     // Classe qui stocke les données du JSON (à modifier pour ajouter des données)
     private CircleProgressData loadedCircleProgressData;
     
@@ -85,7 +88,7 @@ public class ProgressiveCircular : MonoBehaviour
         canvasIndicatorUI.transform.position = GameObject.Find("prise " + numberOfTarget).transform.position;
 
         // Commence la progression de l'indicateur
-        launchProgressCircularBarUI();
+        //launchProgressCircularBarUI();
     }
 
     private class CircleProgressData
@@ -108,6 +111,13 @@ public class ProgressiveCircular : MonoBehaviour
 
     private void Update()
     {
+
+        if (startCountDownTimer.getcountDownTimerIsFinished() && isFirstHold)
+        {
+            isFirstHold = false;
+            launchProgressCircularBarUI();
+        }
+        
         progressBar.value = numberOfTarget - 1;
         progressionCircularBar = progressCircle.fillAmount;
 
