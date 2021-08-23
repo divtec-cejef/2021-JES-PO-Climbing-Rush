@@ -8,6 +8,15 @@ using UnityEngine.UI;
 
 public class ScoreScript : MonoBehaviour
 {
+
+    // Points possibles
+    private const int MAX_POINT = 50;
+    private const int MEDIUM_POINT = 20;
+    private const int LOW_POINT = 10;
+    private const int MIN_POINT = 5;
+    private const int POINT_LOSS = 15;
+    
+    
     public ProgressiveCircular progressiveCircular;
 
     private int currentScore;
@@ -73,19 +82,20 @@ public class ScoreScript : MonoBehaviour
             {
                 if (counterFullProgressionCircle <= 1)
                 {
-                    scoreValue += 50;
+                    scoreValue += MAX_POINT;
+                    print("+" + MAX_POINT);
                 }
                 else if (counterFullProgressionCircle <= 2)
                 {
-                    scoreValue += 20;
+                    scoreValue += MEDIUM_POINT;
                 }
                 else if (counterFullProgressionCircle <= 3)
                 {
-                    scoreValue += 10;
+                    scoreValue += LOW_POINT;
                 }
                 else if (counterFullProgressionCircle > 3)
                 {
-                    scoreValue += 5;
+                    scoreValue += MIN_POINT;
                 }
                 
                 counterFullProgressionCircle = 0;
@@ -95,13 +105,13 @@ public class ScoreScript : MonoBehaviour
             }
             else
             {
-                if (scoreValue < 15)
+                if (scoreValue < POINT_LOSS)
                 {
                     scoreValue = 0;
                 }
                 else
                 {
-                    scoreValue -= 15;
+                    scoreValue -= POINT_LOSS;
                 }
                 
                 counterFullProgressionCircle = 0;
