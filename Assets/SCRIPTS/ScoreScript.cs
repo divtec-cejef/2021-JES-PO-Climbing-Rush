@@ -23,6 +23,8 @@ public class ScoreScript : MonoBehaviour
 
     private bool isTheSameCircle = true;
 
+    private int counterALittleBitHigher = 1;
+    private float oldValueOfProgressBar = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -33,14 +35,29 @@ public class ScoreScript : MonoBehaviour
     private void Update()
     {
         float progressionCircle = progressiveCircular.getProgressionCircularBar();
+
+        print("progressionCircle avant : " + progressionCircle);
+
         
-        
-        if (progressionCircle == 0.01f && getIsTheSameCircle())
+        if (progressionCircle < 1f && oldValueOfProgressBar == 1f)
         {
+            // c'est un nouveau rond qui commence
             counterFullProgressionCircle++;
+            print("léo bouffe moi le cul : " + counterFullProgressionCircle);
 
         }
+
+        oldValueOfProgressBar = progressionCircle;
         
+        print("progressionCircle après : " + progressionCircle);
+        print("COUNTER DE TA MERE LA PUTE : " + counterFullProgressionCircle);
+
+        /*
+        if (progressionCircle <= 1  && getIsTheSameCircle() && counterFullProgressionCircle < counterALittleBitHigher)
+        {
+            counterFullProgressionCircle++;
+        }
+        */
     }
     
     /// <summary>
@@ -54,24 +71,26 @@ public class ScoreScript : MonoBehaviour
             
             if (getIsGoodButton())
             {
-                if (counterFullProgressionCircle <= 2)
+                if (counterFullProgressionCircle <= 1)
                 {
                     scoreValue += 50;
                 }
-                else if (counterFullProgressionCircle <= 3)
+                else if (counterFullProgressionCircle <= 2)
                 {
                     scoreValue += 20;
                 }
-                else if (counterFullProgressionCircle <= 4)
+                else if (counterFullProgressionCircle <= 3)
                 {
                     scoreValue += 10;
                 }
-                else if (counterFullProgressionCircle > 4)
+                else if (counterFullProgressionCircle > 3)
                 {
                     scoreValue += 5;
                 }
                 
                 counterFullProgressionCircle = 0;
+                counterALittleBitHigher = 1;
+
                 setIsTheSameCircle(true);
             }
             else
@@ -84,10 +103,13 @@ public class ScoreScript : MonoBehaviour
                 {
                     scoreValue -= 15;
                 }
+                
+                counterFullProgressionCircle = 0;
             }
         }
         
         score.text = "Score : " + scoreValue;
+
     }
 
     public bool getIsTheSameCircle()
