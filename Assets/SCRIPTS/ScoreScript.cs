@@ -16,12 +16,12 @@ public class ScoreScript : MonoBehaviour
     private const int MIN_POINT = 5;
     private const int POINT_LOSS = 15;
     
-    
     public ProgressiveCircular progressiveCircular;
 
     private int currentScore;
 
     public TextMeshProUGUI score;
+    public GainPoint gainPoint;
     
     private bool isGoodButton;
     private bool isButtonPressedTooFast = false;
@@ -32,7 +32,6 @@ public class ScoreScript : MonoBehaviour
 
     private bool isTheSameCircle = true;
 
-    private int counterALittleBitHigher = 1;
     private float oldValueOfProgressBar = 0;
     
     // Start is called before the first frame update
@@ -80,26 +79,31 @@ public class ScoreScript : MonoBehaviour
             
             if (getIsGoodButton())
             {
-                if (counterFullProgressionCircle <= 1)
+                if (counterFullProgressionCircle < 1)
                 {
                     scoreValue += MAX_POINT;
-                    print("+" + MAX_POINT);
+                    gainPoint.displayGainPoint(MAX_POINT, true);
                 }
-                else if (counterFullProgressionCircle <= 2)
+                else if (counterFullProgressionCircle < 2)
                 {
                     scoreValue += MEDIUM_POINT;
+                    gainPoint.displayGainPoint(MEDIUM_POINT, true);
+
                 }
-                else if (counterFullProgressionCircle <= 3)
+                else if (counterFullProgressionCircle < 3)
                 {
                     scoreValue += LOW_POINT;
+                    gainPoint.displayGainPoint(LOW_POINT, true);
+
                 }
-                else if (counterFullProgressionCircle > 3)
+                else if (counterFullProgressionCircle >= 3)
                 {
                     scoreValue += MIN_POINT;
+                    gainPoint.displayGainPoint(MIN_POINT, true);
+
                 }
                 
                 counterFullProgressionCircle = 0;
-                counterALittleBitHigher = 1;
 
                 setIsTheSameCircle(true);
             }
@@ -108,10 +112,14 @@ public class ScoreScript : MonoBehaviour
                 if (scoreValue < POINT_LOSS)
                 {
                     scoreValue = 0;
+                    gainPoint.displayGainPoint(POINT_LOSS, false);
+
                 }
                 else
                 {
                     scoreValue -= POINT_LOSS;
+                    gainPoint.displayGainPoint(POINT_LOSS, false);
+
                 }
                 
                 counterFullProgressionCircle = 0;

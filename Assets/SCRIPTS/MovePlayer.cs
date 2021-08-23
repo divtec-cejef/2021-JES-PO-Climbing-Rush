@@ -19,6 +19,7 @@ public class MovePlayer : MonoBehaviour
     public EffectBeamIndicator effectBeamIndicator;
     public ProgressiveCircular progressiveCircular;
     public DisplayPopUpText displayPopUpText;
+    public GainPoint gainPoint;
         
     
     private bool stuckPlayer = false;
@@ -54,6 +55,9 @@ public class MovePlayer : MonoBehaviour
         {
             scoreScript.setButtonPressedTooFast(true);
             scoreScript.setIsGoodButton(true);
+            
+            gainPoint.stopCoroutineGainPointTimed();
+            
             
             
             // Le joueur n'a pas appuyé deux fois sur le mauvais bouton
@@ -154,10 +158,8 @@ public class MovePlayer : MonoBehaviour
 
 
         // Calcule les points
-        if (!waitWhileCoroutine)
-        {
-            scoreScript.calculatePoints();
-        }
+        scoreScript.calculatePoints();
+        
 
         // Vérifie si le joueur est redescendu jusqu'à la première
         if (progressiveCircular.getCurrentNumberOfHoldOnIndicator() == 1)
