@@ -157,9 +157,8 @@ public class MovePlayer : MonoBehaviour
         }
 
 
-        // Calcule les points
+        // Calculer les points
         scoreScript.calculatePoints();
-        
 
         // Vérifie si le joueur est redescendu jusqu'à la première
         if (progressiveCircular.getCurrentNumberOfHoldOnIndicator() == 1)
