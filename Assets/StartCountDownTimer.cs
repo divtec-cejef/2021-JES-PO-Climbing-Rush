@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
+//using UnityEngine.InputSystem.iOS;
 
 public class StartCountDownTimer : MonoBehaviour
 {
     // Start is called before the first frame update
 
+    
     private int countDownTime = 3;
+    private bool countDownTimerIsFinished = false;
+    
     private Coroutine startCountDownTimer;
     public TextMeshProUGUI countDownTimeDisplay;
-
+    
     
     void Start()
     {
@@ -32,11 +35,26 @@ public class StartCountDownTimer : MonoBehaviour
 
         countDownTimeDisplay.text = "GO !";
 
-        yield return new WaitForSeconds(1f);
+        countDownTimerIsFinished = true;
+                                                              
+        yield return new WaitForSeconds(1f);                  
+                                                               
         
-        countDownTimeDisplay.gameObject.SetActive(false);
-        
-        StopCoroutine(startCountDownTimer);
+                                                                                                                                                                   
+                                                                                                                                                                                                                          
+        countDownTimeDisplay.gameObject.SetActive(false);     
+                                                              
+        StopCoroutine(startCountDownTimer);                   
+    }                                                         
+
+
+
+    /// <summary>
+    /// </summary>
+    /// <returns>Retourne vrai si le compteur de départ est fini sinon faux</returns>
+    public bool getcountDownTimerIsFinished()
+    {
+        return countDownTimerIsFinished;
     }
     
 }
