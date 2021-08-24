@@ -79,24 +79,19 @@ public class ScoreScript : MonoBehaviour
             
             if (getIsGoodButton())
             {
-                if (counterFullProgressionCircle < 1)
+                if (counterFullProgressionCircle <= 1)
                 {
                     scoreValue += MAX_POINT;
                     gainPoint.displayGainPoint(MAX_POINT, true);
                 }
-                else if (counterFullProgressionCircle < 2)
+                else if (counterFullProgressionCircle <= 2)
                 {
                     scoreValue += MEDIUM_POINT;
                     gainPoint.displayGainPoint(MEDIUM_POINT, true);
 
                 }
-                else if (counterFullProgressionCircle < 3)
-                {
-                    scoreValue += LOW_POINT;
-                    gainPoint.displayGainPoint(LOW_POINT, true);
 
-                }
-                else if (counterFullProgressionCircle >= 3)
+                else if (counterFullProgressionCircle > 2)
                 {
                     scoreValue += MIN_POINT;
                     gainPoint.displayGainPoint(MIN_POINT, true);

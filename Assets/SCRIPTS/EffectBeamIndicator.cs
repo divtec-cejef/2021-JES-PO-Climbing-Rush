@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,20 @@ public class EffectBeamIndicator : MonoBehaviour
     private int numberOfTarget = 0;
 
 
-    
+    private void Start()
+    {
+        effectBeam.gameObject.SetActive(false);
+    }
+
     /// <summary>
     /// Change la couleur de l'effet et l'affiche
     /// </summary>
     /// <param name="colorIndicator">Couleur de l'indicateur courrant</param>
     public void playEffectBeam(Color colorIndicator)
     {
+        effectBeam.gameObject.SetActive(true);
+
+        
         numberOfTarget++;
         
         
