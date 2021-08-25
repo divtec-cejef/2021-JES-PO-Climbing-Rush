@@ -12,8 +12,8 @@ public class MovePlayer : MonoBehaviour
     private PlayerControls controls;
 
 
-    public MoveIndicator moveIndicator;
-    public FlashIndicator flashIndicator;
+    //public MoveIndicator moveIndicator;
+    //public FlashIndicator flashIndicator;
     public ScoreScript scoreScript;
     public IkControl ikControl;
     public EffectBeamIndicator effectBeamIndicator;

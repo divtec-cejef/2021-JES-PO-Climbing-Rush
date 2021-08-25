@@ -17,11 +17,6 @@ public class GeneralCoutnDownTimer : MonoBehaviour
     private Coroutine startGeneralCountDownTimer;
     public TextMeshProUGUI countDownTimeDisplay;
     public StartCountDownTimer startCountDownTimer;
-
-
-    public Text textTemps;
-    public TextMeshProUGUI TempsNum;
-    public GameObject FinText;
     public float timeValue = 90;
 
     private void Start()
@@ -42,7 +37,7 @@ public class GeneralCoutnDownTimer : MonoBehaviour
             else
             {
                 timeValue = 0;
-                FinText.SetActive(true);
+                //FinText.SetActive(true);
             }
 
             DisplayTime(timeValue);
