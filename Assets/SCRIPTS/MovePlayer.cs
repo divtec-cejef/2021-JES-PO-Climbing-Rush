@@ -20,6 +20,7 @@ public class MovePlayer : MonoBehaviour
     public ProgressiveCircular progressiveCircular;
     public DisplayPopUpText displayPopUpText;
     public StartCountDownTimer startCountDownTimer;
+    public GainPoint gainPoint;
         
     
     private bool stuckPlayer = false;
@@ -54,6 +55,8 @@ public class MovePlayer : MonoBehaviour
 
         if (startCountDownTimer.getcountDownTimerIsFinished())
         {
+            gainPoint.stopCoroutineGainPointTimed();
+            
             if (colorButton.Equals(progressiveCircular.getCurrentColorIndicator()))
             {
                 scoreScript.setButtonPressedTooFast(true);
@@ -76,7 +79,7 @@ public class MovePlayer : MonoBehaviour
                 // Le joueur n'est pas tombé
                 progressiveCircular.setFellPlayer(false);
 
-
+                
 
                 print("avant de monter !");
 

@@ -27,7 +27,7 @@ public class IkControl : MonoBehaviour
     private float lookWeightForLeftFeet;
     private float lookWeightForRightFeet;
     public float lookSmoother = 3f;
-    public float speed = 1f;
+    public float speed = 2.5f;
 
     public ScoreScript scoreScript;
 
@@ -192,7 +192,7 @@ public class IkControl : MonoBehaviour
         if (isHoldRight || doFallPlayer && !isHoldLeft)
         {
             print("bras droit");
-            isRightHandOnHold = lookWeightForHoldRight >= 0.9f;
+            isRightHandOnHold = lookWeightForHoldRight >= 0.7f;
             
             lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
             lookWeightForLeftFeet = Mathf.Lerp(lookWeightForLeftFeet, 1f, Time.deltaTime * lookSmoother);
@@ -409,7 +409,7 @@ public class IkControl : MonoBehaviour
         {
             print("bras gauche");
 
-            isLeftHandOnHold = lookWeightForHoldLeft >= 0.9f;
+            isLeftHandOnHold = lookWeightForHoldLeft >= 0.7f;
 
             lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
             lookWeightForRightFeet = Mathf.Lerp(lookWeightForRightFeet, 1f, Time.deltaTime * lookSmoother);
