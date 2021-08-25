@@ -34,11 +34,13 @@ public class GainPoint : MonoBehaviour
 
     IEnumerator displayGainPointTimed(int pointAdded, bool positive)
     {
+
         
         print("DANS LE COROUTINE");
         
         string sign = "";
-        Color color = Color.yellow;
+        //Color color = Color.yellow;
+        Color color;
 
         if (!positive)
         {

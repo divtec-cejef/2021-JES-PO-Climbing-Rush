@@ -8,6 +8,7 @@ public class MenuPause : MonoBehaviour
     public static bool isGamePaused = false;
     public GameObject menuPause;
     public GameObject HUD;
+    public GameObject generalCountDownTimer;
 
 
     private void Start()
@@ -33,6 +34,7 @@ public class MenuPause : MonoBehaviour
 
     public void ResumeGame()
     {
+        generalCountDownTimer.SetActive(true);
         HUD.SetActive(true);
         menuPause.SetActive(false);
         Time.timeScale = 1.0f;
@@ -41,6 +43,7 @@ public class MenuPause : MonoBehaviour
 
     public void PauseGame()
     {
+        generalCountDownTimer.SetActive(false);
         HUD.SetActive(false);
         menuPause.SetActive(true);
         Time.timeScale = 0.0f;

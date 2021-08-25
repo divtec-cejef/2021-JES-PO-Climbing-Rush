@@ -11,9 +11,12 @@ public class StartCountDownTimer : MonoBehaviour
     
     private int countDownTime = 3;
     private bool countDownTimerIsFinished = false;
-    
     private Coroutine startCountDownTimer;
+    
+    public GeneralCoutnDownTimer generalCoutnDownTimer;
     public TextMeshProUGUI countDownTimeDisplay;
+
+    private bool canStartGeneralCountDownTimer = false;
     
     
     void Start()
@@ -33,16 +36,15 @@ public class StartCountDownTimer : MonoBehaviour
             countDownTime--;
         }
 
+        canStartGeneralCountDownTimer = true;
+
         countDownTimeDisplay.text = "GO !";
 
         countDownTimerIsFinished = true;
         print("cest fini gars");
                                                               
-        yield return new WaitForSeconds(1f);                  
-                                                               
-        
-                                                                                                                                                                   
-                                                                                                                                                                                                                          
+        yield return new WaitForSeconds(1f);
+
         countDownTimeDisplay.gameObject.SetActive(false);     
                                                               
         StopCoroutine(startCountDownTimer);                   
@@ -56,6 +58,16 @@ public class StartCountDownTimer : MonoBehaviour
     public bool getcountDownTimerIsFinished()
     {
         return countDownTimerIsFinished;
+    }
+
+    public bool getCanStartGeneralCountDownTimer()
+    {
+        return canStartGeneralCountDownTimer;
+    }
+
+    public void setCanStartGeneralCountDownTimer(bool canStart)
+    {
+        canStartGeneralCountDownTimer = canStart;
     }
     
 }
