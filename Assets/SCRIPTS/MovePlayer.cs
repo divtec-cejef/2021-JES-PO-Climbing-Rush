@@ -45,6 +45,11 @@ public class MovePlayer : MonoBehaviour
         controls.Gameplay.PurpleButton.performed += ctx => correctCircle(Color.magenta);
     }
 
+    private void Start()
+    {
+        Screen.orientation = ScreenOrientation.LandscapeLeft;
+    }
+
 
     /// <summary>
     /// Vérifie si le bouton appuyé correspondant avec la couleur du cercle courrant

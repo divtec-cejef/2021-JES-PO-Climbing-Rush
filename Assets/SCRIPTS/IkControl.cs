@@ -313,10 +313,15 @@ public class IkControl : MonoBehaviour
             {
                 lookWeightForLeftFeet = 0;
             }
+
+
             
-            float axeYPlayer = 1.81f;
+            
             float axeXPlayer = .9f;
-            
+            float axeYPlayer = 1.81f;
+
+
+           
             if (doFallPlayer)
             {
                 axeYPlayer = 1;
@@ -346,6 +351,7 @@ public class IkControl : MonoBehaviour
                 //lookWeightForHoldRight = 0;
                 lookWeightMaxForHoldRight = Mathf.Lerp(lookWeightMaxForHoldRight, 0f, Time.deltaTime * lookSmoother);
             }
+            
             
             
             // Fais monter ou descendre le joueur
