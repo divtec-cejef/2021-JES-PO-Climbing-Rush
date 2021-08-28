@@ -6,7 +6,7 @@
             "id": "dbf23e2d-bed7-4401-b530-241daf20163c",
             "actions": [
                 {
-                    "name": "RedButton",
+                    "name": "P1_RedButton",
                     "type": "Button",
                     "id": "8e492b8a-95b9-4fca-8b2e-2943babb4b52",
                     "expectedControlType": "Button",
@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "BlueButton",
+                    "name": "P1_BlueButton",
                     "type": "Button",
                     "id": "c2c6267e-b158-442a-ae70-2e7309b0d509",
                     "expectedControlType": "Button",
@@ -22,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "GreenButton",
+                    "name": "P1_GreenButton",
                     "type": "Button",
                     "id": "5690b2b9-9264-47fb-9cfa-15af81bfdba6",
                     "expectedControlType": "Button",
@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "YellowButton",
+                    "name": "P1_YellowButton",
                     "type": "Button",
                     "id": "7828b828-3032-4123-a90f-6da1670f1447",
                     "expectedControlType": "Button",
@@ -38,9 +38,49 @@
                     "interactions": ""
                 },
                 {
-                    "name": "PurpleButton",
+                    "name": "P1_PurpleButton",
                     "type": "Button",
                     "id": "85bf1298-1a9f-4ec2-8dd3-fa193a4c6830",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P2_RedButton",
+                    "type": "Button",
+                    "id": "12520a43-81ce-4db8-bd6a-6118e5cdc129",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P2_BlueButton",
+                    "type": "Button",
+                    "id": "8cb8e474-18b4-42e4-9e7b-fcf75da01282",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P2_GreenButton",
+                    "type": "Button",
+                    "id": "d66e243f-04d1-49da-89db-2c282be6b5a3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P2_YellowButton",
+                    "type": "Button",
+                    "id": "31ec7e73-ce37-449e-86e6-96626b4049ce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "P2_PurpleButton",
+                    "type": "Button",
+                    "id": "360df594-64f9-45ca-b0a1-2b746f18a32e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -50,55 +90,110 @@
                 {
                     "name": "",
                     "id": "3898e311-c5e2-4cd7-adbe-b9194ffc5a75",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/trigger",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RedButton",
+                    "action": "P1_RedButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "6fba6c79-953e-4f32-9486-b4ef2229412c",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button2",
+                    "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "BlueButton",
+                    "action": "P1_BlueButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "eeab18cd-e397-4eb0-bf27-2dc80aa83bcd",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button4",
+                    "path": "<Keyboard>/4",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "YellowButton",
+                    "action": "P1_YellowButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "e57fc63f-380d-428e-9581-3bd3b8dc23f2",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button5",
+                    "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PurpleButton",
+                    "action": "P1_PurpleButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "71ef5881-aa99-4ec8-a7c0-cbca507de796",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button3",
+                    "path": "<Keyboard>/3",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "GreenButton",
+                    "action": "P1_GreenButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9a608c0f-8f0d-4fd8-b80f-bce3827220b3",
+                    "path": "<Keyboard>/0",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P2_PurpleButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "77381470-9368-4508-9d2d-badee8e078e8",
+                    "path": "<Keyboard>/6",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P2_RedButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c35da0be-1edf-4136-9ede-e124e85064d1",
+                    "path": "<Keyboard>/7",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P2_BlueButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7e23d2df-7c63-4aec-81f3-0ec7c0bb4550",
+                    "path": "<Keyboard>/8",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P2_GreenButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2bddf9ea-c2c1-4fc8-af61-f933603ed360",
+                    "path": "<Keyboard>/9",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "P2_YellowButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
