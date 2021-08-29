@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class MenuPause : MonoBehaviour
@@ -77,6 +78,9 @@ public class MenuPause : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        
+        SceneManager.LoadSceneAsync(0);
+        
+        //Application.Quit();
     }
 }

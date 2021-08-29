@@ -257,10 +257,10 @@ public class P2_IkControl : MonoBehaviour
             
             float axeXPlayer = .9f;
             float axeYPlayer = 1.81f;
-            float axeZPlayer = .6f;
+            float axeZPlayer = .4f;
 
 
-           
+
             if (doFallPlayer)
             {
                 axeYPlayer = 1;
@@ -435,8 +435,8 @@ public class P2_IkControl : MonoBehaviour
             
             float axeYPlayer = 1.81f;
             float axeXPlayer = -.5f;
-            float axeZPlayer = .6f;
-            
+            float axeZPlayer = .4f;
+
             if (doFallPlayer)
             {
                 axeYPlayer = 1;
