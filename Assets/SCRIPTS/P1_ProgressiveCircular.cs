@@ -34,7 +34,7 @@ public class P1_ProgressiveCircular : MonoBehaviour
     private Vector3 positionNextHold;
     private Vector3 positionIndicatorUI;
 
-    private int numberOfTarget;
+    public int numberOfTarget;
 
     private List<Color> listColorIndicator = new List<Color>();
     private Color nextColorIndicator;
@@ -147,6 +147,8 @@ public class P1_ProgressiveCircular : MonoBehaviour
     public void moveNextIndicator()
     {
 
+        
+        
         // Si le joueur tombe on redescend d'une prise l'indicateur, sinon on le monte
         if (fellPlayer)
         {
@@ -162,16 +164,25 @@ public class P1_ProgressiveCircular : MonoBehaviour
         
         print(".. numberOfTarget : " + numberOfTarget );
         
+        // Si le test est vrai ça veut dire que le joueur a atteint la dernière prise, donc on rend invisible l'indicateur
+        if (numberOfTarget == 70)
+        {
+            progressCircle.gameObject.SetActive(false);
+        }
 
         
         // Téléporte le canvas qui contient l'indicateurUI pour être autour de la prochaine prise
-        //canvasIndicatorUI.transform.position = GameObject.Find("prise " + numberOfTarget).transform.position;
-        Vector3 currentPositionHold = GameObject.Find("P1_prise " + numberOfTarget).transform.position;
-        //currentPositionHold.z -= 1.5f;
-        //currentPositionHold.z -= 1f;
-        currentPositionHold.z -= 0.8f;
-        currentPositionHold.y += 0.2f;
-        canvasIndicatorUI.transform.position = currentPositionHold;
+        //canvasIndicatorUI.transform.position = GameObject.Find("prise " + numberOfTarget).transform.position
+        if (numberOfTarget != 70)
+        {
+            Vector3 currentPositionHold = GameObject.Find("P1_prise " + numberOfTarget).transform.position;
+            //currentPositionHold.z -= 1.5f;
+            //currentPositionHold.z -= 1f;
+            currentPositionHold.z -= 0.8f;
+            currentPositionHold.y += 0.2f;
+            canvasIndicatorUI.transform.position = currentPositionHold;
+        }
+        
         
         // Ajoute une couleur random sur cet indicateur si le joueur n'est pas tombé
         if (!fellPlayer)

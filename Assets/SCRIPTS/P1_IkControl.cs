@@ -11,6 +11,7 @@ public class P1_IkControl : MonoBehaviour
 {
     
     public P1_ProgressiveCircular progressiveCircular;
+    public PlayerWinner playerWinner;
     
     private Animator animator;
 
@@ -59,6 +60,14 @@ public class P1_IkControl : MonoBehaviour
     private bool fallPlayerInARow = false; // le joueur tombe d'affilé
     private bool fallPlayerOnce = false;
     private bool fallPlayerMoreThanOnce = false;
+
+    private bool gameIsFnished = false;
+    private bool isHoldRightFinish = true;
+    private bool isHoldLeftFinish = true;
+
+    private bool isTheLasteHold = false;
+    private bool waitBeforeEndAnimation = true;
+    
 
 
 
@@ -175,9 +184,38 @@ public class P1_IkControl : MonoBehaviour
         }
         
         climbFirstHoldAfterFall = numberOfHoldTraveled + targetNextOrBack == 1;
+
         
         // Prochaine prise à regarder avec la tête
-        animator.SetLookAtPosition(GameObject.Find("P1_prise " + (progressiveCircular.getCurrentNumberOfHoldOnIndicator())).transform.position);
+        if (progressiveCircular.getCurrentNumberOfHoldOnIndicator() != 70)
+        {
+            animator.SetLookAtPosition(GameObject.Find("P1_prise " + (progressiveCircular.getCurrentNumberOfHoldOnIndicator())).transform.position);
+        }
+        else
+        {
+
+            animator.SetLookAtPosition(GameObject.Find("TargetHeadFinish").transform.position);
+            
+            
+            
+            if (isHoldLeftFinish)
+            {
+                print("k1 nan hein 1");
+                isHoldLeftFinish = false;
+                resetWeightLeftHand();
+            }
+            
+                // Faire pour que le joueur regardera le plancher ou il doit monter
+                //lookWeightForHoldRight = 0;
+                //lookWeightMaxForHoldRight = 0;
+                
+                // Il faut remettre à zéro les Max et Weight du bras gauche d'abord et ensuite le bras droit
+                
+                animationOfEnd();
+            
+            
+            
+        }
 
 
         // La variable lookWeight permet de faire bouger le bras jusqu'à la prise. Exemple :
@@ -189,370 +227,522 @@ public class P1_IkControl : MonoBehaviour
         /*--------------- BRAS DROIT --------------*/
         /*-----------------------------------------*/
 
-        // Vérifie si c'est le bras droit qui doit bouger, ainsi bouge le bras droit
-        if (isHoldRight || doFallPlayer && !isHoldLeft)
+        if (!gameIsFnished)
         {
-            print("bras droit");
-            isRightHandOnHold = lookWeightForHoldRight >= 0.7f;
-            
-            lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
-            lookWeightForLeftFeet = Mathf.Lerp(lookWeightForLeftFeet, 1f, Time.deltaTime * lookSmoother);
-
-           
-            numberOfCurrentHold = progressiveCircular.getCurrentNumberOfHoldOnIndicator() - 1;
-
-            int numberOfTargetTmp = numberOfCurrentHold;
-            print("avant, numberOfTargetTmp : " + numberOfTargetTmp);
-
-            if (doFallPlayer)
+            // Vérifie si c'est le bras droit qui doit bouger, ainsi bouge le bras droit
+            if (isHoldRight || doFallPlayer && !isHoldLeft)
             {
-                numberOfTargetTmp = numberOfCurrentHold - 1;
+                print("bras droit");
+                isRightHandOnHold = lookWeightForHoldRight >= 0.7f;
+
+                lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
+                lookWeightForLeftFeet = Mathf.Lerp(lookWeightForLeftFeet, 1f, Time.deltaTime * lookSmoother);
+
+
+
+                numberOfCurrentHold = progressiveCircular.getCurrentNumberOfHoldOnIndicator() - 1;
+
+                print("k1 numberOfCurrentHold : " + numberOfCurrentHold);
                 
-                // Le joueur est tombé, donc vrai
-                fellPlayer = true;
-
-                if (fallPlayerInARow)
+                if (numberOfCurrentHold == 69)
                 {
-                    if (getFellPlayer())
-                    {
-                        if (getIsHoldRight())
-                        {
-                            setGoodHandForClimb(true, false);
-                        }
-                        else
-                        {
-                            setGoodHandForClimb(false, true);
-                        }
-                        
-                        fallPlayerInARow = false;
+                    isTheLasteHold = true;
+                }
+                
 
-                        return;
+                int numberOfTargetTmp = numberOfCurrentHold;
+                print("avant, numberOfTargetTmp : " + numberOfTargetTmp);
+
+                if (doFallPlayer)
+                {
+                    numberOfTargetTmp = numberOfCurrentHold - 1;
+
+                    // Le joueur est tombé, donc vrai
+                    fellPlayer = true;
+
+                    if (fallPlayerInARow)
+                    {
+                        if (getFellPlayer())
+                        {
+                            if (getIsHoldRight())
+                            {
+                                setGoodHandForClimb(true, false);
+                            }
+                            else
+                            {
+                                setGoodHandForClimb(false, true);
+                            }
+
+                            fallPlayerInARow = false;
+
+                            return;
+                        }
                     }
+
+                    fallPlayerOnce = true;
+                }
+                else
+                {
+                    fallPlayerOnce = false;
                 }
 
-                fallPlayerOnce = true;
-            }
-            else
-            {
-                fallPlayerOnce = false;
-            }
-            
 
 
-            print("après, numberOfTargetTmp : " + numberOfTargetTmp);
-            
-            
-          
-            
-            // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
-            currentHoldRight = GameObject.Find("P1_prise " + numberOfTargetTmp);
-            print("c'est la prise droite : " + currentHoldRight);
-
-            if (numberOfTargetTmp == 1)
-            {
-                lookWeightForLeftFeet = 0;
-            }
+                print("après, numberOfTargetTmp : " + numberOfTargetTmp);
 
 
-            
-            
-            float axeXPlayer = .9f;
-            float axeYPlayer = 1.81f;
-            float axeZPlayer = .4f;
 
 
-           
-            if (doFallPlayer)
-            {
-                axeYPlayer = 1;
-            }
-            
-            if (numberOfTargetTmp < 2)
-            {
-                if (numberOfTargetTmp == 0)
+                // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
+
+                currentHoldRight = GameObject.Find("P1_prise " + numberOfTargetTmp);
+
+                print("c'est la prise droite : " + currentHoldRight);
+
+                if (numberOfTargetTmp == 1)
                 {
-                    currentHoldRight = GameObject.Find("P1_prise 1");
-                    //lookWeightForHoldLeft = 0;
-                    //lookWeightMaxForHoldLeft = 0;
                     lookWeightForLeftFeet = 0;
-
                 }
-                numberOfTargetTmp = progressiveCircular.getCurrentNumberOfHoldOnIndicator();
-            }
-            
-            
-            // Info : dépendant de quel côté est la première prise, par ex. gauche, ce code devra être dans la partie du bras gauche
-            if (numberOfTargetTmp == 1 && doFallPlayer)
-            {
-                // Ne change pas la postion y du joueur quand il doit tomber de la première prise
-                //axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
-                
-                if (transform.position.y > 12)
+
+
+
+
+                float axeXPlayer = .9f;
+                float axeYPlayer = 1.81f;
+                float axeZPlayer = .4f;
+
+
+
+                if (doFallPlayer)
                 {
-                    print("ouais il doit descendre encore droit");
-                    
-                    transform.position = Vector3.Lerp(transform.position,
-                        new Vector3(-2.8f, 11.85f, -2.04f),
-                        3.5f * Time.deltaTime);
-                
-                    
+                    axeYPlayer = 1;
                 }
-                
-                
-                //axeYPlayer = 0.83f;
-                axeYPlayer = 0.6f;
-                axeXPlayer = -.5f;
-                axeZPlayer = 1.3f;
-                
 
-                //lookWeightForHoldRight = 0;
-                lookWeightMaxForHoldRight = Mathf.Lerp(lookWeightMaxForHoldRight, 0f, Time.deltaTime * lookSmoother);
-            }
-            
-            
-            
-            // Fais monter ou descendre le joueur
-            transform.position = Vector3.Lerp(transform.position,
-                currentHoldRight.transform.position - new Vector3(axeXPlayer, axeYPlayer, axeZPlayer),
-                speed * Time.deltaTime);
-        }
-        else
-        {
-            lookWeightForHoldRight = 0;
-            lookWeightForLeftFeet = 0;
-        }
-
-        
-        // Récupère la valeur maximale de lookWeight à chaque fois pour que le bras ne descende pas 
-        if (lookWeightForHoldRight > lookWeightMaxForHoldRight)
-        {
-            lookWeightMaxForHoldRight = lookWeightForHoldRight;
-        }
-
-
-        try
-        {
-            // Bouge le bras droit (animation)
-            print("prends la prise avec la main droite");
-            animator.SetIKPositionWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
-            animator.SetIKRotationWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
-            animator.SetIKPosition(AvatarIKGoal.RightHand,
-                currentHoldRight.transform.position - new Vector3(0, 0, .3f));
-            animator.SetIKRotation(AvatarIKGoal.RightHand, currentHoldRight.transform.rotation);
-        }
-        catch (Exception e)
-        {
-        }
-
-
-        /*-----------------------------------------*/
-        /*--------------- PIED DROIT --------------*/
-        /*-----------------------------------------*/
-        try
-        {
-            animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, lookWeightForRightFeet);
-            animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, lookWeightForRightFeet);
-
-            animator.SetIKPosition(AvatarIKGoal.RightFoot,
-                currentHoldRight.transform.position - new Vector3(0.5f, 1.5f, -0.5f));
-            animator.SetIKRotation(AvatarIKGoal.RightFoot, currentHoldRight.transform.rotation);
-        }
-        catch (Exception e)
-        {
-        }
-
-
-        
-        /*-----------------------------------------*/
-        /*-------------- BRAS GAUCHE --------------*/
-        /*-----------------------------------------*/
-
-        // Vérifie si c'est le bras gauche qui doit bouger
-        if (isHoldLeft || doFallPlayer && !isHoldRight)
-        {
-            print("bras gauche");
-
-            isLeftHandOnHold = lookWeightForHoldLeft >= 0.7f;
-
-            lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
-            lookWeightForRightFeet = Mathf.Lerp(lookWeightForRightFeet, 1f, Time.deltaTime * lookSmoother);
-            
-           
-            numberOfCurrentHold = progressiveCircular.getCurrentNumberOfHoldOnIndicator() - 1;
-
-            
-            int numberOfTargetTmp = numberOfCurrentHold;
-            
-            
-            print("avant, numberOfTargetTmp 11: " + numberOfTargetTmp);
-
-            if (doFallPlayer)
-            {
-                
-                numberOfTargetTmp = numberOfCurrentHold - 1;
-                
-                
-                // Le joueur est tombé, donc vrai
-                fellPlayer = true;
-
-                if (fallPlayerInARow)
+                if (numberOfTargetTmp < 2)
                 {
-                    if (getFellPlayer())
+                    if (numberOfTargetTmp == 0)
                     {
-                        print("+ donc là il est tombé");
-                        if (getIsHoldRight())
-                        {
-                            print("+ apparement c'est la main droite du coup on met true a gauche et faux droite");
-                            setGoodHandForClimb(true, false);
-                        }
-                        else
-                        {
-                            print("+ apparement c'est la main gauche du coup on met false a gauche et true a droite");
-                            setGoodHandForClimb(false, true);
-                        }
+                        currentHoldRight = GameObject.Find("P1_prise 1");
+                        //lookWeightForHoldLeft = 0;
+                        //lookWeightMaxForHoldLeft = 0;
+                        lookWeightForLeftFeet = 0;
 
-                        fallPlayerInARow = false;
-                        
-                        return;
                     }
+
+                    numberOfTargetTmp = progressiveCircular.getCurrentNumberOfHoldOnIndicator();
                 }
+
+
+                // Info : dépendant de quel côté est la première prise, par ex. gauche, ce code devra être dans la partie du bras gauche
+                if (numberOfTargetTmp == 1 && doFallPlayer)
+                {
+                    // Ne change pas la postion y du joueur quand il doit tomber de la première prise
+                    //axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
+
+                    if (transform.position.y > 12)
+                    {
+                        print("ouais il doit descendre encore droit");
+
+                        transform.position = Vector3.Lerp(transform.position,
+                            new Vector3(-2.8f, 11.85f, -2.04f),
+                            3.5f * Time.deltaTime);
+
+
+                    }
+
+
+                    //axeYPlayer = 0.83f;
+                    axeYPlayer = 0.6f;
+                    axeXPlayer = -.5f;
+                    axeZPlayer = 1.3f;
+
+
+                    //lookWeightForHoldRight = 0;
+                    lookWeightMaxForHoldRight =
+                        Mathf.Lerp(lookWeightMaxForHoldRight, 0f, Time.deltaTime * lookSmoother);
+                }
+
+
+
+                // Fais monter ou descendre le joueur
+                transform.position = Vector3.Lerp(transform.position,
+                    currentHoldRight.transform.position - new Vector3(axeXPlayer, axeYPlayer, axeZPlayer),
+                    speed * Time.deltaTime);
+
+
                 
-                fallPlayerOnce = true;
+                
             }
             else
             {
-                fallPlayerOnce = false;
-            }
-            
-            
-            print("après, numberOfTargetTmp : " + numberOfTargetTmp);
 
 
-            
-            
-            // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
-            currentHoldLeft = GameObject.Find("P1_prise " + numberOfTargetTmp);
-            print("c'est la prise de gauche : " + currentHoldLeft);
-            
-            float axeYPlayer = 1.81f;
-            float axeXPlayer = -.5f;
-            float axeZPlayer = .4f;
-            
-            if (doFallPlayer)
-            {
-                axeYPlayer = 1;
-            }
-
-            
-            // Les tests ci-dessous c'est quand le joueur descend vers les premières prises
-            if (numberOfTargetTmp < 2)
-            {
-                if (numberOfTargetTmp == 0)
+                if (isHoldRightFinish)
                 {
-                    currentHoldLeft = GameObject.Find("P1_prise 2");
+                    print("k1 nan hein 2");
+                    lookWeightForHoldRight = 0;
+                    lookWeightForLeftFeet = 0;
+                }
+
+            }
+
+
+            // Récupère la valeur maximale de lookWeight à chaque fois pour que le bras ne descende pas 
+            if (lookWeightForHoldRight > lookWeightMaxForHoldRight)
+            {
+                lookWeightMaxForHoldRight = lookWeightForHoldRight;
+            }
+
+
+            try
+            {
+                // Bouge le bras droit (animation)
+                print("prends la prise avec la main droite");
+                animator.SetIKPositionWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
+                animator.SetIKRotationWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
+                animator.SetIKPosition(AvatarIKGoal.RightHand,
+                    currentHoldRight.transform.position - new Vector3(0, 0, .3f));
+                animator.SetIKRotation(AvatarIKGoal.RightHand, currentHoldRight.transform.rotation);
+            }
+            catch (Exception e)
+            {
+            }
+
+
+            /*-----------------------------------------*/
+            /*--------------- PIED DROIT --------------*/
+            /*-----------------------------------------*/
+            try
+            {
+                animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, lookWeightForRightFeet);
+                animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, lookWeightForRightFeet);
+
+                animator.SetIKPosition(AvatarIKGoal.RightFoot,
+                    currentHoldRight.transform.position - new Vector3(0.5f, 1.5f, -0.5f));
+                animator.SetIKRotation(AvatarIKGoal.RightFoot, currentHoldRight.transform.rotation);
+            }
+            catch (Exception e)
+            {
+            }
+
+
+
+            /*-----------------------------------------*/
+            /*-------------- BRAS GAUCHE --------------*/
+            /*-----------------------------------------*/
+
+            // Vérifie si c'est le bras gauche qui doit bouger
+            if (isHoldLeft || doFallPlayer && !isHoldRight)
+            {
+                print("bras gauche");
+
+                isLeftHandOnHold = lookWeightForHoldLeft >= 0.7f;
+
+                lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
+                lookWeightForRightFeet = Mathf.Lerp(lookWeightForRightFeet, 1f, Time.deltaTime * lookSmoother);
+
+
+                numberOfCurrentHold = progressiveCircular.getCurrentNumberOfHoldOnIndicator() - 1;
+
+
+                int numberOfTargetTmp = numberOfCurrentHold;
+
+
+                print("avant, numberOfTargetTmp 11: " + numberOfTargetTmp);
+
+                if (doFallPlayer)
+                {
+
+                    numberOfTargetTmp = numberOfCurrentHold - 1;
+
+
+                    // Le joueur est tombé, donc vrai
+                    fellPlayer = true;
+
+                    if (fallPlayerInARow)
+                    {
+                        if (getFellPlayer())
+                        {
+                            print("+ donc là il est tombé");
+                            if (getIsHoldRight())
+                            {
+                                print("+ apparement c'est la main droite du coup on met true a gauche et faux droite");
+                                setGoodHandForClimb(true, false);
+                            }
+                            else
+                            {
+                                print(
+                                    "+ apparement c'est la main gauche du coup on met false a gauche et true a droite");
+                                setGoodHandForClimb(false, true);
+                            }
+
+                            fallPlayerInARow = false;
+
+                            return;
+                        }
+                    }
+
+                    fallPlayerOnce = true;
+                }
+                else
+                {
+                    fallPlayerOnce = false;
+                }
+
+
+                print("après, numberOfTargetTmp : " + numberOfTargetTmp);
+
+
+
+
+                // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
+                currentHoldLeft = GameObject.Find("P1_prise " + numberOfTargetTmp);
+                print("c'est la prise de gauche : " + currentHoldLeft);
+
+                float axeYPlayer = 1.81f;
+                float axeXPlayer = -.5f;
+                float axeZPlayer = .4f;
+
+                if (doFallPlayer)
+                {
+                    axeYPlayer = 1;
+                }
+
+
+                // Les tests ci-dessous c'est quand le joueur descend vers les premières prises
+                if (numberOfTargetTmp < 2)
+                {
+                    if (numberOfTargetTmp == 0)
+                    {
+                        currentHoldLeft = GameObject.Find("P1_prise 2");
+                        lookWeightForHoldLeft = 0;
+                        lookWeightMaxForHoldLeft = 0;
+                        lookWeightForRightFeet = 0;
+
+                    }
+
+                    numberOfTargetTmp = progressiveCircular.getCurrentNumberOfHoldOnIndicator() - 1;
+                }
+
+                print("after, numberOfTargetTmp et doFallPlayer : " + numberOfTargetTmp + " et " + doFallPlayer);
+
+
+
+
+
+                // Le joueur doit tomber de la deuxième prise seulement en axe Y
+                if (numberOfTargetTmp == 1 && doFallPlayer)
+                {
+
+                    if (transform.position.y > 12)
+                    {
+                        print("ouais il doit descendre encore gauche");
+
+
+                        transform.position = Vector3.Lerp(transform.position,
+                            new Vector3(-2.8f, 11.85f, -1.3f),
+                            3.5f * Time.deltaTime);
+
+
+                    }
+
+                    print("after, inoxtag");
+                    // Il faudra surement changer la valeur ici dans la nouvelle map -------------------- /!\
+                    //axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
+                    axeYPlayer = 2.83f;
+                    axeXPlayer = -.5f;
+                    axeZPlayer = 1.3f;
+                }
+
+                /*
+                // Info : dépenant de quel côté est la deuxième prise, par ex. droite, ce code devra être dans la partie du bras droit
+                if (numberOfTargetTmp == 2 && doFallPlayer)
+                {
+                    axeXPlayer = 1f;
+                    //axeYPlayer = 1.82f;
+                    axeYPlayer = 3f;
                     lookWeightForHoldLeft = 0;
                     lookWeightMaxForHoldLeft = 0;
                     lookWeightForRightFeet = 0;
-
                 }
-                numberOfTargetTmp = progressiveCircular.getCurrentNumberOfHoldOnIndicator() - 1;
-            }
-            
-            print("after, numberOfTargetTmp et doFallPlayer : " + numberOfTargetTmp + " et " + doFallPlayer);
+                */
 
-          
-            
-            
-            
-            // Le joueur doit tomber de la deuxième prise seulement en axe Y
-            if (numberOfTargetTmp == 1 && doFallPlayer)
+
+                // Bouge le corps du personnage vers la prise et monte ou descend
+                transform.position = Vector3.Lerp(transform.position,
+                    currentHoldLeft.transform.position - new Vector3(axeXPlayer, axeYPlayer, axeZPlayer),
+                    speed * Time.deltaTime);
+            }
+            else
             {
-                
-                if (transform.position.y > 12)
+
+                if (isHoldLeftFinish)
                 {
-                    print("ouais il doit descendre encore gauche");
-                   
-                    
-                    transform.position = Vector3.Lerp(transform.position,
-                        new Vector3(-2.8f, 11.85f, -1.3f),
-                        3.5f * Time.deltaTime);
-                    
-                    
+                    print("k1 nan hein 3");
+                    lookWeightForHoldLeft = 0;
+                    lookWeightForRightFeet = 0;
                 }
-                
-                print("after, inoxtag");
-                // Il faudra surement changer la valeur ici dans la nouvelle map -------------------- /!\
-                //axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
-                axeYPlayer = 2.83f;
-                axeXPlayer = -.5f;
-                axeZPlayer = 1.3f;
+
             }
-            
-            /*
-            // Info : dépenant de quel côté est la deuxième prise, par ex. droite, ce code devra être dans la partie du bras droit
-            if (numberOfTargetTmp == 2 && doFallPlayer)
+
+
+            // Récupère la valeur maximale de lookWeight à chaque fois pour que le bras ne descende pas 
+            if (lookWeightForHoldLeft > lookWeightMaxForHoldLeft)
             {
-                axeXPlayer = 1f;
-                //axeYPlayer = 1.82f;
-                axeYPlayer = 3f;
-                lookWeightForHoldLeft = 0;
-                lookWeightMaxForHoldLeft = 0;
-                lookWeightForRightFeet = 0;
+                lookWeightMaxForHoldLeft = lookWeightForHoldLeft;
             }
-            */
+
+
+            // Bouge le bras gauche (animation)
+            try
+            {
+                print("prends la prise avec la main gauche");
+                animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, lookWeightMaxForHoldLeft);
+                animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, lookWeightMaxForHoldLeft);
+                animator.SetIKPosition(AvatarIKGoal.LeftHand, currentHoldLeft.transform.position);
+                animator.SetIKRotation(AvatarIKGoal.LeftHand, currentHoldLeft.transform.rotation);
+            }
+            catch (Exception e)
+            {
+            }
+
+
+            /*-----------------------------------------*/
+            /*-------------- PIED GAUCHE --------------*/
+            /*-----------------------------------------*/
+            try
+            {
+                animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, lookWeightForLeftFeet);
+                animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, lookWeightForLeftFeet);
+                animator.SetIKPosition(AvatarIKGoal.LeftFoot,
+                    currentHoldLeft.transform.position - new Vector3(0.5f, 1.5f, -0.5f));
+                animator.SetIKRotation(AvatarIKGoal.LeftFoot, currentHoldLeft.transform.rotation);
+            }
+            catch (Exception e)
+            {
+            }
+        }
+
+
+        /// <summary>
+        /// Dernière animation que va faire automatiquement le personnage lorsque le joueur aura atteint la dernière prise
+        /// </summary>
+        void animationOfEnd()
+        {
             
+            playerWinner.player1Winner();
+            
+            
+                
+            print("k1 bonsoir l'animation");
+            currentHoldLeft = GameObject.Find("HoldLeftFinish");
 
-            // Bouge le corps du personnage vers la prise et monte ou descend
-            transform.position = Vector3.Lerp(transform.position,
-                currentHoldLeft.transform.position - new Vector3(axeXPlayer, axeYPlayer, axeZPlayer),
-                speed * Time.deltaTime);
-        }
-        else
-        {
-            lookWeightForHoldLeft = 0;
-            lookWeightForRightFeet = 0;
-        }
-        
+            print("k1 lookWeightForHoldLeft : " + lookWeightForHoldLeft);
+            
+            lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * .6f);
 
-        // Récupère la valeur maximale de lookWeight à chaque fois pour que le bras ne descende pas 
-        if (lookWeightForHoldLeft > lookWeightMaxForHoldLeft)
-        {
-            lookWeightMaxForHoldLeft = lookWeightForHoldLeft;
-        }
-
-
-        // Bouge le bras gauche (animation)
-        try
-        {
-            print("prends la prise avec la main gauche");
+            
+            
+            // Récupère la valeur maximale de lookWeight à chaque fois pour que le bras ne descende pas 
+            if (lookWeightForHoldLeft > lookWeightMaxForHoldLeft)
+            {
+                lookWeightMaxForHoldLeft = lookWeightForHoldLeft;
+            }
+            
+            // Bouge le bras 
             animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, lookWeightMaxForHoldLeft);
             animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, lookWeightMaxForHoldLeft);
             animator.SetIKPosition(AvatarIKGoal.LeftHand, currentHoldLeft.transform.position);
             animator.SetIKRotation(AvatarIKGoal.LeftHand, currentHoldLeft.transform.rotation);
-        }
-        catch (Exception e)
-        {
-        }
 
+            
+            // Bouge le corps
+            transform.position = Vector3.Lerp(transform.position,
+                currentHoldLeft.transform.position - new Vector3(-0.4f, -2.2f, .4f),
+                .8f * Time.deltaTime);
+            
+            print("k1 aurevoir l'animation l'animation");
+        
+            
+            
 
-        /*-----------------------------------------*/
-        /*-------------- PIED GAUCHE --------------*/
-        /*-----------------------------------------*/
-        try
-        {
-            animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, lookWeightForLeftFeet);
-            animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, lookWeightForLeftFeet);
-            animator.SetIKPosition(AvatarIKGoal.LeftFoot,
-                currentHoldLeft.transform.position - new Vector3(0.5f, 1.5f, -0.5f));
-            animator.SetIKRotation(AvatarIKGoal.LeftFoot, currentHoldLeft.transform.rotation);
-        }
-        catch (Exception e)
-        {
-        }
+          
+            if (lookWeightForHoldLeft > 0.45f)
+            {
+                if (isHoldRightFinish)
+                {
+                    print("k1 run");
+                    gameIsFnished = true;
+                    isHoldRightFinish = false;
+                    //resetWeightRightHand();
+                }
+                
+                currentHoldRight = GameObject.Find("HoldRightFinish");
 
+                
+                lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * .8f);
+                print("k1 lookWeightForHoldRight : " + lookWeightForHoldRight);
+
+            
+            
+                // Récupère la valeur maximale de lookWeight à chaque fois pour que le bras ne descende pas 
+                if (lookWeightForHoldRight > lookWeightMaxForHoldRight)
+                {
+                    lookWeightMaxForHoldRight = lookWeightForHoldRight;
+                }
+            
+                // Bouge le bras 
+                animator.SetIKPositionWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
+                animator.SetIKRotationWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
+                animator.SetIKPosition(AvatarIKGoal.RightHand, currentHoldRight.transform.position);
+                animator.SetIKRotation(AvatarIKGoal.RightHand, currentHoldRight.transform.rotation);
+
+                
+                if (lookWeightForHoldRight > 0.5f)
+                {
+                    // Bouge le corps
+                    transform.position = Vector3.Lerp(transform.position,
+                        currentHoldRight.transform.position - new Vector3(0.4f, 2.85f, -1.2f),
+                        0.6f * Time.deltaTime);
+                }
+                
+                
+                
+              
+            }
+            
+            
+            
+        }
         
     }
 
+    
+    
+    /// <summary>
+    /// Remets à zéro le weight de la main droite (pour les animations)
+    /// </summary>
+    private void resetWeightRightHand()
+    {
+        lookWeightForHoldRight = 0;
+        lookWeightMaxForHoldRight = 0;
+    }
+    
+    /// <summary>
+    /// Remets à zéro le weight de la main gauche (pour les animations)
+    /// </summary>
+    private void resetWeightLeftHand()
+    {
+        lookWeightForHoldLeft = 0;
+        lookWeightMaxForHoldLeft = 0;
+    }
+
+
+
+
+    
+    
+    
 
     /// <summary>
     /// Retourne si oui ou non le joueur peut attraper la prochaine prise

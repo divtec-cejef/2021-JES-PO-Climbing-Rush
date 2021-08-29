@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using TMPro;
+using UnityEditor.Profiling.Memory.Experimental;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +21,8 @@ public class GeneralCoutnDownTimer : MonoBehaviour
     public StartCountDownTimer startCountDownTimer;
     public float timeValue = 90;
 
+    private bool isGameFinish = false;
+
     private void Start()
     {
         //textTemps.text = textTempsAfficher;
@@ -28,7 +32,7 @@ public class GeneralCoutnDownTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (startCountDownTimer.getCanStartGeneralCountDownTimer())
+        if (startCountDownTimer.getCanStartGeneralCountDownTimer() && !isGameFinish)
         {
             if (timeValue > 0)
             {
@@ -55,6 +59,21 @@ public class GeneralCoutnDownTimer : MonoBehaviour
             countDownTimeDisplay.text = string.Format("{0:00}:{1:00}", minutes, secondes);
         }
     }
+
+
+    public void stopGeneralCountDownTimer()
+    {
+        isGameFinish = true;
+    }
+
+    /// <summary>
+    /// Renvoie le temps en plus pour le convertir en points
+    /// </summary>
+    public float getTimeValueRemaining()
+    {
+        return timeValue;
+    }
+    
 }
 
 

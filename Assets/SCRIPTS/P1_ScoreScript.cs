@@ -171,4 +171,30 @@ public class P1_ScoreScript : MonoBehaviour
         isButtonPressedTooFast = tooFast;
     }
 
+
+    /// <summary>
+    /// Ajoute des points si le timer n'est pas à 00:00
+    /// </summary>
+    /// <param name="timeValueRemaining"></param>
+    public void addRemainingPointsOfTimer(float timeValueRemaining)
+    {
+
+        if (timeValueRemaining > 1)
+        {
+            int timeCastToPoints = (int)(timeValueRemaining * 10) / 2;
+            
+            print("k2 pints gagner grace au timer : " + timeCastToPoints);
+
+            
+            gainPoint.displayGainPoint(timeCastToPoints, true);
+
+            scoreValue += timeCastToPoints;
+            
+            print("k2 ca donne quoi : " + scoreValue);
+            
+            score.text = "Score : " + scoreValue;
+        }
+        
+        
+    }
 }
