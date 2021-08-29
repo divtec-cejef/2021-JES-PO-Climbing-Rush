@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -17,8 +18,53 @@ public class StartCountDownTimer : MonoBehaviour
     public TextMeshProUGUI countDownTimeDisplay;
 
     private bool canStartGeneralCountDownTimer = false;
+
+    // Toujours mettre +1 au nombre de base (ex.: décompte qui commence à 3 alors timeValue = 4
+    public float timeValue = 4;
+
+
+    private void Start()
+    {
+        //textTemps.text = textTempsAfficher;
+        countDownTimeDisplay.text = timeValue.ToString();
+    }
+
+    private void Update()
+    {
+        if (timeValue > 0)
+            {
+                timeValue -= Time.deltaTime;
+            }
+            else
+            {
+                timeValue = 0;
+                countDownTimeDisplay.gameObject.SetActive(false);     
+            }
+
+            DisplayTime(timeValue);
+    }
+
+    void DisplayTime(float timeToDisplay)
+    {
+        if (timeToDisplay < 1 && timeToDisplay > 0)
+        {
+            countDownTimeDisplay.text = "GO !";
+            canStartGeneralCountDownTimer = true;
+            countDownTimerIsFinished = true;
+        }
+        else
+        {
+            //float minutes = Mathf.FloorToInt(timeToDisplay / 60);
+            float secondes = Mathf.FloorToInt(timeToDisplay % 60);
+            countDownTimeDisplay.text = secondes.ToString();
+        }
+
+        
+    }
     
-    
+
+
+    /*
     void Start()
     {
         startCountDownTimer = StartCoroutine(CountDownToStart());
@@ -50,7 +96,7 @@ public class StartCountDownTimer : MonoBehaviour
         StopCoroutine(startCountDownTimer);                   
     }                                                         
 
-
+    */
 
     /// <summary>
     /// </summary>
@@ -71,3 +117,4 @@ public class StartCountDownTimer : MonoBehaviour
     }
     
 }
+    
