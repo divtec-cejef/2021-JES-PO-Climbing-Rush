@@ -23,7 +23,7 @@ public class P2_MovePlayer : MonoBehaviour
     public P2_GainPoint gainPoint;
         
     
-    private bool stuckPlayer = false;
+    private bool dropPlayer = false;
     private bool waitWhileCoroutine = false;
     private int wrongButtonPressTwice = 0;
 
@@ -87,7 +87,7 @@ public class P2_MovePlayer : MonoBehaviour
                 ikControl.setFallPlayerInARow(false);
 
                 // Le joueur ne doit pas être bloqué
-                stuckPlayer = false;
+                dropPlayer = false;
 
                 // Le joueur n'est pas tombé
                 progressiveCircular.setFellPlayer(false);
@@ -105,12 +105,10 @@ public class P2_MovePlayer : MonoBehaviour
                     ikControl.setIsFirstHold(true);
                 }
 
-                // LE DEUXIèME JOUEUR RESTE BLOQUÉ ICI POUR UN RAISON QUE J'IGNORE, IL NE PASSE PAS LE TEST (résultat = faux)
                 // Vérifie que le joueur puisse monter et qu'il ne doit pas être bloqué (appuyé sur le mauvais bouton)
-                // En fait il y aurait plus besoins du "ikControl.getCanClimb()" psq déjà il monte assez vite et Steve Fallet 
-                // a dit que s'il faisait faux il tombait directement donc il y a plus vraiment besoins de ça
-                if (!waitWhileCoroutine)
-                {
+                // ikControl.getCanClimb() && <- je l'ai enlevé, il ne sert plus à rien (je crois)
+                //if (!waitWhileCoroutine)
+                //{
 
                     print("monte !");
 
@@ -154,42 +152,49 @@ public class P2_MovePlayer : MonoBehaviour
 
                     // Fais bouger le joueur à la prochaine prise
                     ikControl.animationClimbingPlayer();
-                }
+                //}
             }
             else
             {
                 // Le bouton pressé est faux et on imagine qu'il a été pressé trop rapidement, si ce n'est pas le cas
                 // alors on annule ce dernier.
                 scoreScript.setIsGoodButton(false);
-                scoreScript.setButtonPressedTooFast(true);
+                //scoreScript.setButtonPressedTooFast(true);
+                scoreScript.setButtonPressedTooFast(false);
 
+                /*
                 if (ikControl.getCanClimb())
                 {
                     scoreScript.setButtonPressedTooFast(false);
                 }
+                */
 
                 // Le joueur doit être bloqué
-                stuckPlayer = true;
+                dropPlayer = true;
 
                 // Le joueur doit descendre d'une prise si wrongButtonPressTwice = 2
-                wrongButtonPressTwice++;
+                //wrongButtonPressTwice++;
             }
 
 
             // Calcule les points
+            /*
             if (!waitWhileCoroutine)
             {
                 scoreScript.calculatePoints();
             }
+            */
 
             // Vérifie si le joueur est redescendu jusqu'à la première
             if (progressiveCircular.getCurrentNumberOfHoldOnIndicator() == 1)
             {
                 isFirstHold = true;
             }
+            
+            scoreScript.calculatePoints();
 
             // Descends le joueur d'une prise
-            if (stuckPlayer && wrongButtonPressTwice >= 2 && !isFirstHold && !waitWhileCoroutine)
+            if (dropPlayer && !isFirstHold)
             {
                 print("le joueur doit tomber");
                 wrongButtonPressTwice = 0;
@@ -224,11 +229,13 @@ public class P2_MovePlayer : MonoBehaviour
                 progressiveCircular.setDefaultProgressCircularBarUI();
                 progressiveCircular.moveNextIndicator();
             }
+            /*
             // Bloque le joueur pendant 2 secondes
-            else if (stuckPlayer)
+            else if (dropPlayer)
             {
                 stopPlayerClimb = StartCoroutine(StopPlayerClimbFor2Seconds());
             }
+            */
         }
 
     }

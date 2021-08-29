@@ -23,7 +23,7 @@ public class P1_MovePlayer : MonoBehaviour
     public P1_GainPoint gainPoint;
         
     
-    private bool stuckPlayer = false;
+    private bool dropPlayer = false;
     private bool waitWhileCoroutine = false;
     private int wrongButtonPressTwice = 0;
 
@@ -68,7 +68,7 @@ public class P1_MovePlayer : MonoBehaviour
             
             if (colorButton.Equals(progressiveCircular.getCurrentColorIndicator()))
             {
-                print("BENKS P1");
+                print("BENKS P1 le truc des couleurs OK");
                 
                 scoreScript.setButtonPressedTooFast(true);
                 scoreScript.setIsGoodButton(true);
@@ -85,7 +85,7 @@ public class P1_MovePlayer : MonoBehaviour
                 ikControl.setFallPlayerInARow(false);
 
                 // Le joueur ne doit pas être bloqué
-                stuckPlayer = false;
+                dropPlayer = false;
 
                 // Le joueur n'est pas tombé
                 progressiveCircular.setFellPlayer(false);
@@ -104,9 +104,9 @@ public class P1_MovePlayer : MonoBehaviour
                 }
 
                 // Vérifie que le joueur puisse monter et qu'il ne doit pas être bloqué (appuyé sur le mauvais bouton)
-                // 
-                if (ikControl.getCanClimb() && !waitWhileCoroutine)
-                {
+                // ikControl.getCanClimb() && <- je l'ai enlevé, il ne sert plus à rien (je crois)
+                //if (!waitWhileCoroutine)
+                //{
 
                     print("monte !");
 
@@ -150,33 +150,40 @@ public class P1_MovePlayer : MonoBehaviour
 
                     // Fais bouger le joueur à la prochaine prise
                     ikControl.animationClimbingPlayer();
-                }
+                //}
             }
             else
             {
                 // Le bouton pressé est faux et on imagine qu'il a été pressé trop rapidement, si ce n'est pas le cas
                 // alors on annule ce dernier.
                 scoreScript.setIsGoodButton(false);
-                scoreScript.setButtonPressedTooFast(true);
+                //scoreScript.setButtonPressedTooFast(true);
+                scoreScript.setButtonPressedTooFast(false);
 
+                /*
                 if (ikControl.getCanClimb())
                 {
                     scoreScript.setButtonPressedTooFast(false);
                 }
+                */
 
-                // Le joueur doit être bloqué
-                stuckPlayer = true;
+                // Le joueur doit tomber d'une prise
+                dropPlayer = true;
 
                 // Le joueur doit descendre d'une prise si wrongButtonPressTwice = 2
-                wrongButtonPressTwice++;
+                //wrongButtonPressTwice++;
             }
 
 
             // Calcule les points
+            /*
             if (!waitWhileCoroutine)
             {
                 scoreScript.calculatePoints();
             }
+            */
+
+            
 
             // Vérifie si le joueur est redescendu jusqu'à la première
             if (progressiveCircular.getCurrentNumberOfHoldOnIndicator() == 1)
@@ -184,8 +191,10 @@ public class P1_MovePlayer : MonoBehaviour
                 isFirstHold = true;
             }
 
+            scoreScript.calculatePoints();
+            
             // Descends le joueur d'une prise
-            if (stuckPlayer && wrongButtonPressTwice >= 2 && !isFirstHold && !waitWhileCoroutine)
+            if (dropPlayer && !isFirstHold)
             {
                 print("le joueur doit tomber");
                 wrongButtonPressTwice = 0;
@@ -220,11 +229,13 @@ public class P1_MovePlayer : MonoBehaviour
                 progressiveCircular.setDefaultProgressCircularBarUI();
                 progressiveCircular.moveNextIndicator();
             }
+            /*
             // Bloque le joueur pendant 2 secondes
-            else if (stuckPlayer)
+            else if (dropPlayer)
             {
                 stopPlayerClimb = StartCoroutine(StopPlayerClimbFor2Seconds());
             }
+            */
         }
 
     }

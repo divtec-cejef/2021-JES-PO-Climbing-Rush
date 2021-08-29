@@ -29,7 +29,7 @@ public class P2_IkControl : MonoBehaviour
     public float lookSmoother = 3f;
     public float speed = 2.5f;
 
-    public P1_ScoreScript scoreScript;
+    public P2_ScoreScript scoreScript;
 
 
     private float lookWeightMaxForHoldRight;
@@ -236,74 +236,12 @@ public class P2_IkControl : MonoBehaviour
                 fallPlayerOnce = false;
             }
             
-            /*
-            // Si le joueur doit tomber alors on cherche la prise précédente
-            if (doFallPlayer)
-            {
-                if (fallPlayerOnce)
-                {
-                    fallPlayerMoreThanOnce = true;
-                }
-                
-                
-                
-                print("coucou le musulman 1");
-
-                isNotYetFallen = false;
-                
-                // Le joueur est tombé, donc vrai
-                fellPlayer = true;
-                
-                if (numberOfTargetTmp == 1)
-                {
-                    numberOfTargetTmp = 1;
-                }
-                else
-                {
-                    numberOfTargetTmp -= 1;
-                    if (isHoldRight)
-                    {
-                        if (numberOfCurrentHold != 2)
-                        {
-                            numberOfTargetTmp -= 1;
-                        }
-                    }
-                }
-
-                /*
-                if (forGetCurrentNumberHold)
-                {
-                    //numberOfCurrentHold -= numberOfTargetTmp;
-                    // affecter la valeur ci dessus a une variable temporaire qu'ensuite affectera a numberOfCurrentHold
-                    numberToFallPlayerTmp += numberOfTargetTmp;
-                    
-                    print("raccordon");
-
-                    
-                    forGetCurrentNumberHold = false;
-                }
-                */
-            /*
-                numberToFallPlayerTmp += numberOfTargetTmp;
-                
-                
-                fallPlayerOnce = true;
-            }
-            else
-            {
-                fallPlayerOnce = false;
-                fallPlayerMoreThanOnce = false;
-            }
-
-            */
 
 
             print("après, numberOfTargetTmp : " + numberOfTargetTmp);
             
             
           
-
-            
             
             // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
             currentHoldRight = GameObject.Find("P2_prise " + numberOfTargetTmp);
@@ -319,6 +257,7 @@ public class P2_IkControl : MonoBehaviour
             
             float axeXPlayer = .9f;
             float axeYPlayer = 1.81f;
+            float axeZPlayer = .6f;
 
 
            
@@ -346,8 +285,25 @@ public class P2_IkControl : MonoBehaviour
             {
                 // Ne change pas la postion y du joueur quand il doit tomber de la première prise
                 //axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
-                axeYPlayer = 0.83f;
-                axeXPlayer = .9f;
+                
+                if (transform.position.y > 12)
+                {
+                    print("ouais il doit descendre encore droit");
+                    
+                    transform.position = Vector3.Lerp(transform.position,
+                        new Vector3(5.4f, 11.85f, -2.04f),
+                        3.5f * Time.deltaTime);
+                
+                    
+                }
+                
+                
+                //axeYPlayer = 0.83f;
+                axeYPlayer = 0.8f;
+                axeXPlayer = -.5f;
+                axeZPlayer = 1.3f;
+                
+
                 //lookWeightForHoldRight = 0;
                 lookWeightMaxForHoldRight = Mathf.Lerp(lookWeightMaxForHoldRight, 0f, Time.deltaTime * lookSmoother);
             }
@@ -356,7 +312,7 @@ public class P2_IkControl : MonoBehaviour
             
             // Fais monter ou descendre le joueur
             transform.position = Vector3.Lerp(transform.position,
-                currentHoldRight.transform.position - new Vector3(axeXPlayer, axeYPlayer, .6f),
+                currentHoldRight.transform.position - new Vector3(axeXPlayer, axeYPlayer, axeZPlayer),
                 speed * Time.deltaTime);
         }
         else
@@ -467,61 +423,7 @@ public class P2_IkControl : MonoBehaviour
                 fallPlayerOnce = false;
             }
             
-            /*
-            // Si le joueur doit tomber alors on cherche la prise précédente
-            if (doFallPlayer)
-            {
-                print("coucou le musulman 2");
-                isNotYetFallen = false;
-
-                if (fallPlayerOnce)
-                {
-                    fallPlayerMoreThanOnce = true;
-                }
-                
-                // Le joueur est tombé, donc vrai
-                fellPlayer = true;
-                
-                if (numberOfTargetTmp == 1)
-                {
-                    numberOfTargetTmp = 1;
-                }
-                else
-                {
-                    numberOfTargetTmp -= 1;
-                    if (isHoldLeft)
-                    {
-                        if (numberOfCurrentHold != 2)
-                        {
-                            numberOfTargetTmp -= 1;
-                        }
-                    }
-                }
-                
-                /*
-                if  (forGetCurrentNumberHold)
-                {
-                    //numberOfCurrentHold -= numberOfTargetTmp;
-
-                    print("raccordon");
-                    numberToFallPlayerTmp += numberOfTargetTmp;
-                    
-                    forGetCurrentNumberHold = false;
-                }
-                */
-            /*
-                numberToFallPlayerTmp += numberOfTargetTmp;
-
-
-                fallPlayerOnce = true;
-            }
-            else
-            {
-                fallPlayerOnce = false;
-                fallPlayerMoreThanOnce = false;
-            }
             
-            */
             print("après, numberOfTargetTmp : " + numberOfTargetTmp);
 
 
@@ -532,7 +434,8 @@ public class P2_IkControl : MonoBehaviour
             print("c'est la prise de gauche : " + currentHoldLeft);
             
             float axeYPlayer = 1.81f;
-            float axeXPlayer = -0.9f;
+            float axeXPlayer = -.5f;
+            float axeZPlayer = .6f;
             
             if (doFallPlayer)
             {
@@ -556,14 +459,31 @@ public class P2_IkControl : MonoBehaviour
             
             print("after, numberOfTargetTmp et doFallPlayer : " + numberOfTargetTmp + " et " + doFallPlayer);
 
+          
+            
+            
             
             // Le joueur doit tomber de la deuxième prise seulement en axe Y
             if (numberOfTargetTmp == 1 && doFallPlayer)
             {
+                
+                if (transform.position.y > 12)
+                {
+                    print("ouais il doit descendre encore gauche");
+                   
+                    
+                    transform.position = Vector3.Lerp(transform.position,
+                        new Vector3(5.4f, 11.85f, -1.3f),
+                        3.5f * Time.deltaTime);
+                    
+                }
+                
                 print("after, inoxtag");
                 // Il faudra surement changer la valeur ici dans la nouvelle map -------------------- /!\
                 //axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
-                axeYPlayer = 2.83f;
+                axeYPlayer = 3f;
+                axeXPlayer = -.5f;
+                axeZPlayer = 1.3f;
             }
             
             /*
@@ -582,7 +502,7 @@ public class P2_IkControl : MonoBehaviour
 
             // Bouge le corps du personnage vers la prise et monte ou descend
             transform.position = Vector3.Lerp(transform.position,
-                currentHoldLeft.transform.position - new Vector3(axeXPlayer, axeYPlayer, .6f),
+                currentHoldLeft.transform.position - new Vector3(axeXPlayer, axeYPlayer, axeZPlayer),
                 speed * Time.deltaTime);
         }
         else
