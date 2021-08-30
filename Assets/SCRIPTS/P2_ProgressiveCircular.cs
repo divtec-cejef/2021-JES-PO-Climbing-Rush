@@ -36,7 +36,7 @@ public class P2_ProgressiveCircular : MonoBehaviour
     private Vector3 positionNextHold;
     private Vector3 positionIndicatorUI;
 
-    private int numberOfTarget;
+    public int numberOfTarget;
 
     private List<Color> listColorIndicator = new List<Color>();
     private Color nextColorIndicator;

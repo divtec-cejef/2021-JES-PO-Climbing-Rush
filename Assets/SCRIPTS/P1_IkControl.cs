@@ -194,7 +194,7 @@ public class P1_IkControl : MonoBehaviour
         else
         {
 
-            animator.SetLookAtPosition(GameObject.Find("TargetHeadFinish").transform.position);
+            animator.SetLookAtPosition(GameObject.Find("P1_TargetHeadFinish").transform.position);
             
             
             
@@ -416,7 +416,6 @@ public class P1_IkControl : MonoBehaviour
             {
                 animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, lookWeightForRightFeet);
                 animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, lookWeightForRightFeet);
-
                 animator.SetIKPosition(AvatarIKGoal.RightFoot,
                     currentHoldRight.transform.position - new Vector3(0.5f, 1.5f, -0.5f));
                 animator.SetIKRotation(AvatarIKGoal.RightFoot, currentHoldRight.transform.rotation);
@@ -635,7 +634,7 @@ public class P1_IkControl : MonoBehaviour
             
                 
             print("k1 bonsoir l'animation");
-            currentHoldLeft = GameObject.Find("HoldLeftFinish");
+            currentHoldLeft = GameObject.Find("P1_HoldLeftFinish");
 
             print("k1 lookWeightForHoldLeft : " + lookWeightForHoldLeft);
             
@@ -677,7 +676,7 @@ public class P1_IkControl : MonoBehaviour
                     //resetWeightRightHand();
                 }
                 
-                currentHoldRight = GameObject.Find("HoldRightFinish");
+                currentHoldRight = GameObject.Find("P1_HoldRightFinish");
 
                 
                 lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * .8f);
