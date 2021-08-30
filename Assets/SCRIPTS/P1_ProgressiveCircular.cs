@@ -97,7 +97,7 @@ public class P1_ProgressiveCircular : MonoBehaviour
         Vector3 currentPositionHold = GameObject.Find("P1_prise " + numberOfTarget).transform.position;
         //currentPositionHold.z -= 1.5f;
         currentPositionHold.z -= 0.8f;
-        currentPositionHold.y += 0.25f;
+        currentPositionHold.y += 0.10f;
         canvasIndicatorUI.transform.position = currentPositionHold;
 
 
@@ -179,7 +179,7 @@ public class P1_ProgressiveCircular : MonoBehaviour
             //currentPositionHold.z -= 1.5f;
             //currentPositionHold.z -= 1f;
             currentPositionHold.z -= 0.8f;
-            currentPositionHold.y += 0.2f;
+            currentPositionHold.y += 0.1f;
             canvasIndicatorUI.transform.position = currentPositionHold;
         }
         

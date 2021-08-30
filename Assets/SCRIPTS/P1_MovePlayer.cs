@@ -49,7 +49,7 @@ public class P1_MovePlayer : MonoBehaviour
 
     private void Start()
     {
-        Screen.orientation = ScreenOrientation.LandscapeLeft;
+        Screen.orientation = ScreenOrientation.Portrait;
     }
 
 

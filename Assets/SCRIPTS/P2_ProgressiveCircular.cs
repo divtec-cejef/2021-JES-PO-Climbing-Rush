@@ -98,8 +98,8 @@ public class P2_ProgressiveCircular : MonoBehaviour
         
         Vector3 currentPositionHold = GameObject.Find("P2_prise " + numberOfTarget).transform.position;
         //currentPositionHold.z -= 1.5f;
-        currentPositionHold.z -= 0.8f;
-        currentPositionHold.y += 0.25f;
+        currentPositionHold.z -= 0.7f;
+        currentPositionHold.y += 0.1f;
         canvasIndicatorUI.transform.position = currentPositionHold;
 
 
@@ -172,7 +172,7 @@ public class P2_ProgressiveCircular : MonoBehaviour
         //currentPositionHold.z -= 1.5f;
         //currentPositionHold.z -= 1f;
         currentPositionHold.z -= 0.8f;
-        currentPositionHold.y += 0.2f;
+        currentPositionHold.y += 0.1f;
         canvasIndicatorUI.transform.position = currentPositionHold;
         
         // Ajoute une couleur random sur cet indicateur si le joueur n'est pas tombé

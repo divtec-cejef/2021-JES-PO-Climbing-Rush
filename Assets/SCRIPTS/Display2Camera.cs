@@ -8,7 +8,7 @@ public class Display2Camera : MonoBehaviour
         // Premet de changé la taille de la fenetre
         for (int i  = 0; i < Display.displays.Length;i++)
         {
-            Display.displays[i].Activate(1920,1080,60);
+            Display.displays[i].Activate(1080,1920,60);
         }
         
     }

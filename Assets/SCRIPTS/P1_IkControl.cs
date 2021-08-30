@@ -307,7 +307,7 @@ public class P1_IkControl : MonoBehaviour
 
 
 
-                float axeXPlayer = .9f;
+                float axeXPlayer = .6f;
                 float axeYPlayer = 1.81f;
                 float axeZPlayer = .4f;
 
@@ -499,7 +499,7 @@ public class P1_IkControl : MonoBehaviour
                 print("c'est la prise de gauche : " + currentHoldLeft);
 
                 float axeYPlayer = 1.81f;
-                float axeXPlayer = -.5f;
+                float axeXPlayer = -.2f;
                 float axeZPlayer = .4f;
 
                 if (doFallPlayer)
