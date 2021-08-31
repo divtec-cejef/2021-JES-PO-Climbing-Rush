@@ -10,8 +10,7 @@ using UnityEngine.UI;
 public class GeneralCoutnDownTimer : MonoBehaviour
 {
     public TextMeshProUGUI GeneralCountDownTimer;
-    // Start is called before the first frame update
-
+    public GameFinishStuckPlayers gameFinishStuckPlayers;
 
     private float countDownTime; // 1 minute 30 secondes
     private bool countDownTimerIsFinished = false;
@@ -60,11 +59,12 @@ public class GeneralCoutnDownTimer : MonoBehaviour
             float secondes = Mathf.FloorToInt(timeToDisplay % 60);
             countDownTimeDisplay.text = string.Format("{0:00}:{1:00}", minutes, secondes);
 
+            
+            // Affiche "Temps écoulé" et bloque les joueurs pour qu'ils ne continuent pas
             if (minutes == 0 && secondes == 0)
             {
-                print("mango");
-                // Affiche "Temps écoulé"
                 playerWinner.timeExpired();
+                gameFinishStuckPlayers.gameIsFinish();
             }
             
         }

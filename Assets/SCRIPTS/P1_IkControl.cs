@@ -12,6 +12,7 @@ public class P1_IkControl : MonoBehaviour
     
     public P1_ProgressiveCircular progressiveCircular;
     public PlayerWinner playerWinner;
+    public GameFinishStuckPlayers gameFinishStuckPlayers;
     
     private Animator animator;
 
@@ -630,6 +631,7 @@ public class P1_IkControl : MonoBehaviour
         {
             
             playerWinner.player1Winner();
+            gameFinishStuckPlayers.gameIsFinish();
             
             
                 

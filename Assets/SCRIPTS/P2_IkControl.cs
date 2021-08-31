@@ -11,6 +11,7 @@ public class P2_IkControl : MonoBehaviour
 {
     public P2_ProgressiveCircular progressiveCircular;
     public PlayerWinner playerWinner;
+    public GameFinishStuckPlayers gameFinishStuckPlayers;
 
     private Animator animator;
 
@@ -580,7 +581,9 @@ public class P2_IkControl : MonoBehaviour
         void animationOfEnd()
         {
             playerWinner.player2Winner();
+            gameFinishStuckPlayers.gameIsFinish();
 
+            
 
             print("k1 bonsoir l'animation");
             currentHoldLeft = GameObject.Find("P2_HoldLeftFinish");

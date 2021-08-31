@@ -31,19 +31,21 @@ public class P2_MovePlayer : MonoBehaviour
 
     private bool isFirstHold = true;
 
+    private bool gameIsFinishAndStuckPlayer = false;
 
 
     void Awake()
     {
         
         controls = new PlayerControls();
-
+        
         // Les cinq boutons à contrôler
         controls.Gameplay.P2_RedButton.performed += ctx => correctCircle(Color.red);
         controls.Gameplay.P2_BlueButton.performed += ctx => correctCircle(Color.blue);
         controls.Gameplay.P2_GreenButton.performed += ctx => correctCircle(Color.green);
         controls.Gameplay.P2_YellowButton.performed += ctx => correctCircle(Color.yellow);
         controls.Gameplay.P2_PurpleButton.performed += ctx => correctCircle(Color.magenta);
+        
     }
 
     private void Start()
@@ -61,7 +63,7 @@ public class P2_MovePlayer : MonoBehaviour
 
         
         
-        if (startCountDownTimer.getcountDownTimerIsFinished())
+        if (startCountDownTimer.getcountDownTimerIsFinished() && !gameIsFinishAndStuckPlayer)
         {
             gainPoint.stopCoroutineGainPointTimed();
            
@@ -256,7 +258,14 @@ public class P2_MovePlayer : MonoBehaviour
         print("la coroutine est stope !");
     }
 
-    
+    /// <summary>
+    /// Change la valeur à vrai si le jeu est fini et doit bloquer le joueur sinon faux
+    /// </summary>
+    /// <param name="isFinish">Booléen à vrai si le jeu est fini sinon faux</param>
+    public void isGameIsFinishAndStuckPlayer(bool isFinish)
+    {
+        gameIsFinishAndStuckPlayer = isFinish;
+    }
 
 
     // Fonctions qui permettent aux boutons de s'activer
