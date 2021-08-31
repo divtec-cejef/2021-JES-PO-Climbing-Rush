@@ -213,7 +213,7 @@ public class P2_ProgressiveCircular : MonoBehaviour
             // Augmente la barre de progression circulaire
             // Plus on rajoute des zéro après la virgule plus ça sera rapie (pour la fluidité du rétrécissement)
             progressCircle.fillAmount += loadedCircleProgressData.speedIndicatorProgress;
-            //yield return new WaitForSeconds(0.001f);
+            //yield return new WaitForSe conds(0.001f);
             yield return new WaitForSeconds(loadedCircleProgressData.waitTimeProgress);
             
 
