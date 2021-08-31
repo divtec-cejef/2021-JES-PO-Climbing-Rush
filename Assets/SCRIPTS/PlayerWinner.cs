@@ -25,6 +25,20 @@ public class PlayerWinner : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// Affiche sur l'écran du premier et deuxième joueur Temps écoulé
+    /// </summary>
+    public void timeExpired()
+    {
+        P1_textWinnerOrLooser.gameObject.SetActive(true);
+        P2_textWinnerOrLooser.gameObject.SetActive(true);
+
+        
+        P1_textWinnerOrLooser.text = "Temps écoulé";
+        P2_textWinnerOrLooser.text = "Temps écoulé";
+    }
+
+
     public void player1Winner()
     {
         if (!isPlayerWin)

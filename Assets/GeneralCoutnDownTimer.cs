@@ -19,6 +19,7 @@ public class GeneralCoutnDownTimer : MonoBehaviour
     private Coroutine startGeneralCountDownTimer;
     public TextMeshProUGUI countDownTimeDisplay;
     public StartCountDownTimer startCountDownTimer;
+    public PlayerWinner playerWinner;
     public float timeValue = 90;
 
     private bool isGameFinish = false;
@@ -42,6 +43,7 @@ public class GeneralCoutnDownTimer : MonoBehaviour
             {
                 timeValue = 0;
                 //FinText.SetActive(true);
+                
             }
 
             DisplayTime(timeValue);
@@ -57,6 +59,14 @@ public class GeneralCoutnDownTimer : MonoBehaviour
             float minutes = Mathf.FloorToInt(timeToDisplay / 60);
             float secondes = Mathf.FloorToInt(timeToDisplay % 60);
             countDownTimeDisplay.text = string.Format("{0:00}:{1:00}", minutes, secondes);
+
+            if (minutes == 0 && secondes == 0)
+            {
+                print("mango");
+                // Affiche "Temps écoulé"
+                playerWinner.timeExpired();
+            }
+            
         }
     }
 
