@@ -582,7 +582,6 @@ public class P2_IkControl : MonoBehaviour
         {
             playerWinner.player2Winner();
             gameFinishStuckPlayers.gameIsFinish();
-
             
 
             print("k1 bonsoir l'animation");
