@@ -272,7 +272,7 @@ public class P2_MovePlayer : MonoBehaviour
     void OnEnable()
     {
         controls.Gameplay.Enable();
-    }
+    }  
 
     void OnDisable()
     {
