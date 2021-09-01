@@ -7,14 +7,19 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class P1_GainPoint : MonoBehaviour
 {
-
-    public TextMeshProUGUI gainPointText;
+    
+    [SerializeField] private TextMeshProUGUI P1_PositivePointsText;
+    [SerializeField] private TextMeshProUGUI P1_NegativePointsText;
 
     private Coroutine startGainPointCoroutine;
     
     // Start is called before the first frame update
     void Start()
     {
+
+        P1_PositivePointsText.gameObject.SetActive(false);
+        P1_NegativePointsText.gameObject.SetActive(false);
+        
         
     }
 
@@ -38,30 +43,23 @@ public class P1_GainPoint : MonoBehaviour
         
         print("DANS LE COROUTINE");
         
-        string sign = "";
-        //Color color = Color.yellow;
-        Color color;
 
         if (!positive)
         {
-            sign = "-";
-            color = Color.red;
+            P1_NegativePointsText.text = "-" + pointAdded;
+            P1_NegativePointsText.gameObject.SetActive(true);
         }
         else
         {
-            sign = "+";
-            color = Color.yellow;
+            P1_PositivePointsText.text = "+" + pointAdded;
+            P1_PositivePointsText.gameObject.SetActive(true);
         }
-        
-        gainPointText.text = "" + sign + pointAdded;
-        gainPointText.color = color;
-        
-        gainPointText.enabled = true;
 
-        
-        yield return new WaitForSeconds(1.5f);
 
-        gainPointText.enabled = false;
+        yield return new WaitForSeconds(0.5f);
+
+        P1_NegativePointsText.gameObject.SetActive(false);
+        P1_PositivePointsText.gameObject.SetActive(false);
         
         
         //StopCoroutine(startGainPointCoroutine);

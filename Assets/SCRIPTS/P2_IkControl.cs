@@ -6,6 +6,7 @@ using System.Text;
 //using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 public class P2_IkControl : MonoBehaviour
 {
@@ -182,8 +183,10 @@ public class P2_IkControl : MonoBehaviour
         // Prochaine prise à regarder avec la tête
         if (progressiveCircular.getCurrentNumberOfHoldOnIndicator() != 70)
         {
+
             animator.SetLookAtPosition(GameObject
-                .Find("P2_prise " + (progressiveCircular.getCurrentNumberOfHoldOnIndicator())).transform.position);
+                .Find("P2_prise " + (progressiveCircular.getCurrentNumberOfHoldOnIndicator()))
+                .transform.position);
         }
 
         else
@@ -323,8 +326,8 @@ public class P2_IkControl : MonoBehaviour
                             new Vector3(5.4f, 11.85f, -2.04f),
                             3.5f * Time.deltaTime);
                     }
-
-
+                    
+                    
                     //axeYPlayer = 0.83f;
                     axeYPlayer = 0.8f;
                     axeXPlayer = -.2f;

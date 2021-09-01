@@ -46,6 +46,7 @@ public class P1_MovePlayer : MonoBehaviour
         controls.Gameplay.P1_YellowButton.performed += ctx => correctCircle(Color.yellow);
         controls.Gameplay.P1_PurpleButton.performed += ctx => correctCircle(Color.magenta);
         
+        print("bah alors steve ballet");
         
     }
 
