@@ -9,13 +9,17 @@ public class P2_GainPoint : MonoBehaviour
 {
 
     public TextMeshProUGUI gainPointText;
+    
+    [SerializeField] private TextMeshProUGUI P2_PositivePointsText;
+    [SerializeField] private TextMeshProUGUI P2_NegativePointsText;
 
     private Coroutine startGainPointCoroutine;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        P2_PositivePointsText.gameObject.SetActive(false);
+        P2_NegativePointsText.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -44,24 +48,21 @@ public class P2_GainPoint : MonoBehaviour
 
         if (!positive)
         {
-            sign = "-";
-            color = Color.red;
+            P2_NegativePointsText.text = "-" + pointAdded;
+            P2_NegativePointsText.gameObject.SetActive(true);
         }
         else
         {
-            sign = "+";
-            color = Color.yellow;
+            P2_PositivePointsText.text = "+" + pointAdded;
+            P2_PositivePointsText.gameObject.SetActive(true);
         }
         
-        gainPointText.text = "" + sign + pointAdded;
-        gainPointText.color = color;
         
-        gainPointText.enabled = true;
-
         
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
 
-        gainPointText.enabled = false;
+        P2_NegativePointsText.gameObject.SetActive(false);
+        P2_PositivePointsText.gameObject.SetActive(false);
         
         
         //StopCoroutine(startGainPointCoroutine);
