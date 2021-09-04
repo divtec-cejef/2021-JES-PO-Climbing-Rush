@@ -101,6 +101,8 @@ public class P2_LightUpLeds : MonoBehaviour
         } while (counterDown < 3);
         */
 
+        
+        // Le premier if permet de ne pas surcharger l'arduino qui fera crash le jeu
         // Change la couleur des LEDs
         if (!isChangedColorRing && !currentColor.Equals(previousColor))
         {
