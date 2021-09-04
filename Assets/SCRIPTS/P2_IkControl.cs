@@ -340,6 +340,19 @@ public class P2_IkControl : MonoBehaviour
                 }
 
 
+                
+                
+                if (numberOfTargetTmp == 59)
+                {
+                    axeZPlayer = .5f;
+                    print("h1 prise 59 droit");
+                }
+                else if (numberOfTargetTmp == 61)
+                {
+                    axeZPlayer = .9f;
+                    print("h1 prise 61 droit");
+                }
+
                 // Fais monter ou descendre le joueur
                 transform.position = Vector3.Lerp(transform.position,
                     currentHoldRight.transform.position - new Vector3(axeXPlayer, axeYPlayer, axeZPlayer),
@@ -524,7 +537,27 @@ public class P2_IkControl : MonoBehaviour
                 }
                 */
 
-
+                
+                if (numberOfTargetTmp == 40)
+                {
+                    print("h1 prise 40 gauche");
+                    axeZPlayer = 1f;
+                }
+                else if (numberOfTargetTmp == 56)
+                {
+                    axeZPlayer = 1;
+                    print("h1 prise 56 gauche");
+                }
+                
+                else if (numberOfTargetTmp == 58)
+                {
+                    axeZPlayer = 1f;
+                    axeXPlayer = .1f;
+                    print("h1 prise 58 gauche");
+                }
+                
+                
+                
                 // Bouge le corps du personnage vers la prise et monte ou descend
                 transform.position = Vector3.Lerp(transform.position,
                     currentHoldLeft.transform.position - new Vector3(axeXPlayer, axeYPlayer, axeZPlayer),
