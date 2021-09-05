@@ -27,8 +27,17 @@ public class P1_LightUpLeds : MonoBehaviour
     private Color tmpColor;
 
     private int counterDown = 0;
+    private int buttonNumberOfGoodColor = 0;
+    private int countUp = 0;
+    private int indexColorIndicator = 0;
 
     private bool isChangedColorRing = false;
+    private bool isGoodColorAssignButton = false;
+    private bool hasFindIndexColorIndicator = false;
+
+
+    private List<Color> listColorIndicator = new List<Color>();
+    private List<Color> listColorIndicatorTmp = new List<Color>();
 
 
     // Chemin du fichier JSON
@@ -44,15 +53,18 @@ public class P1_LightUpLeds : MonoBehaviour
         dataStream.Open();
 
         previousColor = Color.white;
+
+        // Liste des couleurs des indicateurs
+        listColorIndicator.AddRange(new List<Color>()
+            {Color.red, Color.blue, Color.green, Color.yellow});
     }
 
 
     // Update is called once per frame
     void Update()
     {
-       
         currentColor = progressiveCircular.getCurrentColorIndicator();
-        
+
 
         /*
         do
@@ -101,6 +113,12 @@ public class P1_LightUpLeds : MonoBehaviour
         } while (counterDown < 3);
         */
 
+
+        /*----------------------------------------------------------------------------------------
+         -----------------------------------------------------------------------------------------
+                         CODE CI-DESSOUS MARCHE SEULEMENT POUR UN ANNEAU LUMINEUX
+         -----------------------------------------------------------------------------------------
+         -----------------------------------------------------------------------------------------*/
         // Change la couleur des LEDs
         if (!isChangedColorRing && !currentColor.Equals(previousColor))
         {
@@ -163,6 +181,114 @@ public class P1_LightUpLeds : MonoBehaviour
         {
             isChangedColorRing = false;
         }
+    }
+
+
+    /// <returns>La couleur de l'indicateur</returns>
+    private Color getColorOfIndicator()
+    {
+        return progressiveCircular.getCurrentColorIndicator();
+    }
+
+
+    /// <summary>
+    /// Envoie la couleur que les boutons auront ainsi qu'aux anneaux LEDs correspondant
+    /// </summary>
+    public Color sendColorsOfButtonAndRings(int numberOfButton)
+    {
+        countUp++;
+
+
+        if (!isGoodColorAssignButton)
+        {
+            isGoodColorAssignButton = true;
+            listColorIndicatorTmp.AddRange(new List<Color>()
+                {Color.red, Color.blue, Color.green, Color.yellow});
+
+            listColorIndicatorTmp.Remove(getColorOfIndicator());
+            
+            buttonNumberOfGoodColor = randomNumberButton();
+        }
         
+        
+        if (countUp == 4)
+        {
+            countUp = 0;
+            isGoodColorAssignButton = false;
+            hasFindIndexColorIndicator = false;
+            print("laurent on rénitialise tout");
+        }
+
+
+        Color colorRandom = Color.black;
+        int indexRandom = 0;
+
+
+        if (numberOfButton != buttonNumberOfGoodColor)
+        {
+            indexRandom = Random.Range(0, listColorIndicatorTmp.Count);
+            print("laurent indexRandom tirer : " + indexRandom);
+    
+            colorRandom = listColorIndicatorTmp[indexRandom];
+            print("laurent couleur random : " + colorRandom);
+            
+            // Enlève la couleur qui a été tirée
+            listColorIndicatorTmp.RemoveAt(indexRandom);
+        }
+        
+        
+        
+        if (buttonNumberOfGoodColor == numberOfButton)
+        {
+            colorRandom = getColorOfIndicator();
+            print("laurent couleur random 11: " + colorRandom);
+        }
+
+        print("Mymy nbr button + couleur : " + numberOfButton + " " + colorRandom);
+
+        /*---------------------------------------------------------------------------
+         ----------------------------------------------------------------------------
+                        ACTIVER CE CODE QUAND L'ARDUINO EST CONNECTÉ AU PC     
+        -----------------------------------------------------------------------------
+        -----------------------------------------------------------------------------
+        
+        // Envoie le numéro du bouton ainsi que sa couleur à l'arduino
+        if (colorRandom.Equals(Color.red))
+        {
+            print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
+            dataStream.WriteLine(numberOfButton + "," + COLOR_RED);
+            dataStream.WriteLine(numberOfButton + "," + COLOR_RED);
+        }
+        else if (colorRandom.Equals(Color.blue))
+        {
+            print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
+            dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
+            dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
+        }
+        else if (colorRandom.Equals(Color.green))
+        {
+            print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
+            dataStream.WriteLine(numberOfButton + "," + COLOR_GREEN);
+            dataStream.WriteLine(numberOfButton + "," + COLOR_GREEN);
+        }
+        else if (colorRandom.Equals(Color.yellow))
+        {
+            print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
+            dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
+            dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
+        }
+        -----------------------------------------------------------------------------*/
+        
+        previousColor = getColorOfIndicator();
+
+        // Renvoie aux boutons "virtuels" leurs couleurs
+        return colorRandom;
+    }
+
+
+    /// <returns>Renvoie un numéro de button de 1 à 5</returns>
+    private int randomNumberButton()
+    {
+        return Random.Range(1, 5);
     }
 }

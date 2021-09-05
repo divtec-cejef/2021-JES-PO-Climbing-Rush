@@ -102,6 +102,11 @@ public class P2_LightUpLeds : MonoBehaviour
         */
 
         
+        /*----------------------------------------------------------------------------------------
+         -----------------------------------------------------------------------------------------
+                         CODE CI-DESSOUS MARCHE SEULEMENT POUR UN ANNEAU LUMINEUX
+         -----------------------------------------------------------------------------------------
+         -----------------------------------------------------------------------------------------*/
         // Le premier if permet de ne pas surcharger l'arduino qui fera crash le jeu
         // Change la couleur des LEDs
         if (!isChangedColorRing && !currentColor.Equals(previousColor))
@@ -166,5 +171,12 @@ public class P2_LightUpLeds : MonoBehaviour
             isChangedColorRing = false;
         }
         
+        
+        
+        
+        
     }
+    
+
+    
 }
