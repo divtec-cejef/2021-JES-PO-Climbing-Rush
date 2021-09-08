@@ -118,7 +118,7 @@ public class P1_LightUpLeds : MonoBehaviour
          -----------------------------------------------------------------------------------------
                          CODE CI-DESSOUS MARCHE SEULEMENT POUR UN ANNEAU LUMINEUX
          -----------------------------------------------------------------------------------------
-         -----------------------------------------------------------------------------------------*/
+         -----------------------------------------------------------------------------------------
         // Change la couleur des LEDs
         if (!isChangedColorRing && !currentColor.Equals(previousColor))
         {
@@ -181,6 +181,7 @@ public class P1_LightUpLeds : MonoBehaviour
         {
             isChangedColorRing = false;
         }
+        */
     }
 
 
@@ -250,7 +251,7 @@ public class P1_LightUpLeds : MonoBehaviour
          ----------------------------------------------------------------------------
                         ACTIVER CE CODE QUAND L'ARDUINO EST CONNECTÉ AU PC     
         -----------------------------------------------------------------------------
-        -----------------------------------------------------------------------------
+        -----------------------------------------------------------------------------*/
         
         // Envoie le numéro du bouton ainsi que sa couleur à l'arduino
         if (colorRandom.Equals(Color.red))
@@ -277,7 +278,7 @@ public class P1_LightUpLeds : MonoBehaviour
             dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
             dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
         }
-        -----------------------------------------------------------------------------*/
+        /*-----------------------------------------------------------------------------*/
         
         previousColor = getColorOfIndicator();
 
