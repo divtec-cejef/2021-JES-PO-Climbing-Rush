@@ -103,7 +103,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3898e311-c5e2-4cd7-adbe-b9194ffc5a75"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/trigger"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -114,7 +114,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""6fba6c79-953e-4f32-9486-b4ef2229412c"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/button2"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -125,7 +125,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""eeab18cd-e397-4eb0-bf27-2dc80aa83bcd"",
-                    ""path"": ""<Keyboard>/4"",
+                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/button4"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -136,7 +136,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e57fc63f-380d-428e-9581-3bd3b8dc23f2"",
-                    ""path"": ""<Keyboard>/5"",
+                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/button5"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -147,7 +147,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""71ef5881-aa99-4ec8-a7c0-cbca507de796"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/button3"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -158,7 +158,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""9a608c0f-8f0d-4fd8-b80f-bce3827220b3"",
-                    ""path"": ""<Keyboard>/5"",
+                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/button10"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -169,7 +169,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""77381470-9368-4508-9d2d-badee8e078e8"",
-                    ""path"": ""<Keyboard>/1"",
+                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/button6"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -180,7 +180,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c35da0be-1edf-4136-9ede-e124e85064d1"",
-                    ""path"": ""<Keyboard>/2"",
+                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/button7"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -191,7 +191,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""7e23d2df-7c63-4aec-81f3-0ec7c0bb4550"",
-                    ""path"": ""<Keyboard>/3"",
+                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/button8"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -202,7 +202,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2bddf9ea-c2c1-4fc8-af61-f933603ed360"",
-                    ""path"": ""<Keyboard>/4"",
+                    ""path"": ""<HID::DragonRise Inc.   Generic   USB  Joystick  >/button9"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

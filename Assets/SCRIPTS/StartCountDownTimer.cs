@@ -38,10 +38,13 @@ public class StartCountDownTimer : MonoBehaviour
             else
             {
                 timeValue = 0;
-                countDownTimeDisplay.gameObject.SetActive(false);     
+                countDownTimeDisplay.gameObject.SetActive(false);    
             }
 
+        if (timeValue > 0)
+        {
             DisplayTime(timeValue);
+        }
     }
 
     void DisplayTime(float timeToDisplay)
