@@ -160,7 +160,7 @@ public class PlayerWinner : MonoBehaviour
 
                 MySqlCommand Player2 = conn.CreateCommand();
                 Player2.CommandText =
-                    "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 1";
+                    "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 2";
                 object Player2Name = Player2.ExecuteScalar();
 
                 P1Screen_nameWinner.text = Player1Name.ToString();
@@ -200,7 +200,7 @@ public class PlayerWinner : MonoBehaviour
 
                 MySqlCommand Player2 = conn.CreateCommand();
                 Player2.CommandText =
-                    "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 1";
+                    "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 2";
                 object Player2Name = Player2.ExecuteScalar();
 
                 P1Screen_nameWinner.text = Player2Name.ToString();

@@ -52,7 +52,7 @@ public class CameraCinematique : MonoBehaviour
             object Player1Name = Player1.ExecuteScalar();
                 
             MySqlCommand Player2 = conn.CreateCommand();
-            Player2.CommandText = "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 1";
+            Player2.CommandText = "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 2";
             object Player2Name = Player2.ExecuteScalar();
 
             playername1.text = Player1Name.ToString();
