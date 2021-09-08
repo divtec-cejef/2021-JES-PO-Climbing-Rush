@@ -195,8 +195,12 @@ public class P2_ScoreScript : MonoBehaviour
             
             score.text = "Score : " + scoreValue;
         }
-        
-        
     }
-
+    
+    /// <returns>Retourne le score du joueur 2</returns>
+    public int getScoreValue()
+    {
+        return scoreValue;
+    }
 }
+

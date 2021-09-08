@@ -197,4 +197,11 @@ public class P1_ScoreScript : MonoBehaviour
         
         
     }
+
+
+    /// <returns>Retourne le score du joueur 1</returns>
+    public int getScoreValue()
+    {
+        return scoreValue;
+    }
 }
