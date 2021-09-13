@@ -43,7 +43,7 @@ public class P1_LightUpLeds : MonoBehaviour
     // Chemin du fichier JSON
     private string pathJsonFile;
 
-    private SerialPort dataStream = new SerialPort("COM3", 9600);
+    private SerialPort dataStream = new SerialPort("COM5", 9600);
 
 
     // Start is called before the first frame update
@@ -57,7 +57,8 @@ public class P1_LightUpLeds : MonoBehaviour
         // Liste des couleurs des indicateurs
         listColorIndicator.AddRange(new List<Color>()
             {Color.red, Color.blue, Color.green, Color.yellow});
-    }
+        
+       }
 
 
     // Update is called once per frame
@@ -265,7 +266,7 @@ public class P1_LightUpLeds : MonoBehaviour
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
             dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
             dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
-        }
+        } 
         else if (colorRandom.Equals(Color.green))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);

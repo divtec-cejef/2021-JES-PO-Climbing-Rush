@@ -25,21 +25,20 @@ public class StartCountDownTimer : MonoBehaviour
 
     private void Start()
     {
-        //textTemps.text = textTempsAfficher;
         countDownTimeDisplay.text = timeValue.ToString();
     }
 
     private void Update()
     {
         if (timeValue > 0)
-            {
-                timeValue -= Time.deltaTime;
-            }
-            else
-            {
-                timeValue = 0;
-                countDownTimeDisplay.gameObject.SetActive(false);    
-            }
+        {
+            timeValue -= Time.deltaTime;
+        }
+        else
+        {
+            timeValue = 0;
+            countDownTimeDisplay.gameObject.SetActive(false);    
+        }
 
         if (timeValue > 0)
         {
@@ -57,9 +56,8 @@ public class StartCountDownTimer : MonoBehaviour
         }
         else
         {
-            //float minutes = Mathf.FloorToInt(timeToDisplay / 60);
-            float secondes = Mathf.FloorToInt(timeToDisplay % 60);
-            countDownTimeDisplay.text = secondes.ToString();
+            float seconds = Mathf.FloorToInt(timeToDisplay % 60);
+            countDownTimeDisplay.text = seconds.ToString();
         }
 
         

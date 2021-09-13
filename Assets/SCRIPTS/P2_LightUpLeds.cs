@@ -34,7 +34,7 @@ public class P2_LightUpLeds : MonoBehaviour
     // Chemin du fichier JSON
     private string pathJsonFile;
 
-    private SerialPort dataStream = new SerialPort("COM3", 9600);
+    private SerialPort dataStream = new SerialPort("COM5", 9600);
 
 
     // Start is called before the first frame update
