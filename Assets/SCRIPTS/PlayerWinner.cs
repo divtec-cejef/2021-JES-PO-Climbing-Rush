@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using MySql.Data.MySqlClient;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class PlayerWinner : MonoBehaviour
@@ -23,6 +24,9 @@ public class PlayerWinner : MonoBehaviour
     [SerializeField] private TextMeshProUGUI P1Screen_nameLooser;
     [SerializeField] private TextMeshProUGUI P2Screen_nameWinner;
     [SerializeField] private TextMeshProUGUI P2Screen_nameLooser;
+    
+    [SerializeField] private TextMeshProUGUI P1Name;
+    [SerializeField] private TextMeshProUGUI P2Name;
 
 
     [SerializeField] private Canvas canvasClassementP1;
@@ -138,35 +142,21 @@ public class PlayerWinner : MonoBehaviour
     {
         canvasClassementP1.gameObject.SetActive(true);
         canvasClassementP2.gameObject.SetActive(true);
-
-        if (P1_ScoreScript.getScoreValue() > P2_ScoreScript.getScoreValue())
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            P1Screen_winnerScoreBoard.text = P1_ScoreScript.getScoreValue().ToString();
-            P1Screen_looserScoreBoard.text = P2_ScoreScript.getScoreValue().ToString();
-
-            P2Screen_winnerScoreBoard.text = P1_ScoreScript.getScoreValue().ToString();
-            P2Screen_looserScoreBoard.text = P2_ScoreScript.getScoreValue().ToString();
-
             string connStr =
                 "Database=lacourseauxtrophees;Server=192.168.1.10;Uid=maxime;Password=Admlocal1;pooling=false;CharSet=utf8;port=3306";
             MySqlConnection conn = new MySqlConnection(connStr);
             try
             {
                 conn.Open();
-                MySqlCommand Player1 = conn.CreateCommand();
-                Player1.CommandText =
-                    "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 1";
-                object Player1Name = Player1.ExecuteScalar();
-
-                MySqlCommand Player2 = conn.CreateCommand();
-                Player2.CommandText =
-                    "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 2";
-                object Player2Name = Player2.ExecuteScalar();
-
-                P1Screen_nameWinner.text = Player1Name.ToString();
-                P1Screen_nameLooser.text = Player2Name.ToString();
-                P2Screen_nameWinner.text = Player1Name.ToString();
-                P2Screen_nameLooser.text = Player2Name.ToString();
+            
+                MySqlCommand CMD_addScore = conn.CreateCommand();
+                CMD_addScore.CommandText = "UPDATE tb_player SET score_kr_player = " + P1_ScoreScript.getScoreValue() + " WHERE identifiant_player  = " + MenuActions.Player1Name + ";";
+                CMD_addScore.ExecuteScalar();
+                MySqlCommand CMD_addScore2 = conn.CreateCommand();
+                CMD_addScore2.CommandText = "UPDATE tb_player SET score_kr_player = " + P2_ScoreScript.getScoreValue() + " WHERE identifiant_player  = " + MenuActions.Player2Name + ";";
+                CMD_addScore2.ExecuteScalar();
             }
             catch (Exception ex)
             {
@@ -175,6 +165,23 @@ public class PlayerWinner : MonoBehaviour
 
             conn.Close();
             print("Done.");
+
+            SceneManager.LoadScene(0);
+        }
+
+
+        if (P1_ScoreScript.getScoreValue() > P2_ScoreScript.getScoreValue())
+        {
+            P1Screen_winnerScoreBoard.text = P1_ScoreScript.getScoreValue().ToString();
+            P1Screen_looserScoreBoard.text = P2_ScoreScript.getScoreValue().ToString();
+
+            P2Screen_winnerScoreBoard.text = P1_ScoreScript.getScoreValue().ToString();
+            P2Screen_looserScoreBoard.text = P2_ScoreScript.getScoreValue().ToString();
+            
+            P1Screen_nameWinner.text = P1Name.text;
+            P1Screen_nameLooser.text = P2Name.text;
+            P2Screen_nameWinner.text = P1Name.text;
+            P2Screen_nameLooser.text = P2Name.text;
         }
 
 
@@ -185,36 +192,12 @@ public class PlayerWinner : MonoBehaviour
 
             P2Screen_winnerScoreBoard.text = P2_ScoreScript.getScoreValue().ToString();
             P2Screen_looserScoreBoard.text = P1_ScoreScript.getScoreValue().ToString();
-
-
-            string connStr =
-                "Database=lacourseauxtrophees;Server=192.168.1.10;Uid=maxime;Password=Admlocal1;pooling=false;CharSet=utf8;port=3306";
-            MySqlConnection conn = new MySqlConnection(connStr);
-            try
-            {
-                conn.Open();
-                MySqlCommand Player1 = conn.CreateCommand();
-                Player1.CommandText =
-                    "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 1";
-                object Player1Name = Player1.ExecuteScalar();
-
-                MySqlCommand Player2 = conn.CreateCommand();
-                Player2.CommandText =
-                    "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 2";
-                object Player2Name = Player2.ExecuteScalar();
-
-                P1Screen_nameWinner.text = Player2Name.ToString();
-                P1Screen_nameLooser.text = Player1Name.ToString();
-                P2Screen_nameWinner.text = Player2Name.ToString();
-                P2Screen_nameLooser.text = Player1Name.ToString();
-            }
-            catch (Exception ex)
-            {
-                print("Ca marche po - " + ex);
-            }
-
-            conn.Close();
-            print("Done.");
+            
+            P1Screen_nameWinner.text = P2Name.text;
+            P1Screen_nameLooser.text = P1Name.text;
+            P2Screen_nameWinner.text = P2Name.text;
+            P2Screen_nameLooser.text = P1Name.text;
+            
         }
     }
 

@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: b59381b1c3dfd9a49919a36688ab95d7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playerRedClothes: {fileID: 2100000, guid: 16ea1613592318d4eb2eea5197a22bf4, type: 2}
+  - playerBlueClothes: {fileID: 2100000, guid: 95ac1c6a5c0ae114790987cd64408f63, type: 2}
+  - playerGreenClothes: {fileID: 2100000, guid: 6c13920917fad9b4f9de48659f6adebc, type: 2}
+  - playerPinkClothes: {fileID: 2100000, guid: 8fd734e876bfcc243a7f787dc9684b10, type: 2}
+  - playerOrangeClothes: {fileID: 2100000, guid: 8005a96d64cd842479b0adae61ea8791, type: 2}
+  - playerYellowClothes: {fileID: 2100000, guid: 0b13018f7373f69498d1f62b2db832d1, type: 2}
+  - playerBlackClothes: {fileID: 2100000, guid: d615b3e4e84df4246b83dfbd45092562, type: 2}
+  - playerWhiteClothes: {fileID: 2100000, guid: 6716d3c99cabd94448c3c5b7ccab2159, type: 2}
+  - playerMagentaClothes: {fileID: 2100000, guid: 2c5c40d29ebdb2745837e16a691f5bca, type: 2}
+  - playerBrownClothes: {fileID: 2100000, guid: be1d1eb4887de5341843fab624cc39b2, type: 2}
+  - playerCyanClothes: {fileID: 2100000, guid: e3d47c58bd5d89346ba4e4784f7922fc, type: 2}
+  - playerLimeClothes: {fileID: 2100000, guid: fb8f37014a4170b4ea9b23a3ff908a24, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

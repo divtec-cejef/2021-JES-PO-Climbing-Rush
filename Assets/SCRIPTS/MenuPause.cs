@@ -31,6 +31,7 @@ public class MenuPause : MonoBehaviour
         P1_menuPause.SetActive(false);
         P2_menuPause.SetActive(false);
     }
+    
 
     private void Update()
     {

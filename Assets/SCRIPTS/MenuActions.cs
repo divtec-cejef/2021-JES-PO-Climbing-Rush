@@ -18,6 +18,9 @@ public class MenuActions : MonoBehaviour
     [SerializeField] private TextMeshProUGUI LoadingText;
 
     private bool settings = false;
+    
+    public static string Player1Name;
+    public static string Player2Name;
 
     public static int musicVolume;
     public static int sfxVolume;
@@ -27,6 +30,15 @@ public class MenuActions : MonoBehaviour
         StartCoroutine(LoadGame());
     }
 
+    public void Name1(string name)
+    {
+        Player1Name = name;
+    }
+    public void Name2(string name)
+    {
+        Player2Name = name;
+    }
+    
     private IEnumerator LoadGame()
     {
         AsyncOperation operation = SceneManager.LoadSceneAsync(1);

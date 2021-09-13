@@ -39,31 +39,7 @@ public class CameraCinematique : MonoBehaviour
         
         playername1.gameObject.SetActive(false);
         playername2.gameObject.SetActive(false);
-    
         
-                
-        string connStr = "Database=lacourseauxtrophees;Server=192.168.1.10;Uid=maxime;Password=Admlocal1;pooling=false;CharSet=utf8;port=3306";
-        MySqlConnection conn = new MySqlConnection(connStr);
-        try
-        {
-            conn.Open();
-            MySqlCommand Player1 = conn.CreateCommand();
-            Player1.CommandText = "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 1";
-            object Player1Name = Player1.ExecuteScalar();
-                
-            MySqlCommand Player2 = conn.CreateCommand();
-            Player2.CommandText = "SELECT name_player FROM tb_player WHERE current_game_player = 2 AND number_player = 2";
-            object Player2Name = Player2.ExecuteScalar();
-
-            playername1.text = Player1Name.ToString();
-            playername2.text = Player2Name.ToString();
-        }
-        catch (Exception ex)
-        {
-            print("Ca marche po - " + ex);
-        }
-        conn.Close();
-        print("Done.");
     }
 
     // Update is called once per frame
