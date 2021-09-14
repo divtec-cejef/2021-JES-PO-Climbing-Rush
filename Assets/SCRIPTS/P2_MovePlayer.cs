@@ -21,6 +21,8 @@ public class P2_MovePlayer : MonoBehaviour
     public DisplayPopUpText displayPopUpText;
     public StartCountDownTimer startCountDownTimer;
     public P2_GainPoint gainPoint;
+    public P2_LightUpLeds lightUpLeds;
+
         
     
     private bool dropPlayer = false;
@@ -30,8 +32,16 @@ public class P2_MovePlayer : MonoBehaviour
     private Coroutine stopPlayerClimb;
 
     private bool isFirstHold = true;
-
     private bool gameIsFinishAndStuckPlayer = false;
+    
+    private Color colorButton5 = Color.white;
+    private Color colorButton6 = Color.white;
+    private Color colorButton7 = Color.white;
+    private Color colorButton8 = Color.white;
+    private Color previousColorIndicator = Color.white;
+    
+    private bool isSameColorIndicator = false;
+
 
 
     void Awake()
@@ -40,17 +50,58 @@ public class P2_MovePlayer : MonoBehaviour
         controls = new PlayerControls();
         
         // Les cinq boutons à contrôler
+        /*
         controls.Gameplay.P2_RedButton.performed += ctx => correctCircle(Color.red);
         controls.Gameplay.P2_BlueButton.performed += ctx => correctCircle(Color.blue);
         controls.Gameplay.P2_GreenButton.performed += ctx => correctCircle(Color.green);
         controls.Gameplay.P2_YellowButton.performed += ctx => correctCircle(Color.yellow);
         //controls.Gameplay.P2_PurpleButton.performed += ctx => correctCircle(Color.magenta);
+        */
         
+        
+        /*-------------------------------------------------------------------------------------
+                            CODE CI-DESSOUS POUR LES BOUTONS AVEC LES LEDs
+         --------------------------------------------------------------------------------------*/
+        
+        controls.Gameplay.P2_RedButton.performed += ctx => correctCircle(colorButton5);
+        controls.Gameplay.P2_BlueButton.performed += ctx => correctCircle(colorButton6);
+        controls.Gameplay.P2_GreenButton.performed    += ctx => correctCircle(colorButton7);
+        controls.Gameplay.P2_YellowButton.performed += ctx => correctCircle(colorButton8);
+        //controls.Gameplay.P1_PurpleButton.performed += ctx => correctCircle(Color.magenta);
+
     }
 
     private void Start()
     {
         Screen.orientation = ScreenOrientation.Portrait;
+    }
+
+
+    private void Update()
+    {
+        /*----------------------------------------------------------------------------------------------------------------
+                        ACTIVER LE CODE CI-DESSOUS SEULEMENT SI ON FAIT AVEC LES BOUTONS LUMINEUX (LEDs)
+         -----------------------------------------------------------------------------------------------------------------*/
+        
+        
+        if (!isSameColorIndicator && !previousColorIndicator.Equals(progressiveCircular.getCurrentColorIndicator()))
+        {
+            colorButton5= lightUpLeds.sendColorsOfButtonAndRings(5); 
+            colorButton6 = lightUpLeds.sendColorsOfButtonAndRings(6); 
+            colorButton7 = lightUpLeds.sendColorsOfButtonAndRings(7);
+            colorButton8 = lightUpLeds.sendColorsOfButtonAndRings(8);
+            previousColorIndicator = progressiveCircular.getCurrentColorIndicator();
+
+            isSameColorIndicator = true;
+        }
+        
+        
+        
+        // Mets à false lorsque l'anneau de LEDs doit changer de couleur
+        if (isSameColorIndicator && previousColorIndicator.Equals(progressiveCircular.getCurrentColorIndicator()))
+        {
+            isSameColorIndicator = false;
+        }
     }
 
 
