@@ -80,7 +80,7 @@ public class P2_ProgressiveCircular : MonoBehaviour
 
         // Liste des couleurs des indicateurs
         listColorIndicator.AddRange(new List<Color>()
-            {Color.red, Color.blue, Color.green, Color.yellow, Color.magenta});
+            {Color.red, Color.blue, Color.green, Color.yellow});
 
 
         // Ajout d'une couleur aléatoire à l'indicateur
@@ -242,7 +242,7 @@ public class P2_ProgressiveCircular : MonoBehaviour
         int randomNumber = 0;
         do
         {
-            randomNumber = Random.Range(0, 5);
+            randomNumber = Random.Range(0, 4);
         } while (randomNumber == previousRandomNumber);
 
         previousRandomNumber = randomNumber;
