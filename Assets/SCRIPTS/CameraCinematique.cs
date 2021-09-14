@@ -23,6 +23,8 @@ public class CameraCinematique : MonoBehaviour
     
     public GameObject P1_generalCountDownTimer;
     public GameObject P2_generalCountDownTimer;
+    
+    
 
     public bool isCinematicFinished = false;
 
@@ -53,6 +55,9 @@ public class CameraCinematique : MonoBehaviour
     // Update is called once per frame
     public void EndAnim()
     {
+        
+        P1_generalCountDownTimer.SetActive(true);
+        P2_generalCountDownTimer.SetActive(true);
 
         IndicatorPlayer1.gameObject.SetActive(true);
         IndicatorPlayer2.gameObject.SetActive(true);

@@ -259,24 +259,20 @@ public class P1_LightUpLeds : MonoBehaviour
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
             dataStream.WriteLine(numberOfButton + "," + COLOR_RED);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_RED);
         }
         else if (colorRandom.Equals(Color.blue))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
             dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
         } 
         else if (colorRandom.Equals(Color.green))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
             dataStream.WriteLine(numberOfButton + "," + COLOR_GREEN);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_GREEN);
         }
         else if (colorRandom.Equals(Color.yellow))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
             dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
         }
         /*-----------------------------------------------------------------------------*/
