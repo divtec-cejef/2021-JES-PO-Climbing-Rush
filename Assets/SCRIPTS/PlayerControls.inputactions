@@ -156,7 +156,7 @@
                 {
                     "name": "",
                     "id": "77381470-9368-4508-9d2d-badee8e078e8",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button6",
+                    "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -167,7 +167,7 @@
                 {
                     "name": "",
                     "id": "c35da0be-1edf-4136-9ede-e124e85064d1",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button7",
+                    "path": "<Keyboard>/6",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -177,23 +177,23 @@
                 },
                 {
                     "name": "",
-                    "id": "7e23d2df-7c63-4aec-81f3-0ec7c0bb4550",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button8",
+                    "id": "2bddf9ea-c2c1-4fc8-af61-f933603ed360",
+                    "path": "<Keyboard>/8",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "P2_GreenButton",
+                    "action": "P2_YellowButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "2bddf9ea-c2c1-4fc8-af61-f933603ed360",
-                    "path": "<HID::DragonRise Inc.   Generic   USB  Joystick  >/button9",
+                    "id": "7e23d2df-7c63-4aec-81f3-0ec7c0bb4550",
+                    "path": "<Keyboard>/7",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "P2_YellowButton",
+                    "action": "P2_GreenButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

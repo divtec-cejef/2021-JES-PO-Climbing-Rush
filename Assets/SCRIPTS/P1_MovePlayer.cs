@@ -18,7 +18,7 @@ public class P1_MovePlayer : MonoBehaviour
     public P1_IkControl ikControl;
     public P1_EffectBeamIndicator effectBeamIndicator;
     public P1_ProgressiveCircular progressiveCircular;
-    public DisplayPopUpText displayPopUpText;
+    //public DisplayPopUpText displayPopUpText;
     public StartCountDownTimer startCountDownTimer;
     public P1_GainPoint gainPoint;
     public P1_LightUpLeds lightUpLeds;
@@ -293,7 +293,7 @@ public class P1_MovePlayer : MonoBehaviour
 
     }
 
-    
+    /*
     IEnumerator StopPlayerClimbFor2Seconds()
     {
         // Le joueur est bloqué pendant 2 secondes
@@ -308,7 +308,7 @@ public class P1_MovePlayer : MonoBehaviour
         displayPopUpText.setBlocked(false);
         print("la coroutine est stope !");
     }
-
+*/
 
 
     /// <summary>

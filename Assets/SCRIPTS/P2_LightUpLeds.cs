@@ -34,7 +34,6 @@ public class P2_LightUpLeds : MonoBehaviour
     // Chemin du fichier JSON
     private string pathJsonFile;
 
-    private SerialPort dataStream = new SerialPort("COM5", 9600);
 
     private List<Color> listColorIndicator = new List<Color>();
     private List<Color> listColorIndicatorTmp = new List<Color>();
@@ -45,6 +44,7 @@ public class P2_LightUpLeds : MonoBehaviour
     private bool hasFindIndexColorIndicator = false;
 
 
+    public static SerialPort dataStream = new SerialPort("COM5", 9600);
 
 
 
@@ -52,7 +52,7 @@ public class P2_LightUpLeds : MonoBehaviour
     void Start()
     {
         // Initialise le flux de série
-        dataStream.Open();
+        //dataStream.Open();
 
         previousColor = Color.white;
         
@@ -265,25 +265,25 @@ public class P2_LightUpLeds : MonoBehaviour
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
             //P1_LightUpLeds.dataStream.WriteLine(numberOfButton + "," + COLOR_RED);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_RED);
+            //dataStream.WriteLine(numberOfButton + "," + COLOR_RED);
         }
         else if (colorRandom.Equals(Color.blue))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
             //P1_LightUpLeds.dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
+            //dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
         } 
         else if (colorRandom.Equals(Color.green))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
             //P1_LightUpLeds.dataStream.WriteLine(numberOfButton + "," + COLOR_GREEN);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_GREEN);
+            //dataStream.WriteLine(numberOfButton + "," + COLOR_GREEN);
         }
         else if (colorRandom.Equals(Color.yellow))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
             //P1_LightUpLeds.dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
+            //ataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
         }
         /*-----------------------------------------------------------------------------*/
         

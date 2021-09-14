@@ -43,14 +43,14 @@ public class P1_LightUpLeds : MonoBehaviour
     // Chemin du fichier JSON
     private string pathJsonFile;
 
-    public static SerialPort dataStream = new SerialPort("COM5", 9600);
+    //public static SerialPort dataStream = new SerialPort("COM5", 9600);
 
 
     // Start is called before the first frame update
     void Start()
     {
         // Initialise le flux de série
-        dataStream.Open();
+        //dataStream.Open();
 
         previousColor = Color.white;
 
@@ -258,22 +258,26 @@ public class P1_LightUpLeds : MonoBehaviour
         if (colorRandom.Equals(Color.red))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_RED);
+            //dataStream.WriteLine(numberOfButton + "," + COLOR_RED);
+            //P2_LightUpLeds.dataStream.WriteLine(numberOfButton + "," + COLOR_RED);
         }
         else if (colorRandom.Equals(Color.blue))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
+            //dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
+            //P2_LightUpLeds.dataStream.WriteLine(numberOfButton + "," + COLOR_BLUE);
         } 
         else if (colorRandom.Equals(Color.green))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_GREEN);
+            //dataStream.WriteLine(numberOfButton + "," + COLOR_GREEN);
+            //P2_LightUpLeds.dataStream.WriteLine(numberOfButton + "," + COLOR_GREEN);
         }
         else if (colorRandom.Equals(Color.yellow))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
-            dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
+            //dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
+            //P2_LightUpLeds.dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
         }
         /*-----------------------------------------------------------------------------*/
         
