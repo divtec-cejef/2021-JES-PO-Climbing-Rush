@@ -48,6 +48,7 @@ public class PlayerWinner : MonoBehaviour
     private bool isP2_winnerLooserDisplayed = false;
     private bool isTimeExpired = false;
     private bool isScoreDisplayed = false;
+    
 
 
     private bool isPlayerWin = false;
@@ -148,6 +149,41 @@ public class PlayerWinner : MonoBehaviour
     }
 
 
+    private void Update()
+    {
+        if (isScoreDisplayed)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                string connStr =
+                    "Database=lacourseauxtrophees;Server=192.168.1.10;Uid=maxime;Password=Admlocal1;pooling=false;CharSet=utf8;port=3306";
+                MySqlConnection conn = new MySqlConnection(connStr);
+                try
+                {
+                    conn.Open();
+            
+                    MySqlCommand CMD_addScore = conn.CreateCommand();
+                    CMD_addScore.CommandText = "UPDATE tb_player SET score_kr_player = " + P1_ScoreScript.getScoreValue() + " WHERE identifiant_player  = " + MenuActions.Player1Name + ";";
+                    CMD_addScore.ExecuteScalar();
+                    MySqlCommand CMD_addScore2 = conn.CreateCommand();
+                    CMD_addScore2.CommandText = "UPDATE tb_player SET score_kr_player = " + P2_ScoreScript.getScoreValue() + " WHERE identifiant_player  = " + MenuActions.Player2Name + ";";
+                    CMD_addScore2.ExecuteScalar();
+                }
+                catch (Exception ex)
+                {
+                    print("Ca marche po - " + ex);
+                }
+
+                conn.Close();
+                print("Done.");
+
+                SceneManager.LoadScene(0);
+            }
+        }
+
+    }
+
+
     /// <summary>
     /// Affiche les points des joueurs sur le scoreBoard
     /// </summary>
@@ -168,6 +204,7 @@ public class PlayerWinner : MonoBehaviour
     
         canvasClassementP1.gameObject.SetActive(true);
         canvasClassementP2.gameObject.SetActive(true);
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             string connStr =
@@ -195,7 +232,7 @@ public class PlayerWinner : MonoBehaviour
             SceneManager.LoadScene(0);
         }
 
-
+        */
         if (P1_ScoreScript.getScoreValue() > P2_ScoreScript.getScoreValue())
         {
             P1Screen_winnerScoreBoard.text = P1_ScoreScript.getScoreValue().ToString();

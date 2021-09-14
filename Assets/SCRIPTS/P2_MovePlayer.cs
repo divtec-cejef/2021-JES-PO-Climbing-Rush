@@ -44,7 +44,7 @@ public class P2_MovePlayer : MonoBehaviour
         controls.Gameplay.P2_BlueButton.performed += ctx => correctCircle(Color.blue);
         controls.Gameplay.P2_GreenButton.performed += ctx => correctCircle(Color.green);
         controls.Gameplay.P2_YellowButton.performed += ctx => correctCircle(Color.yellow);
-        controls.Gameplay.P2_PurpleButton.performed += ctx => correctCircle(Color.magenta);
+        //controls.Gameplay.P2_PurpleButton.performed += ctx => correctCircle(Color.magenta);
         
     }
 

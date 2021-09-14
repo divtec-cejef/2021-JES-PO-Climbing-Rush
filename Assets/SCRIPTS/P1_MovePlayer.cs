@@ -45,29 +45,31 @@ public class P1_MovePlayer : MonoBehaviour
    
     void Awake()
     {
-
+        
+        
+        
         controls = new PlayerControls();
         
         // Les cinq boutons à contrôler
-        
+        /*
         controls.Gameplay.P1_RedButton.performed += ctx => correctCircle(Color.red);
         controls.Gameplay.P1_BlueButton.performed += ctx => correctCircle(Color.blue);
         controls.Gameplay.P1_GreenButton.performed += ctx => correctCircle(Color.green);
         controls.Gameplay.P1_YellowButton.performed += ctx => correctCircle(Color.yellow);
         controls.Gameplay.P1_PurpleButton.performed += ctx => correctCircle(Color.magenta);
-        
+        */
         
         
         /*-------------------------------------------------------------------------------------
                             CODE CI-DESSOUS POUR LES BOUTONS AVEC LES LEDs
          --------------------------------------------------------------------------------------*/
-        /*
+        
         controls.Gameplay.P1_RedButton.performed += ctx => correctCircle(colorButton1);
         controls.Gameplay.P1_BlueButton.performed += ctx => correctCircle(colorButton2);
-        controls.Gameplay.P1_GreenButton.performed += ctx => correctCircle(colorButton3);
+        controls.Gameplay.P1_GreenButton.performed    += ctx => correctCircle(colorButton3);
         controls.Gameplay.P1_YellowButton.performed += ctx => correctCircle(colorButton4);
         //controls.Gameplay.P1_PurpleButton.performed += ctx => correctCircle(Color.magenta);
-        */
+        
     }
 
     private void Start()
@@ -82,7 +84,7 @@ public class P1_MovePlayer : MonoBehaviour
                         ACTIVER LE CODE CI-DESSOUS SEULEMENT SI ON FAIT AVEC LES BOUTONS LUMINEUX (LEDs)
          -----------------------------------------------------------------------------------------------------------------*/
         
-        /*
+        
         if (!isSameColorIndicator && !previousColorIndicator.Equals(progressiveCircular.getCurrentColorIndicator()))
         {
             colorButton1 = lightUpLeds.sendColorsOfButtonAndRings(1); 
@@ -101,7 +103,7 @@ public class P1_MovePlayer : MonoBehaviour
         {
             isSameColorIndicator = false;
         }
-        */
+        
     }
 
 
