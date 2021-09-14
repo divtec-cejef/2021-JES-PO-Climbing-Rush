@@ -32,9 +32,22 @@ public class PlayerWinner : MonoBehaviour
     [SerializeField] private Canvas canvasClassementP1;
     [SerializeField] private Canvas canvasClassementP2;
 
+    public GameObject p1_progressBar;
+    public GameObject p2_progressBar;
+
+    public TextMeshProUGUI p1_position;
+    public TextMeshProUGUI p2_position;
+    
+    public GameObject P1_generalCountDownTimer;
+    public GameObject P2_generalCountDownTimer;
+    
+    
+    
+
     private bool isP1_winnerLooserDisplayed = false;
     private bool isP2_winnerLooserDisplayed = false;
     private bool isTimeExpired = false;
+    private bool isScoreDisplayed = false;
 
 
     private bool isPlayerWin = false;
@@ -140,6 +153,19 @@ public class PlayerWinner : MonoBehaviour
     /// </summary>
     private void displayScoreBoard()
     {
+
+        isScoreDisplayed = true;
+    
+        p1_progressBar.SetActive(false);
+        p2_progressBar.SetActive(false);
+        
+        p1_position.gameObject.SetActive(false);
+        p2_position.gameObject.SetActive(false);
+        
+        P1_generalCountDownTimer.SetActive(false);
+        P2_generalCountDownTimer.SetActive(false);
+        
+    
         canvasClassementP1.gameObject.SetActive(true);
         canvasClassementP2.gameObject.SetActive(true);
         if (Input.GetKeyDown(KeyCode.Space))
@@ -218,4 +244,10 @@ public class PlayerWinner : MonoBehaviour
     {
         return isTimeExpired;
     }
+
+    public bool getIsScoreDisplayed()
+    {
+        return isScoreDisplayed;
+    }
+
 }

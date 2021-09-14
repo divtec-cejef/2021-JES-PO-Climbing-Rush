@@ -22,8 +22,9 @@ public class MenuPause : MonoBehaviour
     public TextMeshProUGUI P2_winnerLooser;
     public TextMeshProUGUI P1_position;
     public TextMeshProUGUI P2_position;
-    
     public PlayerWinner playerWinner;
+    public StartCountDownTimer startCountDownTimer;
+    public CameraCinematique cameraCinematique;
 
 
     private void Start()
@@ -64,19 +65,48 @@ public class MenuPause : MonoBehaviour
             P1_winnerLooser.gameObject.SetActive(true);
             P2_winnerLooser.gameObject.SetActive(true);
         }
-        
-        P1_position.gameObject.SetActive(true);
-        P2_position.gameObject.SetActive(true);
-        
-        P1_startCountDownTimer.SetActive(true);
-        P2_startCountDownTimer.SetActive(true);
-        
-        P1_generalCountDownTimer.SetActive(true);
-        P2_generalCountDownTimer.SetActive(true);
-        
-        P1_HUD.SetActive(true);
-        P2_HUD.SetActive(true);
-        
+
+        if (!playerWinner.getIsScoreDisplayed())
+        {
+            P1_startCountDownTimer.SetActive(true);
+            P2_startCountDownTimer.SetActive(true);
+            
+        }
+
+        if (!playerWinner.getIsScoreDisplayed() && cameraCinematique.getIsCinemticFinished())
+        {
+            
+                P1_position.gameObject.SetActive(true);
+                P2_position.gameObject.SetActive(true);
+                
+                P1_generalCountDownTimer.SetActive(true);
+                P2_generalCountDownTimer.SetActive(true);
+                
+        }
+        else
+        {
+            P1_position.gameObject.SetActive(false);
+            P2_position.gameObject.SetActive(false);
+            
+        }
+
+        if (!startCountDownTimer.getcountDownTimerIsFinished())
+        {
+            P1_startCountDownTimer.SetActive(true);
+            P2_startCountDownTimer.SetActive(true);
+        }
+        else
+        {
+            P1_startCountDownTimer.SetActive(false);
+            P2_startCountDownTimer.SetActive(false);
+        }
+
+        if (cameraCinematique.getIsCinemticFinished())
+        {
+            P1_HUD.SetActive(true);
+            P2_HUD.SetActive(true);
+        }
+
         P1_menuPause.SetActive(false);
         P2_menuPause.SetActive(false);
         

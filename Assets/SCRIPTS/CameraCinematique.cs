@@ -20,10 +20,18 @@ public class CameraCinematique : MonoBehaviour
     
     [SerializeField] private TextMeshProUGUI playername1;
     [SerializeField] private TextMeshProUGUI playername2;
+    
+    public GameObject P1_generalCountDownTimer;
+    public GameObject P2_generalCountDownTimer;
+
+    public bool isCinematicFinished = false;
 
 
     void Start()
     {
+        
+        P1_generalCountDownTimer.SetActive(false);
+        P2_generalCountDownTimer.SetActive(false);
 
         IndicatorPlayer1.gameObject.SetActive(false);
         IndicatorPlayer2.gameObject.SetActive(false);
@@ -64,6 +72,13 @@ public class CameraCinematique : MonoBehaviour
         
         playername1.gameObject.SetActive(true);
         playername2.gameObject.SetActive(true);
-        
+
+        isCinematicFinished = true;
+
+    }
+
+    public bool getIsCinemticFinished()
+    {
+        return isCinematicFinished;
     }
 }
