@@ -56,6 +56,7 @@ public class CameraCinematique : MonoBehaviour
     public void EndAnim()
     {
         
+        
         P1_generalCountDownTimer.SetActive(true);
         P2_generalCountDownTimer.SetActive(true);
 

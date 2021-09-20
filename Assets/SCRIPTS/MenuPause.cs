@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Configuration;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -25,6 +27,7 @@ public class MenuPause : MonoBehaviour
     public PlayerWinner playerWinner;
     public StartCountDownTimer startCountDownTimer;
     public CameraCinematique cameraCinematique;
+
 
 
     private void Start()
@@ -116,33 +119,37 @@ public class MenuPause : MonoBehaviour
 
     public void PauseGame()
     {
+        if (startCountDownTimer.getcountDownTimerIsFinished())
+        {
+            P1_winnerLooser.gameObject.SetActive(false);
+            P2_winnerLooser.gameObject.SetActive(false);
         
-        P1_winnerLooser.gameObject.SetActive(false);
-        P2_winnerLooser.gameObject.SetActive(false);
+            P1_position.gameObject.SetActive(false);
+            P2_position.gameObject.SetActive(false);
         
-        P1_position.gameObject.SetActive(false);
-        P2_position.gameObject.SetActive(false);
+            P1_startCountDownTimer.SetActive(false);
+            P2_startCountDownTimer.SetActive(false);
         
-        P1_startCountDownTimer.SetActive(false);
-        P2_startCountDownTimer.SetActive(false);
+            P1_generalCountDownTimer.SetActive(false);
+            P2_generalCountDownTimer.SetActive(false);
         
-        P1_generalCountDownTimer.SetActive(false);
-        P2_generalCountDownTimer.SetActive(false);
+            P1_HUD.SetActive(false);
+            P2_HUD.SetActive(false);
         
-        P1_HUD.SetActive(false);
-        P2_HUD.SetActive(false);
+            P1_menuPause.SetActive(true);
+            P2_menuPause.SetActive(true);
         
-        P1_menuPause.SetActive(true);
-        P2_menuPause.SetActive(true);
-        
-        Time.timeScale = 0.0f;
-        isGamePaused = true;
+            Time.timeScale = 0.0f;
+            isGamePaused = true;
+        }
     }
 
     public void QuitGame()
     {
         
         SceneManager.LoadSceneAsync(0);
+        Time.timeScale = 1.0f;
+        isGamePaused = true;
         
         //Application.Quit();
     }
