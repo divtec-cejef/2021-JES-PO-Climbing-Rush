@@ -37,7 +37,7 @@ public class P2_ScoreScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        score.text = "Score : " + scoreValue;
+        score.text = "Score : 0000";
         
     }
 
@@ -122,7 +122,26 @@ public class P2_ScoreScript : MonoBehaviour
             }
         }
         
-        score.text = "Score : " + scoreValue;
+        if (scoreValue == 0)
+        {
+            score.text = "Score : 0000"; 
+        }
+        else if (scoreValue < 10)
+        {
+            score.text = "Score : 000" + scoreValue;
+        }
+        else if (scoreValue < 100)
+        {
+            score.text = "Score : 00" + scoreValue;
+        }
+        else if (scoreValue < 1000)
+        {
+            score.text = "Score : 0" + scoreValue;
+        }
+        else if (scoreValue > 1000)
+        {
+            score.text = "Score : " + scoreValue;
+        }
 
     }
 
@@ -182,7 +201,7 @@ public class P2_ScoreScript : MonoBehaviour
 
         if (timeValueRemaining > 1)
         {
-            int timeCastToPoints = (int)(timeValueRemaining * 10) / 2;
+            int timeCastToPoints = (int)(timeValueRemaining * 80);
             
             print("k2 pints gagner grace au timer : " + timeCastToPoints);
 
