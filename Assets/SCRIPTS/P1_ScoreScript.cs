@@ -10,11 +10,11 @@ public class P1_ScoreScript : MonoBehaviour
 {
 
     // Points possibles
-    private const int MAX_POINT = 50;
-    private const int MEDIUM_POINT = 20;
-    private const int LOW_POINT = 10;
-    private const int MIN_POINT = 5;
-    private const int POINT_LOSS = 15;
+    private const int MAX_POINT = 80;
+    private const int MEDIUM_POINT = 40;
+    private const int LOW_POINT = 20;
+    private const int MIN_POINT = 10;
+    private const int POINT_LOSS = 50;
     
     public P1_ProgressiveCircular progressiveCircular;
 
