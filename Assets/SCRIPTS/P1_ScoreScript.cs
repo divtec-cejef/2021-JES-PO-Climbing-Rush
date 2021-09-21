@@ -14,7 +14,7 @@ public class P1_ScoreScript : MonoBehaviour
     private const int MEDIUM_POINT = 40;
     private const int LOW_POINT = 20;
     private const int MIN_POINT = 10;
-    private const int POINT_LOSS = 50;
+    private const int POINT_LOSS = 100;
     
     public P1_ProgressiveCircular progressiveCircular;
 
@@ -200,7 +200,7 @@ public class P1_ScoreScript : MonoBehaviour
 
         if (timeValueRemaining > 1)
         {
-            int timeCastToPoints = (int)(timeValueRemaining * 80);
+            int timeCastToPoints = (int)(timeValueRemaining * 60);
             
             print("k2 pints gagner grace au timer : " + timeCastToPoints);
 

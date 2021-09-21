@@ -149,6 +149,7 @@ public class MenuPause : MonoBehaviour
         
         SceneManager.LoadSceneAsync(0);
         Time.timeScale = 1.0f;
+        P2_LightUpLeds.dataStream.WriteLine("mmm");
         isGamePaused = true;
         
         //Application.Quit();

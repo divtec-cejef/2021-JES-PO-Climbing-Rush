@@ -176,7 +176,8 @@ public class PlayerWinner : MonoBehaviour
 
                 conn.Close();
                 print("Done.");
-
+                
+                P2_LightUpLeds.dataStream.WriteLine("mmm");
                 SceneManager.LoadScene(0);
             }
         }

@@ -39,6 +39,8 @@ public class P1_LightUpLeds : MonoBehaviour
     private List<Color> listColorIndicator = new List<Color>();
     private List<Color> listColorIndicatorTmp = new List<Color>();
 
+    //private SerialPort dataStream = AnimationLEDs.dataStream;
+    
 
     // Chemin du fichier JSON
     private string pathJsonFile;
@@ -51,6 +53,9 @@ public class P1_LightUpLeds : MonoBehaviour
     {
         // Initialise le flux de série
         //dataStream.Open();
+        //dataStream.WriteLine("g");
+        P2_LightUpLeds.dataStream.WriteLine("ggg");
+
 
         previousColor = Color.white;
 
@@ -276,7 +281,7 @@ public class P1_LightUpLeds : MonoBehaviour
         else if (colorRandom.Equals(Color.yellow))
         {
             print("bouton N°" + numberOfButton + ", couleur : " + colorRandom);
-            //dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
+           // dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
             P2_LightUpLeds.dataStream.WriteLine(numberOfButton + "," + COLOR_YELLOW);
         }
         /*-----------------------------------------------------------------------------*/

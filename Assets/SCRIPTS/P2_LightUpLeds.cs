@@ -45,14 +45,16 @@ public class P2_LightUpLeds : MonoBehaviour
 
 
     public static SerialPort dataStream = new SerialPort("COM5", 9600);
-
+    //private SerialPort dataStream = AnimationLEDs.dataStream;
 
 
     // Start is called before the first frame update
     void Start()
     {
+        
         // Initialise le flux de série
         dataStream.Open();
+        dataStream.WriteLine("ggg");
 
         previousColor = Color.white;
         
