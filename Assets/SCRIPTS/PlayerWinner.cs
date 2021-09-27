@@ -163,10 +163,10 @@ public class PlayerWinner : MonoBehaviour
                     conn.Open();
             
                     MySqlCommand CMD_addScore = conn.CreateCommand();
-                    CMD_addScore.CommandText = "UPDATE tb_player SET score_kr_player = " + P1_ScoreScript.getScoreValue() + " WHERE identifiant_player  = " + MenuActions.Player1Name + ";";
+                    CMD_addScore.CommandText = "UPDATE tb_player SET score_kr_player = " + P1_ScoreScript.getScoreValue() + " WHERE identifiant_player  = " + MenuActions.id1 + ";";
                     CMD_addScore.ExecuteScalar();
                     MySqlCommand CMD_addScore2 = conn.CreateCommand();
-                    CMD_addScore2.CommandText = "UPDATE tb_player SET score_kr_player = " + P2_ScoreScript.getScoreValue() + " WHERE identifiant_player  = " + MenuActions.Player2Name + ";";
+                    CMD_addScore2.CommandText = "UPDATE tb_player SET score_kr_player = " + P2_ScoreScript.getScoreValue() + " WHERE identifiant_player  = " + MenuActions.id2 + ";";
                     CMD_addScore2.ExecuteScalar();
                 }
                 catch (Exception ex)

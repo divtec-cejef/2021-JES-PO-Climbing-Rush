@@ -25,25 +25,25 @@ public class Database : MonoBehaviour
             conn.Open();
             
             MySqlCommand CMD_player1Name = conn.CreateCommand();
-            CMD_player1Name.CommandText = "SELECT name_player FROM tb_player WHERE identifiant_player = " + MenuActions.Player1Name + ";";
+            CMD_player1Name.CommandText = "SELECT name_player FROM tb_player WHERE identifiant_player = " + MenuActions.id1 + ";";
             object player1Name = CMD_player1Name.ExecuteScalar();
             
             J1.text = player1Name.ToString();
 
             MySqlCommand CMD_player2Name = conn.CreateCommand();
-            CMD_player2Name.CommandText = "SELECT name_player FROM tb_player WHERE identifiant_player = " + MenuActions.Player2Name + ";";
+            CMD_player2Name.CommandText = "SELECT name_player FROM tb_player WHERE identifiant_player = " + MenuActions.id2 + ";";
             object player2Name = CMD_player2Name.ExecuteScalar();
             
             J2.text = player2Name.ToString();
 
 
             MySqlCommand CMD_player1Color = conn.CreateCommand();
-            CMD_player1Color.CommandText = "SELECT color_player FROM tb_player WHERE identifiant_player = " + MenuActions.Player1Name + ";";
+            CMD_player1Color.CommandText = "SELECT color_player FROM tb_player WHERE identifiant_player = " + MenuActions.id1 + ";";
             object player1Color = CMD_player1Color.ExecuteScalar();
             string P1Color = player1Color.ToString();
 
             MySqlCommand CMD_player2Color = conn.CreateCommand();
-            CMD_player2Color.CommandText = "SELECT color_player FROM tb_player WHERE identifiant_player = " + MenuActions.Player2Name + ";";
+            CMD_player2Color.CommandText = "SELECT color_player FROM tb_player WHERE identifiant_player = " + MenuActions.id2 + ";";
             object player2Color = CMD_player2Color.ExecuteScalar();
             
             string P2Color = player2Color.ToString();
