@@ -15,7 +15,6 @@ public class GameFinishStuckPlayers : MonoBehaviour
     /// </summary>
     public void gameIsFinish()
     {
-        print("axel il me casse les couilles avec son idée");
         P1MovePlayer.isGameIsFinishAndStuckPlayer(true);
         P2MovePlayer.isGameIsFinishAndStuckPlayer(true);
     }

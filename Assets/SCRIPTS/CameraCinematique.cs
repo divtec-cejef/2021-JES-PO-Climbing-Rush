@@ -55,8 +55,6 @@ public class CameraCinematique : MonoBehaviour
     // Update is called once per frame
     public void EndAnim()
     {
-        
-        
         P1_generalCountDownTimer.SetActive(true);
         P2_generalCountDownTimer.SetActive(true);
 

@@ -11,8 +11,7 @@ public class IntroAnim : MonoBehaviour
     public IEnumerator PulseEffect()
     {
         Vector3 resetSize = transform.localScale;
-        /*while (true)
-        {*/
+      
         // Loops forever
         transform.gameObject.GetComponent<TextMeshProUGUI>().enabled = true;
         while (startGame)
@@ -33,6 +32,6 @@ public class IntroAnim : MonoBehaviour
         }
         transform.gameObject.GetComponent<TextMeshProUGUI>().enabled = false;
         yield return null;
-        //}
+        
     }
 }

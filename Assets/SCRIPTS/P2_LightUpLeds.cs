@@ -45,7 +45,6 @@ public class P2_LightUpLeds : MonoBehaviour
 
 
     public static SerialPort dataStream = new SerialPort("COM5", 9600);
-    //private SerialPort dataStream = AnimationLEDs.dataStream;
 
 
     // Start is called before the first frame update
@@ -69,128 +68,7 @@ public class P2_LightUpLeds : MonoBehaviour
     {
        
         currentColor = progressiveCircular.getCurrentColorIndicator();
-        
-
-        /*
-        do
-        {
-            // Couleur rouge
-            if (currentColor.Equals(Color.red))
-            {
-                dataStream.WriteLine("1," + COLOR_RED);
-                isChangedColorRing = true;
-                print("changement de couleur");
-            }
-
-            // Couleur bleu
-            if (currentColor.Equals(Color.blue))
-            {
-                dataStream.WriteLine("1," + COLOR_BLUE);
-                isChangedColorRing = true;
-                print("changement de couleur");
-            }
-
-            // Couleur vert
-            if (currentColor.Equals(Color.green))
-            {
-                dataStream.WriteLine("1," + COLOR_GREEN);
-                isChangedColorRing = true;
-                print("changement de couleur");
-            }
-
-            // Couleur jaune
-            if (currentColor.Equals(Color.yellow))
-            {
-                dataStream.WriteLine("1," + COLOR_YELLOW);
-                isChangedColorRing = true;
-                print("changement de couleur");
-            }
-
-            // Couleur magenta
-            if (currentColor.Equals(Color.magenta))
-            {
-                dataStream.WriteLine("1," + COLOR_MAGENTA);
-                isChangedColorRing = true;
-                print("changement de couleur");
-            }
-
-            counterDown++;
-        } while (counterDown < 3);
-        */
-
-        
-        /*----------------------------------------------------------------------------------------
-         -----------------------------------------------------------------------------------------
-                         CODE CI-DESSOUS MARCHE SEULEMENT POUR UN ANNEAU LUMINEUX
-         -----------------------------------------------------------------------------------------
-         -----------------------------------------------------------------------------------------*/
-        /*
-        // Le premier if permet de ne pas surcharger l'arduino qui fera crash le jeu
-        // Change la couleur des LEDs
-        if (!isChangedColorRing && !currentColor.Equals(previousColor))
-        {
-            // Couleur rouge
-            if (currentColor.Equals(Color.red))
-            {
-                dataStream.WriteLine("1," + COLOR_RED);
-                dataStream.WriteLine("1," + COLOR_RED);
-                //dataStream.WriteLine("1," + COLOR_RED);
-                isChangedColorRing = true;
-                print("changement de couleur");
-            }
-
-            // Couleur bleu
-            if (currentColor.Equals(Color.blue))
-            {
-                dataStream.WriteLine("1," + COLOR_BLUE);
-                dataStream.WriteLine("1," + COLOR_BLUE);
-                //dataStream.WriteLine("1," + COLOR_BLUE);
-                isChangedColorRing = true;
-                print("changement de couleur");
-            }
-
-            // Couleur vert
-            if (currentColor.Equals(Color.green))
-            {
-                dataStream.WriteLine("1," + COLOR_GREEN);
-                dataStream.WriteLine("1," + COLOR_GREEN);
-                //dataStream.WriteLine("1," + COLOR_GREEN);
-                isChangedColorRing = true;
-                print("changement de couleur");
-            }
-
-            // Couleur jaune
-            if (currentColor.Equals(Color.yellow))
-            {
-                dataStream.WriteLine("1," + COLOR_YELLOW);
-                dataStream.WriteLine("1," + COLOR_YELLOW);
-                //dataStream.WriteLine("1," + COLOR_YELLOW);
-                isChangedColorRing = true;
-                print("changement de couleur");
-            }
-
-            // Couleur magenta
-            if (currentColor.Equals(Color.magenta))
-            {
-                dataStream.WriteLine("1," + COLOR_MAGENTA);
-                dataStream.WriteLine("1," + COLOR_MAGENTA);
-                //dataStream.WriteLine("1," + COLOR_MAGENTA);
-                isChangedColorRing = true;
-                print("changement de couleur");
-            }
-
-            previousColor = currentColor;
-        }
-
-
-        // Mets à false lorsque l'anneau de LEDs doit changer de couleur
-        if (isChangedColorRing && currentColor.Equals(previousColor))
-        {
-            isChangedColorRing = false;
-        }
-        */
-        
-        
+    
     }
     
     
@@ -226,7 +104,6 @@ public class P2_LightUpLeds : MonoBehaviour
             countUp = 0;
             isGoodColorAssignButton = false;
             hasFindIndexColorIndicator = false;
-            print("laurent on rénitialise tout");
         }
 
 
@@ -237,10 +114,8 @@ public class P2_LightUpLeds : MonoBehaviour
         if (numberOfButton != buttonNumberOfGoodColor)
         {
             indexRandom = Random.Range(0, listColorIndicatorTmp.Count);
-            print("laurent indexRandom tirer : " + indexRandom);
     
             colorRandom = listColorIndicatorTmp[indexRandom];
-            print("laurent couleur random : " + colorRandom);
             
             // Enlève la couleur qui a été tirée
             listColorIndicatorTmp.RemoveAt(indexRandom);
@@ -251,10 +126,8 @@ public class P2_LightUpLeds : MonoBehaviour
         if (buttonNumberOfGoodColor == numberOfButton)
         {
             colorRandom = getColorOfIndicator();
-            print("laurent couleur random 11: " + colorRandom);
         }
 
-        print("Mymy nbr button + couleur : " + numberOfButton + " " + colorRandom);
 
         /*---------------------------------------------------------------------------
          ----------------------------------------------------------------------------

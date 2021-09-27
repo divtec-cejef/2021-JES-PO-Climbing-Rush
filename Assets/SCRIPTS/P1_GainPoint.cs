@@ -13,7 +13,6 @@ public class P1_GainPoint : MonoBehaviour
 
     private Coroutine startGainPointCoroutine;
     
-    // Start is called before the first frame update
     void Start()
     {
 
@@ -23,16 +22,9 @@ public class P1_GainPoint : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void displayGainPoint(int pointAdded, bool positive)
     {
 
-        print("AVANT LE COROUTINE");
         startGainPointCoroutine = StartCoroutine(displayGainPointTimed(pointAdded,positive));
 
     }
@@ -40,9 +32,6 @@ public class P1_GainPoint : MonoBehaviour
     IEnumerator displayGainPointTimed(int pointAdded, bool positive)
     {
 
-        
-        print("DANS LE COROUTINE");
-        
 
         if (!positive)
         {
@@ -62,8 +51,6 @@ public class P1_GainPoint : MonoBehaviour
         P1_PositivePointsText.gameObject.SetActive(false);
         
         
-        //StopCoroutine(startGainPointCoroutine);
-        
     }
 
     public void stopCoroutineGainPointTimed()
@@ -73,5 +60,4 @@ public class P1_GainPoint : MonoBehaviour
             StopCoroutine(startGainPointCoroutine);
         }
     }
-    
 }

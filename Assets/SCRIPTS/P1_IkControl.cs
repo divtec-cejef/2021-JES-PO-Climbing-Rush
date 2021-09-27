@@ -124,34 +124,24 @@ public class P1_IkControl : MonoBehaviour
             fellPlayer = false;
         }
         
-        print("numberOfHoldTraveled : " + numberOfHoldTraveled);
-
 
         watchTarget = false;
 
         
         if (isFirstHold)
         {
-            print("isFirstHold");
-
             isHoldRight = true;
             isFirstHold = false;
         }
         else if (isHoldRight)
         {
-            print("Prise droite");
-            
             isHoldLeft = true;
             isHoldRight = false;
-            
         }
         else
         {
-            print("Prise gauche");
-
             isHoldRight = true;
             isHoldLeft = false;
-            
         }
     }
 
@@ -201,7 +191,6 @@ public class P1_IkControl : MonoBehaviour
             
             if (isHoldLeftFinish)
             {
-                print("k1 nan hein 1");
                 isHoldLeftFinish = false;
                 resetWeightLeftHand();
             }
@@ -233,26 +222,19 @@ public class P1_IkControl : MonoBehaviour
             // Vérifie si c'est le bras droit qui doit bouger, ainsi bouge le bras droit
             if (isHoldRight || doFallPlayer && !isHoldLeft)
             {
-                print("bras droit");
                 isRightHandOnHold = lookWeightForHoldRight >= 0.7f;
 
                 lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * lookSmoother);
                 lookWeightForLeftFeet = Mathf.Lerp(lookWeightForLeftFeet, 1f, Time.deltaTime * lookSmoother);
 
-
-
                 numberOfCurrentHold = progressiveCircular.getCurrentNumberOfHoldOnIndicator() - 1;
-
-                print("k1 numberOfCurrentHold : " + numberOfCurrentHold);
                 
                 if (numberOfCurrentHold == 69)
                 {
                     isTheLasteHold = true;
                 }
                 
-
                 int numberOfTargetTmp = numberOfCurrentHold;
-                print("avant, numberOfTargetTmp : " + numberOfTargetTmp);
 
                 if (doFallPlayer)
                 {
@@ -288,25 +270,15 @@ public class P1_IkControl : MonoBehaviour
                 }
 
 
-
-                print("après, numberOfTargetTmp : " + numberOfTargetTmp);
-
-
-
-
                 // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
 
                 currentHoldRight = GameObject.Find("P1_prise " + numberOfTargetTmp);
 
-                print("c'est la prise droite : " + currentHoldRight);
 
                 if (numberOfTargetTmp == 1)
                 {
                     lookWeightForLeftFeet = 0;
                 }
-
-
-
 
                 float axeXPlayer = .6f;
                 float axeYPlayer = 1.81f;
@@ -324,10 +296,7 @@ public class P1_IkControl : MonoBehaviour
                     if (numberOfTargetTmp == 0)
                     {
                         currentHoldRight = GameObject.Find("P1_prise 1");
-                        //lookWeightForHoldLeft = 0;
-                        //lookWeightMaxForHoldLeft = 0;
                         lookWeightForLeftFeet = 0;
-
                     }
 
                     numberOfTargetTmp = progressiveCircular.getCurrentNumberOfHoldOnIndicator();
@@ -337,18 +306,11 @@ public class P1_IkControl : MonoBehaviour
                 // Info : dépendant de quel côté est la première prise, par ex. gauche, ce code devra être dans la partie du bras gauche
                 if (numberOfTargetTmp == 1 && doFallPlayer)
                 {
-                    // Ne change pas la postion y du joueur quand il doit tomber de la première prise
-                    //axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
-
                     if (transform.position.y > 12)
                     {
-                        print("ouais il doit descendre encore droit");
-
                         transform.position = Vector3.Lerp(transform.position,
                             new Vector3(-2.8f, 11.85f, -2.04f),
                             3.5f * Time.deltaTime);
-
-
                     }
 
 
@@ -380,7 +342,6 @@ public class P1_IkControl : MonoBehaviour
 
                 if (isHoldRightFinish)
                 {
-                    print("k1 nan hein 2");
                     lookWeightForHoldRight = 0;
                     lookWeightForLeftFeet = 0;
                 }
@@ -398,7 +359,6 @@ public class P1_IkControl : MonoBehaviour
             try
             {
                 // Bouge le bras droit (animation)
-                print("prends la prise avec la main droite");
                 animator.SetIKPositionWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
                 animator.SetIKRotationWeight(AvatarIKGoal.RightHand, lookWeightMaxForHoldRight);
                 animator.SetIKPosition(AvatarIKGoal.RightHand,
@@ -434,8 +394,6 @@ public class P1_IkControl : MonoBehaviour
             // Vérifie si c'est le bras gauche qui doit bouger
             if (isHoldLeft || doFallPlayer && !isHoldRight)
             {
-                print("bras gauche");
-
                 isLeftHandOnHold = lookWeightForHoldLeft >= 0.7f;
 
                 lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * lookSmoother);
@@ -447,9 +405,7 @@ public class P1_IkControl : MonoBehaviour
 
                 int numberOfTargetTmp = numberOfCurrentHold;
 
-
-                print("avant, numberOfTargetTmp 11: " + numberOfTargetTmp);
-
+                
                 if (doFallPlayer)
                 {
 
@@ -463,16 +419,12 @@ public class P1_IkControl : MonoBehaviour
                     {
                         if (getFellPlayer())
                         {
-                            print("+ donc là il est tombé");
                             if (getIsHoldRight())
                             {
-                                print("+ apparement c'est la main droite du coup on met true a gauche et faux droite");
                                 setGoodHandForClimb(true, false);
                             }
                             else
                             {
-                                print(
-                                    "+ apparement c'est la main gauche du coup on met false a gauche et true a droite");
                                 setGoodHandForClimb(false, true);
                             }
 
@@ -489,15 +441,8 @@ public class P1_IkControl : MonoBehaviour
                     fallPlayerOnce = false;
                 }
 
-
-                print("après, numberOfTargetTmp : " + numberOfTargetTmp);
-
-
-
-
                 // Cherche l'objet qui est la prise courrante ou qui doit être la précédente
                 currentHoldLeft = GameObject.Find("P1_prise " + numberOfTargetTmp);
-                print("c'est la prise de gauche : " + currentHoldLeft);
 
                 float axeYPlayer = 1.81f;
                 float axeXPlayer = -.2f;
@@ -524,48 +469,23 @@ public class P1_IkControl : MonoBehaviour
                     numberOfTargetTmp = progressiveCircular.getCurrentNumberOfHoldOnIndicator() - 1;
                 }
 
-                print("after, numberOfTargetTmp et doFallPlayer : " + numberOfTargetTmp + " et " + doFallPlayer);
-
-
-
-
-
                 // Le joueur doit tomber de la deuxième prise seulement en axe Y
                 if (numberOfTargetTmp == 1 && doFallPlayer)
                 {
 
                     if (transform.position.y > 12)
                     {
-                        print("ouais il doit descendre encore gauche");
-
-
                         transform.position = Vector3.Lerp(transform.position,
                             new Vector3(-2.8f, 11.85f, -1.3f),
                             3.5f * Time.deltaTime);
-
-
                     }
 
-                    print("after, inoxtag");
-                    // Il faudra surement changer la valeur ici dans la nouvelle map -------------------- /!\
-                    //axeYPlayer = currentHoldRight.transform.position.y - transform.position.y;
                     axeYPlayer = 2.83f;
                     axeXPlayer = -.5f;
                     axeZPlayer = 1.3f;
                 }
 
-                /*
-                // Info : dépenant de quel côté est la deuxième prise, par ex. droite, ce code devra être dans la partie du bras droit
-                if (numberOfTargetTmp == 2 && doFallPlayer)
-                {
-                    axeXPlayer = 1f;
-                    //axeYPlayer = 1.82f;
-                    axeYPlayer = 3f;
-                    lookWeightForHoldLeft = 0;
-                    lookWeightMaxForHoldLeft = 0;
-                    lookWeightForRightFeet = 0;
-                }
-                */
+              
 
 
                 // Bouge le corps du personnage vers la prise et monte ou descend
@@ -578,7 +498,6 @@ public class P1_IkControl : MonoBehaviour
 
                 if (isHoldLeftFinish)
                 {
-                    print("k1 nan hein 3");
                     lookWeightForHoldLeft = 0;
                     lookWeightForRightFeet = 0;
                 }
@@ -596,7 +515,6 @@ public class P1_IkControl : MonoBehaviour
             // Bouge le bras gauche (animation)
             try
             {
-                print("prends la prise avec la main gauche");
                 animator.SetIKPositionWeight(AvatarIKGoal.LeftHand, lookWeightMaxForHoldLeft);
                 animator.SetIKRotationWeight(AvatarIKGoal.LeftHand, lookWeightMaxForHoldLeft);
                 animator.SetIKPosition(AvatarIKGoal.LeftHand, currentHoldLeft.transform.position);
@@ -635,10 +553,8 @@ public class P1_IkControl : MonoBehaviour
             
             
                 
-            print("k1 bonsoir l'animation");
             currentHoldLeft = GameObject.Find("P1_HoldLeftFinish");
 
-            print("k1 lookWeightForHoldLeft : " + lookWeightForHoldLeft);
             
             lookWeightForHoldLeft = Mathf.Lerp(lookWeightForHoldLeft, 1f, Time.deltaTime * .6f);
 
@@ -661,31 +577,22 @@ public class P1_IkControl : MonoBehaviour
             transform.position = Vector3.Lerp(transform.position,
                 currentHoldLeft.transform.position - new Vector3(-0.4f, -2.2f, .4f),
                 .8f * Time.deltaTime);
-            
-            print("k1 aurevoir l'animation l'animation");
-        
-            
-            
+
 
           
             if (lookWeightForHoldLeft > 0.45f)
             {
                 if (isHoldRightFinish)
                 {
-                    print("k1 run");
                     gameIsFnished = true;
                     isHoldRightFinish = false;
-                    //resetWeightRightHand();
                 }
                 
                 currentHoldRight = GameObject.Find("P1_HoldRightFinish");
 
                 
                 lookWeightForHoldRight = Mathf.Lerp(lookWeightForHoldRight, 1f, Time.deltaTime * .8f);
-                print("k1 lookWeightForHoldRight : " + lookWeightForHoldRight);
-
-            
-            
+     
                 // Récupère la valeur maximale de lookWeight à chaque fois pour que le bras ne descende pas 
                 if (lookWeightForHoldRight > lookWeightMaxForHoldRight)
                 {
@@ -706,16 +613,8 @@ public class P1_IkControl : MonoBehaviour
                         currentHoldRight.transform.position - new Vector3(0.4f, 2.85f, -1.2f),
                         0.6f * Time.deltaTime);
                 }
-                
-                
-                
-              
             }
-            
-            
-            
         }
-        
     }
 
     

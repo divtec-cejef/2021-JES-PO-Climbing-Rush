@@ -7,9 +7,7 @@ using UnityEngine;
 
 public class StartCountDownTimer : MonoBehaviour
 {
-    // Start is called before the first frame update
-
-    
+   
     private int countDownTime = 3;
     private bool countDownTimerIsFinished = false;
     private Coroutine startCountDownTimer;
@@ -56,41 +54,6 @@ public class StartCountDownTimer : MonoBehaviour
         IntroAnim.startGame = false;
     }
     
-
-
-    /*
-    void Start()
-    {
-        startCountDownTimer = StartCoroutine(CountDownToStart());
-    }
-
-    // Décompte de 3 secondes
-    IEnumerator CountDownToStart()
-    {
-        while (countDownTime > 0)
-        {
-            countDownTimeDisplay.text = countDownTime.ToString();
-
-            yield return new WaitForSeconds(1f);
-
-            countDownTime--;
-        }
-
-        canStartGeneralCountDownTimer = true;
-
-        countDownTimeDisplay.text = "GO !";
-
-        countDownTimerIsFinished = true;
-        print("cest fini gars");
-                                                              
-        yield return new WaitForSeconds(1f);
-
-        countDownTimeDisplay.gameObject.SetActive(false);     
-                                                              
-        StopCoroutine(startCountDownTimer);                   
-    }                                                         
-
-    */
 
     /// <summary>
     /// </summary>

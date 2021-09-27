@@ -65,7 +65,6 @@ public class P2_ProgressiveCircular : MonoBehaviour
     {
         // Lecture du fichier JSON
         // Récupère le chemin du fichier json
-        //string pathJsonFile = File.ReadAllText("C:/Users/Utilisateur/Desktop/data.json");
         pathJsonFile = File.ReadAllText("C:/data.json");
         
         // Stock dans la classe "CircleProgressData" les données du JSON
@@ -86,25 +85,16 @@ public class P2_ProgressiveCircular : MonoBehaviour
         // Ajout d'une couleur aléatoire à l'indicateur
         progressCircle.GetComponent<Image>().color = getRandomColor();
         currentColorIndicator = progressCircle.GetComponent<Image>().color;
-        print("c'est quoi la couleur indicateur P2 : " + currentColorIndicator);
 
-        
-        
+
         // Initialise à 1 parce qu'on commence avec la prise 1
         numberOfTarget = FIRST_HOLD;
 
-        // Téléporte le canvas qui contient l'indicateurUI pour être autour de la prise 1
-        //canvasIndicatorUI.transform.position = GameObject.Find("prise " + numberOfTarget).transform.position;
         
         Vector3 currentPositionHold = GameObject.Find("P2_prise " + numberOfTarget).transform.position;
-        //currentPositionHold.z -= 1.5f;
         currentPositionHold.z -= 0.7f;
         currentPositionHold.y += 0.1f;
         canvasIndicatorUI.transform.position = currentPositionHold;
-
-
-        // Commence la progression de l'indicateur
-        //launchProgressCircularBarUI();
     }
 
     private class CircleProgressData
@@ -136,10 +126,6 @@ public class P2_ProgressiveCircular : MonoBehaviour
         
         progressBar.value = numberOfTarget - 1;
         progressionCircularBar = progressCircle.fillAmount;
-
-        // Stock dans la classe "CircleProgressData" les données du JSON
-        //loadedCircleProgressData = JsonUtility.FromJson<CircleProgressData>(pathJsonFile);
-
     }
 
 
@@ -162,10 +148,7 @@ public class P2_ProgressiveCircular : MonoBehaviour
             numberOfTarget++;
         }
         
-        print(".. numberOfTarget : " + numberOfTarget );
-        
 
-        
         // Téléporte le canvas qui contient l'indicateurUI pour être autour de la prochaine prise
         //canvasIndicatorUI.transform.position = GameObject.Find("prise " + numberOfTarget).transform.position;
         Vector3 currentPositionHold = GameObject.Find("P2_prise " + numberOfTarget).transform.position;
@@ -201,7 +184,6 @@ public class P2_ProgressiveCircular : MonoBehaviour
     {
         progressCircularBarUICoroutine = StartCoroutine(ProgressCircularIndicatorUI());
     }
-
     
     
     IEnumerator ProgressCircularIndicatorUI()

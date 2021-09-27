@@ -12,8 +12,6 @@ public class P2_MovePlayer : MonoBehaviour
     private PlayerControls controls;
 
 
-    //public MoveIndicator moveIndicator;
-    //public FlashIndicator flashIndicator;
     public P2_ScoreScript scoreScript;
     public P2_IkControl ikControl;
     public P2_EffectBeamIndicator effectBeamIndicator;
@@ -23,7 +21,6 @@ public class P2_MovePlayer : MonoBehaviour
     public P2_GainPoint gainPoint;
     public P2_LightUpLeds lightUpLeds;
 
-        
     
     private bool dropPlayer = false;
     private bool waitWhileCoroutine = false;
@@ -41,8 +38,7 @@ public class P2_MovePlayer : MonoBehaviour
     private Color previousColorIndicator = Color.white;
     
     private bool isSameColorIndicator = false;
-
-
+    
 
     void Awake()
     {
@@ -96,7 +92,6 @@ public class P2_MovePlayer : MonoBehaviour
         }
         
         
-        
         // Mets à false lorsque l'anneau de LEDs doit changer de couleur
         if (isSameColorIndicator && previousColorIndicator.Equals(progressiveCircular.getCurrentColorIndicator()))
         {
@@ -112,19 +107,13 @@ public class P2_MovePlayer : MonoBehaviour
     private void correctCircle(Color colorButton)
     {
 
-        
-        
         if (startCountDownTimer.getcountDownTimerIsFinished() && !gameIsFinishAndStuckPlayer)
         {
             gainPoint.stopCoroutineGainPointTimed();
            
-            print("BENKS P2 couleurBouton : " + colorButton);
-            print("BENKS P2 couleur de l'indicateur : " + progressiveCircular.getCurrentColorIndicator());
             
             if (colorButton.Equals(progressiveCircular.getCurrentColorIndicator()))
             {
-                print("BENKS P2 passer le truc des couleurs");
-                
                 scoreScript.setButtonPressedTooFast(true);
                 scoreScript.setIsGoodButton(true);
 
@@ -144,12 +133,7 @@ public class P2_MovePlayer : MonoBehaviour
 
                 // Le joueur n'est pas tombé
                 progressiveCircular.setFellPlayer(false);
-
                 
-
-                print("avant de monter !");
-
-
 
                 // Vérifie si le joueur est redescendu jusqu'à la première
                 if (progressiveCircular.getCurrentNumberOfHoldOnIndicator() == 1)
@@ -159,15 +143,7 @@ public class P2_MovePlayer : MonoBehaviour
                 }
 
                 // Vérifie que le joueur puisse monter et qu'il ne doit pas être bloqué (appuyé sur le mauvais bouton)
-                // ikControl.getCanClimb() && <- je l'ai enlevé, il ne sert plus à rien (je crois)
-                //if (!waitWhileCoroutine)
-                //{
-
-                    print("monte !");
-
-
-                    // Vérifie si le joueur est tombé alors on fait pour que la prochaine prise soit prise avec la bonne main
-                    //&& ikControl.getNumberOfHoldCurrent() != 1
+                // Vérifie si le joueur est tombé alors on fait pour que la prochaine prise soit prise avec la bonne main
                     if (ikControl.getFellPlayer())
                     {
                         if (ikControl.getIsHoldRight() && progressiveCircular.getCurrentNumberOfHoldOnIndicator() != 1)
@@ -179,8 +155,6 @@ public class P2_MovePlayer : MonoBehaviour
                             ikControl.setGoodHandForClimb(false, true);
                         }
                     }
-
-
 
 
                     // Joue un effet autour de l'indicateur quand on attrape la prise
@@ -205,38 +179,20 @@ public class P2_MovePlayer : MonoBehaviour
 
                     // Fais bouger le joueur à la prochaine prise
                     ikControl.animationClimbingPlayer();
-                //}
+                
             }
             else
             {
                 // Le bouton pressé est faux et on imagine qu'il a été pressé trop rapidement, si ce n'est pas le cas
                 // alors on annule ce dernier.
                 scoreScript.setIsGoodButton(false);
-                //scoreScript.setButtonPressedTooFast(true);
                 scoreScript.setButtonPressedTooFast(false);
-
-                /*
-                if (ikControl.getCanClimb())
-                {
-                    scoreScript.setButtonPressedTooFast(false);
-                }
-                */
-
+                
                 // Le joueur doit être bloqué
                 dropPlayer = true;
 
-                // Le joueur doit descendre d'une prise si wrongButtonPressTwice = 2
-                //wrongButtonPressTwice++;
             }
-
-
-            // Calcule les points
-            /*
-            if (!waitWhileCoroutine)
-            {
-                scoreScript.calculatePoints();
-            }
-            */
+            
 
             // Vérifie si le joueur est redescendu jusqu'à la première
             if (progressiveCircular.getCurrentNumberOfHoldOnIndicator() == 1)
@@ -264,17 +220,12 @@ public class P2_MovePlayer : MonoBehaviour
 
                 if (ikControl.getIsHoldRight())
                 {
-                    print("ouais 1");
                     ikControl.setGoodHandForClimb(false, true);
                 }
                 else
                 {
-                    print("ouais 2");
                     ikControl.setGoodHandForClimb(true, false);
                 }
-
-
-
 
                 // Déplace l'indicateur
                 progressiveCircular.setButtonPressed(true);
@@ -282,13 +233,6 @@ public class P2_MovePlayer : MonoBehaviour
                 progressiveCircular.setDefaultProgressCircularBarUI();
                 progressiveCircular.moveNextIndicator();
             }
-            /*
-            // Bloque le joueur pendant 2 secondes
-            else if (dropPlayer)
-            {
-                stopPlayerClimb = StartCoroutine(StopPlayerClimbFor2Seconds());
-            }
-            */
         }
 
     }

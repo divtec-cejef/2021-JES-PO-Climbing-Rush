@@ -152,6 +152,5 @@ public class MenuPause : MonoBehaviour
         P2_LightUpLeds.dataStream.WriteLine("mmm");
         isGamePaused = true;
         
-        //Application.Quit();
     }
 }

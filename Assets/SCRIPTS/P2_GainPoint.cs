@@ -31,7 +31,6 @@ public class P2_GainPoint : MonoBehaviour
     public void displayGainPoint(int pointAdded, bool positive)
     {
 
-        print("AVANT LE COROUTINE");
         startGainPointCoroutine = StartCoroutine(displayGainPointTimed(pointAdded,positive));
 
     }
@@ -39,8 +38,6 @@ public class P2_GainPoint : MonoBehaviour
     IEnumerator displayGainPointTimed(int pointAdded, bool positive)
     {
 
-        
-        print("DANS LE COROUTINE");
         
         string sign = "";
         //Color color = Color.yellow;
@@ -63,10 +60,6 @@ public class P2_GainPoint : MonoBehaviour
 
         P2_NegativePointsText.gameObject.SetActive(false);
         P2_PositivePointsText.gameObject.SetActive(false);
-        
-        
-        //StopCoroutine(startGainPointCoroutine);
-        
     }
 
     public void stopCoroutineGainPointTimed()

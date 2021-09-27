@@ -14,7 +14,7 @@ public class animationFirst : MonoBehaviour
         while (true)
         {
             float timer = 0f;
-            // Zoom in
+
             while (timer < 1f)
             {
                 yield return new WaitForEndOfFrame();
@@ -26,7 +26,7 @@ public class animationFirst : MonoBehaviour
                 );
             }
             timer = 0f;
-            //yield return new WaitForSeconds(Speed);
+
             while (timer < 1f)
             {
                 yield return new WaitForEndOfFrame();
@@ -37,7 +37,6 @@ public class animationFirst : MonoBehaviour
                     transform.localScale.y - (Time.deltaTime * Strength * 2)
                 );
             }
-            //yield return new WaitForSeconds(Speed);
             yield return null;
         }
     }

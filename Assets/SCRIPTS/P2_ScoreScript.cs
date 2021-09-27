@@ -27,54 +27,35 @@ public class P2_ScoreScript : MonoBehaviour
     private bool isButtonPressedTooFast = false;
     
     private int scoreValue = 0;
-
     private int counterFullProgressionCircle = 0;
-
     private bool isTheSameCircle = true;
-
     private float oldValueOfProgressBar = 0;
     
-    // Start is called before the first frame update
     void Start()
     {
         score.text = "Score : 0000";
-        
     }
 
     private void Update()
     {
         float progressionCircle = progressiveCircular.getProgressionCircularBar();
-
-        print("progressionCircle avant : " + progressionCircle);
-
+        
         
         if (progressionCircle < 1f && oldValueOfProgressBar == 1f)
         {
             // c'est un nouveau rond qui commence
             counterFullProgressionCircle++;
-            print("léo bouffe moi le cul : " + counterFullProgressionCircle);
-
         }
 
         oldValueOfProgressBar = progressionCircle;
-        
-        print("progressionCircle après : " + progressionCircle);
-        print("COUNTER DE TA MERE LA PUTE : " + counterFullProgressionCircle);
-
-        /*
-        if (progressionCircle <= 1  && getIsTheSameCircle() && counterFullProgressionCircle < counterALittleBitHigher)
-        {
-            counterFullProgressionCircle++;
-        }
-        */
     }
+    
     
     /// <summary>
     /// Calcule les points gagnés dépendant à quel moment on prend la prise, et les affiche sur HUD
     /// </summary>
     public void calculatePoints()
     {
-        
         if (!getButtonIsPressedToFast())
         {
             
@@ -203,14 +184,10 @@ public class P2_ScoreScript : MonoBehaviour
         {
             int timeCastToPoints = (int)(timeValueRemaining * 60);
             
-            print("k2 pints gagner grace au timer : " + timeCastToPoints);
-
             
             gainPoint.displayGainPoint(timeCastToPoints, true);
 
             scoreValue += timeCastToPoints;
-            
-            print("k2 ca donne quoi : " + scoreValue);
             
             score.text = "Score : " + scoreValue;
         }
