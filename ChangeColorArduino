@@ -1,0 +1,54 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO.Ports;
+using UnityEngine;
+using UnityEngine.Experimental.TerrainAPI;
+using UnityEngine.InputSystem;
+
+public class ChangeColor : MonoBehaviour
+{
+    
+    private ColorControls controls;
+
+    private SerialPort dataStream = new SerialPort("COM5", 9600);
+    
+    void Start()
+    {
+        dataStream.Open();
+        dataStream.WriteLine("1,r");
+        dataStream.WriteLine("2,b");
+        dataStream.WriteLine("3,g");
+        dataStream.WriteLine("4,y");
+    }
+
+    void Awake()
+    {
+        controls = new ColorControls();
+        controls.Gameplay.Button1.performed += ctx => changeColorOfCube(Color.red);
+        controls.Gameplay.Button2.performed += ctx => changeColorOfCube(Color.blue);
+        controls.Gameplay.Button3.performed += ctx => changeColorOfCube(Color.green);
+        controls.Gameplay.Button4.performed += ctx => changeColorOfCube(Color.yellow);
+    }
+
+    
+    /// <summary>
+    /// Change la couleur du cube en fonction de la couleur passée en paramètre
+    /// </summary>
+    /// <param name="color">Couleur que le cube doit prendre</param>
+    private void changeColorOfCube(Color color)
+    {
+        this.GetComponent<Renderer>().material.color = color;
+    }
+    
+    
+    void OnEnable()
+    {
+        controls.Gameplay.Enable();
+    }
+    void OnDisable()
+    {
+        controls.Gameplay.Disable();
+    }
+
+}
