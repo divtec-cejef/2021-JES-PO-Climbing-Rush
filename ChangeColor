@@ -29,4 +29,13 @@ public class ChangeColor : MonoBehaviour
         this.GetComponent<Renderer>().material.color = color;
     }
 
+
+    void OnEnable()
+    {
+    controls.Gameplay.Enable();
+    }
+    void OnDisable()
+    {
+    controls.Gameplay.Disable();
+    }
 }
