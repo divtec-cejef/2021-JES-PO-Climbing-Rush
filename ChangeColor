@@ -1,0 +1,32 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Experimental.TerrainAPI;
+using UnityEngine.InputSystem;
+
+public class ChangeColor : MonoBehaviour
+{
+    
+    private ColorControls controls;
+    
+    
+    void Awake()
+    {
+        controls = new ColorControls();
+        controls.Gameplay.Button1.performed += ctx => changeColorOfCube(Color.red);
+        controls.Gameplay.Button2.performed += ctx => changeColorOfCube(Color.blue);
+        controls.Gameplay.Button3.performed += ctx => changeColorOfCube(Color.green);
+        controls.Gameplay.Button4.performed += ctx => changeColorOfCube(Color.yellow);
+    }
+
+    
+    /// <summary>
+    /// Change la couleur du cube en fonction de la couleur passée en paramètre
+    /// </summary>
+    /// <param name="color">Couleur que le cube doit prendre</param>
+    private void changeColorOfCube(Color color)
+    {
+        this.GetComponent<Renderer>().material.color = color;
+    }
+
+}
