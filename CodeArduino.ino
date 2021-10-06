@@ -11,6 +11,10 @@ Adafruit_NeoPixel ring1 = Adafruit_NeoPixel(24, A0, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel ring2 = Adafruit_NeoPixel(24, 2, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel ring3 = Adafruit_NeoPixel(24, 3, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel ring4 = Adafruit_NeoPixel(24, 4, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel ring5 = Adafruit_NeoPixel(24, 5, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel ring6 = Adafruit_NeoPixel(24, 6, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel ring7 = Adafruit_NeoPixel(24, 7, NEO_GRB + NEO_KHZ800);
+Adafruit_NeoPixel ring8 = Adafruit_NeoPixel(24, 8, NEO_GRB + NEO_KHZ800);
 
 
 char myCol[20];
