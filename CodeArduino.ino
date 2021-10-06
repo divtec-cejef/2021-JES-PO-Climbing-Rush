@@ -11,10 +11,6 @@ Adafruit_NeoPixel ring1 = Adafruit_NeoPixel(24, A0, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel ring2 = Adafruit_NeoPixel(24, 2, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel ring3 = Adafruit_NeoPixel(24, 3, NEO_GRB + NEO_KHZ800);
 Adafruit_NeoPixel ring4 = Adafruit_NeoPixel(24, 4, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel ring5 = Adafruit_NeoPixel(24, 5, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel ring6 = Adafruit_NeoPixel(24, 6, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel ring7 = Adafruit_NeoPixel(24, 7, NEO_GRB + NEO_KHZ800);
-Adafruit_NeoPixel ring8 = Adafruit_NeoPixel(24, 8, NEO_GRB + NEO_KHZ800);
 
 
 char myCol[20];
@@ -30,28 +26,16 @@ void setup() {
   ring2.setBrightness(255);
   ring3.setBrightness(255);
   ring4.setBrightness(255);
-  ring5.setBrightness(255);
-  ring6.setBrightness(255);
-  ring7.setBrightness(255);
-  ring8.setBrightness(255);
   
   ring1.begin();
   ring2.begin();
   ring3.begin();
   ring4.begin();
-  ring5.begin();
-  ring6.begin();
-  ring7.begin();
-  ring8.begin();
   
   ring1.show();
   ring2.show();
   ring3.show();
   ring4.show();
-  ring5.show();
-  ring6.show();
-  ring7.show();
-  ring8.show();
 
   Serial.begin(9600);
 }
